@@ -1,0 +1,1014 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="PROD ACCESS GRANTED" description="You've found the secret devops terminal">
+  <div class="terminal-container">
+    <div class="terminal-header">
+      <span class="terminal-title">PROD_TERMINAL_v1.0.0-YOLO</span>
+      <div class="terminal-controls">
+        <span class="dot red"></span>
+        <span class="dot yellow"></span>
+        <span class="dot green pulse"></span>
+      </div>
+    </div>
+
+    <div class="terminal-content">
+      <div class="header-box">
+        <pre class="header-text">
+    ╔════════════════════════════════════════╗
+    ║   TESTING IN PRODUCTION DETECTED...    ║
+    ║   JUST KIDDING! WELCOME, ENGINEER :)   ║
+    ╚════════════════════════════════════════╝
+        </pre>
+      </div>
+
+      <div class="drive-container">
+        <pre class="drive-label">KUBERNETES CLUSTER - DEFINITELY NOT ON FIRE</pre>
+        <pre id="spinning-donut" class="spinning-drive"></pre>
+        <div class="drive-stats-box">
+          <div class="stat-line">
+            <span class="stat-key">HOTFIX DEPLOYMENT:</span>
+            <span class="stat-bar">
+              <span class="progress-fill" style="width: 47%">████████████████░░░░░░░░░░░░░░</span>
+            </span>
+            <span class="stat-percent">47%</span>
+          </div>
+          <div class="stat-line">
+            <span class="stat-key">INCIDENT FREQUENCY:</span>
+            <span class="stat-val frequency-flicker">TOO DAMN HIGH</span>
+          </div>
+          <div class="stat-line">
+            <span class="stat-key">CODE QUALITY:</span>
+            <span class="stat-val success">IT WORKS ON MY MACHINE ✓</span>
+          </div>
+          <div class="stat-line">
+            <span class="stat-key">COFFEE CONSUMPTION:</span>
+            <span class="stat-val">∞ cups/hour</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="terminal-output">
+        <p class="line delay-1"><span class="prompt">$</span> kubectl get pods --namespace=production</p>
+        <p class="line delay-2"><span class="success">SUCCESS:</span> You found the easter egg! (Unlike that memory leak we've been hunting)</p>
+        <p class="line delay-3"><span class="info">INFO:</span> Fun fact - 90% of DevOps is just googling error messages</p>
+        <p class="line delay-4"><span class="warning">WARNING:</span> Docker containers may be running in production without your knowledge</p>
+        <p class="line delay-5"><span class="prompt">$</span> echo "Who needs tests when you have users?"</p>
+        <p class="line delay-6 quote">Who needs tests when you have users?</p>
+        <p class="line delay-7"><span class="error">ERROR:</span> Just kidding. Please write tests. The on-call engineer will thank you.</p>
+        <p class="line delay-8"><span class="prompt">$</span> cat /dev/urandom | display_devops_truth</p>
+        <p class="line delay-9 secret-msg">██████╗ ███████╗██╗   ██╗ ██████╗ ██████╗ ███████╗
+██╔══██╗██╔════╝██║   ██║██╔═══██╗██╔══██╗██╔════╝
+██║  ██║█████╗  ██║   ██║██║   ██║██████╔╝███████╗
+██║  ██║██╔══╝  ╚██╗ ██╔╝██║   ██║██╔═══╝ ╚════██║
+██████╔╝███████╗ ╚████╔╝ ╚██████╔╝██║     ███████║
+╚═════╝ ╚══════╝  ╚═══╝   ╚═════╝ ╚═╝     ╚══════╝
+
+<span class="sub-text">Peak Ops Achieved! (Now fix that PagerDuty alert)</span></p>
+        <p class="line delay-10"><span class="info">TIP:</span> Share this page? Only with people who understand the pain 🔥</p>
+        <p class="line delay-11 cursor-line"><span class="prompt">$</span> <span class="cursor">█</span></p>
+      </div>
+
+      <div class="fun-stats">
+        <div class="stat-box">
+          <div class="stat-label">YAML LINES WRITTEN</div>
+          <div class="stat-value" id="pathways">0</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">BUGS IN PRODUCTION</div>
+          <div class="stat-value glitch-text" data-text="∞">∞</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">VIBE CHECK</div>
+          <div class="stat-value">ON FIRE 🔥</div>
+        </div>
+      </div>
+
+      <div class="devops-meme-section">
+        <h3 class="meme-title">TYPICAL DEVOPS DAY</h3>
+        <div class="meme-container">
+          <img src="/width=3840.webp" alt="Pepe trying to fix servers" class="pepe-img">
+          <div class="pepe-label">tfw cloud is supposed to be highly-available</div>
+          <canvas id="server-rack-canvas"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="back-link-container">
+    <a href="/" class="secret-back">← Escape Production (back to staging)</a>
+  </div>
+</BaseLayout>
+
+<style>
+  .terminal-container {
+    max-width: 900px;
+    margin: 2rem auto;
+    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid var(--color-primary);
+    border-radius: 8px;
+    box-shadow:
+      0 0 30px rgba(0, 255, 204, 0.3),
+      inset 0 0 50px rgba(0, 255, 204, 0.05);
+    overflow: hidden;
+  }
+
+  .terminal-header {
+    background: linear-gradient(180deg, #1a1a1a 0%, #0d0d0d 100%);
+    padding: 0.75rem 1.5rem;
+    border-bottom: 1px solid var(--color-primary);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .terminal-title {
+    color: var(--color-primary);
+    font-family: 'Orbitron', monospace;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    font-size: 0.9rem;
+  }
+
+  .terminal-controls {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
+
+  .dot.red {
+    background: #ff5f56;
+  }
+
+  .dot.yellow {
+    background: #ffbd2e;
+  }
+
+  .dot.green {
+    background: var(--color-primary);
+  }
+
+  .dot.pulse {
+    animation: pulse-dot 2s infinite;
+  }
+
+  @keyframes pulse-dot {
+    0%, 100% {
+      opacity: 1;
+      box-shadow: 0 0 5px var(--color-primary);
+    }
+    50% {
+      opacity: 0.7;
+      box-shadow: 0 0 15px var(--color-primary);
+    }
+  }
+
+  .terminal-content {
+    padding: 2rem;
+    min-height: 400px;
+  }
+
+  .header-box {
+    margin-bottom: 2rem;
+  }
+
+  .header-text {
+    color: var(--color-primary);
+    font-size: 0.75rem;
+    line-height: 1.3;
+    text-align: center;
+    animation: flicker-in 1s ease-in;
+  }
+
+  .drive-container {
+    margin: 2rem 0;
+    text-align: center;
+  }
+
+  .drive-label {
+    color: var(--color-accent);
+    font-size: 0.9rem;
+    letter-spacing: 0.2em;
+    margin-bottom: 1.5rem;
+    font-family: 'Orbitron', monospace;
+    font-weight: 700;
+    text-shadow: 0 0 10px rgba(255, 183, 0, 0.5);
+  }
+
+  .spinning-drive {
+    color: var(--color-primary);
+    font-size: 0.55rem;
+    line-height: 1;
+    margin: 0;
+    text-align: left;
+    text-shadow: 0 0 20px rgba(0, 255, 204, 0.8);
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Share Tech Mono', monospace;
+    white-space: pre;
+    letter-spacing: 0;
+    background: rgba(0, 255, 204, 0.02);
+    border: 1px solid rgba(0, 255, 204, 0.2);
+    border-radius: 4px;
+    padding: 1rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .drive-stats-box {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: rgba(0, 255, 204, 0.05);
+    border: 1px solid rgba(0, 255, 204, 0.3);
+    border-radius: 4px;
+  }
+
+  .stat-line {
+    display: flex;
+    align-items: center;
+    margin: 0.75rem 0;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.85rem;
+  }
+
+  .stat-key {
+    color: var(--color-text-dim);
+    min-width: 220px;
+    margin-right: 1rem;
+  }
+
+  .stat-val {
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+
+  .stat-val.success {
+    color: var(--color-primary);
+  }
+
+  .stat-bar {
+    flex: 1;
+    margin-right: 1rem;
+    color: var(--color-primary);
+  }
+
+  .stat-percent {
+    color: var(--color-accent);
+    font-weight: 700;
+    min-width: 50px;
+  }
+
+  .frequency-flicker {
+    animation: freq-flicker 3s infinite;
+  }
+
+  @keyframes freq-flicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+
+  @keyframes flicker-in {
+    0% {
+      opacity: 0;
+    }
+    10% {
+      opacity: 0;
+    }
+    10.1% {
+      opacity: 1;
+    }
+    10.2% {
+      opacity: 0;
+    }
+    20% {
+      opacity: 0;
+    }
+    20.1% {
+      opacity: 1;
+    }
+    20.6% {
+      opacity: 0;
+    }
+    30% {
+      opacity: 0;
+    }
+    30.1% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  .terminal-output {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.95rem;
+  }
+
+  .line {
+    margin: 0.75rem 0;
+    opacity: 0;
+    animation: fade-in 0.3s forwards;
+  }
+
+  .delay-1 { animation-delay: 1s; }
+  .delay-2 { animation-delay: 1.5s; }
+  .delay-3 { animation-delay: 2s; }
+  .delay-4 { animation-delay: 2.5s; }
+  .delay-5 { animation-delay: 3s; }
+  .delay-6 { animation-delay: 3.5s; }
+  .delay-7 { animation-delay: 4s; }
+  .delay-8 { animation-delay: 4.5s; }
+  .delay-9 { animation-delay: 5s; }
+  .delay-10 { animation-delay: 5.5s; }
+  .delay-11 { animation-delay: 6s; }
+
+  @keyframes fade-in {
+    to {
+      opacity: 1;
+    }
+  }
+
+  .prompt {
+    color: var(--color-accent);
+    margin-right: 0.5rem;
+  }
+
+  .success {
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+
+  .info {
+    color: #00d4ff;
+  }
+
+  .warning {
+    color: var(--color-accent);
+  }
+
+  .error {
+    color: var(--color-secondary);
+  }
+
+  .quote {
+    color: var(--color-text-dim);
+    font-style: italic;
+    padding-left: 2rem;
+  }
+
+  .secret-msg {
+    color: var(--color-primary);
+    font-weight: 700;
+    text-align: center;
+    margin: 1.5rem 0;
+    font-size: 0.8rem;
+    line-height: 1.3;
+    font-family: 'Share Tech Mono', monospace;
+    letter-spacing: 0.05em;
+    white-space: pre;
+  }
+
+  .sub-text {
+    color: var(--color-secondary);
+    font-size: 0.85rem;
+    display: block;
+    margin-top: 1rem;
+    letter-spacing: 0.05em;
+    font-weight: normal;
+    white-space: normal;
+  }
+
+  .cursor-line {
+    margin-top: 1.5rem;
+  }
+
+  .cursor {
+    animation: blink 1s infinite;
+    color: var(--color-primary);
+  }
+
+  @keyframes blink {
+    0%, 50% {
+      opacity: 1;
+    }
+    51%, 100% {
+      opacity: 0;
+    }
+  }
+
+  .fun-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(0, 255, 204, 0.3);
+  }
+
+  .stat-box {
+    text-align: center;
+    padding: 1rem;
+    background: rgba(0, 255, 204, 0.05);
+    border: 1px solid rgba(0, 255, 204, 0.2);
+    border-radius: 4px;
+    transition: all 0.3s ease;
+  }
+
+  .stat-box:hover {
+    background: rgba(0, 255, 204, 0.1);
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+  }
+
+  .stat-label {
+    color: var(--color-text-dim);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-value {
+    color: var(--color-primary);
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-family: 'Orbitron', monospace;
+  }
+
+  .glitch-text {
+    position: relative;
+    color: var(--color-secondary);
+  }
+
+  .glitch-text::before,
+  .glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .glitch-text::before {
+    color: var(--color-primary);
+    animation: glitch-1 2s infinite;
+  }
+
+  .glitch-text::after {
+    color: var(--color-accent);
+    animation: glitch-2 2s infinite;
+  }
+
+  .devops-meme-section {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(0, 255, 204, 0.3);
+  }
+
+  .meme-title {
+    color: var(--color-accent);
+    font-family: 'Orbitron', monospace;
+    font-size: 1rem;
+    letter-spacing: 0.2em;
+    text-align: center;
+    margin-bottom: 2rem;
+    text-shadow: 0 0 10px rgba(255, 183, 0, 0.5);
+  }
+
+  .meme-container {
+    position: relative;
+    max-width: 600px;
+    margin: 0 auto;
+    height: 300px;
+  }
+
+  #server-rack-canvas {
+    width: 100%;
+    height: 300px;
+    display: block;
+    background: rgba(0, 255, 204, 0.02);
+    border: 1px solid rgba(0, 255, 204, 0.2);
+    border-radius: 4px;
+  }
+
+  .pepe-img {
+    position: absolute;
+    width: 180px;
+    height: auto;
+    left: 20px;
+    top: 30px;
+    z-index: 10;
+  }
+
+  .pepe-label {
+    position: absolute;
+    left: 20px;
+    top: 240px;
+    width: 180px;
+    text-align: center;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 12px;
+    color: var(--color-primary);
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.9);
+    padding: 0.5rem 0.75rem;
+    border: 1px solid rgba(0, 255, 204, 0.3);
+    line-height: 1.4;
+  }
+
+  .back-link-container {
+    text-align: center;
+    margin: 2rem 0 4rem;
+  }
+
+  .secret-back {
+    color: var(--color-text-dim);
+    text-decoration: none;
+    padding: 0.75rem 1.5rem;
+    border: 1px solid rgba(0, 255, 204, 0.3);
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    display: inline-block;
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+  }
+
+  .secret-back:hover {
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+    box-shadow: 0 0 20px rgba(0, 255, 204, 0.2);
+  }
+
+  @media (max-width: 768px) {
+    .terminal-container {
+      margin: 1rem;
+    }
+
+    .terminal-content {
+      padding: 1rem;
+    }
+
+    .header-text {
+      font-size: 0.6rem;
+    }
+
+    .drive-label {
+      font-size: 0.7rem;
+    }
+
+    .spinning-drive {
+      font-size: 0.3rem;
+      line-height: 0.9;
+      letter-spacing: 0;
+      min-height: 300px;
+      padding: 0.5rem;
+    }
+
+    .drive-stats-box {
+      padding: 1rem;
+    }
+
+    .stat-line {
+      flex-direction: column;
+      align-items: flex-start;
+      font-size: 0.75rem;
+    }
+
+    .stat-key {
+      min-width: auto;
+      margin-bottom: 0.25rem;
+    }
+
+    .terminal-output {
+      font-size: 0.85rem;
+    }
+
+    .fun-stats {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+  }
+</style>
+
+<script>
+  // ULTRA POWERFUL SPINNING DONUT - Based on a1k0n's algorithm
+  const donutEl = document.getElementById('spinning-donut');
+
+  let A = 0, B = 0;
+  const screen_width = 140;
+  const screen_height = 40;
+  let runnerFrame = 0;
+
+  // Running character frames (DevOps engineer escaping production incidents)
+  const runnerFrames = [
+    [
+      '  o ',
+      ' /|\\',
+      ' / >'
+    ],
+    [
+      '  o ',
+      ' /|\\',
+      ' ><  '
+    ],
+    [
+      '  o ',
+      ' /|\\',
+      '< \\ '
+    ],
+    [
+      '  o ',
+      ' /|\\',
+      ' ><  '
+    ]
+  ];
+
+  // Robot pursuers (PagerDuty alerts and production bugs)
+  const robotFrames = [
+    [
+      ' [O_O]',
+      ' |╫╫╫|',
+      ' | | |',
+      '  > < '
+    ],
+    [
+      ' [O_O]',
+      ' |╫╫╫|',
+      ' | | |',
+      ' >   <'
+    ],
+    [
+      ' [0_0]',
+      ' |╫╫╫|',
+      ' | | |',
+      '  > < '
+    ],
+    [
+      ' [0_0]',
+      ' |╫╫╫|',
+      ' | | |',
+      ' >   <'
+    ]
+  ];
+
+  // BOSS INCIDENT - The dreaded P1 outage at 3AM
+  const bossRobotFrames = [
+    [
+      ' ╔═══════╗',
+      ' ║[█_█]║',
+      ' ║ ╫╫╫╫╫ ║',
+      ' ║ |║|║| ║',
+      ' ╚═══════╝',
+      '  >>  << '
+    ],
+    [
+      ' ╔═══════╗',
+      ' ║[█_█]║',
+      ' ║ ╫╫╫╫╫ ║',
+      ' ║ |║|║| ║',
+      ' ╚═══════╝',
+      ' >>    <<'
+    ],
+    [
+      ' ╔═══════╗',
+      ' ║[■_■]║',
+      ' ║ ╫╫╫╫╫ ║',
+      ' ║ |║|║| ║',
+      ' ╚═══════╝',
+      '  >>  << '
+    ],
+    [
+      ' ╔═══════╗',
+      ' ║[■_■]║',
+      ' ║ ╫╫╫╫╫ ║',
+      ' ║ |║|║| ║',
+      ' ╚═══════╝',
+      ' >>    <<'
+    ]
+  ];
+
+  // All characters move together - maintain fixed spacing offsets
+  let basePos = 0;
+  const runnerOffset = 0;
+  const robot1Offset = -30;    // Robots run as a tight group
+  const robot2Offset = -40;    // Just 10 pixels apart
+  const bossOffset = -55;      // Boss close behind
+  let robotFrame = 0;
+
+  function renderDonut() {
+    if (!donutEl) return;
+
+    const b = [];
+    const z = [];
+
+    // Initialize buffers
+    for (let i = 0; i < screen_width * screen_height; i++) {
+      b[i] = ' ';
+      z[i] = 0;
+    }
+
+    const cosA = Math.cos(A);
+    const sinA = Math.sin(A);
+    const cosB = Math.cos(B);
+    const sinB = Math.sin(B);
+
+    // j - goes around the cross-sectional circle of a torus
+    for (let j = 0; j < 6.28; j += 0.07) {
+      const cosj = Math.cos(j);
+      const sinj = Math.sin(j);
+
+      // i - goes around the center of revolution of a torus
+      for (let i = 0; i < 6.28; i += 0.02) {
+        const cosi = Math.cos(i);
+        const sini = Math.sin(i);
+
+        // Circle offset (R1 + R2*cos(j))
+        const circlex = 2 + cosj;
+        const h = circlex * cosi;
+        const D = 1 / (circlex * sinA * sini + sinj * cosA + 5);
+        const t = circlex * cosA * sini - sinj * sinA;
+
+        // 2D projection
+        const x = Math.floor(screen_width / 2 + 40 * D * (h * cosB - t * sinB));
+        const y = Math.floor(screen_height / 2 - 20 * D * (h * sinB + t * cosB));
+        const o = x + screen_width * y;
+
+        // Luminance
+        const N = Math.floor(8 * ((sinj * sinA - circlex * cosA * sini) * cosB -
+                             circlex * cosA * sini * sinB - sinj * cosA -
+                             circlex * sinA * sini));
+
+        if (y >= 0 && y < screen_height && x >= 0 && x < screen_width && D > z[o]) {
+          z[o] = D;
+          const luminance_index = N > 0 ? N : 0;
+          b[o] = '.,-~:;=!*#$@'[luminance_index > 11 ? 11 : luminance_index];
+        }
+      }
+    }
+
+    // Add energy particles around the donut
+    for (let p = 0; p < 30; p++) {
+      const angle = (A * 2 + p * 0.5) % 6.28;
+      const radius = 60 + Math.sin(B * 3 + p) * 10;
+      const px = Math.floor(screen_width / 2 + Math.cos(angle) * radius);
+      const py = Math.floor(screen_height / 2 + Math.sin(angle) * radius * 0.4);
+      const pidx = px + screen_width * py;
+      if (pidx >= 0 && pidx < screen_width * screen_height && py >= 0 && py < screen_height) {
+        b[pidx] = ['·', '•', '○', '◉', '*'][p % 5];
+      }
+    }
+
+    // Calculate positions based on basePos + offsets
+    const runnerPos = basePos + runnerOffset;
+    const robot1Pos = basePos + robot1Offset;
+    const robot2Pos = basePos + robot2Offset;
+    const bossRobotPos = basePos + bossOffset;
+
+    // Add the running character at the bottom
+    const runner = runnerFrames[Math.floor(runnerFrame) % runnerFrames.length];
+    const runnerY = screen_height - 6;
+    const runnerX = Math.floor(runnerPos);
+
+    for (let ri = 0; ri < runner.length; ri++) {
+      const line = runner[ri];
+      for (let rj = 0; rj < line.length; rj++) {
+        const char = line[rj];
+        if (char !== ' ') {
+          const rx = runnerX + rj;
+          const ry = runnerY + ri;
+          if (rx >= 0 && rx < screen_width && ry >= 0 && ry < screen_height) {
+            const idx = rx + screen_width * ry;
+            b[idx] = char;
+          }
+        }
+      }
+    }
+
+    // Add pursuing robots
+    const robot = robotFrames[Math.floor(robotFrame) % robotFrames.length];
+    const robotY = screen_height - 7;
+
+    // Robot 1
+    const r1x = Math.floor(robot1Pos);
+    for (let ri = 0; ri < robot.length; ri++) {
+      const line = robot[ri];
+      for (let rj = 0; rj < line.length; rj++) {
+        const char = line[rj];
+        if (char !== ' ') {
+          const rx = r1x + rj;
+          const ry = robotY + ri;
+          if (rx >= 0 && rx < screen_width && ry >= 0 && ry < screen_height) {
+            const idx = rx + screen_width * ry;
+            b[idx] = char;
+          }
+        }
+      }
+    }
+
+    // Robot 2
+    const r2x = Math.floor(robot2Pos);
+    for (let ri = 0; ri < robot.length; ri++) {
+      const line = robot[ri];
+      for (let rj = 0; rj < line.length; rj++) {
+        const char = line[rj];
+        if (char !== ' ') {
+          const rx = r2x + rj;
+          const ry = robotY + ri;
+          if (rx >= 0 && rx < screen_width && ry >= 0 && ry < screen_height) {
+            const idx = rx + screen_width * ry;
+            b[idx] = char;
+          }
+        }
+      }
+    }
+
+    // BOSS ROBOT - Larger and more menacing
+    const bossRobot = bossRobotFrames[Math.floor(robotFrame) % bossRobotFrames.length];
+    const bossY = screen_height - 9;
+    const bossX = Math.floor(bossRobotPos);
+    for (let ri = 0; ri < bossRobot.length; ri++) {
+      const line = bossRobot[ri];
+      for (let rj = 0; rj < line.length; rj++) {
+        const char = line[rj];
+        if (char !== ' ') {
+          const rx = bossX + rj;
+          const ry = bossY + ri;
+          if (rx >= 0 && rx < screen_width && ry >= 0 && ry < screen_height) {
+            const idx = rx + screen_width * ry;
+            b[idx] = char;
+          }
+        }
+      }
+    }
+
+    // Add ground for the runner
+    const groundY = screen_height - 2;
+    for (let gx = 0; gx < screen_width; gx++) {
+      const idx = gx + screen_width * groundY;
+      b[idx] = ['═', '─', '═'][gx % 3];
+    }
+
+    // Animate rotation
+    A += 0.04;
+    B += 0.02;
+
+    // Move all characters together as one formation
+    basePos += 1.5;
+    runnerFrame += 0.3;
+    robotFrame += 0.25;
+
+    // Reset the entire formation when runner goes off screen
+    if (basePos + runnerOffset > screen_width + 10) {
+      basePos = -20;
+    }
+
+    // Convert buffer to string
+    let output = '';
+    for (let k = 0; k < screen_height; k++) {
+      output += b.slice(k * screen_width, (k + 1) * screen_width).join('') + '\n';
+    }
+
+    donutEl.textContent = output;
+  }
+
+  // Start the ULTIMATE Kubernetes cluster animation (definitely stable)
+  setInterval(renderDonut, 50);
+
+  // Animated counter for YAML lines written
+  const pathwaysEl = document.getElementById('pathways');
+  let count = 0;
+  const target = 999999; // All the YAML we've written
+  const duration = 3000;
+  const increment = target / (duration / 50);
+
+  const counter = setInterval(() => {
+    count += increment;
+    if (count >= target) {
+      count = target;
+      clearInterval(counter);
+    }
+    if (pathwaysEl) {
+      pathwaysEl.textContent = Math.floor(count).toLocaleString();
+    }
+  }, 50);
+
+  // Server rack animation
+  const rackCanvas = document.getElementById('server-rack-canvas') as HTMLCanvasElement;
+  const rackCtx = rackCanvas?.getContext('2d');
+
+  if (rackCanvas && rackCtx) {
+    // Shadow rackCtx with const to help TypeScript understand it's not null in this scope
+    const ctx = rackCtx;
+    const dpr = window.devicePixelRatio || 1;
+    const rect = rackCanvas.getBoundingClientRect();
+    rackCanvas.width = rect.width * dpr;
+    rackCanvas.height = 300 * dpr;
+    rackCanvas.style.height = '300px';
+    ctx.scale(dpr, dpr);
+
+    const width = rect.width;
+    const height = 300;
+
+    // Colors
+    const CYAN = 'rgb(0, 255, 204)';
+    const PURPLE = 'rgb(150, 100, 255)';
+    const ORANGE = 'rgb(255, 150, 50)';
+    const PINK = 'rgb(255, 0, 110)';
+
+    function drawServerRack(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number) {
+      // Main rack body
+      ctx.fillStyle = 'rgba(150, 100, 255, 0.1)';
+      ctx.fillRect(x, y, w, h);
+      ctx.strokeStyle = PURPLE;
+      ctx.lineWidth = 2;
+      ctx.strokeRect(x, y, w, h);
+
+      // Horizontal rack segments
+      const segments = 8;
+      for (let i = 1; i < segments; i++) {
+        const segY = y + (h / segments) * i;
+        ctx.strokeStyle = 'rgba(150, 100, 255, 0.5)';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(x, segY);
+        ctx.lineTo(x + w, segY);
+        ctx.stroke();
+      }
+
+      // LED indicators
+      for (let i = 0; i < segments; i++) {
+        const ledY = y + (h / segments) * i + (h / segments / 2);
+        for (let j = 0; j < 3; j++) {
+          const ledX = x + 10 + j * 15;
+          const colors = [CYAN, ORANGE, PINK];
+          ctx.fillStyle = colors[j];
+          ctx.beginPath();
+          ctx.arc(ledX, ledY, 3, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+
+      // Ventilation holes
+      ctx.fillStyle = 'rgba(0, 255, 204, 0.2)';
+      for (let i = 0; i < segments; i++) {
+        const vY = y + (h / segments) * i + (h / segments / 2);
+        for (let j = 0; j < 5; j++) {
+          const vX = x + w - 40 + j * 6;
+          ctx.fillRect(vX, vY - 8, 3, 16);
+        }
+      }
+    }
+
+    function animateRack() {
+      ctx.clearRect(0, 0, width, height);
+
+      // Draw server rack
+      const rackX = width - 120;
+      const rackY = 50;
+      const rackW = 80;
+      const rackH = 200;
+      drawServerRack(ctx, rackX, rackY, rackW, rackH);
+
+      // Draw "us-east-1" text over the rack
+      ctx.font = 'bold 16px "Orbitron", monospace';
+      ctx.fillStyle = PINK;
+      ctx.textAlign = 'center';
+      ctx.fillText('us-east-1', rackX + rackW / 2, rackY - 15);
+
+      // Draw meme text under the rack
+      ctx.font = '13px "Share Tech Mono", monospace';
+      ctx.fillStyle = CYAN;
+      ctx.textAlign = 'center';
+      ctx.fillText('"never goes down"', rackX + rackW / 2, rackY + rackH + 25);
+      ctx.fillStyle = 'rgba(255, 150, 50, 0.9)';
+      ctx.fillText('- They said confidently', rackX + rackW / 2, rackY + rackH + 43);
+
+      requestAnimationFrame(animateRack);
+    }
+
+    animateRack();
+
+    // Handle resize
+    let rackResizeTimeout: ReturnType<typeof setTimeout>;
+    window.addEventListener('resize', () => {
+      clearTimeout(rackResizeTimeout);
+      rackResizeTimeout = setTimeout(() => {
+        const newRect = rackCanvas.getBoundingClientRect();
+        rackCanvas.width = newRect.width * dpr;
+        rackCanvas.height = 300 * dpr;
+        rackCanvas.style.height = '300px';
+        ctx.scale(dpr, dpr);
+      }, 250);
+    });
+  }
+</script>
+</BaseLayout>

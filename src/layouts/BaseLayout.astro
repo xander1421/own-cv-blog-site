@@ -1,0 +1,986 @@
+---
+import { getCollection } from 'astro:content';
+
+export interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  type?: 'website' | 'article';
+  publishedTime?: string;
+  modifiedTime?: string;
+  tags?: string[];
+  author?: string;
+}
+
+const {
+  title,
+  description = "DevOps Engineer with 4+ years of experience building scalable cloud infrastructures. AWS, Kubernetes, Terraform, CI/CD.",
+  image = "/width=3840.webp",
+  type = "website",
+  publishedTime,
+  modifiedTime,
+  tags = [],
+  author = "Alexandru Pruteanu"
+} = Astro.props;
+
+// Get all blog posts for search
+const allPosts = await getCollection('blog');
+const searchData = allPosts.map(post => ({
+  title: post.data.title,
+  description: post.data.description,
+  slug: post.slug,
+  tags: post.data.tags
+}));
+
+// SEO metadata
+const siteUrl = 'https://alexpruteanu.cloud';
+const canonicalURL = new URL(Astro.url.pathname, siteUrl);
+const fullTitle = `${title} | Alexandru Pruteanu`;
+const imageURL = new URL(image, siteUrl);
+
+// Keywords for SEO (recruiter-focused)
+const keywords = [
+  'DevOps Engineer',
+  'Cloud Infrastructure',
+  'AWS',
+  'Kubernetes',
+  'Terraform',
+  'CI/CD',
+  'Docker',
+  'Infrastructure as Code',
+  'Site Reliability Engineering',
+  'Alexandru Pruteanu',
+  ...tags
+].join(', ');
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Primary Meta Tags -->
+    <title>{fullTitle}</title>
+    <meta name="title" content={fullTitle} />
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content={author} />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={imageURL} />
+    <meta property="og:site_name" content="Alexandru Pruteanu - DevOps Engineer" />
+    <meta property="og:locale" content="en_US" />
+    {publishedTime && <meta property="article:published_time" content={publishedTime} />}
+    {modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
+    {tags.map(tag => <meta property="article:tag" content={tag} />)}
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalURL} />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageURL} />
+    <meta name="twitter:creator" content="@alexandru_prt" />
+
+    <!-- Additional SEO -->
+    <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow" />
+    <meta name="theme-color" content="#00ffcc" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- RSS Feed -->
+    <link rel="alternate" type="application/rss+xml" title="Alexandru Pruteanu Blog" href="/rss.xml" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div class="server-rack-bg"></div>
+    <div class="cloud-factory"></div>
+    <div class="perspective-grid"></div>
+    <div class="data-streams"></div>
+    <div class="scanlines"></div>
+    <div class="noise"></div>
+    <div class="neural-network"></div>
+    <div class="hologram-grid"></div>
+    <div class="glitch-overlay"></div>
+    <header>
+      <nav>
+        <a href="/" class="logo">
+          <span class="terminal-prompt">xander1421@localhost:~$</span>
+        </a>
+        <div class="nav-links">
+          <a href="/about">ABOUT</a>
+          <a href="/blog">BLOG</a>
+          <button id="search-button" class="search-btn" aria-label="Search">
+            <span>🔍</span>
+            <span class="search-shortcut">/</span>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Search Modal -->
+    <div id="search-modal" class="search-modal" style="display: none;" data-posts={JSON.stringify(searchData)}>
+      <div class="search-modal-content">
+        <div class="search-header">
+          <input
+            type="text"
+            id="search-input"
+            placeholder="Search blog posts..."
+            autocomplete="off"
+          />
+          <button id="close-search" class="close-btn">✕</button>
+        </div>
+        <div id="search-results" class="search-results"></div>
+      </div>
+    </div>
+    <main>
+      <slot />
+    </main>
+    <footer>
+      <p>&copy; 2025 Alexandru Pruteanu | DevOps Engineer</p>
+      <p class="secret-hint">Some codes never expire // Est. 1986</p>
+    </footer>
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --color-primary: #00ffcc;
+    --color-secondary: #ff006e;
+    --color-bg: #0a0a0a;
+    --color-surface: #121212;
+    --color-text: #e0e0e0;
+    --color-text-dim: #808080;
+    --color-accent: #ffb700;
+  }
+  
+  /* Global background gradients */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background:
+      radial-gradient(ellipse at center, rgba(0, 255, 204, 0.05) 0%, transparent 70%),
+      radial-gradient(circle at 20% 80%, rgba(255, 0, 110, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(255, 183, 0, 0.03) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: 'Share Tech Mono', monospace;
+    line-height: 1.6;
+    min-height: 100%;
+  }
+
+  body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Force hardware acceleration and 60fps */
+  .neural-network,
+  .hologram-grid,
+  .scanlines,
+  .noise,
+  .glitch-overlay,
+  .server-rack-bg,
+  .cloud-factory,
+  .perspective-grid,
+  .data-streams {
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 1000;
+  }
+
+  /* 80s Anime Noir Server Rack Background */
+  .server-rack-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.15;
+    background-image:
+      /* Vertical server rack panels */
+      repeating-linear-gradient(
+        90deg,
+        transparent 0px,
+        rgba(150, 100, 255, 0.1) 2px,
+        rgba(150, 100, 255, 0.2) 4px,
+        transparent 6px,
+        transparent 80px
+      ),
+      /* Horizontal rack segments */
+      repeating-linear-gradient(
+        0deg,
+        transparent 0px,
+        rgba(255, 0, 110, 0.05) 1px,
+        transparent 2px,
+        transparent 40px
+      ),
+      /* Accent highlights */
+      repeating-linear-gradient(
+        90deg,
+        transparent 0px,
+        rgba(0, 255, 204, 0.15) 1px,
+        transparent 2px,
+        transparent 240px
+      );
+    filter: blur(4px);
+    animation: rackPulse 6s ease-in-out infinite;
+  }
+
+  @keyframes rackPulse {
+    0%, 100% {
+      opacity: 0.15;
+    }
+    50% {
+      opacity: 0.22;
+    }
+  }
+
+  /* Cloud Factory Infrastructure */
+  .cloud-factory {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.08;
+    background:
+      /* Large infrastructure blocks */
+      linear-gradient(135deg, transparent 30%, rgba(100, 150, 255, 0.15) 32%, transparent 34%),
+      linear-gradient(225deg, transparent 50%, rgba(255, 150, 50, 0.12) 52%, transparent 54%),
+      linear-gradient(45deg, transparent 70%, rgba(150, 100, 255, 0.1) 72%, transparent 74%);
+    background-size: 400px 400px, 350px 350px, 450px 450px;
+    background-position: 0 0, 200px 200px, 100px -100px;
+    animation: cloudFactoryShift 60s linear infinite;
+  }
+
+  @keyframes cloudFactoryShift {
+    0% {
+      background-position: 0 0, 200px 200px, 100px -100px;
+    }
+    100% {
+      background-position: 400px 400px, 600px 600px, 500px 300px;
+    }
+  }
+
+  /* Perspective Grid - 80s style vanishing point */
+  .perspective-grid {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 60vh;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.12;
+    background-image:
+      /* Horizontal lines converging to vanishing point */
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent calc(5vh - 1px),
+        rgba(255, 0, 110, 0.3) calc(5vh - 1px),
+        rgba(255, 0, 110, 0.3) 5vh
+      );
+    transform: perspective(400px) rotateX(45deg);
+    transform-origin: bottom center;
+  }
+
+  /* Animated Data Streams */
+  .data-streams {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.06;
+    overflow: hidden;
+  }
+
+  .data-streams::before,
+  .data-streams::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 100vh;
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(0, 255, 204, 0.6) 20%,
+      rgba(0, 255, 204, 0.8) 50%,
+      rgba(0, 255, 204, 0.6) 80%,
+      transparent 100%
+    );
+    animation: dataStreamFlow 8s linear infinite;
+  }
+
+  .data-streams::before {
+    left: 15%;
+    animation-delay: 0s;
+  }
+
+  .data-streams::after {
+    right: 25%;
+    animation-delay: 4s;
+  }
+
+  @keyframes dataStreamFlow {
+    0% {
+      transform: translateY(-100vh);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(100vh);
+      opacity: 0;
+    }
+  }
+
+  /* Cyber effects (toned down) */
+  .scanlines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.05),
+      rgba(0, 0, 0, 0.05) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+    z-index: 1000;
+    opacity: 0.5;
+  }
+
+  .noise {
+    display: none;
+  }
+
+  /* Header */
+  header {
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-primary);
+    box-shadow: 0 0 20px rgba(0, 255, 204, 0.3);
+    position: relative;
+    z-index: 100;
+  }
+
+  nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo {
+    display: flex;
+    text-decoration: none;
+    color: var(--color-primary);
+    font-family: 'Share Tech Mono', monospace;
+    line-height: 1;
+  }
+
+  .terminal-prompt {
+    font-size: 1.1rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    color: var(--color-primary);
+  }
+
+  .terminal-prompt::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: var(--color-primary);
+    border-radius: 50%;
+    margin-right: 0.5rem;
+    animation: blink 1.5s infinite;
+  }
+
+  @keyframes blink {
+    0%, 50% {
+      opacity: 1;
+    }
+    51%, 100% {
+      opacity: 0;
+    }
+  }
+
+  /* Removed heavy glitch effects for better readability */
+
+  /* Neural Network Background - Global (simplified) */
+  .neural-network {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    opacity: 0.05;
+    background-image:
+      linear-gradient(rgba(0, 255, 204, 0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 255, 204, 0.08) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Reduce effects on mobile for performance */
+  @media (max-width: 768px) {
+    .neural-network,
+    .hologram-grid {
+      opacity: 0.02;
+    }
+
+    .server-rack-bg,
+    .cloud-factory,
+    .perspective-grid {
+      opacity: 0.05;
+    }
+
+    .data-streams {
+      display: none;
+    }
+  }
+
+  /* Holographic Grid Effect - Global (subtle) */
+  .hologram-grid {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background:
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 3px,
+        rgba(0, 255, 204, 0.015) 3px,
+        rgba(0, 255, 204, 0.015) 4px
+      );
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .nav-links a {
+    color: var(--color-text-dim);
+    text-decoration: none;
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .nav-links a:hover {
+    color: var(--color-primary);
+    text-shadow: 0 0 10px rgba(0, 255, 204, 0.5);
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--color-primary);
+    transition: width 0.3s ease;
+  }
+
+  .nav-links a:hover::after {
+    width: 100%;
+  }
+
+  /* Search Button */
+  .search-btn {
+    background: rgba(0, 255, 204, 0.1);
+    border: 1px solid var(--color-primary);
+    color: var(--color-primary);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+  }
+
+  .search-btn:hover {
+    background: rgba(0, 255, 204, 0.2);
+  }
+
+  .search-shortcut {
+    font-size: 0.75rem;
+    opacity: 0.7;
+  }
+
+  /* Search Modal */
+  .search-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
+    z-index: 9999;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 10vh;
+  }
+
+  .search-modal-content {
+    width: 90%;
+    max-width: 600px;
+    background: var(--color-surface);
+    border: 2px solid var(--color-primary);
+    border-radius: 8px;
+    box-shadow: 0 0 40px rgba(0, 255, 204, 0.3);
+    overflow: hidden;
+  }
+
+  .search-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    border-bottom: 1px solid rgba(0, 255, 204, 0.2);
+  }
+
+  #search-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--color-text);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1.1rem;
+    outline: none;
+  }
+
+  #search-input::placeholder {
+    color: var(--color-text-dim);
+  }
+
+  .close-btn {
+    background: transparent;
+    border: none;
+    color: var(--color-text-dim);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.25rem 0.5rem;
+    transition: color 0.3s ease;
+  }
+
+  .close-btn:hover {
+    color: var(--color-primary);
+  }
+
+  .search-results {
+    max-height: 60vh;
+    overflow-y: auto;
+    padding: 1rem;
+  }
+
+  .search-result-item {
+    padding: 1rem;
+    border: 1px solid rgba(0, 255, 204, 0.2);
+    margin-bottom: 0.75rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  .search-result-item:hover {
+    border-color: var(--color-primary);
+    background: rgba(0, 255, 204, 0.05);
+    transform: translateX(4px);
+  }
+
+  .search-result-title {
+    color: var(--color-primary);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .search-result-description {
+    color: var(--color-text-dim);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .search-result-tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .search-result-tag {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    background: rgba(0, 255, 204, 0.1);
+    border: 1px solid rgba(0, 255, 204, 0.3);
+    border-radius: 3px;
+    color: var(--color-primary);
+  }
+
+  .search-no-results {
+    text-align: center;
+    color: var(--color-text-dim);
+    padding: 2rem;
+    font-family: 'Share Tech Mono', monospace;
+  }
+
+  /* Main content */
+  main {
+    flex: 1;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+  }
+
+  /* Footer */
+  footer {
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-primary);
+    padding: 2rem;
+    text-align: center;
+    color: var(--color-text-dim);
+    font-size: 0.9rem;
+  }
+
+  .reliability {
+    margin-top: 0.5rem;
+    color: var(--color-primary);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.85rem;
+  }
+
+  .secret-hint {
+    margin-top: 0.5rem;
+    color: rgba(128, 128, 128, 0.4);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+  }
+
+  /* Typography */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Orbitron', monospace;
+    color: var(--color-primary);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  h1 {
+    font-size: 3rem;
+    font-weight: 900;
+  }
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  p {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.8;
+  }
+
+  a {
+    color: var(--color-primary);
+    transition: all 0.3s ease;
+  }
+
+  a:hover {
+    color: var(--color-accent);
+    text-shadow: 0 0 5px currentColor;
+  }
+
+  /* Blockquotes */
+  blockquote {
+    border-left: 3px solid var(--color-secondary);
+    padding-left: 1.5rem;
+    margin: 2rem 0;
+    font-style: italic;
+    color: var(--color-text-dim);
+    background: linear-gradient(90deg, rgba(255, 0, 110, 0.1) 0%, transparent 100%);
+    padding: 1rem 1.5rem;
+  }
+
+  /* Code blocks */
+  pre {
+    background: var(--color-surface);
+    border: 1px solid rgba(0, 255, 204, 0.2);
+    padding: 1rem;
+    overflow-x: auto;
+    margin: 1rem 0;
+    border-radius: 4px;
+  }
+
+  code {
+    font-family: 'Share Tech Mono', monospace;
+    color: var(--color-accent);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 2rem;
+    }
+    h2 {
+      font-size: 1.5rem;
+    }
+    .nav-links {
+      gap: 1rem;
+    }
+    main {
+      padding: 2rem 1rem;
+    }
+  }
+</style>
+
+<script>
+  // Easter egg hint
+  console.log("🎮 Some say the old ways still work...");
+
+  // Random system messages
+  const messages = [
+    'AWS_DEPLOYMENT_COMPLETE',
+    'KUBERNETES_CLUSTER_SCALING',
+    'TERRAFORM_APPLY_SUCCESS',
+    'CI/CD_PIPELINE_RUNNING',
+    'DOCKER_CONTAINERS_HEALTHY',
+    'INFRASTRUCTURE_AS_CODE_ACTIVE',
+    'MONITORING_SYSTEMS_ONLINE',
+    'AUTOMATION_PROTOCOLS_ENGAGED'
+  ];
+
+  setInterval(() => {
+    const corruption = document.querySelector('.data-corruption');
+    if (corruption && Math.random() > 0.7) {
+      const spans = corruption.querySelectorAll('span');
+      const randomSpan = spans[Math.floor(Math.random() * spans.length)];
+      const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+      randomSpan.textContent = randomMessage;
+    }
+  }, 3000);
+
+  // Konami Code easter egg
+  const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+  let konamiIndex = 0;
+
+  document.addEventListener('keydown', (e) => {
+    const key = e.key.toLowerCase();
+
+    if (key === konamiCode[konamiIndex] || e.key === konamiCode[konamiIndex]) {
+      konamiIndex++;
+
+      if (konamiIndex === konamiCode.length) {
+        // Success! Flash effect and redirect
+        const body = document.body;
+        body.style.transition = 'opacity 0.2s';
+        body.style.opacity = '0.3';
+
+        setTimeout(() => {
+          body.style.opacity = '1';
+        }, 100);
+
+        setTimeout(() => {
+          body.style.opacity = '0.3';
+        }, 200);
+
+        setTimeout(() => {
+          body.style.opacity = '1';
+          window.location.href = '/neural-link';
+        }, 300);
+
+        konamiIndex = 0;
+      }
+    } else {
+      konamiIndex = 0;
+    }
+  });
+
+  // Global Search Functionality
+  const searchModal = document.getElementById('search-modal');
+  const searchButton = document.getElementById('search-button');
+  const closeSearch = document.getElementById('close-search');
+  const searchInput = document.getElementById('search-input') as HTMLInputElement;
+  const searchResults = document.getElementById('search-results');
+
+  // Get search data from data attribute
+  const postsData = searchModal?.getAttribute('data-posts');
+  const posts = postsData ? JSON.parse(postsData) : [];
+
+  // Open search modal
+  function openSearch() {
+    if (searchModal && searchInput) {
+      searchModal.style.display = 'flex';
+      // Use setTimeout to ensure the modal is rendered before focusing
+      setTimeout(() => {
+        searchInput.focus();
+      }, 10);
+    }
+  }
+
+  // Close search modal
+  function closeSearchModal() {
+    if (searchModal) {
+      searchModal.style.display = 'none';
+      if (searchInput) searchInput.value = '';
+      if (searchResults) searchResults.innerHTML = '';
+    }
+  }
+
+  // Search function
+  function performSearch(query: string) {
+    if (!query.trim()) {
+      if (searchResults) searchResults.innerHTML = '';
+      return;
+    }
+
+    const lowercaseQuery = query.toLowerCase();
+    const results = posts.filter((post: any) => {
+      return (
+        post.title.toLowerCase().includes(lowercaseQuery) ||
+        post.description.toLowerCase().includes(lowercaseQuery) ||
+        post.tags.some((tag: string) => tag.toLowerCase().includes(lowercaseQuery))
+      );
+    });
+
+    if (results.length === 0) {
+      if (searchResults) {
+        searchResults.innerHTML = '<div class="search-no-results">No posts found. Try different keywords.</div>';
+      }
+      return;
+    }
+
+    if (searchResults) {
+      searchResults.innerHTML = results.map((post: any) => `
+        <div class="search-result-item" data-slug="${post.slug}">
+          <div class="search-result-title">${post.title}</div>
+          <div class="search-result-description">${post.description}</div>
+          <div class="search-result-tags">
+            ${post.tags.map((tag: string) => `<span class="search-result-tag">${tag}</span>`).join('')}
+          </div>
+        </div>
+      `).join('');
+
+      // Add click handlers to results
+      document.querySelectorAll('.search-result-item').forEach((item) => {
+        item.addEventListener('click', () => {
+          const slug = item.getAttribute('data-slug');
+          window.location.href = `/blog/${slug}`;
+        });
+      });
+    }
+  }
+
+  // Keyboard shortcut - Register with capture phase to prevent browser default
+  window.addEventListener('keydown', (e: KeyboardEvent) => {
+    // Open search with "/" (unless typing in an input)
+    if (e.key === '/' && !(e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement)) {
+      e.preventDefault();
+      openSearch();
+      return;
+    }
+
+    // Also support Ctrl+K or Cmd+K
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+      e.preventDefault();
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+      openSearch();
+      return false;
+    }
+
+    // Close on Escape
+    if (e.key === 'Escape') {
+      closeSearchModal();
+    }
+  }, { capture: true });
+
+  // Event listeners
+  searchButton?.addEventListener('click', openSearch);
+  closeSearch?.addEventListener('click', closeSearchModal);
+
+  // Search input handler
+  searchInput?.addEventListener('input', (e) => {
+    performSearch((e.target as HTMLInputElement).value);
+  });
+
+  // Close when clicking outside modal
+  searchModal?.addEventListener('click', (e) => {
+    if (e.target === searchModal) {
+      closeSearchModal();
+    }
+  });
+</script>

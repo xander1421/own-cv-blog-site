@@ -1,0 +1,468 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const blogPosts = await getCollection('blog');
+
+  return blogPosts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+const { title, description, date, image, tags } = post.data;
+
+// Format image path for Open Graph
+const ogImage = image ? `/images/blog/${image.replace('./', '')}` : '/width=3840.webp';
+
+// JSON-LD structured data for BlogPosting
+const siteUrl = 'https://alexpruteanu.cloud';
+const blogPostSchema = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": title,
+  "description": description,
+  "image": new URL(ogImage, siteUrl).toString(),
+  "datePublished": date ? date.toISOString() : undefined,
+  "dateModified": date ? date.toISOString() : undefined,
+  "author": {
+    "@type": "Person",
+    "name": "Alexandru Pruteanu",
+    "url": "https://alexpruteanu.cloud",
+    "jobTitle": "DevOps Engineer",
+    "sameAs": [
+      "https://github.com/xander1421",
+      "https://linkedin.com/in/alexandru-prt"
+    ]
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "Alexandru Pruteanu",
+    "url": "https://alexpruteanu.cloud"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": new URL(`/blog/${post.slug}`, siteUrl).toString()
+  },
+  "keywords": tags ? tags.join(', ') : '',
+  "articleSection": tags ? tags[0] : 'DevOps'
+};
+---
+
+<BaseLayout
+  title={title || 'Blog Post'}
+  description={description || ''}
+  image={ogImage}
+  type="article"
+  publishedTime={date ? date.toISOString() : undefined}
+  tags={tags || []}
+>
+  <!-- JSON-LD Schema for BlogPosting -->
+  <script type="application/ld+json" set:html={JSON.stringify(blogPostSchema)} />
+
+  <article class="blog-post">
+    <header class="post-header">
+      <div class="back-link">
+        <a href="/blog">← Back to Blog</a>
+      </div>
+
+      {date && (
+        <time datetime={date.toISOString()} class="post-date">
+          {date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+        </time>
+      )}
+
+      <h1>{title}</h1>
+
+      {image && (
+        <div class="hero-image-container">
+          <img src={`/images/blog/${image.replace('./', '')}`} alt={title} class="hero-image" />
+        </div>
+      )}
+
+      {tags && Array.isArray(tags) && (
+        <div class="tags">
+          {tags.map((tag: string, index: number) => (
+            <span class={`tag tag-${index % 5}`}>{tag}</span>
+          ))}
+        </div>
+      )}
+    </header>
+
+    <div class="post-content">
+      <Content />
+    </div>
+
+    <footer class="post-footer">
+      <div class="share-section">
+        <p>Connect with me:</p>
+        <div class="social-links">
+          <a href="https://github.com/xander1421" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://linkedin.com/in/alexandru-prt" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+      <div class="back-link-bottom">
+        <a href="/blog">← Back to All Posts</a>
+      </div>
+    </footer>
+  </article>
+</BaseLayout>
+
+<style is:global>
+  /* Shiki code block styling */
+  .shiki {
+    background: rgba(18, 18, 18, 0.95) !important;
+    border: 2px solid rgba(0, 255, 204, 0.2);
+    border-left: 4px solid var(--color-primary);
+    padding: 1.8rem;
+    overflow-x: auto;
+    margin: 2.5rem 0;
+    line-height: 1.6;
+    border-radius: 6px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  }
+
+  .shiki code {
+    font-family: 'Share Tech Mono', 'Courier New', monospace !important;
+    font-size: 0.95rem;
+  }
+</style>
+
+<style>
+  .blog-post {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+  }
+
+  .post-header {
+    margin-bottom: 3.5rem;
+    padding: 2rem 2.5rem 2.5rem 2.5rem;
+    border-bottom: 2px solid rgba(0, 255, 204, 0.2);
+    background: rgba(0, 255, 204, 0.02);
+    border-radius: 8px;
+  }
+
+  .hero-image-container {
+    margin: 2rem 0 1.5rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-image {
+    max-width: 100%;
+    height: auto;
+    max-height: 400px;
+    display: block;
+    border-radius: 8px;
+    border: 2px solid rgba(0, 255, 204, 0.2);
+  }
+
+  .back-link {
+    margin-bottom: 2rem;
+  }
+
+  .back-link a {
+    color: var(--color-text-dim);
+    text-decoration: none;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    display: inline-block;
+  }
+
+  .back-link a:hover {
+    color: var(--color-primary);
+    transform: translateX(-3px);
+  }
+
+  .post-date {
+    display: block;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.95rem;
+    color: var(--color-text-dim);
+    margin-bottom: 1.5rem;
+  }
+
+  .post-header h1 {
+    font-size: 2.8rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+    color: var(--color-primary);
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    margin-top: 1.5rem;
+  }
+
+  .tag {
+    padding: 0.4rem 1rem;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.85rem;
+    letter-spacing: 0.03em;
+    transition: all 0.3s ease;
+  }
+
+  /* Colorful tag variants */
+  .tag-0 {
+    background: rgba(0, 255, 204, 0.08);
+    border: 1px solid rgba(0, 255, 204, 0.3);
+    color: #00ffcc;
+  }
+
+  .tag-0:hover {
+    background: rgba(0, 255, 204, 0.15);
+    transform: translateY(-2px);
+  }
+
+  .tag-1 {
+    background: rgba(255, 0, 110, 0.08);
+    border: 1px solid rgba(255, 0, 110, 0.3);
+    color: #ff006e;
+  }
+
+  .tag-1:hover {
+    background: rgba(255, 0, 110, 0.15);
+    transform: translateY(-2px);
+  }
+
+  .tag-2 {
+    background: rgba(255, 183, 0, 0.08);
+    border: 1px solid rgba(255, 183, 0, 0.3);
+    color: #ffb700;
+  }
+
+  .tag-2:hover {
+    background: rgba(255, 183, 0, 0.15);
+    transform: translateY(-2px);
+  }
+
+  .tag-3 {
+    background: rgba(138, 43, 226, 0.08);
+    border: 1px solid rgba(138, 43, 226, 0.3);
+    color: #8a2be2;
+  }
+
+  .tag-3:hover {
+    background: rgba(138, 43, 226, 0.15);
+    transform: translateY(-2px);
+  }
+
+  .tag-4 {
+    background: rgba(0, 191, 255, 0.08);
+    border: 1px solid rgba(0, 191, 255, 0.3);
+    color: #00bfff;
+  }
+
+  .tag-4:hover {
+    background: rgba(0, 191, 255, 0.15);
+    transform: translateY(-2px);
+  }
+
+  .post-content {
+    line-height: 1.85;
+    font-size: 1.1rem;
+    color: var(--color-text);
+  }
+
+  .post-content :global(h1),
+  .post-content :global(h2),
+  .post-content :global(h3),
+  .post-content :global(h4) {
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+    color: var(--color-primary);
+    line-height: 1.3;
+  }
+
+  .post-content :global(h2) {
+    font-size: 2rem;
+    border-bottom: 2px solid rgba(0, 255, 204, 0.2);
+    padding-bottom: 0.7rem;
+  }
+
+  .post-content :global(h3) {
+    font-size: 1.5rem;
+  }
+
+  .post-content :global(h4) {
+    font-size: 1.2rem;
+  }
+
+  .post-content :global(p) {
+    margin-bottom: 1.8rem;
+  }
+
+  .post-content :global(ul),
+  .post-content :global(ol) {
+    margin-bottom: 2rem;
+    padding-left: 2.5rem;
+  }
+
+  .post-content :global(li) {
+    margin-bottom: 0.8rem;
+    line-height: 1.7;
+  }
+
+  .post-content :global(code) {
+    background: rgba(0, 255, 204, 0.1);
+    padding: 0.25rem 0.5rem;
+    border: 1px solid rgba(0, 255, 204, 0.2);
+    color: var(--color-primary);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.92em;
+  }
+
+  .post-content :global(pre code) {
+    background: none;
+    border: none;
+    padding: 0;
+  }
+
+  .post-content :global(a) {
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    transition: all 0.3s ease;
+  }
+
+  .post-content :global(a:hover) {
+    color: var(--color-text);
+  }
+
+  .post-content :global(blockquote) {
+    border-left: 4px solid var(--color-primary);
+    padding-left: 2rem;
+    margin: 2.5rem 0;
+    font-style: italic;
+    color: var(--color-text-dim);
+    background: rgba(0, 255, 204, 0.03);
+    padding: 1.5rem 2rem;
+  }
+
+  /* Table styling for better readability */
+  .post-content :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2.5rem 0;
+    background: rgba(18, 18, 18, 0.5);
+    border: 1px solid rgba(0, 255, 204, 0.2);
+  }
+
+  .post-content :global(th),
+  .post-content :global(td) {
+    padding: 1rem 1.5rem;
+    text-align: left;
+    border: 1px solid rgba(0, 255, 204, 0.15);
+  }
+
+  .post-content :global(th) {
+    background: rgba(0, 255, 204, 0.1);
+    color: var(--color-primary);
+    font-weight: 700;
+    font-family: 'Orbitron', monospace;
+  }
+
+  .post-content :global(tr:hover) {
+    background: rgba(0, 255, 204, 0.05);
+  }
+
+  .post-footer {
+    margin-top: 5rem;
+    padding-top: 2.5rem;
+    border-top: 2px solid rgba(0, 255, 204, 0.2);
+  }
+
+  .share-section {
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+
+  .share-section p {
+    color: var(--color-text-dim);
+    margin-bottom: 1.5rem;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1rem;
+  }
+
+  .social-links {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .social-links a {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-family: 'Share Tech Mono', monospace;
+    padding: 0.7rem 1.5rem;
+    border: 2px solid var(--color-primary);
+    transition: all 0.3s ease;
+  }
+
+  .social-links a:hover {
+    background: var(--color-primary);
+    color: var(--color-bg);
+  }
+
+  .back-link-bottom {
+    text-align: center;
+  }
+
+  .back-link-bottom a {
+    color: var(--color-text-dim);
+    text-decoration: none;
+    font-family: 'Share Tech Mono', monospace;
+    transition: all 0.3s ease;
+  }
+
+  .back-link-bottom a:hover {
+    color: var(--color-primary);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .blog-post {
+      padding: 1.5rem 1rem;
+    }
+
+    .post-header {
+      padding: 1.5rem 1.5rem 2rem 1.5rem;
+    }
+
+    .post-header h1 {
+      font-size: 2rem;
+    }
+
+    .post-content {
+      font-size: 1.05rem;
+    }
+
+    .post-content :global(h2) {
+      font-size: 1.6rem;
+    }
+
+    .post-content :global(h3) {
+      font-size: 1.3rem;
+    }
+
+    .post-content :global(ul),
+    .post-content :global(ol) {
+      padding-left: 1.8rem;
+    }
+  }
+</style>

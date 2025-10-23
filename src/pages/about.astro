@@ -1,0 +1,807 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// JSON-LD structured data for Person schema (optimized for recruiters)
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Alexandru Pruteanu",
+  "alternateName": "Alex Pruteanu",
+  "url": "https://alexpruteanu.cloud",
+  "image": "https://alexpruteanu.cloud/width=3840.webp",
+  "jobTitle": "DevOps Engineer",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "Yopeso"
+  },
+  "sameAs": [
+    "https://github.com/xander1421",
+    "https://linkedin.com/in/alexandru-prt",
+    "https://alexpruteanu.cloud"
+  ],
+  "email": "alexpruteanu@hotmail.com",
+  "knowsAbout": [
+    "DevOps",
+    "Cloud Infrastructure",
+    "AWS",
+    "Google Cloud Platform",
+    "Kubernetes",
+    "Docker",
+    "Terraform",
+    "Infrastructure as Code",
+    "CI/CD",
+    "Jenkins",
+    "GitHub Actions",
+    "Ansible",
+    "Helm",
+    "Site Reliability Engineering",
+    "Monitoring",
+    "Observability",
+    "Python",
+    "Bash",
+    "PostgreSQL",
+    "Redis"
+  ],
+  "knowsLanguage": [
+    {
+      "@type": "Language",
+      "name": "Romanian",
+      "alternateName": "ro"
+    },
+    {
+      "@type": "Language",
+      "name": "English",
+      "alternateName": "en"
+    },
+    {
+      "@type": "Language",
+      "name": "Portuguese",
+      "alternateName": "pt"
+    },
+    {
+      "@type": "Language",
+      "name": "Russian",
+      "alternateName": "ru"
+    }
+  ],
+  "alumniOf": {
+    "@type": "EducationalOrganization",
+    "name": "High School"
+  }
+};
+---
+
+<BaseLayout title="About" description="DevOps Engineer with 4+ years of experience in cloud infrastructure, automation, and CI/CD">
+  <!-- JSON-LD Schema for Person -->
+  <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+
+  <div class="about-container">
+    <header class="about-header">
+      <h1>About Me</h1>
+      <p class="header-subtitle">DevOps Engineer specializing in cloud infrastructure</p>
+
+      <div class="contact-info-header">
+        <span class="contact-label">Email:</span>
+        <a href="mailto:alexpruteanu@hotmail.com" class="contact-email">alexpruteanu@hotmail.com</a>
+      </div>
+
+      <div class="social-links">
+        <a href="https://github.com/xander1421" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://linkedin.com/in/alexandru-prt" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </header>
+
+    <section class="summary-section">
+      <h2>Professional Summary</h2>
+      <p class="summary-text">
+        DevOps Engineer with over 4 years of hands-on experience building and managing scalable cloud infrastructures using AWS, Kubernetes, and Terraform. Proven track record automating CI/CD pipelines, container orchestration, and infrastructure provisioning across multiple environments. Adept at improving deployment reliability, monitoring, and developer productivity through modern DevOps tooling.
+      </p>
+    </section>
+
+    <section class="skills-section">
+      <h2>Technical Skills</h2>
+      <div class="skills-grid">
+        <div class="skill-category cloud">
+          <h3><span class="icon">☁️</span> Cloud & Infrastructure</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">AWS</span>
+            <span class="skill-tag">GCP</span>
+            <span class="skill-tag">Terraform</span>
+            <span class="skill-tag">Helm</span>
+            <span class="skill-tag">Ansible</span>
+          </div>
+        </div>
+        <div class="skill-category cicd">
+          <h3><span class="icon">🚀</span> CI/CD & Automation</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">Jenkins</span>
+            <span class="skill-tag">GitHub Actions</span>
+            <span class="skill-tag">CircleCI</span>
+            <span class="skill-tag">Spinnaker</span>
+          </div>
+        </div>
+        <div class="skill-category containers">
+          <h3><span class="icon">📦</span> Containers & Orchestration</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">Docker</span>
+            <span class="skill-tag">Kubernetes</span>
+            <span class="skill-tag">Docker Swarm</span>
+          </div>
+        </div>
+        <div class="skill-category monitoring">
+          <h3><span class="icon">📊</span> Monitoring & Observability</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">Datadog</span>
+            <span class="skill-tag">Grafana</span>
+            <span class="skill-tag">Prometheus</span>
+            <span class="skill-tag">SonarQube</span>
+          </div>
+        </div>
+        <div class="skill-category languages">
+          <h3><span class="icon">💻</span> Languages & Databases</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">Bash</span>
+            <span class="skill-tag">PostgreSQL</span>
+            <span class="skill-tag">MySQL</span>
+            <span class="skill-tag">Redis</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="experience-section">
+      <h2>Professional Experience</h2>
+
+      <div class="job">
+        <div class="job-header">
+          <div>
+            <h3>DevOps Engineer</h3>
+            <p class="company">Yopeso</p>
+          </div>
+          <span class="period">Sep 2023 – Current</span>
+        </div>
+        <ul class="achievements">
+          <li>Designed and deployed AWS infrastructure using Terraform and Helm, improving environment provisioning time by 40%</li>
+          <li>Deployed and maintained Kubernetes clusters to support microservices at scale, improving system resilience and reliability</li>
+          <li>Automated infrastructure provisioning and configuration with Ansible, reducing deployment time and human error</li>
+        </ul>
+        <p class="tech-stack"><strong>Tech Stack:</strong> Terraform · AWS · Kubernetes · Helm · Jenkins · Ansible · Docker · Python · GitHub</p>
+      </div>
+
+      <div class="job">
+        <div class="job-header">
+          <div>
+            <h3>DevOps Engineer</h3>
+            <p class="company">Quorum</p>
+          </div>
+          <span class="period">Feb 2022 – May 2023</span>
+        </div>
+        <ul class="achievements">
+          <li>Managed and provisioned AWS infrastructure using Terraform, ensuring consistent, scalable, and auditable deployments across environments</li>
+          <li>Configured and maintained key AWS services — including RDS (PostgreSQL/MySQL), Elasticache (Redis), and OpenSearch — delivering reliable and high-performance data platforms</li>
+          <li>Implemented secure IAM roles and policies to enforce least-privilege access and strengthen cloud security posture</li>
+          <li>Oversaw EC2 instance lifecycles, improving resource utilization and cost efficiency</li>
+          <li>Built and maintained CI/CD pipelines with Jenkins, GitHub Actions, and CircleCI, accelerating software delivery and reducing manual errors</li>
+          <li>Integrated Datadog for real-time infrastructure monitoring, improving uptime and observability across distributed systems</li>
+        </ul>
+        <p class="tech-stack"><strong>Tech Stack:</strong> AWS · Terraform · Jenkins · CircleCI · GitHub · Datadog · Ansible · Kubernetes · Docker</p>
+      </div>
+
+      <div class="job">
+        <div class="job-header">
+          <div>
+            <h3>DevOps Engineer</h3>
+            <p class="company">Grid Dynamics</p>
+          </div>
+          <span class="period">Mar 2021 – Jan 2022</span>
+        </div>
+        <ul class="achievements">
+          <li>Hosting client applications on Google Cloud Platform (GCP), ensuring reliable accessibility and optimal performance</li>
+          <li>Maintaining Kubernetes infrastructure leveraging the Google Kubernetes Engine (GKE), resulting in smooth orchestration of containerized applications</li>
+          <li>Establishing and maintaining CI/CD processes using tools such as Jenkins, Chef, and Spinnaker, streamlining development and deployment workflows</li>
+          <li>Testing containerized workloads with Sonar and Black Duck, affirming the quality, security, and compliance of software</li>
+          <li>Introducing new microservices into the existing stack, creating necessary pipelines and recipes using Chef for VMs and Helm for Kubernetes</li>
+          <li>Actively responding to developer feedback and making appropriate changes to the infrastructure model to eliminate bottlenecks</li>
+        </ul>
+        <p class="tech-stack"><strong>Tech Stack:</strong> Google Cloud Platform (GCP) · Helm · Spinnaker · Ansible · Kubernetes</p>
+      </div>
+
+      <div class="job">
+        <div class="job-header">
+          <div>
+            <h3>Machine Learning Internship</h3>
+            <p class="company">Smart AItomation</p>
+          </div>
+          <span class="period">Nov 2020 – Feb 2021</span>
+        </div>
+        <ul class="achievements">
+          <li>Developed end-to-end machine learning pipelines, accelerating model deployment and reducing time-to-delivery for production ML solutions</li>
+          <li>Collected and prepared custom datasets via Selenium and BeautifulSoup, enabling high-quality data inputs for training and evaluation</li>
+          <li>Performed data analysis and visualization with Pandas and Matplotlib, uncovering insights to guide model refinement</li>
+          <li>Implemented and trained models using scikit-learn (Logistic Regression) and spaCy (Named Entity Recognition), improving accuracy and processing speed</li>
+          <li>Integrated GitHub Actions to automate CI/CD workflows, ensuring efficient and reproducible ML experiments</li>
+          <li>Deployed containerized ML applications on Heroku, enabling seamless public access to project demos and prototypes</li>
+        </ul>
+        <p class="tech-stack"><strong>Tech Stack:</strong> Python · scikit-learn · spaCy · Selenium · BeautifulSoup · Pandas · Matplotlib · GitHub Actions · Docker · Heroku</p>
+      </div>
+
+      <div class="job">
+        <div class="job-header">
+          <div>
+            <h3>DevOps Engineer</h3>
+            <p class="company">EBS-Integrator</p>
+          </div>
+          <span class="period">Aug 2020 – Oct 2020</span>
+        </div>
+        <ul class="achievements">
+          <li>Implemented and maintained CI pipelines in GitLab, optimizing build, test, and deployment workflows across multiple environments</li>
+          <li>Developed and managed Ansible playbooks for configuration management and automated provisioning, reducing manual setup time</li>
+          <li>Built and deployed Docker containers, integrating Nginx for load balancing to enhance performance and ensure high availability</li>
+          <li>Orchestrated microservice deployments using Docker Swarm, enabling modular, scalable, and fault-tolerant application architecture</li>
+          <li>Collaborated with clients to design customized infrastructure solutions, aligning DevOps practices with specific performance and reliability goals</li>
+        </ul>
+        <p class="tech-stack"><strong>Tech Stack:</strong> GitLab · Docker Swarm · Ansible · Nginx · Redis · Elasticsearch · RabbitMQ · GitHub</p>
+      </div>
+
+      <div class="job">
+        <div class="job-header">
+          <div>
+            <h3>DevOps Internship</h3>
+            <p class="company">Endava</p>
+          </div>
+          <span class="period">Mar 2020 – Jul 2020</span>
+        </div>
+        <ul class="achievements">
+          <li>Implementing GIT for the seamless control of source-code, streamlining the version control process for efficient code management</li>
+          <li>Creating and maintaining multi-branch Jenkins pipelines using Docker, thereby enhancing the automation and deployment process within the team</li>
+          <li>Leveraging Docker multi-stage builds to isolate work, ensuring clean, efficient, and error-free code development</li>
+          <li>Utilizing Python scripting skills to send build metrics from the Jenkins pipeline to Grafana for visualization and in-depth analysis</li>
+          <li>Creating a deployment pipeline to push the newest Docker application images to AWS, enhancing the efficiency of app updates and ensuring timely delivery</li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <div class="job-header">
+          <div>
+            <h3>IT Helpdesk</h3>
+            <p class="company">Gilat</p>
+          </div>
+          <span class="period">Apr 2017 – Apr 2020</span>
+        </div>
+        <ul class="achievements">
+          <li>Providing 24/6 call center support, acting as the first point of contact for troubleshooting and resolving IT issues</li>
+          <li>Specializing in the administration and troubleshooting of a wide variety of Microsoft products to maximize productivity and efficiency</li>
+          <li>Implementing secure access within our domain network to uphold high security standards and protect against potential threats</li>
+          <li>Hands-on maintenance and management of SAP systems, ensuring their optimal performance for smooth business operations</li>
+          <li>Operating and performing minor development tasks on Salesforce to enhance its functionality and user experience</li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <div class="job-header">
+          <div>
+            <h3>IT Helpdesk</h3>
+            <p class="company">Contraproducoes</p>
+          </div>
+          <span class="period">May 2015 – Dec 2015</span>
+        </div>
+        <ul class="achievements">
+          <li>Computer maintenance</li>
+          <li>Software updates</li>
+          <li>Hardware infrastructure upgrade</li>
+          <li>Customer support face to face</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="additional-info">
+      <div class="info-grid">
+        <div class="info-item">
+          <h3>Education</h3>
+          <p class="degree">High School Diploma</p>
+        </div>
+        <div class="info-item">
+          <h3>Languages</h3>
+          <ul class="languages-list">
+            <li>Romanian <span class="level">(Native)</span></li>
+            <li>English <span class="level">(C2)</span></li>
+            <li>Portuguese <span class="level">(C1)</span></li>
+            <li>Russian <span class="level">(B2)</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <h2>Let's Connect</h2>
+      <p>Interested in working together or discussing DevOps practices?</p>
+      <div class="cta-buttons">
+        <a href="https://github.com/xander1421" target="_blank" rel="noopener" class="cta-button">Visit My GitHub</a>
+        <a href="/blog" class="cta-button secondary">Read My Blog</a>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .about-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+  }
+
+  .about-header {
+    text-align: center;
+    margin-bottom: 4rem;
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 2px solid rgba(0, 255, 204, 0.2);
+  }
+
+  .about-header h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: var(--color-primary);
+  }
+
+  .header-subtitle {
+    font-size: 1.2rem;
+    color: var(--color-text-dim);
+    margin-bottom: 1rem;
+  }
+
+  .social-links {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .social-links a {
+    color: var(--color-primary);
+    text-decoration: none;
+    padding: 0.6rem 1.5rem;
+    border: 2px solid var(--color-primary);
+    font-family: 'Share Tech Mono', monospace;
+    transition: all 0.3s ease;
+  }
+
+  .social-links a:hover {
+    background: var(--color-primary);
+    color: var(--color-bg);
+  }
+
+  .contact-info-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin: 1.5rem 0;
+    font-size: 1rem;
+  }
+
+  .contact-label {
+    color: var(--color-text-dim);
+    font-family: 'Share Tech Mono', monospace;
+    font-weight: 600;
+  }
+
+  .contact-email {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-family: 'Share Tech Mono', monospace;
+    transition: all 0.3s ease;
+    padding: 0.4rem 1rem;
+    border: 1px solid rgba(0, 255, 204, 0.3);
+    background: rgba(0, 255, 204, 0.05);
+  }
+
+  .contact-email:hover {
+    background: rgba(0, 255, 204, 0.15);
+    border-color: var(--color-primary);
+  }
+
+  section {
+    margin-bottom: 4.5rem;
+  }
+
+  section h2 {
+    font-size: 2rem;
+    color: var(--color-primary);
+    margin-bottom: 2rem;
+    border-bottom: 2px solid rgba(0, 255, 204, 0.2);
+    padding-bottom: 0.8rem;
+  }
+
+  .summary-text {
+    font-size: 1.15rem;
+    line-height: 1.9;
+    color: var(--color-text);
+    padding: 2rem;
+    background: rgba(0, 255, 204, 0.03);
+    border-left: 4px solid var(--color-primary);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2.5rem;
+  }
+
+  .skill-category {
+    padding: 1.5rem;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 2px solid;
+    transition: all 0.3s ease;
+  }
+
+  .skill-category:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .skill-category h3 {
+    font-size: 1.1rem;
+    color: var(--color-text);
+    margin-bottom: 1.2rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .skill-category .icon {
+    font-size: 1.5rem;
+  }
+
+  /* Cloud category - Cyan/Blue */
+  .skill-category.cloud {
+    border-color: rgb(0, 200, 255);
+    background: rgba(0, 200, 255, 0.05);
+  }
+
+  .skill-category.cloud h3 {
+    color: rgb(0, 200, 255);
+  }
+
+  .skill-category.cloud .skill-tag {
+    background: rgba(0, 200, 255, 0.08);
+    border-color: rgba(0, 200, 255, 0.3);
+    color: rgb(0, 200, 255);
+  }
+
+  .skill-category.cloud .skill-tag:hover {
+    background: rgba(0, 200, 255, 0.2);
+    border-color: rgb(0, 200, 255);
+  }
+
+  /* CI/CD category - Orange */
+  .skill-category.cicd {
+    border-color: rgb(255, 150, 50);
+    background: rgba(255, 150, 50, 0.05);
+  }
+
+  .skill-category.cicd h3 {
+    color: rgb(255, 150, 50);
+  }
+
+  .skill-category.cicd .skill-tag {
+    background: rgba(255, 150, 50, 0.08);
+    border-color: rgba(255, 150, 50, 0.3);
+    color: rgb(255, 150, 50);
+  }
+
+  .skill-category.cicd .skill-tag:hover {
+    background: rgba(255, 150, 50, 0.2);
+    border-color: rgb(255, 150, 50);
+  }
+
+  /* Containers category - Purple */
+  .skill-category.containers {
+    border-color: rgb(150, 100, 255);
+    background: rgba(150, 100, 255, 0.05);
+  }
+
+  .skill-category.containers h3 {
+    color: rgb(150, 100, 255);
+  }
+
+  .skill-category.containers .skill-tag {
+    background: rgba(150, 100, 255, 0.08);
+    border-color: rgba(150, 100, 255, 0.3);
+    color: rgb(150, 100, 255);
+  }
+
+  .skill-category.containers .skill-tag:hover {
+    background: rgba(150, 100, 255, 0.2);
+    border-color: rgb(150, 100, 255);
+  }
+
+  /* Monitoring category - Green */
+  .skill-category.monitoring {
+    border-color: rgb(50, 255, 100);
+    background: rgba(50, 255, 100, 0.05);
+  }
+
+  .skill-category.monitoring h3 {
+    color: rgb(50, 255, 100);
+  }
+
+  .skill-category.monitoring .skill-tag {
+    background: rgba(50, 255, 100, 0.08);
+    border-color: rgba(50, 255, 100, 0.3);
+    color: rgb(50, 255, 100);
+  }
+
+  .skill-category.monitoring .skill-tag:hover {
+    background: rgba(50, 255, 100, 0.2);
+    border-color: rgb(50, 255, 100);
+  }
+
+  /* Languages category - Pink */
+  .skill-category.languages {
+    border-color: rgb(255, 0, 110);
+    background: rgba(255, 0, 110, 0.05);
+  }
+
+  .skill-category.languages h3 {
+    color: rgb(255, 0, 110);
+  }
+
+  .skill-category.languages .skill-tag {
+    background: rgba(255, 0, 110, 0.08);
+    border-color: rgba(255, 0, 110, 0.3);
+    color: rgb(255, 0, 110);
+  }
+
+  .skill-category.languages .skill-tag:hover {
+    background: rgba(255, 0, 110, 0.2);
+    border-color: rgb(255, 0, 110);
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .skill-tag {
+    padding: 0.5rem 1rem;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+    font-weight: 500;
+    border: 1px solid;
+  }
+
+  .job {
+    margin-bottom: 3.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(0, 255, 204, 0.1);
+  }
+
+  .job:last-child {
+    border-bottom: none;
+  }
+
+  .job-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+    gap: 1.5rem;
+  }
+
+  .job-header h3 {
+    font-size: 1.4rem;
+    color: var(--color-primary);
+    margin: 0 0 0.5rem 0;
+  }
+
+  .company {
+    font-size: 1.05rem;
+    color: var(--color-text-dim);
+    margin: 0;
+    font-family: 'Share Tech Mono', monospace;
+  }
+
+  .period {
+    font-family: 'Share Tech Mono', monospace;
+    color: var(--color-text-dim);
+    font-size: 0.95rem;
+    white-space: nowrap;
+  }
+
+  .achievements {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .achievements li {
+    position: relative;
+    padding-left: 1.8rem;
+    margin-bottom: 1rem;
+    line-height: 1.7;
+    color: var(--color-text);
+    font-size: 1.05rem;
+  }
+
+  .achievements li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--color-primary);
+    font-size: 1.3rem;
+  }
+
+  .tech-stack {
+    margin-top: 1.5rem;
+    padding: 0.75rem 1rem;
+    background: rgba(0, 255, 204, 0.05);
+    border-left: 3px solid var(--color-primary);
+    font-size: 0.9rem;
+    color: var(--color-text-dim);
+    font-family: 'Share Tech Mono', monospace;
+    line-height: 1.6;
+  }
+
+  .tech-stack strong {
+    color: var(--color-primary);
+  }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 3rem;
+  }
+
+  .info-item h3 {
+    font-size: 1.3rem;
+    color: var(--color-primary);
+    margin-bottom: 1.2rem;
+  }
+
+  .degree {
+    font-weight: bold;
+    color: var(--color-text);
+    margin-bottom: 0.5rem;
+    font-size: 1.05rem;
+  }
+
+  .institution {
+    color: var(--color-text-dim);
+    line-height: 1.6;
+  }
+
+  .languages-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .languages-list li {
+    padding: 0.8rem 0;
+    border-bottom: 1px solid rgba(0, 255, 204, 0.1);
+    color: var(--color-text);
+    font-size: 1.05rem;
+  }
+
+  .languages-list li:last-child {
+    border-bottom: none;
+  }
+
+  .level {
+    color: var(--color-text-dim);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.9rem;
+    margin-left: 0.5rem;
+  }
+
+  .cta-section {
+    text-align: center;
+    padding: 3.5rem 2rem;
+    background: rgba(0, 255, 204, 0.03);
+    border: 2px solid rgba(0, 255, 204, 0.2);
+    margin-top: 4rem;
+  }
+
+  .cta-section h2 {
+    border: none;
+    margin-bottom: 1rem;
+  }
+
+  .cta-section p {
+    color: var(--color-text-dim);
+    margin-bottom: 2.5rem;
+    font-size: 1.1rem;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .cta-button {
+    padding: 1rem 2.5rem;
+    text-decoration: none;
+    font-family: 'Orbitron', monospace;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    transition: all 0.3s ease;
+    border: 2px solid var(--color-primary);
+    background: var(--color-primary);
+    color: var(--color-bg);
+    font-size: 0.95rem;
+  }
+
+  .cta-button:hover {
+    background: transparent;
+    color: var(--color-primary);
+  }
+
+  .cta-button.secondary {
+    background: transparent;
+    color: var(--color-primary);
+  }
+
+  .cta-button.secondary:hover {
+    background: var(--color-primary);
+    color: var(--color-bg);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .about-container {
+      padding: 1.5rem 1rem;
+    }
+
+    .about-header h1 {
+      font-size: 2.5rem;
+    }
+
+    .header-subtitle {
+      font-size: 1.1rem;
+    }
+
+    section h2 {
+      font-size: 1.7rem;
+    }
+
+    .job-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .skills-grid,
+    .info-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .summary-text {
+      font-size: 1.05rem;
+      padding: 1.5rem;
+    }
+
+    .achievements li {
+      font-size: 1rem;
+    }
+
+    .cta-section {
+      padding: 2.5rem 1.5rem;
+    }
+
+    .cta-buttons {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 1rem;
+    }
+  }
+</style>

@@ -1,0 +1,998 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog');
+const sortedPosts = allPosts.sort((a, b) =>
+  new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+const featuredPosts = sortedPosts.slice(0, 3);
+
+// JSON-LD structured data for Person schema (optimized for recruiters and search)
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Alexandru Pruteanu",
+  "alternateName": "Alex Pruteanu",
+  "url": "https://alexpruteanu.cloud",
+  "image": "https://alexpruteanu.cloud/width=3840.webp",
+  "jobTitle": "DevOps Engineer",
+  "description": "DevOps Engineer with 4+ years of experience building scalable cloud infrastructures using AWS, Kubernetes, and Terraform",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "Yopeso"
+  },
+  "sameAs": [
+    "https://github.com/xander1421",
+    "https://linkedin.com/in/alexandru-prt",
+    "https://alexpruteanu.cloud"
+  ],
+  "email": "alexpruteanu@hotmail.com",
+  "knowsAbout": [
+    "DevOps",
+    "Cloud Infrastructure",
+    "AWS",
+    "Google Cloud Platform",
+    "Kubernetes",
+    "Docker",
+    "Terraform",
+    "Infrastructure as Code",
+    "CI/CD",
+    "Jenkins",
+    "GitHub Actions",
+    "Ansible",
+    "Helm",
+    "Site Reliability Engineering",
+    "Monitoring",
+    "Observability"
+  ]
+};
+
+// WebSite schema for the main site
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Alexandru Pruteanu - DevOps Engineer",
+  "url": "https://alexpruteanu.cloud",
+  "description": "Technical blog and portfolio of Alexandru Pruteanu, DevOps Engineer specializing in cloud infrastructure, Kubernetes, and scalable systems",
+  "author": {
+    "@type": "Person",
+    "name": "Alexandru Pruteanu"
+  },
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "https://alexpruteanu.cloud/blog?search={search_term_string}"
+    },
+    "query-input": "required name=search_term_string"
+  }
+};
+---
+
+<BaseLayout
+  title="Home"
+  description="Alexandru Pruteanu - DevOps Engineer with 4+ years of experience building scalable cloud infrastructures. Specializing in AWS, Kubernetes, Terraform, CI/CD pipelines, and Infrastructure as Code."
+>
+  <!-- JSON-LD Schema for Person and WebSite -->
+  <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+  <div class="hero">
+    <div class="hero-content">
+      <h1 class="title">
+        <span class="name">Alexandru Pruteanu</span>
+      </h1>
+
+      <p class="tagline">
+        DevOps Engineer specializing in cloud infrastructure, Kubernetes, and scalable systems
+      </p>
+
+      <div class="cicd-animation">
+        <canvas id="cicd-canvas"></canvas>
+      </div>
+
+      <div class="contact-links">
+        <a href="https://github.com/xander1421" target="_blank" rel="noopener" class="contact-link">
+          <span>GitHub</span>
+        </a>
+        <a href="https://linkedin.com/in/alexandru-prt" target="_blank" rel="noopener" class="contact-link">
+          <span>LinkedIn</span>
+        </a>
+        <a href="/about" class="contact-link">
+          <span>About</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <section class="featured-posts">
+    <div class="section-header">
+      <h2 class="section-title">Latest Posts</h2>
+      <a href="/blog" class="view-all-link">View all posts →</a>
+    </div>
+
+    <div class="posts-grid">
+      {featuredPosts.map((post) => (
+        <article class="post-card">
+          <div class="post-meta">
+            <time datetime={post.data.date.toISOString()}>
+              {post.data.date.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+              })}
+            </time>
+          </div>
+
+          <h3 class="post-title">
+            <a href={`/blog/${post.slug}`}>{post.data.title}</a>
+          </h3>
+
+          {post.data.image && (
+            <a href={`/blog/${post.slug}`} class="post-image-link">
+              <img src={`/images/blog/${post.data.image.replace('./', '')}`} alt={post.data.title} class="post-image" loading="lazy" />
+            </a>
+          )}
+
+          <p class="post-description">{post.data.description}</p>
+
+          <div class="post-tags">
+            {post.data.tags.map((tag: string, index: number) => (
+              <span class={`tag tag-${index % 5}`}>{tag}</span>
+            ))}
+          </div>
+
+          <a href={`/blog/${post.slug}`} class="read-more">
+            Read more →
+          </a>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    padding: 2rem 2rem 1.5rem;
+    text-align: center;
+    border-bottom: 1px solid rgba(0, 255, 204, 0.1);
+  }
+
+  .hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .title {
+    margin-bottom: 0.5rem;
+  }
+
+  .name {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--color-primary);
+    letter-spacing: 0.05em;
+    line-height: 1.1;
+    display: block;
+  }
+
+  .tagline {
+    font-size: 1.1rem;
+    color: var(--color-text-dim);
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+  }
+
+  /* CI/CD Animation */
+  .cicd-animation {
+    max-width: 900px;
+    margin: 0 auto 1.5rem;
+    padding: 0.5rem;
+    position: relative;
+  }
+
+  #cicd-canvas {
+    width: 100%;
+    height: auto;
+    display: block;
+    cursor: pointer;
+  }
+
+  .contact-links {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .contact-link {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.95rem;
+    color: var(--color-text-dim);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+    padding: 0.4rem 0;
+  }
+
+  .contact-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--color-primary);
+    transition: width 0.3s ease;
+  }
+
+  .contact-link:hover {
+    color: var(--color-primary);
+  }
+
+  .contact-link:hover::after {
+    width: 100%;
+  }
+
+  /* Featured Posts Section */
+  .featured-posts {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 2rem 3rem;
+  }
+
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .section-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    letter-spacing: 0.02em;
+  }
+
+  .view-all-link {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.95rem;
+    color: var(--color-text-dim);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .view-all-link:hover {
+    color: var(--color-primary);
+  }
+
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+  }
+
+  .post-card {
+    background: rgba(0, 255, 204, 0.02);
+    border: 1px solid rgba(0, 255, 204, 0.1);
+    padding: 2rem;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .post-card:hover {
+    border-color: rgba(0, 255, 204, 0.3);
+    transform: translateY(-4px);
+    background: rgba(0, 255, 204, 0.05);
+  }
+
+  .post-image-link {
+    display: block;
+    margin: 1.5rem -2rem;
+    overflow: hidden;
+  }
+
+  .post-image {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+    display: block;
+    border-top: 2px solid rgba(0, 255, 204, 0.2);
+    border-bottom: 2px solid rgba(0, 255, 204, 0.2);
+  }
+
+  .post-card:hover .post-image {
+    transform: scale(1.05);
+  }
+
+  .post-meta {
+    margin-bottom: 1rem;
+    height: 1.5rem;
+  }
+
+  .post-meta time {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--color-text-dim);
+    letter-spacing: 0.03em;
+  }
+
+  .post-title {
+    margin-bottom: 1rem;
+    height: 8rem;
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .post-title a {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--color-text);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    line-height: 1.3;
+  }
+
+  .post-title a:hover {
+    color: var(--color-primary);
+  }
+
+  .post-description {
+    color: var(--color-text-dim);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+  }
+
+  .post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .tag {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.75rem;
+    padding: 0.4rem 0.8rem;
+    letter-spacing: 0.03em;
+    transition: all 0.3s ease;
+  }
+
+  /* Colorful tag variants */
+  .tag-0 {
+    background: rgba(0, 255, 204, 0.08);
+    border: 1px solid rgba(0, 255, 204, 0.3);
+    color: #00ffcc;
+  }
+
+  .tag-0:hover {
+    background: rgba(0, 255, 204, 0.15);
+    transform: translateY(-2px);
+  }
+
+  .tag-1 {
+    background: rgba(255, 0, 110, 0.08);
+    border: 1px solid rgba(255, 0, 110, 0.3);
+    color: #ff006e;
+  }
+
+  .tag-1:hover {
+    background: rgba(255, 0, 110, 0.15);
+    transform: translateY(-2px);
+  }
+
+  .tag-2 {
+    background: rgba(255, 183, 0, 0.08);
+    border: 1px solid rgba(255, 183, 0, 0.3);
+    color: #ffb700;
+  }
+
+  .tag-2:hover {
+    background: rgba(255, 183, 0, 0.15);
+    transform: translateY(-2px);
+  }
+
+  .tag-3 {
+    background: rgba(138, 43, 226, 0.08);
+    border: 1px solid rgba(138, 43, 226, 0.3);
+    color: #8a2be2;
+  }
+
+  .tag-3:hover {
+    background: rgba(138, 43, 226, 0.15);
+    transform: translateY(-2px);
+  }
+
+  .tag-4 {
+    background: rgba(0, 191, 255, 0.08);
+    border: 1px solid rgba(0, 191, 255, 0.3);
+    color: #00bfff;
+  }
+
+  .tag-4:hover {
+    background: rgba(0, 191, 255, 0.15);
+    transform: translateY(-2px);
+  }
+
+  .read-more {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.9rem;
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    align-self: flex-start;
+  }
+
+  .read-more:hover {
+    letter-spacing: 0.05em;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hero {
+      padding: 1.5rem 1.5rem 1rem;
+    }
+
+    .name {
+      font-size: 2rem;
+    }
+
+    .tagline {
+      font-size: 1rem;
+    }
+
+    .cicd-animation {
+      max-width: 700px;
+      padding: 0.5rem;
+    }
+
+    .contact-links {
+      gap: 1.5rem;
+    }
+
+    .featured-posts {
+      padding: 1.5rem 1.5rem 2rem;
+    }
+
+    .section-title {
+      font-size: 1.75rem;
+    }
+
+    .posts-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .post-card {
+      padding: 1.5rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero {
+      padding: 1rem 1rem 0.75rem;
+    }
+
+    .name {
+      font-size: 1.75rem;
+    }
+
+    .tagline {
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+
+    .cicd-animation {
+      max-width: 600px;
+      padding: 0.25rem;
+    }
+
+    .featured-posts {
+      padding: 1rem 1rem 1.5rem;
+    }
+
+    .section-header {
+      margin-bottom: 1.5rem;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+    }
+
+    .post-title a {
+      font-size: 1.2rem;
+    }
+  }
+</style>
+
+<script>
+  // CI/CD Canvas Animation
+  if (typeof window !== 'undefined') {
+    window.addEventListener('load', () => {
+      const canvas = document.getElementById('cicd-canvas') as HTMLCanvasElement;
+      if (!canvas) return;
+
+      const ctxOrNull = canvas.getContext('2d');
+      if (!ctxOrNull) return;
+
+      // Shadow ctx to help TypeScript understand it's not null
+      const ctx: CanvasRenderingContext2D = ctxOrNull;
+
+      // Set canvas resolution
+      const dpr = window.devicePixelRatio || 1;
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = rect.width * dpr;
+      canvas.height = 380 * dpr;
+      canvas.style.height = '380px';
+      ctx.scale(dpr, dpr);
+
+      const width = rect.width;
+      const height = 380;
+
+      // Colors
+      const PRIMARY = 'rgb(0, 255, 204)';
+      const PRIMARY_DIM = 'rgba(0, 255, 204, 0.3)';
+      const BG_DARK = 'rgba(0, 20, 20, 0.8)';
+      const TEXT_DIM = 'rgba(180, 200, 200, 0.9)';
+
+      // Stage type colors
+      const CI_COLOR = 'rgb(100, 150, 255)'; // Blue for CI
+      const CI_COLOR_DIM = 'rgba(100, 150, 255, 0.3)';
+      const CD_COLOR = 'rgb(255, 150, 50)'; // Orange for CD
+      const CD_COLOR_DIM = 'rgba(255, 150, 50, 0.3)';
+      const GITOPS_COLOR = 'rgb(150, 100, 255)'; // Purple for GitOps
+      const GITOPS_COLOR_DIM = 'rgba(150, 100, 255, 0.3)';
+      const SUCCESS_COLOR = 'rgb(50, 255, 100)'; // Green
+
+      // Infinity path generation (lemniscate)
+      function generateInfinityPath() {
+        const points: {x: number; y: number}[] = [];
+        const centerX = width / 2;
+        const centerY = height / 2;
+        const scaleX = width * 0.38; // Wider horizontal scale
+        const scaleY = height * 0.28; // Vertical scale
+
+        for (let i = 0; i <= 360; i++) {
+          const t = (i / 180) * Math.PI;
+          const denominator = 1 + Math.sin(t) * Math.sin(t);
+          const x = centerX + (scaleX * Math.cos(t)) / denominator;
+          const y = centerY + (scaleY * Math.sin(t) * Math.cos(t)) / denominator;
+          points.push({ x, y });
+        }
+
+        return points;
+      }
+
+      const pathPoints = generateInfinityPath();
+
+      // Calculate arc lengths for constant-speed movement
+      const arcLengths = [0];
+      for (let i = 1; i < pathPoints.length; i++) {
+        const dx = pathPoints[i].x - pathPoints[i - 1].x;
+        const dy = pathPoints[i].y - pathPoints[i - 1].y;
+        arcLengths.push(arcLengths[i - 1] + Math.sqrt(dx * dx + dy * dy));
+      }
+      const totalLength = arcLengths[arcLengths.length - 1];
+
+      // Get point at normalized progress (0-1)
+      function getPointAtProgress(progress: number) {
+        const targetLength = progress * totalLength;
+        let index = 0;
+        for (let i = 0; i < arcLengths.length - 1; i++) {
+          if (arcLengths[i + 1] >= targetLength) {
+            index = i;
+            break;
+          }
+        }
+        const t = (targetLength - arcLengths[index]) / (arcLengths[index + 1] - arcLengths[index]);
+        return {
+          x: pathPoints[index].x + t * (pathPoints[index + 1].x - pathPoints[index].x),
+          y: pathPoints[index].y + t * (pathPoints[index + 1].y - pathPoints[index].y)
+        };
+      }
+
+      // Pipeline stations - spread out to avoid overlap on infinity path
+      const stations: Array<{name: string; progress: number; type: string; x?: number; y?: number}> = [
+        { name: 'Push', progress: 0.05, type: 'entry' },
+        { name: 'Build', progress: 0.15, type: 'ci' },
+        { name: 'Test', progress: 0.23, type: 'ci' },
+        { name: 'Scan', progress: 0.33, type: 'ci' },
+        { name: 'Image', progress: 0.43, type: 'ci' },
+        { name: 'GitOps', progress: 0.53, type: 'crossover' },
+        { name: 'Staging', progress: 0.63, type: 'cd' },
+        { name: 'Approve', progress: 0.81, type: 'cd' },
+        { name: 'Prod', progress: 0.90, type: 'cd' },
+        { name: 'Monitor', progress: 0.97, type: 'cd' }
+      ];
+
+      stations.forEach(station => {
+        const pos = getPointAtProgress(station.progress);
+        station.x = pos.x;
+        station.y = pos.y;
+      });
+
+      // Laptop position (external - bottom right)
+      const laptop = {
+        x: width - 100,
+        y: height - 70,
+        name: 'Commit'
+      };
+
+      // Moving token
+      const token = {
+        progress: 0,
+        speed: 0.0005, // per frame
+        x: 0,
+        y: 0,
+        color: SUCCESS_COLOR
+      };
+
+      let dashOffset = 0;
+      let time = 0;
+
+      // Draw functions
+      function drawLaptop(ctx: CanvasRenderingContext2D, x: number, y: number) {
+        ctx.save();
+
+        // Laptop screen
+        ctx.strokeStyle = PRIMARY;
+        ctx.fillStyle = BG_DARK;
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.roundRect(x - 20, y - 15, 40, 25, 2);
+        ctx.fill();
+        ctx.stroke();
+
+        // Screen lines
+        ctx.strokeStyle = PRIMARY_DIM;
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(x - 15, y - 10);
+        ctx.lineTo(x + 15, y - 10);
+        ctx.moveTo(x - 15, y - 5);
+        ctx.lineTo(x + 5, y - 5);
+        ctx.stroke();
+
+        // Laptop base
+        ctx.fillStyle = PRIMARY;
+        ctx.beginPath();
+        ctx.moveTo(x - 22, y + 10);
+        ctx.lineTo(x + 22, y + 10);
+        ctx.lineTo(x + 25, y + 15);
+        ctx.lineTo(x - 25, y + 15);
+        ctx.closePath();
+        ctx.fill();
+
+        // Label
+        ctx.fillStyle = TEXT_DIM;
+        ctx.font = '11px Share Tech Mono, monospace';
+        ctx.textAlign = 'center';
+        ctx.fillText('Commit', x, y + 35);
+
+        // Pulsing glow ring
+        const pulseIntensity = 0.3 + Math.sin(time * 0.05) * 0.2;
+        ctx.strokeStyle = `rgba(0, 255, 204, ${pulseIntensity})`;
+        ctx.lineWidth = 2;
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = PRIMARY;
+        ctx.beginPath();
+        ctx.arc(x, y, 32, 0, Math.PI * 2);
+        ctx.stroke();
+
+        ctx.restore();
+      }
+
+      function drawDottedLine(ctx: CanvasRenderingContext2D, x1: number, y1: number, x2: number, y2: number, offset: number) {
+        ctx.save();
+
+        // Gradient from laptop to first station
+        const gradient = ctx.createLinearGradient(x1, y1, x2, y2);
+        gradient.addColorStop(0, PRIMARY);
+        gradient.addColorStop(1, CI_COLOR);
+
+        ctx.strokeStyle = gradient;
+        ctx.lineWidth = 2.5;
+        ctx.setLineDash([5, 5]);
+        ctx.lineDashOffset = offset;
+        ctx.shadowBlur = 5;
+        ctx.shadowColor = PRIMARY;
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      function getStageColor(type: string, active: boolean) {
+        if (!active) {
+          if (type === 'ci') return CI_COLOR_DIM;
+          if (type === 'cd') return CD_COLOR_DIM;
+          if (type === 'crossover') return GITOPS_COLOR_DIM;
+          return PRIMARY_DIM;
+        }
+        if (type === 'ci') return CI_COLOR;
+        if (type === 'cd') return CD_COLOR;
+        if (type === 'crossover') return GITOPS_COLOR;
+        return PRIMARY;
+      }
+
+      function drawStationIcon(ctx: CanvasRenderingContext2D, x: number, y: number, name: string, color: string) {
+        ctx.save();
+        ctx.strokeStyle = color;
+        ctx.fillStyle = color;
+        ctx.lineWidth = 2;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+
+        switch(name) {
+          case 'Push':
+            // Upload arrow
+            ctx.beginPath();
+            ctx.moveTo(x, y - 8);
+            ctx.lineTo(x, y + 8);
+            ctx.moveTo(x - 5, y - 3);
+            ctx.lineTo(x, y - 8);
+            ctx.lineTo(x + 5, y - 3);
+            ctx.stroke();
+            break;
+
+          case 'Build':
+            // Hammer/tools
+            ctx.beginPath();
+            ctx.moveTo(x - 6, y + 6);
+            ctx.lineTo(x - 2, y + 2);
+            ctx.lineTo(x - 6, y - 2);
+            ctx.moveTo(x + 2, y - 6);
+            ctx.lineTo(x + 6, y - 2);
+            ctx.lineTo(x + 2, y + 2);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(x - 4, y + 4, 2, 0, Math.PI * 2);
+            ctx.fill();
+            break;
+
+          case 'Test':
+            // Checkmark in shield
+            ctx.beginPath();
+            ctx.moveTo(x, y - 8);
+            ctx.lineTo(x - 6, y - 4);
+            ctx.lineTo(x - 6, y + 6);
+            ctx.lineTo(x, y + 10);
+            ctx.lineTo(x + 6, y + 6);
+            ctx.lineTo(x + 6, y - 4);
+            ctx.closePath();
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(x - 4, y);
+            ctx.lineTo(x - 1, y + 3);
+            ctx.lineTo(x + 5, y - 3);
+            ctx.stroke();
+            break;
+
+          case 'Scan':
+            // Magnifying glass with bug
+            ctx.beginPath();
+            ctx.arc(x - 2, y - 2, 5, 0, Math.PI * 2);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(x + 2, y + 2);
+            ctx.lineTo(x + 6, y + 6);
+            ctx.stroke();
+            break;
+
+          case 'Image':
+            // Container/box
+            ctx.strokeRect(x - 6, y - 6, 12, 12);
+            ctx.beginPath();
+            ctx.moveTo(x - 3, y - 2);
+            ctx.lineTo(x, y + 2);
+            ctx.lineTo(x + 3, y - 2);
+            ctx.stroke();
+            break;
+
+          case 'GitOps':
+            // Git branch with sync
+            ctx.beginPath();
+            ctx.moveTo(x - 6, y - 6);
+            ctx.lineTo(x - 6, y + 6);
+            ctx.moveTo(x - 6, y);
+            ctx.lineTo(x + 6, y);
+            ctx.moveTo(x + 6, y - 6);
+            ctx.lineTo(x + 6, y + 6);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(x - 6, y - 6, 2, 0, Math.PI * 2);
+            ctx.arc(x - 6, y + 6, 2, 0, Math.PI * 2);
+            ctx.arc(x + 6, y + 6, 2, 0, Math.PI * 2);
+            ctx.fill();
+            break;
+
+          case 'Staging':
+            // Server stack
+            ctx.strokeRect(x - 6, y - 6, 12, 4);
+            ctx.strokeRect(x - 6, y - 1, 12, 4);
+            ctx.strokeRect(x - 6, y + 4, 12, 4);
+            break;
+
+          case 'Approve':
+            // Thumbs up
+            ctx.beginPath();
+            ctx.moveTo(x - 2, y + 4);
+            ctx.lineTo(x - 2, y - 2);
+            ctx.lineTo(x, y - 6);
+            ctx.lineTo(x + 2, y - 6);
+            ctx.lineTo(x + 2, y);
+            ctx.lineTo(x + 4, y);
+            ctx.lineTo(x + 4, y + 6);
+            ctx.lineTo(x - 2, y + 6);
+            ctx.closePath();
+            ctx.stroke();
+            break;
+
+          case 'Prod':
+            // Rocket
+            ctx.beginPath();
+            ctx.moveTo(x, y - 8);
+            ctx.lineTo(x + 4, y + 2);
+            ctx.lineTo(x + 2, y + 2);
+            ctx.lineTo(x + 2, y + 8);
+            ctx.lineTo(x - 2, y + 8);
+            ctx.lineTo(x - 2, y + 2);
+            ctx.lineTo(x - 4, y + 2);
+            ctx.closePath();
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(x, y - 2, 2, 0, Math.PI * 2);
+            ctx.fill();
+            break;
+
+          case 'Monitor':
+            // Graph/chart
+            ctx.beginPath();
+            ctx.moveTo(x - 6, y + 6);
+            ctx.lineTo(x - 3, y);
+            ctx.lineTo(x, y + 3);
+            ctx.lineTo(x + 3, y - 3);
+            ctx.lineTo(x + 6, y + 2);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(x - 6, y + 6, 1.5, 0, Math.PI * 2);
+            ctx.arc(x + 6, y + 2, 1.5, 0, Math.PI * 2);
+            ctx.fill();
+            break;
+
+          default:
+            ctx.beginPath();
+            ctx.arc(x, y, 5, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        ctx.restore();
+      }
+
+      function drawStation(ctx: CanvasRenderingContext2D, x: number, y: number, name: string, type: string, active: boolean) {
+        ctx.save();
+
+        const color = getStageColor(type, active);
+
+        // Background circle
+        ctx.fillStyle = BG_DARK;
+        ctx.beginPath();
+        ctx.arc(x, y, 25, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Ring
+        ctx.strokeStyle = color;
+        ctx.lineWidth = active ? 3 : 2;
+        if (active) {
+          ctx.shadowBlur = 15;
+          ctx.shadowColor = color;
+        }
+        ctx.beginPath();
+        ctx.arc(x, y, 25, 0, Math.PI * 2);
+        ctx.stroke();
+
+        // Draw custom icon
+        ctx.shadowBlur = 0;
+        drawStationIcon(ctx, x, y, name, color);
+
+        // Label
+        ctx.fillStyle = active ? color : TEXT_DIM;
+        ctx.font = '11px Share Tech Mono, monospace';
+        ctx.textAlign = 'center';
+        const labelY = y < height / 2 ? y - 35 : y + 45;
+        ctx.fillText(name, x, labelY);
+
+        ctx.restore();
+      }
+
+      function drawInfinityPath(ctx: CanvasRenderingContext2D) {
+        ctx.save();
+
+        // Create gradient from left (CI) to right (CD)
+        const gradient = ctx.createLinearGradient(0, height / 2, width, height / 2);
+        gradient.addColorStop(0, CI_COLOR_DIM);
+        gradient.addColorStop(0.5, GITOPS_COLOR_DIM);
+        gradient.addColorStop(1, CD_COLOR_DIM);
+
+        ctx.strokeStyle = gradient;
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.moveTo(pathPoints[0].x, pathPoints[0].y);
+        for (let i = 1; i < pathPoints.length; i++) {
+          ctx.lineTo(pathPoints[i].x, pathPoints[i].y);
+        }
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      function drawToken(ctx: CanvasRenderingContext2D, x: number, y: number, color: string) {
+        ctx.save();
+        ctx.fillStyle = color;
+        ctx.shadowBlur = 20;
+        ctx.shadowColor = color;
+        ctx.beginPath();
+        ctx.arc(x, y, 8, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+
+      // Animation loop
+      function animate() {
+        time++;
+        dashOffset = (dashOffset + 0.5) % 10;
+
+        // Update token position
+        token.progress = (token.progress + token.speed) % 1;
+        const pos = getPointAtProgress(token.progress);
+        token.x = pos.x;
+        token.y = pos.y;
+
+        // Clear canvas
+        ctx.clearRect(0, 0, width, height);
+
+        // Draw infinity path
+        drawInfinityPath(ctx);
+
+        // Draw laptop and dotted connector
+        const entryStation = stations[0];
+        if (entryStation.x !== undefined && entryStation.y !== undefined) {
+          drawDottedLine(ctx, laptop.x - 25, laptop.y - 10, entryStation.x + 20, entryStation.y + 20, dashOffset);
+        }
+        drawLaptop(ctx, laptop.x, laptop.y);
+
+        // Draw stations
+        stations.forEach(station => {
+          if (station.x !== undefined && station.y !== undefined) {
+            const distanceToToken = Math.abs(station.progress - token.progress);
+            const active = distanceToToken < 0.03 || distanceToToken > 0.97;
+            drawStation(ctx, station.x, station.y, station.name, station.type, active);
+          }
+        });
+
+        // Draw token
+        drawToken(ctx, token.x, token.y, token.color);
+
+        requestAnimationFrame(animate);
+      }
+
+      // Start animation
+      animate();
+
+      // Handle window resize
+      window.addEventListener('resize', () => {
+        const newRect = canvas.getBoundingClientRect();
+        canvas.width = newRect.width * dpr;
+        canvas.style.width = newRect.width + 'px';
+        ctx.scale(dpr, dpr);
+      });
+    });
+  }
+</script>
