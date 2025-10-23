@@ -66,7 +66,7 @@ const blogPostSchema = {
   tags={tags || []}
 >
   <!-- JSON-LD Schema for BlogPosting -->
-  <script type="application/ld+json" set:html={JSON.stringify(blogPostSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(blogPostSchema)} />
 
   <article class="blog-post">
     <header class="post-header">

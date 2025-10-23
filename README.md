@@ -16,7 +16,7 @@ This is my personal CV website and blog where I share insights about:
 - **Fully Responsive**: Works seamlessly on desktop, tablet, and mobile
 - **Blog System**: Write blog posts in Markdown with frontmatter metadata
 - **CV/About Page**: Detailed professional experience and skills
-- **Easter Egg**: Hidden feature activated by Konami code (↑ ↑ ↓ ↓ ← → ← → B A)
+
 
 ## 📂 Project Structure
 
@@ -33,8 +33,9 @@ This is my personal CV website and blog where I share insights about:
 │       ├── about.astro       # CV/About page
 │       ├── blog.astro        # Blog listing
 │       ├── blog/
-│       │   └── [slug].astro  # Dynamic blog post pages
-│       └── neural-link.astro # Easter egg page
+│       |   └── [slug].astro  # Dynamic blog post pages
+│       └── neural-link.astro
+
 └── package.json
 ```
 
@@ -49,6 +50,7 @@ All commands are run from the root of the project:
 | `npm run build`           | Build your production site to `./dist/`          |
 | `npm run preview`         | Preview your build locally, before deploying     |
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
+| `bunx astro check`        | Runs typecheck                                   |
 
 ## ✍️ Adding Blog Posts
 

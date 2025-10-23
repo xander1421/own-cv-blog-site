@@ -73,7 +73,7 @@ const personSchema = {
 
 <BaseLayout title="About" description="DevOps Engineer with 4+ years of experience in cloud infrastructure, automation, and CI/CD">
   <!-- JSON-LD Schema for Person -->
-  <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(personSchema)} />
 
   <div class="about-container">
     <header class="about-header">
@@ -88,6 +88,7 @@ const personSchema = {
       <div class="social-links">
         <a href="https://github.com/xander1421" target="_blank" rel="noopener">GitHub</a>
         <a href="https://linkedin.com/in/alexandru-prt" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://resonant-grave.vercel.app/" target="_blank" rel="noopener">The Resonant Grave</a>
       </div>
     </header>
 
@@ -317,7 +318,7 @@ const personSchema = {
       <h2>Let's Connect</h2>
       <p>Interested in working together or discussing DevOps practices?</p>
       <div class="cta-buttons">
-        <a href="https://github.com/xander1421" target="_blank" rel="noopener" class="cta-button">Visit My GitHub</a>
+        <a href="mailto:alexpruteanu@hotmail.com" class="cta-button">Contact Me</a>
         <a href="/blog" class="cta-button secondary">Read My Blog</a>
       </div>
     </section>

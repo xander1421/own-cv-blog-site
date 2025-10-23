@@ -75,8 +75,8 @@ const websiteSchema = {
   description="Alexandru Pruteanu - DevOps Engineer with 4+ years of experience building scalable cloud infrastructures. Specializing in AWS, Kubernetes, Terraform, CI/CD pipelines, and Infrastructure as Code."
 >
   <!-- JSON-LD Schema for Person and WebSite -->
-  <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
-  <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
   <div class="hero">
     <div class="hero-content">
       <h1 class="title">
@@ -89,18 +89,6 @@ const websiteSchema = {
 
       <div class="cicd-animation">
         <canvas id="cicd-canvas"></canvas>
-      </div>
-
-      <div class="contact-links">
-        <a href="https://github.com/xander1421" target="_blank" rel="noopener" class="contact-link">
-          <span>GitHub</span>
-        </a>
-        <a href="https://linkedin.com/in/alexandru-prt" target="_blank" rel="noopener" class="contact-link">
-          <span>LinkedIn</span>
-        </a>
-        <a href="/about" class="contact-link">
-          <span>About</span>
-        </a>
       </div>
     </div>
   </div>
@@ -189,13 +177,18 @@ const websiteSchema = {
     margin: 0 auto 1.5rem;
     padding: 0.5rem;
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   #cicd-canvas {
     width: 100%;
+    max-width: 900px;
     height: auto;
     display: block;
     cursor: pointer;
+    margin: 0 auto;
   }
 
   .contact-links {
@@ -449,8 +442,14 @@ const websiteSchema = {
     }
 
     .cicd-animation {
-      max-width: 700px;
-      padding: 0.5rem;
+      max-width: 100%;
+      width: 100%;
+      padding: 0.5rem 1rem;
+    }
+
+    #cicd-canvas {
+      width: 100%;
+      max-width: 100%;
     }
 
     .contact-links {
@@ -473,6 +472,10 @@ const websiteSchema = {
     .post-card {
       padding: 1.5rem;
     }
+
+    .post-image-link {
+      margin: 1.5rem -1.5rem;
+    }
   }
 
   @media (max-width: 480px) {
@@ -490,8 +493,14 @@ const websiteSchema = {
     }
 
     .cicd-animation {
-      max-width: 600px;
-      padding: 0.25rem;
+      max-width: 100%;
+      width: 100%;
+      padding: 0.25rem 0.5rem;
+    }
+
+    #cicd-canvas {
+      width: 100%;
+      max-width: 100%;
     }
 
     .featured-posts {
@@ -509,6 +518,14 @@ const websiteSchema = {
     .post-title a {
       font-size: 1.2rem;
     }
+
+    .post-card {
+      padding: 1.25rem;
+    }
+
+    .post-image-link {
+      margin: 1.5rem -1.25rem;
+    }
   }
 </style>
 
@@ -525,16 +542,28 @@ const websiteSchema = {
       // Shadow ctx to help TypeScript understand it's not null
       const ctx: CanvasRenderingContext2D = ctxOrNull;
 
-      // Set canvas resolution
+      // Set canvas resolution - responsive height based on width
       const dpr = window.devicePixelRatio || 1;
       const rect = canvas.getBoundingClientRect();
+
+      // Responsive height: smaller on mobile
+      let canvasHeight = 380;
+      if (rect.width < 480) {
+        canvasHeight = 250;
+      } else if (rect.width < 768) {
+        canvasHeight = 300;
+      }
+
       canvas.width = rect.width * dpr;
-      canvas.height = 380 * dpr;
-      canvas.style.height = '380px';
+      canvas.height = canvasHeight * dpr;
+      canvas.style.height = `${canvasHeight}px`;
       ctx.scale(dpr, dpr);
 
       const width = rect.width;
-      const height = 380;
+      const height = canvasHeight;
+
+      // Scale factor for mobile - reduce icon/circle sizes
+      const scale = width < 480 ? 0.6 : width < 768 ? 0.75 : 1;
 
       // Colors
       const PRIMARY = 'rgb(0, 255, 204)';
@@ -618,13 +647,6 @@ const websiteSchema = {
         station.y = pos.y;
       });
 
-      // Laptop position (external - bottom right)
-      const laptop = {
-        x: width - 100,
-        y: height - 70,
-        name: 'Commit'
-      };
-
       // Moving token
       const token = {
         progress: 0,
@@ -638,78 +660,6 @@ const websiteSchema = {
       let time = 0;
 
       // Draw functions
-      function drawLaptop(ctx: CanvasRenderingContext2D, x: number, y: number) {
-        ctx.save();
-
-        // Laptop screen
-        ctx.strokeStyle = PRIMARY;
-        ctx.fillStyle = BG_DARK;
-        ctx.lineWidth = 2;
-        ctx.beginPath();
-        ctx.roundRect(x - 20, y - 15, 40, 25, 2);
-        ctx.fill();
-        ctx.stroke();
-
-        // Screen lines
-        ctx.strokeStyle = PRIMARY_DIM;
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        ctx.moveTo(x - 15, y - 10);
-        ctx.lineTo(x + 15, y - 10);
-        ctx.moveTo(x - 15, y - 5);
-        ctx.lineTo(x + 5, y - 5);
-        ctx.stroke();
-
-        // Laptop base
-        ctx.fillStyle = PRIMARY;
-        ctx.beginPath();
-        ctx.moveTo(x - 22, y + 10);
-        ctx.lineTo(x + 22, y + 10);
-        ctx.lineTo(x + 25, y + 15);
-        ctx.lineTo(x - 25, y + 15);
-        ctx.closePath();
-        ctx.fill();
-
-        // Label
-        ctx.fillStyle = TEXT_DIM;
-        ctx.font = '11px Share Tech Mono, monospace';
-        ctx.textAlign = 'center';
-        ctx.fillText('Commit', x, y + 35);
-
-        // Pulsing glow ring
-        const pulseIntensity = 0.3 + Math.sin(time * 0.05) * 0.2;
-        ctx.strokeStyle = `rgba(0, 255, 204, ${pulseIntensity})`;
-        ctx.lineWidth = 2;
-        ctx.shadowBlur = 10;
-        ctx.shadowColor = PRIMARY;
-        ctx.beginPath();
-        ctx.arc(x, y, 32, 0, Math.PI * 2);
-        ctx.stroke();
-
-        ctx.restore();
-      }
-
-      function drawDottedLine(ctx: CanvasRenderingContext2D, x1: number, y1: number, x2: number, y2: number, offset: number) {
-        ctx.save();
-
-        // Gradient from laptop to first station
-        const gradient = ctx.createLinearGradient(x1, y1, x2, y2);
-        gradient.addColorStop(0, PRIMARY);
-        gradient.addColorStop(1, CI_COLOR);
-
-        ctx.strokeStyle = gradient;
-        ctx.lineWidth = 2.5;
-        ctx.setLineDash([5, 5]);
-        ctx.lineDashOffset = offset;
-        ctx.shadowBlur = 5;
-        ctx.shadowColor = PRIMARY;
-        ctx.beginPath();
-        ctx.moveTo(x1, y1);
-        ctx.lineTo(x2, y2);
-        ctx.stroke();
-        ctx.restore();
-      }
-
       function getStageColor(type: string, active: boolean) {
         if (!active) {
           if (type === 'ci') return CI_COLOR_DIM;
@@ -727,111 +677,113 @@ const websiteSchema = {
         ctx.save();
         ctx.strokeStyle = color;
         ctx.fillStyle = color;
-        ctx.lineWidth = 2;
+        ctx.lineWidth = 2 * scale;
         ctx.lineCap = 'round';
         ctx.lineJoin = 'round';
+
+        const s = scale; // shorthand for cleaner code
 
         switch(name) {
           case 'Push':
             // Upload arrow
             ctx.beginPath();
-            ctx.moveTo(x, y - 8);
-            ctx.lineTo(x, y + 8);
-            ctx.moveTo(x - 5, y - 3);
-            ctx.lineTo(x, y - 8);
-            ctx.lineTo(x + 5, y - 3);
+            ctx.moveTo(x, y - 8*s);
+            ctx.lineTo(x, y + 8*s);
+            ctx.moveTo(x - 5*s, y - 3*s);
+            ctx.lineTo(x, y - 8*s);
+            ctx.lineTo(x + 5*s, y - 3*s);
             ctx.stroke();
             break;
 
           case 'Build':
             // Hammer/tools
             ctx.beginPath();
-            ctx.moveTo(x - 6, y + 6);
-            ctx.lineTo(x - 2, y + 2);
-            ctx.lineTo(x - 6, y - 2);
-            ctx.moveTo(x + 2, y - 6);
-            ctx.lineTo(x + 6, y - 2);
-            ctx.lineTo(x + 2, y + 2);
+            ctx.moveTo(x - 6*s, y + 6*s);
+            ctx.lineTo(x - 2*s, y + 2*s);
+            ctx.lineTo(x - 6*s, y - 2*s);
+            ctx.moveTo(x + 2*s, y - 6*s);
+            ctx.lineTo(x + 6*s, y - 2*s);
+            ctx.lineTo(x + 2*s, y + 2*s);
             ctx.stroke();
             ctx.beginPath();
-            ctx.arc(x - 4, y + 4, 2, 0, Math.PI * 2);
+            ctx.arc(x - 4*s, y + 4*s, 2*s, 0, Math.PI * 2);
             ctx.fill();
             break;
 
           case 'Test':
             // Checkmark in shield
             ctx.beginPath();
-            ctx.moveTo(x, y - 8);
-            ctx.lineTo(x - 6, y - 4);
-            ctx.lineTo(x - 6, y + 6);
-            ctx.lineTo(x, y + 10);
-            ctx.lineTo(x + 6, y + 6);
-            ctx.lineTo(x + 6, y - 4);
+            ctx.moveTo(x, y - 8*s);
+            ctx.lineTo(x - 6*s, y - 4*s);
+            ctx.lineTo(x - 6*s, y + 6*s);
+            ctx.lineTo(x, y + 10*s);
+            ctx.lineTo(x + 6*s, y + 6*s);
+            ctx.lineTo(x + 6*s, y - 4*s);
             ctx.closePath();
             ctx.stroke();
             ctx.beginPath();
-            ctx.moveTo(x - 4, y);
-            ctx.lineTo(x - 1, y + 3);
-            ctx.lineTo(x + 5, y - 3);
+            ctx.moveTo(x - 4*s, y);
+            ctx.lineTo(x - 1*s, y + 3*s);
+            ctx.lineTo(x + 5*s, y - 3*s);
             ctx.stroke();
             break;
 
           case 'Scan':
             // Magnifying glass with bug
             ctx.beginPath();
-            ctx.arc(x - 2, y - 2, 5, 0, Math.PI * 2);
+            ctx.arc(x - 2*s, y - 2*s, 5*s, 0, Math.PI * 2);
             ctx.stroke();
             ctx.beginPath();
-            ctx.moveTo(x + 2, y + 2);
-            ctx.lineTo(x + 6, y + 6);
+            ctx.moveTo(x + 2*s, y + 2*s);
+            ctx.lineTo(x + 6*s, y + 6*s);
             ctx.stroke();
             break;
 
           case 'Image':
             // Container/box
-            ctx.strokeRect(x - 6, y - 6, 12, 12);
+            ctx.strokeRect(x - 6*s, y - 6*s, 12*s, 12*s);
             ctx.beginPath();
-            ctx.moveTo(x - 3, y - 2);
-            ctx.lineTo(x, y + 2);
-            ctx.lineTo(x + 3, y - 2);
+            ctx.moveTo(x - 3*s, y - 2*s);
+            ctx.lineTo(x, y + 2*s);
+            ctx.lineTo(x + 3*s, y - 2*s);
             ctx.stroke();
             break;
 
           case 'GitOps':
             // Git branch with sync
             ctx.beginPath();
-            ctx.moveTo(x - 6, y - 6);
-            ctx.lineTo(x - 6, y + 6);
-            ctx.moveTo(x - 6, y);
-            ctx.lineTo(x + 6, y);
-            ctx.moveTo(x + 6, y - 6);
-            ctx.lineTo(x + 6, y + 6);
+            ctx.moveTo(x - 6*s, y - 6*s);
+            ctx.lineTo(x - 6*s, y + 6*s);
+            ctx.moveTo(x - 6*s, y);
+            ctx.lineTo(x + 6*s, y);
+            ctx.moveTo(x + 6*s, y - 6*s);
+            ctx.lineTo(x + 6*s, y + 6*s);
             ctx.stroke();
             ctx.beginPath();
-            ctx.arc(x - 6, y - 6, 2, 0, Math.PI * 2);
-            ctx.arc(x - 6, y + 6, 2, 0, Math.PI * 2);
-            ctx.arc(x + 6, y + 6, 2, 0, Math.PI * 2);
+            ctx.arc(x - 6*s, y - 6*s, 2*s, 0, Math.PI * 2);
+            ctx.arc(x - 6*s, y + 6*s, 2*s, 0, Math.PI * 2);
+            ctx.arc(x + 6*s, y + 6*s, 2*s, 0, Math.PI * 2);
             ctx.fill();
             break;
 
           case 'Staging':
             // Server stack
-            ctx.strokeRect(x - 6, y - 6, 12, 4);
-            ctx.strokeRect(x - 6, y - 1, 12, 4);
-            ctx.strokeRect(x - 6, y + 4, 12, 4);
+            ctx.strokeRect(x - 6*s, y - 6*s, 12*s, 4*s);
+            ctx.strokeRect(x - 6*s, y - 1*s, 12*s, 4*s);
+            ctx.strokeRect(x - 6*s, y + 4*s, 12*s, 4*s);
             break;
 
           case 'Approve':
             // Thumbs up
             ctx.beginPath();
-            ctx.moveTo(x - 2, y + 4);
-            ctx.lineTo(x - 2, y - 2);
-            ctx.lineTo(x, y - 6);
-            ctx.lineTo(x + 2, y - 6);
-            ctx.lineTo(x + 2, y);
-            ctx.lineTo(x + 4, y);
-            ctx.lineTo(x + 4, y + 6);
-            ctx.lineTo(x - 2, y + 6);
+            ctx.moveTo(x - 2*s, y + 4*s);
+            ctx.lineTo(x - 2*s, y - 2*s);
+            ctx.lineTo(x, y - 6*s);
+            ctx.lineTo(x + 2*s, y - 6*s);
+            ctx.lineTo(x + 2*s, y);
+            ctx.lineTo(x + 4*s, y);
+            ctx.lineTo(x + 4*s, y + 6*s);
+            ctx.lineTo(x - 2*s, y + 6*s);
             ctx.closePath();
             ctx.stroke();
             break;
@@ -839,38 +791,38 @@ const websiteSchema = {
           case 'Prod':
             // Rocket
             ctx.beginPath();
-            ctx.moveTo(x, y - 8);
-            ctx.lineTo(x + 4, y + 2);
-            ctx.lineTo(x + 2, y + 2);
-            ctx.lineTo(x + 2, y + 8);
-            ctx.lineTo(x - 2, y + 8);
-            ctx.lineTo(x - 2, y + 2);
-            ctx.lineTo(x - 4, y + 2);
+            ctx.moveTo(x, y - 8*s);
+            ctx.lineTo(x + 4*s, y + 2*s);
+            ctx.lineTo(x + 2*s, y + 2*s);
+            ctx.lineTo(x + 2*s, y + 8*s);
+            ctx.lineTo(x - 2*s, y + 8*s);
+            ctx.lineTo(x - 2*s, y + 2*s);
+            ctx.lineTo(x - 4*s, y + 2*s);
             ctx.closePath();
             ctx.stroke();
             ctx.beginPath();
-            ctx.arc(x, y - 2, 2, 0, Math.PI * 2);
+            ctx.arc(x, y - 2*s, 2*s, 0, Math.PI * 2);
             ctx.fill();
             break;
 
           case 'Monitor':
             // Graph/chart
             ctx.beginPath();
-            ctx.moveTo(x - 6, y + 6);
-            ctx.lineTo(x - 3, y);
-            ctx.lineTo(x, y + 3);
-            ctx.lineTo(x + 3, y - 3);
-            ctx.lineTo(x + 6, y + 2);
+            ctx.moveTo(x - 6*s, y + 6*s);
+            ctx.lineTo(x - 3*s, y);
+            ctx.lineTo(x, y + 3*s);
+            ctx.lineTo(x + 3*s, y - 3*s);
+            ctx.lineTo(x + 6*s, y + 2*s);
             ctx.stroke();
             ctx.beginPath();
-            ctx.arc(x - 6, y + 6, 1.5, 0, Math.PI * 2);
-            ctx.arc(x + 6, y + 2, 1.5, 0, Math.PI * 2);
+            ctx.arc(x - 6*s, y + 6*s, 1.5*s, 0, Math.PI * 2);
+            ctx.arc(x + 6*s, y + 2*s, 1.5*s, 0, Math.PI * 2);
             ctx.fill();
             break;
 
           default:
             ctx.beginPath();
-            ctx.arc(x, y, 5, 0, Math.PI * 2);
+            ctx.arc(x, y, 5*s, 0, Math.PI * 2);
             ctx.fill();
         }
 
@@ -881,22 +833,23 @@ const websiteSchema = {
         ctx.save();
 
         const color = getStageColor(type, active);
+        const radius = 25 * scale;
 
         // Background circle
         ctx.fillStyle = BG_DARK;
         ctx.beginPath();
-        ctx.arc(x, y, 25, 0, Math.PI * 2);
+        ctx.arc(x, y, radius, 0, Math.PI * 2);
         ctx.fill();
 
         // Ring
         ctx.strokeStyle = color;
-        ctx.lineWidth = active ? 3 : 2;
+        ctx.lineWidth = active ? 3 * scale : 2 * scale;
         if (active) {
-          ctx.shadowBlur = 15;
+          ctx.shadowBlur = 15 * scale;
           ctx.shadowColor = color;
         }
         ctx.beginPath();
-        ctx.arc(x, y, 25, 0, Math.PI * 2);
+        ctx.arc(x, y, radius, 0, Math.PI * 2);
         ctx.stroke();
 
         // Draw custom icon
@@ -905,9 +858,11 @@ const websiteSchema = {
 
         // Label
         ctx.fillStyle = active ? color : TEXT_DIM;
-        ctx.font = '11px Share Tech Mono, monospace';
+        const fontSize = Math.max(8, 11 * scale);
+        ctx.font = `${fontSize}px Share Tech Mono, monospace`;
         ctx.textAlign = 'center';
-        const labelY = y < height / 2 ? y - 35 : y + 45;
+        const labelOffset = 35 * scale;
+        const labelY = y < height / 2 ? y - labelOffset : y + labelOffset + 10 * scale;
         ctx.fillText(name, x, labelY);
 
         ctx.restore();
@@ -936,10 +891,10 @@ const websiteSchema = {
       function drawToken(ctx: CanvasRenderingContext2D, x: number, y: number, color: string) {
         ctx.save();
         ctx.fillStyle = color;
-        ctx.shadowBlur = 20;
+        ctx.shadowBlur = 20 * scale;
         ctx.shadowColor = color;
         ctx.beginPath();
-        ctx.arc(x, y, 8, 0, Math.PI * 2);
+        ctx.arc(x, y, 8 * scale, 0, Math.PI * 2);
         ctx.fill();
         ctx.restore();
       }
@@ -960,13 +915,6 @@ const websiteSchema = {
 
         // Draw infinity path
         drawInfinityPath(ctx);
-
-        // Draw laptop and dotted connector
-        const entryStation = stations[0];
-        if (entryStation.x !== undefined && entryStation.y !== undefined) {
-          drawDottedLine(ctx, laptop.x - 25, laptop.y - 10, entryStation.x + 20, entryStation.y + 20, dashOffset);
-        }
-        drawLaptop(ctx, laptop.x, laptop.y);
 
         // Draw stations
         stations.forEach(station => {

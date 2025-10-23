@@ -592,9 +592,63 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       font-size: 0.85rem;
     }
 
+    /* ASCII art 20% smaller on mobile */
+    .secret-msg {
+      font-size: 0.64rem;
+    }
+
     .fun-stats {
       grid-template-columns: 1fr;
       gap: 1rem;
+    }
+
+    /* Fix overlapping in TYPICAL DEVOPS DAY section */
+    .meme-container {
+      height: 500px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .pepe-img {
+      position: relative;
+      width: 140px;
+      left: auto;
+      top: auto;
+      margin: 1rem auto 0.5rem;
+      display: block;
+    }
+
+    .pepe-label {
+      position: relative;
+      left: auto;
+      top: auto;
+      width: auto;
+      max-width: 200px;
+      margin: 0 auto 1rem;
+    }
+
+    #server-rack-canvas {
+      position: relative;
+      height: 250px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .secret-msg {
+      font-size: 0.5rem;
+    }
+
+    .meme-container {
+      height: 450px;
+    }
+
+    .pepe-img {
+      width: 120px;
+    }
+
+    #server-rack-canvas {
+      height: 220px;
     }
   }
 </style>
@@ -909,14 +963,19 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     // Shadow rackCtx with const to help TypeScript understand it's not null in this scope
     const ctx = rackCtx;
     const dpr = window.devicePixelRatio || 1;
-    const rect = rackCanvas.getBoundingClientRect();
-    rackCanvas.width = rect.width * dpr;
-    rackCanvas.height = 300 * dpr;
-    rackCanvas.style.height = '300px';
-    ctx.scale(dpr, dpr);
 
-    const width = rect.width;
-    const height = 300;
+    // Function to setup canvas
+    function setupCanvas() {
+      const rect = rackCanvas.getBoundingClientRect();
+      rackCanvas.width = rect.width * dpr;
+      rackCanvas.height = 300 * dpr;
+      rackCanvas.style.height = '300px';
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.scale(dpr, dpr);
+      return { width: rect.width, height: 300 };
+    }
+
+    let { width, height } = setupCanvas();
 
     // Colors
     const CYAN = 'rgb(0, 255, 204)';
@@ -971,26 +1030,52 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     function animateRack() {
       ctx.clearRect(0, 0, width, height);
 
-      // Draw server rack
-      const rackX = width - 120;
-      const rackY = 50;
-      const rackW = 80;
-      const rackH = 200;
+      // Responsive sizing based on WINDOW width (not canvas width)
+      const windowWidth = window.innerWidth;
+      let rackX, rackY, rackW, rackH;
+      let titleFontSize, textFontSize;
+
+      if (windowWidth < 480) {
+        // Very small mobile - center the rack
+        rackW = Math.min(100, width * 0.5);
+        rackH = 180;
+        rackX = width / 2 - rackW / 2;
+        rackY = 20;
+        titleFontSize = 12;
+        textFontSize = 10;
+      } else if (windowWidth < 768) {
+        // Mobile - center the rack
+        rackW = 100;
+        rackH = 200;
+        rackX = width / 2 - rackW / 2;
+        rackY = 30;
+        titleFontSize = 14;
+        textFontSize = 11;
+      } else {
+        // Desktop - rack on the far right
+        rackW = 80;
+        rackH = 200;
+        rackX = width - 130; // Position far to the right with padding (50px from edge)
+        rackY = 50;
+        titleFontSize = 16;
+        textFontSize = 13;
+      }
+
       drawServerRack(ctx, rackX, rackY, rackW, rackH);
 
       // Draw "us-east-1" text over the rack
-      ctx.font = 'bold 16px "Orbitron", monospace';
+      ctx.font = `bold ${titleFontSize}px "Orbitron", monospace`;
       ctx.fillStyle = PINK;
       ctx.textAlign = 'center';
-      ctx.fillText('us-east-1', rackX + rackW / 2, rackY - 15);
+      ctx.fillText('us-east-1', rackX + rackW / 2, rackY - 10);
 
       // Draw meme text under the rack
-      ctx.font = '13px "Share Tech Mono", monospace';
+      ctx.font = `${textFontSize}px "Share Tech Mono", monospace`;
       ctx.fillStyle = CYAN;
       ctx.textAlign = 'center';
-      ctx.fillText('"never goes down"', rackX + rackW / 2, rackY + rackH + 25);
+      ctx.fillText('"never goes down"', rackX + rackW / 2, rackY + rackH + 20);
       ctx.fillStyle = 'rgba(255, 150, 50, 0.9)';
-      ctx.fillText('- They said confidently', rackX + rackW / 2, rackY + rackH + 43);
+      ctx.fillText('- They said confidently', rackX + rackW / 2, rackY + rackH + 20 + textFontSize + 6);
 
       requestAnimationFrame(animateRack);
     }
@@ -1002,11 +1087,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     window.addEventListener('resize', () => {
       clearTimeout(rackResizeTimeout);
       rackResizeTimeout = setTimeout(() => {
-        const newRect = rackCanvas.getBoundingClientRect();
-        rackCanvas.width = newRect.width * dpr;
-        rackCanvas.height = 300 * dpr;
-        rackCanvas.style.height = '300px';
-        ctx.scale(dpr, dpr);
+        const dims = setupCanvas();
+        width = dims.width;
+        height = dims.height;
       }, 250);
     });
   }
