@@ -535,6 +535,17 @@ $ grep -A 10 "scripts" package.json
 # - Any script running executables
 ```
 
+**Use AI-assisted scanning:**
+
+Modern tools like Claude Code can analyze entire codebases for security vulnerabilities. I scanned the SmartPay repo with Claude Code, which flagged:
+- The malicious `postinstall` hook
+- Plaintext password storage
+- Hardcoded credentials
+- Suspicious network requests
+- Cryptocurrency wallet interactions
+
+This multi-layered approach (manual `grep` + AI scanning) catches both obvious and subtle threats.
+
 **If you see this, STOP:**
 ```json
 "postinstall": "npm start"
@@ -674,43 +685,50 @@ Use this checklist when approached with a "technical assessment":
 
 **If you see 3+ red flags: STOP. This is likely a scam.**
 
-## What I Did Right (And What I Almost Did Wrong)
+## How I Caught It: Security Awareness Pays Off
 
 ### ✅ What I Did Right
 
-1. **Cloned but didn't install**
-   - Reviewed `package.json` before running `npm install`
-   - Caught the `postinstall` hook immediately
+1. **Checked `package.json` BEFORE npm install**
+   - I already knew about malicious `postinstall` hooks from previous supply chain attacks
+   - First thing I did: `grep -A 10 "scripts" package.json`
+   - Caught the `"postinstall": "npm start"` immediately
+   - **Never ran npm install on my main machine**
 
-2. **Checked git history first**
-   - Noticed bot email addresses
-   - Saw minimal commit history
-   - Identified suspicious timeline
+2. **Analyzed git history for red flags**
+   - Noticed bot email addresses (`@bots.bitbucket.org`)
+   - Saw minimal commit history (only 3 commits)
+   - Identified suspicious timeline (all within one week)
+   - Generic commit messages ("initial project")
 
-3. **Static analysis before execution**
-   - Used `grep` to search for dangerous patterns
-   - Found hardcoded credentials
-   - Discovered crypto wallet code
+3. **Performed static code analysis**
+   - Used `grep` to search for dangerous patterns before execution
+   - Scanned the entire repo with Claude Code for potential vulnerabilities
+   - Found hardcoded Supabase credentials
+   - Discovered crypto wallet harvesting code (`ethers.js`)
+   - Identified plaintext password storage
+   - AI-assisted analysis helped spot obfuscated patterns I might have missed manually
 
-4. **Used isolated environment**
-   - When I *did* run it (for forensics), used a throwaway VM
-   - No internet access
-   - Monitored network requests
+4. **Used the LinkedIn conversation to expose the scammer**
+   - Asked an intentionally nonsensical question about barcode scanning
+   - Real founder would've corrected me; scammer agreed to everything
+   - Proved he was reading from a script, not understanding the product
 
-### ❌ What I Almost Did Wrong
+5. **Isolated environment for forensic analysis**
+   - When I *did* run the code (purely for analysis), used a throwaway VM
+   - Disabled network access to prevent data exfiltration
+   - Monitored all file system and network activity
 
-1. **Nearly ran `npm install` out of habit**
-   - Muscle memory: `git clone` → `cd` → `npm install`
-   - Caught myself at the last second
+### 🎯 The Key Insight
 
-2. **Trusted the "professional" appearance**
-   - README looked legitimate
-   - Code structure seemed normal
-   - Package dependencies looked reasonable
+**I didn't get lucky. I followed my security training:**
 
-3. **Felt time pressure**
-   - "We need to fill this role quickly"
-   - Makes you rush, skip security checks
+- **Never trust, always verify** - Even "professional-looking" repos need auditing
+- **Package.json is your first line of defense** - Check it before installing
+- **Git history tells the truth** - Real projects have real development history
+- **Test with confusion** - Scammers reading scripts will agree to anything
+
+**This is why security awareness matters.** Knowing about supply chain attacks meant I knew exactly what to look for.
 
 ## Lessons Learned
 
