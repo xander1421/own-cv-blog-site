@@ -6,19 +6,58 @@ import type { CollectionEntry } from 'astro:content';
 export async function getStaticPaths() {
   const blogPosts = await getCollection('blog');
 
-  return blogPosts.map((post) => ({
-    params: { slug: post.slug },
-    props: { post },
-  }));
+  return blogPosts.map((post) => {
+    // Calculate related posts based on tag overlap
+    const relatedPosts = blogPosts
+      .filter(p => p.slug !== post.slug) // Exclude current post
+      .map(p => {
+        // Count matching tags
+        const matchingTags = p.data.tags.filter(tag =>
+          post.data.tags.includes(tag)
+        ).length;
+        return { post: p, score: matchingTags };
+      })
+      .filter(p => p.score > 0) // Only posts with at least 1 matching tag
+      .sort((a, b) => {
+        // Sort by score first, then by date
+        if (b.score !== a.score) return b.score - a.score;
+        return b.post.data.date.getTime() - a.post.data.date.getTime();
+      })
+      .slice(0, 3) // Get top 3
+      .map(p => p.post);
+
+    return {
+      params: { slug: post.slug },
+      props: { post, relatedPosts },
+    };
+  });
 }
 
 interface Props {
   post: CollectionEntry<'blog'>;
+  relatedPosts: CollectionEntry<'blog'>[];
 }
 
-const { post } = Astro.props;
+const { post, relatedPosts } = Astro.props;
 const { Content } = await post.render();
 const { title, description, date, image, tags } = post.data;
+
+// Calculate reading time
+function calculateReadingTime(content: string): number {
+  const plainText = content
+    .replace(/```[\s\S]*?```/g, '')
+    .replace(/`[^`]*`/g, '')
+    .replace(/#{1,6}\s/g, '')
+    .replace(/[*_~`]/g, '')
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+    .replace(/\n+/g, ' ');
+
+  const words = plainText.trim().split(/\s+/).filter(word => word.length > 0);
+  const readingTime = Math.ceil(words.length / 200);
+  return readingTime;
+}
+
+const readingTime = calculateReadingTime(post.body);
 
 // Format image path for Open Graph
 const ogImage = image ? `/images/blog/${image.replace('./', '')}` : '/width=3840.webp';
@@ -68,17 +107,23 @@ const blogPostSchema = {
   <!-- JSON-LD Schema for BlogPosting -->
   <script is:inline type="application/ld+json" set:html={JSON.stringify(blogPostSchema)} />
 
+  <!-- Reading Progress Bar -->
+  <div id="reading-progress" class="reading-progress-bar"></div>
+
   <article class="blog-post">
     <header class="post-header">
       <div class="back-link">
         <a href="/blog">← Back to Blog</a>
       </div>
 
-      {date && (
-        <time datetime={date.toISOString()} class="post-date">
-          {date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-        </time>
-      )}
+      <div class="post-meta-info">
+        {date && (
+          <time datetime={date.toISOString()} class="post-date">
+            {date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+          </time>
+        )}
+        <span class="reading-time">• {readingTime} min read</span>
+      </div>
 
       <h1>{title}</h1>
 
@@ -101,8 +146,76 @@ const blogPostSchema = {
       <Content />
     </div>
 
+    {relatedPosts.length > 0 && (
+      <section class="related-posts">
+        <h2 class="related-posts-title">Related Posts</h2>
+        <div class="related-posts-grid">
+          {relatedPosts.map((relatedPost) => (
+            <article class="related-post-card">
+              {relatedPost.data.image && (
+                <a href={`/blog/${relatedPost.slug}`} class="related-post-image-link">
+                  <img
+                    src={`/images/blog/${relatedPost.data.image.replace('./', '')}`}
+                    alt={relatedPost.data.title}
+                    class="related-post-image"
+                    loading="lazy"
+                  />
+                </a>
+              )}
+              <div class="related-post-content">
+                <time datetime={relatedPost.data.date.toISOString()} class="related-post-date">
+                  {relatedPost.data.date.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric'
+                  })}
+                </time>
+                <h3 class="related-post-title">
+                  <a href={`/blog/${relatedPost.slug}`}>{relatedPost.data.title}</a>
+                </h3>
+                <div class="related-post-tags">
+                  {relatedPost.data.tags.slice(0, 3).map((tag: string, index: number) => (
+                    <span class={`tag tag-${index % 5}`}>{tag}</span>
+                  ))}
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+    )}
+
     <footer class="post-footer">
       <div class="share-section">
+        <p class="share-title">Share this post:</p>
+        <div class="share-buttons">
+          <a
+            href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(`https://alexpruteanu.cloud/blog/${post.slug}`)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="share-button twitter"
+            aria-label="Share on Twitter"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </svg>
+            <span>Twitter</span>
+          </a>
+          <a
+            href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(`https://alexpruteanu.cloud/blog/${post.slug}`)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="share-button linkedin"
+            aria-label="Share on LinkedIn"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+            <span>LinkedIn</span>
+          </a>
+        </div>
+      </div>
+      <div class="connect-section">
         <p>Connect with me:</p>
         <div class="social-links">
           <a href="https://github.com/xander1421" target="_blank" rel="noopener">GitHub</a>
@@ -114,6 +227,13 @@ const blogPostSchema = {
       </div>
     </footer>
   </article>
+
+  <!-- Back to Top Button -->
+  <button id="back-to-top" class="back-to-top-button" aria-label="Back to top">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
 </BaseLayout>
 
 <style is:global>
@@ -128,15 +248,56 @@ const blogPostSchema = {
     line-height: 1.6;
     border-radius: 6px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    position: relative;
   }
 
   .shiki code {
     font-family: 'Share Tech Mono', 'Courier New', monospace !important;
     font-size: 0.95rem;
   }
+
+  .copy-code-button {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    background: rgba(0, 255, 204, 0.1);
+    border: 1px solid var(--color-primary);
+    color: var(--color-primary);
+    padding: 0.5rem 1rem;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.8rem;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    z-index: 10;
+  }
+
+  .copy-code-button:hover {
+    background: rgba(0, 255, 204, 0.2);
+    box-shadow: 0 0 10px rgba(0, 255, 204, 0.3);
+  }
+
+  .copy-code-button.copied {
+    background: rgba(50, 255, 100, 0.2);
+    border-color: rgb(50, 255, 100);
+    color: rgb(50, 255, 100);
+  }
 </style>
 
 <style>
+  /* Reading Progress Bar */
+  .reading-progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+    box-shadow: 0 0 10px var(--color-primary);
+    z-index: 9999;
+    transition: width 0.1s ease-out;
+  }
+
   .blog-post {
     max-width: 1200px;
     margin: 0 auto;
@@ -185,12 +346,25 @@ const blogPostSchema = {
     transform: translateX(-3px);
   }
 
+  .post-meta-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+
   .post-date {
-    display: block;
     font-family: 'Share Tech Mono', monospace;
     font-size: 0.95rem;
     color: var(--color-text-dim);
-    margin-bottom: 1.5rem;
+  }
+
+  .reading-time {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.95rem;
+    color: var(--color-primary);
+    font-weight: 600;
   }
 
   .post-header h1 {
@@ -380,6 +554,95 @@ const blogPostSchema = {
     background: rgba(0, 255, 204, 0.05);
   }
 
+  /* Related Posts */
+  .related-posts {
+    margin-top: 5rem;
+    padding-top: 3rem;
+    border-top: 2px solid rgba(0, 255, 204, 0.2);
+  }
+
+  .related-posts-title {
+    font-size: 2rem;
+    color: var(--color-primary);
+    margin-bottom: 2rem;
+    font-family: 'Orbitron', monospace;
+  }
+
+  .related-posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+
+  .related-post-card {
+    background: rgba(0, 255, 204, 0.02);
+    border: 1px solid rgba(0, 255, 204, 0.2);
+    border-radius: 6px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .related-post-card:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0, 255, 204, 0.2);
+  }
+
+  .related-post-image-link {
+    display: block;
+    overflow: hidden;
+  }
+
+  .related-post-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .related-post-card:hover .related-post-image {
+    transform: scale(1.05);
+  }
+
+  .related-post-content {
+    padding: 1.5rem;
+  }
+
+  .related-post-date {
+    display: block;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--color-text-dim);
+    margin-bottom: 0.75rem;
+  }
+
+  .related-post-title {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+  }
+
+  .related-post-title a {
+    color: var(--color-text);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .related-post-title a:hover {
+    color: var(--color-primary);
+  }
+
+  .related-post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .related-post-tags .tag {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.7rem;
+  }
+
   .post-footer {
     margin-top: 5rem;
     padding-top: 2.5rem;
@@ -392,6 +655,80 @@ const blogPostSchema = {
   }
 
   .share-section p {
+    color: var(--color-text-dim);
+    margin-bottom: 1.5rem;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1rem;
+  }
+
+  .share-title {
+    font-size: 1.1rem;
+    color: var(--color-text);
+    margin-bottom: 1.5rem;
+    font-family: 'Orbitron', monospace;
+    font-weight: 600;
+  }
+
+  .share-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .share-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border: 2px solid;
+    text-decoration: none;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .share-button svg {
+    transition: transform 0.3s ease;
+  }
+
+  .share-button:hover svg {
+    transform: scale(1.1);
+  }
+
+  .share-button.twitter {
+    border-color: #1DA1F2;
+    color: #1DA1F2;
+    background: rgba(29, 161, 242, 0.05);
+  }
+
+  .share-button.twitter:hover {
+    background: rgba(29, 161, 242, 0.15);
+    box-shadow: 0 0 20px rgba(29, 161, 242, 0.3);
+    transform: translateY(-2px);
+  }
+
+  .share-button.linkedin {
+    border-color: #0077B5;
+    color: #0077B5;
+    background: rgba(0, 119, 181, 0.05);
+  }
+
+  .share-button.linkedin:hover {
+    background: rgba(0, 119, 181, 0.15);
+    box-shadow: 0 0 20px rgba(0, 119, 181, 0.3);
+    transform: translateY(-2px);
+  }
+
+  .connect-section {
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+
+  .connect-section p {
     color: var(--color-text-dim);
     margin-bottom: 1.5rem;
     font-family: 'Share Tech Mono', monospace;
@@ -434,6 +771,52 @@ const blogPostSchema = {
     color: var(--color-primary);
   }
 
+  /* Back to Top Button */
+  .back-to-top-button {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 50px;
+    height: 50px;
+    background: rgba(0, 255, 204, 0.15);
+    border: 2px solid var(--color-primary);
+    color: var(--color-primary);
+    cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 9998;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  .back-to-top-button.visible {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .back-to-top-button:hover {
+    background: var(--color-primary);
+    color: var(--color-bg);
+    transform: translateY(-3px);
+    box-shadow: 0 0 25px rgba(0, 255, 204, 0.5), 0 6px 20px rgba(0, 0, 0, 0.4);
+  }
+
+  .back-to-top-button:active {
+    transform: translateY(-1px);
+  }
+
+  .back-to-top-button svg {
+    transition: transform 0.3s ease;
+  }
+
+  .back-to-top-button:hover svg {
+    transform: translateY(-2px);
+  }
+
   /* Responsive */
   @media (max-width: 768px) {
     .blog-post {
@@ -464,5 +847,154 @@ const blogPostSchema = {
     .post-content :global(ol) {
       padding-left: 1.8rem;
     }
+
+    .share-button {
+      padding: 0.65rem 1.2rem;
+      font-size: 0.9rem;
+    }
+
+    .share-buttons {
+      gap: 0.8rem;
+    }
+
+    .back-to-top-button {
+      width: 45px;
+      height: 45px;
+      bottom: 1.5rem;
+      right: 1.5rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .share-button {
+      padding: 0.6rem 1rem;
+      font-size: 0.85rem;
+      gap: 0.4rem;
+    }
+
+    .share-button svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .back-to-top-button {
+      width: 40px;
+      height: 40px;
+      bottom: 1rem;
+      right: 1rem;
+    }
+
+    .back-to-top-button svg {
+      width: 20px;
+      height: 20px;
+    }
   }
 </style>
+
+<script>
+  // Reading Progress Bar
+  function updateReadingProgress() {
+    const progressBar = document.getElementById('reading-progress');
+    if (!progressBar) return;
+
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+
+    // Calculate progress (how far down the page we've scrolled)
+    const scrollableHeight = documentHeight - windowHeight;
+    const progress = (scrollTop / scrollableHeight) * 100;
+
+    // Update progress bar width
+    progressBar.style.width = Math.min(progress, 100) + '%';
+  }
+
+  // Update on scroll
+  window.addEventListener('scroll', updateReadingProgress);
+
+  // Update on load
+  window.addEventListener('load', updateReadingProgress);
+
+  // Update on resize
+  window.addEventListener('resize', updateReadingProgress);
+
+  // Copy Code Button
+  function addCopyButtons() {
+    const codeBlocks = document.querySelectorAll('.shiki');
+
+    codeBlocks.forEach((codeBlock) => {
+      // Skip if button already exists
+      if (codeBlock.querySelector('.copy-code-button')) return;
+
+      // Create copy button
+      const button = document.createElement('button');
+      button.className = 'copy-code-button';
+      button.textContent = 'Copy';
+      button.setAttribute('aria-label', 'Copy code to clipboard');
+
+      // Add click handler
+      button.addEventListener('click', async () => {
+        const code = codeBlock.querySelector('code');
+        if (!code) return;
+
+        try {
+          await navigator.clipboard.writeText(code.textContent || '');
+
+          // Show success feedback
+          button.textContent = 'Copied!';
+          button.classList.add('copied');
+
+          // Reset after 2 seconds
+          setTimeout(() => {
+            button.textContent = 'Copy';
+            button.classList.remove('copied');
+          }, 2000);
+        } catch (err) {
+          console.error('Failed to copy code:', err);
+          button.textContent = 'Error';
+          setTimeout(() => {
+            button.textContent = 'Copy';
+          }, 2000);
+        }
+      });
+
+      // Add button to code block
+      codeBlock.appendChild(button);
+    });
+  }
+
+  // Add copy buttons on load
+  window.addEventListener('load', addCopyButtons);
+
+  // Back to Top Button
+  const backToTopButton = document.getElementById('back-to-top');
+
+  function toggleBackToTopButton() {
+    if (!backToTopButton) return;
+
+    // Show button after scrolling down 300px
+    if (window.scrollY > 300) {
+      backToTopButton.classList.add('visible');
+    } else {
+      backToTopButton.classList.remove('visible');
+    }
+  }
+
+  function scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }
+
+  // Listen for scroll events
+  window.addEventListener('scroll', toggleBackToTopButton);
+
+  // Handle button click
+  if (backToTopButton) {
+    backToTopButton.addEventListener('click', scrollToTop);
+  }
+
+  // Check initial position on load
+  window.addEventListener('load', toggleBackToTopButton);
+</script>

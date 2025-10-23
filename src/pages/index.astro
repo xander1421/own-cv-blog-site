@@ -3,10 +3,29 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
 const allPosts = await getCollection('blog');
+
+// Function to calculate reading time
+function calculateReadingTime(content: string): number {
+  const plainText = content
+    .replace(/```[\s\S]*?```/g, '')
+    .replace(/`[^`]*`/g, '')
+    .replace(/#{1,6}\s/g, '')
+    .replace(/[*_~`]/g, '')
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+    .replace(/\n+/g, ' ');
+
+  const words = plainText.trim().split(/\s+/).filter(word => word.length > 0);
+  const readingTime = Math.ceil(words.length / 200);
+  return readingTime;
+}
+
 const sortedPosts = allPosts.sort((a, b) =>
   new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
 );
-const featuredPosts = sortedPosts.slice(0, 3);
+const featuredPosts = sortedPosts.slice(0, 3).map(post => ({
+  ...post,
+  readingTime: calculateReadingTime(post.body)
+}));
 
 // JSON-LD structured data for Person schema (optimized for recruiters and search)
 const personSchema = {
@@ -44,7 +63,11 @@ const personSchema = {
     "Helm",
     "Site Reliability Engineering",
     "Monitoring",
-    "Observability"
+    "Observability",
+    "Security",
+    "IAM",
+    "RBAC",
+    "Encryption"
   ]
 };
 
@@ -110,6 +133,7 @@ const websiteSchema = {
                 day: 'numeric'
               })}
             </time>
+            <span class="reading-time">• {post.readingTime} min read</span>
           </div>
 
           <h3 class="post-title">
@@ -305,8 +329,12 @@ const websiteSchema = {
   }
 
   .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
     margin-bottom: 1rem;
-    height: 1.5rem;
+    min-height: 1.5rem;
+    flex-wrap: wrap;
   }
 
   .post-meta time {
@@ -314,6 +342,13 @@ const websiteSchema = {
     font-size: 0.85rem;
     color: var(--color-text-dim);
     letter-spacing: 0.03em;
+  }
+
+  .reading-time {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--color-primary);
+    font-weight: 600;
   }
 
   .post-title {

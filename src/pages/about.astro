@@ -40,7 +40,13 @@ const personSchema = {
     "Python",
     "Bash",
     "PostgreSQL",
-    "Redis"
+    "Redis",
+    "Security",
+    "IAM",
+    "RBAC",
+    "Secrets Management",
+    "SSL/TLS",
+    "Encryption"
   ],
   "knowsLanguage": [
     {
@@ -146,6 +152,16 @@ const personSchema = {
             <span class="skill-tag">PostgreSQL</span>
             <span class="skill-tag">MySQL</span>
             <span class="skill-tag">Redis</span>
+          </div>
+        </div>
+        <div class="skill-category security">
+          <h3><span class="icon">🔒</span> Security & Compliance</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">IAM & RBAC</span>
+            <span class="skill-tag">Secrets Management</span>
+            <span class="skill-tag">SSL/TLS</span>
+            <span class="skill-tag">Security Groups</span>
+            <span class="skill-tag">Encryption</span>
           </div>
         </div>
       </div>
@@ -562,6 +578,27 @@ const personSchema = {
   .skill-category.languages .skill-tag:hover {
     background: rgba(255, 0, 110, 0.2);
     border-color: rgb(255, 0, 110);
+  }
+
+  /* Security category - Red/Gold */
+  .skill-category.security {
+    border-color: rgb(255, 70, 70);
+    background: rgba(255, 70, 70, 0.05);
+  }
+
+  .skill-category.security h3 {
+    color: rgb(255, 70, 70);
+  }
+
+  .skill-category.security .skill-tag {
+    background: rgba(255, 70, 70, 0.08);
+    border-color: rgba(255, 70, 70, 0.3);
+    color: rgb(255, 70, 70);
+  }
+
+  .skill-category.security .skill-tag:hover {
+    background: rgba(255, 70, 70, 0.2);
+    border-color: rgb(255, 70, 70);
   }
 
   .skill-tags {

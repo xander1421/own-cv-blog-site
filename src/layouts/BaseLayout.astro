@@ -108,6 +108,9 @@ const keywords = [
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
   </head>
   <body>
+    <!-- Matrix Rain Effect Canvas -->
+    <canvas id="matrix-rain" class="matrix-background"></canvas>
+
     <div class="server-rack-bg"></div>
     <div class="cloud-factory"></div>
     <div class="perspective-grid"></div>
@@ -186,7 +189,19 @@ const keywords = [
     --color-text-dim: #808080;
     --color-accent: #ffb700;
   }
-  
+
+  /* Matrix Rain Background */
+  .matrix-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    opacity: 0.04;
+    pointer-events: none;
+  }
+
   /* Global background gradients */
   body::before {
     content: '';
@@ -1072,4 +1087,82 @@ const keywords = [
       closeSearchModal();
     }
   });
+
+  // Matrix Rain Effect
+  const canvas = document.getElementById('matrix-rain') as HTMLCanvasElement;
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    if (ctx) {
+      // Set canvas to full window size
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      // Matrix characters - katakana, latin letters, and numbers
+      const matrixChars = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲンABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()';
+      const chars = matrixChars.split('');
+
+      const fontSize = 14;
+      const columns = canvas.width / fontSize;
+
+      // Array to store y-position of each column
+      const drops: number[] = [];
+      for (let i = 0; i < columns; i++) {
+        drops[i] = Math.random() * -100; // Start at random heights
+      }
+
+      // Draw function
+      function draw() {
+        if (!ctx || !canvas) return;
+
+        // Fade effect - creates the trail
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Set text style
+        ctx.fillStyle = '#00ffcc'; // Your primary cyan color
+        ctx.font = `${fontSize}px 'Share Tech Mono', monospace`;
+
+        // Draw characters
+        for (let i = 0; i < drops.length; i++) {
+          // Random character
+          const char = chars[Math.floor(Math.random() * chars.length)];
+          const x = i * fontSize;
+          const y = drops[i] * fontSize;
+
+          ctx.fillText(char, x, y);
+
+          // Reset drop to top randomly after it crosses the screen
+          if (y > canvas.height && Math.random() > 0.975) {
+            drops[i] = 0;
+          }
+
+          // Move drop down
+          drops[i]++;
+        }
+      }
+
+      // Animation loop
+      const interval = setInterval(draw, 50);
+
+      // Handle window resize
+      window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // Recalculate columns
+        const newColumns = canvas.width / fontSize;
+        drops.length = newColumns;
+        for (let i = 0; i < newColumns; i++) {
+          if (drops[i] === undefined) {
+            drops[i] = Math.random() * -100;
+          }
+        }
+      });
+
+      // Clean up on page unload
+      window.addEventListener('beforeunload', () => {
+        clearInterval(interval);
+      });
+    }
+  }
 </script>

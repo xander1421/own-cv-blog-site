@@ -5,6 +5,21 @@ import { getCollection } from 'astro:content';
 // Get all blog posts using Astro's content collections API
 const allPosts = await getCollection('blog');
 
+// Function to calculate reading time
+function calculateReadingTime(content: string): number {
+  const plainText = content
+    .replace(/```[\s\S]*?```/g, '')
+    .replace(/`[^`]*`/g, '')
+    .replace(/#{1,6}\s/g, '')
+    .replace(/[*_~`]/g, '')
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+    .replace(/\n+/g, ' ');
+
+  const words = plainText.trim().split(/\s+/).filter(word => word.length > 0);
+  const readingTime = Math.ceil(words.length / 200);
+  return readingTime;
+}
+
 // Sort by date (newest first) and map to include data
 const posts = allPosts
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
@@ -15,6 +30,7 @@ const posts = allPosts
     description: post.data.description,
     tags: post.data.tags,
     image: post.data.image,
+    readingTime: calculateReadingTime(post.body),
   }));
 ---
 
@@ -38,9 +54,12 @@ const posts = allPosts
                 <img src={`/images/blog/${post.image.replace('./', '')}`} alt={post.title} class="post-image" loading="lazy" />
               </a>
             )}
-            <time datetime={post.date.toISOString()} class="post-date">
-              {post.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-            </time>
+            <div class="post-meta">
+              <time datetime={post.date.toISOString()} class="post-date">
+                {post.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+              </time>
+              <span class="reading-time">• {post.readingTime} min read</span>
+            </div>
             <h2 class="post-title">
               <a href={`/blog/${post.slug}`}>{post.title}</a>
             </h2>
@@ -127,12 +146,25 @@ const posts = allPosts
     transform: scale(1.05);
   }
 
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+
   .post-date {
     font-family: 'Share Tech Mono', monospace;
     font-size: 0.9rem;
     color: var(--color-text-dim);
-    display: block;
-    margin-bottom: 1rem;
+  }
+
+  .reading-time {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.9rem;
+    color: var(--color-primary);
+    font-weight: 600;
   }
 
   .post-title {

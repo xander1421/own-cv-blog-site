@@ -1,0 +1,744 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="404 - Page Not Found"
+  description="Infrastructure not found. The requested resource does not exist in this cluster."
+>
+  <div class="error-container">
+    <div class="terminal">
+      <div class="terminal-header">
+        <div class="terminal-buttons">
+          <span class="btn-close"></span>
+          <span class="btn-minimize"></span>
+          <span class="btn-maximize"></span>
+        </div>
+        <div class="terminal-title">devops@production:~$ kubectl get page</div>
+      </div>
+
+      <div class="terminal-body" id="terminal">
+        <pre class="ascii-art">
+    ⚠️  INFRASTRUCTURE ALERT  ⚠️
+
+    ╔═══════════════════════════════════╗
+    ║   HTTP 404: Resource Not Found    ║
+    ╚═══════════════════════════════════╝
+
+         🔥 Pod Status: CrashLoopBackOff 🔥
+
+         ┌─────────────────────────┐
+         │  ❌  Page Not Found  ❌  │
+         └─────────────────────────┘
+        </pre>
+
+        <div class="output">
+          <div class="line error">
+            <span class="prompt">kubectl get pods --all-namespaces</span>
+          </div>
+          <div class="line">
+NAME                          READY   STATUS              RESTARTS   AGE
+requested-page-deployment     0/1     ImagePullBackOff    ∞          404d
+dns-resolution-service        0/1     CrashLoopBackOff    42         404d
+route-not-found-pod           0/1     Error               404        404d
+          </div>
+
+          <div class="separator">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+
+          <div class="line">
+<span class="label">📋 Troubleshooting Steps:</span>
+
+1. Check if you typed the URL correctly
+2. Try navigating from the <a href="/" class="link">home page</a>
+3. Browse the <a href="/blog" class="link">blog</a> for interesting articles
+4. Read <a href="/about" class="link">about me</a>
+
+<span class="label">🎮 Or try typing commands below:</span>
+Type <span class="cmd-hint">help</span> for available commands
+          </div>
+        </div>
+
+        <div class="input-line">
+          <span class="prompt-symbol">visitor@404:~$</span>
+          <input
+            type="text"
+            id="terminal-input"
+            class="terminal-input"
+            autocomplete="off"
+            spellcheck="false"
+            placeholder="Type 'help' for commands..."
+          />
+        </div>
+
+        <div id="output"></div>
+      </div>
+    </div>
+
+    <div class="quick-links">
+      <a href="/" class="error-btn">
+        <span>🏠</span>
+        <span>Home</span>
+      </a>
+      <a href="/blog" class="error-btn">
+        <span>📝</span>
+        <span>Blog</span>
+      </a>
+      <a href="/about" class="error-btn">
+        <span>👤</span>
+        <span>About</span>
+      </a>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .error-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0.5rem 1rem 2rem;
+    min-height: 85vh;
+  }
+
+  .terminal {
+    background: #0a0a0a;
+    border: 2px solid var(--color-primary);
+    border-radius: 8px;
+    box-shadow: 0 0 30px rgba(0, 255, 204, 0.3);
+    overflow: hidden;
+    margin-bottom: 2rem;
+  }
+
+  .terminal-header {
+    background: linear-gradient(180deg, #1a1a1a 0%, #0f0f0f 100%);
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-bottom: 1px solid var(--color-primary);
+  }
+
+  .terminal-buttons {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .terminal-buttons span {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: block;
+  }
+
+  .btn-close {
+    background: #ff5f57;
+  }
+
+  .btn-minimize {
+    background: #ffbd2e;
+  }
+
+  .btn-maximize {
+    background: #28ca42;
+  }
+
+  .terminal-title {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.9rem;
+    color: var(--color-text-dim);
+    flex: 1;
+  }
+
+  .terminal-body {
+    padding: 1.5rem;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.9rem;
+    color: var(--color-text);
+    min-height: 500px;
+    max-height: calc(85vh - 200px);
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  /* Custom scrollbar for terminal */
+  .terminal-body::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .terminal-body::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  .terminal-body::-webkit-scrollbar-thumb {
+    background: var(--color-primary);
+    border-radius: 4px;
+  }
+
+  .terminal-body::-webkit-scrollbar-thumb:hover {
+    background: var(--color-accent);
+  }
+
+  .ascii-art {
+    color: var(--color-primary);
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    line-height: 1.3;
+    animation: glitch 3s infinite;
+  }
+
+  @keyframes glitch {
+    0%, 90%, 100% {
+      opacity: 1;
+      text-shadow: 0 0 10px rgba(0, 255, 204, 0.5);
+    }
+    92%, 94%, 96% {
+      opacity: 0.9;
+      text-shadow: 2px 0 10px rgba(255, 0, 110, 0.5);
+    }
+  }
+
+  .output {
+    margin-bottom: 1rem;
+  }
+
+  .line {
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+    white-space: pre-wrap;
+  }
+
+  .line.error {
+    color: #ff5f57;
+  }
+
+  .line.warning {
+    color: #ffbd2e;
+  }
+
+  .line.info {
+    color: #00bfff;
+  }
+
+  .line.success {
+    color: #28ca42;
+  }
+
+  .prompt {
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+
+  .label {
+    color: var(--color-primary);
+    font-weight: 700;
+    display: block;
+    margin: 1rem 0 0.5rem;
+  }
+
+  .separator {
+    color: rgba(0, 255, 204, 0.3);
+    margin: 1rem 0;
+  }
+
+  .link {
+    color: var(--color-primary);
+    text-decoration: underline;
+    transition: all 0.3s ease;
+  }
+
+  .link:hover {
+    color: var(--color-accent);
+    text-shadow: 0 0 5px currentColor;
+  }
+
+  .cmd-hint {
+    color: var(--color-accent);
+    font-weight: 700;
+    padding: 0.2rem 0.4rem;
+    background: rgba(255, 183, 0, 0.1);
+    border-radius: 3px;
+  }
+
+  .input-line {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(0, 255, 204, 0.2);
+  }
+
+  .prompt-symbol {
+    color: var(--color-primary);
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .terminal-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--color-text);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.9rem;
+    outline: none;
+    caret-color: var(--color-primary);
+  }
+
+  .terminal-input::placeholder {
+    color: rgba(128, 128, 128, 0.5);
+  }
+
+  #output {
+    margin-top: 1rem;
+  }
+
+  #output .line {
+    animation: fadeIn 0.3s ease;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-5px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .quick-links {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .error-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1.5rem 2rem;
+    background: rgba(0, 255, 204, 0.05);
+    border: 2px solid var(--color-primary);
+    border-radius: 8px;
+    color: var(--color-primary);
+    text-decoration: none;
+    font-family: 'Orbitron', monospace;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    min-width: 120px;
+  }
+
+  .error-btn span:first-child {
+    font-size: 2rem;
+  }
+
+  .error-btn:hover {
+    background: rgba(0, 255, 204, 0.15);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 20px rgba(0, 255, 204, 0.3);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .error-container {
+      padding: 0.5rem 0.5rem 1.5rem;
+      min-height: 80vh;
+    }
+
+    .terminal-body {
+      padding: 1rem;
+      font-size: 0.8rem;
+      min-height: 400px;
+      max-height: calc(80vh - 180px);
+    }
+
+    .ascii-art {
+      font-size: 0.7rem;
+    }
+
+    .terminal-title {
+      font-size: 0.75rem;
+    }
+
+    .error-btn {
+      padding: 1rem 1.5rem;
+      min-width: 100px;
+    }
+
+    .error-btn span:first-child {
+      font-size: 1.5rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .error-container {
+      padding: 0.25rem 0.5rem 1rem;
+      min-height: 75vh;
+    }
+
+    .terminal-body {
+      padding: 0.75rem;
+      font-size: 0.75rem;
+      min-height: 350px;
+      max-height: calc(75vh - 150px);
+    }
+
+    .ascii-art {
+      font-size: 0.65rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .line {
+      margin-bottom: 0.4rem;
+    }
+  }
+</style>
+
+<script>
+  const input = document.getElementById('terminal-input') as HTMLInputElement;
+  const outputDiv = document.getElementById('output');
+
+  // Command history
+  let commandHistory: string[] = [];
+  let historyIndex = -1;
+  let easterEggFound = false;
+  let sudoAttempts = 0;
+
+  // ASCII arts
+  const successArt = `
+    ✨ SUCCESS! ✨
+
+    ╔═══════════════════════╗
+    ║   All Systems Green   ║
+    ╚═══════════════════════╝
+  `;
+
+  const failArt = `
+    💥 ACCESS DENIED 💥
+
+    ┌───────────────────────┐
+    │  Permission Denied!   │
+    └───────────────────────┘
+  `;
+
+  // Available commands
+  const commands: Record<string, () => string> = {
+    help: () => `
+<span class="label">Available Commands:</span>
+
+<span class="cmd-hint">help</span>          - Show this help menu
+<span class="cmd-hint">ls</span>            - List available pages
+<span class="cmd-hint">whoami</span>        - Display current user
+<span class="cmd-hint">kubectl</span>       - Check cluster status
+<span class="cmd-hint">terraform</span>     - Check infrastructure state
+<span class="cmd-hint">docker</span>        - List containers
+<span class="cmd-hint">aws</span>           - AWS CLI simulator
+<span class="cmd-hint">ping</span>          - Test connectivity
+<span class="cmd-hint">curl</span>          - Make HTTP requests
+<span class="cmd-hint">joke</span>          - Random DevOps joke
+<span class="cmd-hint">quote</span>         - Inspirational quote
+<span class="cmd-hint">hack</span>          - ??? (Try it!)
+<span class="cmd-hint">sudo</span>          - Run with elevated privileges
+<span class="cmd-hint">exit</span>          - Return to home page
+<span class="cmd-hint">clear</span>         - Clear terminal
+<span class="cmd-hint">matrix</span>        - Enter the Matrix
+`,
+
+    ls: () => `
+<span class="success">drwxr-xr-x</span>  2 devops devops  4096 Oct 23  <a href="/" class="link">home</a>
+<span class="success">drwxr-xr-x</span>  2 devops devops  4096 Oct 23  <a href="/blog" class="link">blog</a>
+<span class="success">drwxr-xr-x</span>  2 devops devops  4096 Oct 23  <a href="/about" class="link">about</a>
+<span class="error">-rw-r--r--</span>  1 devops devops     0 Oct 23  <span class="error">404.html (you are here)</span>
+`,
+
+    whoami: () => `
+visitor@404
+
+<span class="info">You are: </span>A curious explorer who wandered off the beaten path
+<span class="info">IP: </span>127.0.0.1 (localhost)
+<span class="info">Status: </span>Lost but not forgotten
+<span class="info">Hint: </span>Try typing 'help' or navigate using the links above
+`,
+
+    kubectl: () => `
+<span class="prompt">kubectl get pods -n production</span>
+
+NAME                          READY   STATUS    RESTARTS   AGE
+blog-deployment-7d9f8-xkr2p   1/1     Running   0          42d
+about-page-6c8b9-mp4xt        1/1     Running   0          42d
+home-page-5a7c4-zt8wq         1/1     Running   0          42d
+<span class="error">404-page-8f3d2-lmn9k          1/1     Running   ∞          404d</span>
+
+<span class="success">✓ All pods running (except this one)</span>
+`,
+
+    terraform: () => `
+<span class="prompt">terraform plan</span>
+
+Terraform will perform the following actions:
+
+  <span class="success"># module.website.aws_route.home will be created</span>
+  + resource "aws_route" "home" {
+      + destination = "/"
+      + status      = "active"
+    }
+
+  <span class="success"># module.website.aws_route.blog will be created</span>
+  + resource "aws_route" "blog" {
+      + destination = "/blog"
+      + status      = "active"
+    }
+
+  <span class="error"># module.website.aws_route.this will NOT be created</span>
+  - resource "aws_route" "current_page" {
+      - destination = "${window.location.pathname}"
+      - status      = "404_not_found"
+    }
+
+<span class="warning">Plan: 2 to add, 0 to change, 1 to destroy.</span>
+`,
+
+    docker: () => `
+<span class="prompt">docker ps</span>
+
+CONTAINER ID   IMAGE              STATUS          PORTS                    NAMES
+a3f7c8e92b1d   nginx:latest       Up 42 days      0.0.0.0:80->80/tcp       web-server
+b9e4d2f18c3a   postgres:14        Up 42 days      0.0.0.0:5432->5432/tcp   database
+<span class="error">c7a1b5e29d4f   ghost:latest       Exited (404)    ---                      this-page</span>
+
+<span class="info">Hint: This page seems to have crashed. Try 'docker restart this-page'... or just go home.</span>
+`,
+
+    aws: () => `
+<span class="prompt">aws ec2 describe-instances --filters "Name=tag:Page,Values=current"</span>
+
+{
+    "Reservations": [],
+    "ResponseMetadata": {
+        "HTTPStatusCode": 404,
+        "Message": "The requested resource was not found"
+    }
+}
+
+<span class="error">Error: No instances found matching the criteria</span>
+<span class="info">Suggestion: Check the instance ID or navigate to an existing page</span>
+`,
+
+    ping: () => `
+<span class="prompt">ping alexpruteanu.cloud</span>
+
+PING alexpruteanu.cloud (76.76.21.21): 56 data bytes
+64 bytes from 76.76.21.21: icmp_seq=0 ttl=64 time=12.4 ms
+64 bytes from 76.76.21.21: icmp_seq=1 ttl=64 time=11.8 ms
+64 bytes from 76.76.21.21: icmp_seq=2 ttl=64 time=13.2 ms
+
+<span class="success">--- alexpruteanu.cloud ping statistics ---</span>
+3 packets transmitted, 3 packets received, 0% packet loss
+<span class="info">Server is alive! The page you're looking for is just not deployed yet.</span>
+`,
+
+    curl: () => `
+<span class="prompt">curl -I ${window.location.href}</span>
+
+HTTP/2 404 Not Found
+content-type: text/html; charset=utf-8
+date: ${new Date().toUTCString()}
+server: vercel
+x-vercel-cache: MISS
+x-error-message: Page not found in deployment
+x-suggestion: Try /blog or /about instead
+
+<span class="error">Response Code: 404 (Not Found)</span>
+`,
+
+    joke: () => {
+      const jokes = [
+        "Why do programmers prefer dark mode?\n\nBecause light attracts bugs! 🐛",
+        "How many DevOps engineers does it take to change a light bulb?\n\nNone. That's a hardware problem. 💡",
+        "What's a DevOps engineer's favorite song?\n\n'Push It' by Salt-N-Pepa 🎵",
+        "Why did the Kubernetes pod go to therapy?\n\nIt had too many restarts and couldn't handle the crash loops. 😅",
+        "What do you call a Docker container that won't start?\n\nA 'ContainerNot' 🐳",
+        "Why don't DevOps engineers trust stairs?\n\nBecause they're always up to something, and there's no rollback! 🪜",
+        "What's the object-oriented way to become wealthy?\n\nInheritance. 💰",
+        "Why did the developer quit their job?\n\nThey didn't get arrays. 📊"
+      ];
+      return `<span class="success">${jokes[Math.floor(Math.random() * jokes.length)]}</span>`;
+    },
+
+    quote: () => {
+      const quotes = [
+        '"Any fool can write code that a computer can understand. Good programmers write code that humans can understand." - Martin Fowler',
+        '"Automation is good, so long as you know exactly where to put the machine." - Eliyahu Goldratt',
+        '"The best error message is the one that never shows up." - Thomas Fuchs',
+        '"Infrastructure as code is not about infrastructure. It\'s about code." - Kief Morris',
+        '"First, solve the problem. Then, write the code." - John Johnson',
+        '"It works on my machine!" - Every Developer Ever',
+        '"Move fast and break things... but please fix them before prod." - DevOps Wisdom'
+      ];
+      return `<span class="info">${quotes[Math.floor(Math.random() * quotes.length)]}</span>`;
+    },
+
+    hack: () => {
+      if (!easterEggFound) {
+        easterEggFound = true;
+        return `
+<span class="success">${successArt}</span>
+
+<span class="success">🎉 EASTER EGG FOUND! 🎉</span>
+
+Initializing hacking sequence...
+[████████████████████] 100%
+
+<span class="info">Access Granted!</span>
+You've discovered the secret command!
+
+<span class="label">Secret Achievement Unlocked:</span>
+"1337 H4X0R" - You found the hidden command
+
+<span class="info">Fun fact:</span> The real hack is understanding that 404 pages
+can be more than just boring error messages. They're an opportunity
+to showcase creativity and guide users back to safety.
+
+<span class="cmd-hint">Try: 'matrix' for another surprise!</span>
+`;
+      } else {
+        return `<span class="warning">You already found this easter egg! Try 'matrix' for more.</span>`;
+      }
+    },
+
+    sudo: () => {
+      sudoAttempts++;
+      if (sudoAttempts === 1) {
+        return `<span class="error">[sudo] password for visitor: </span>
+
+<span class="error">Sorry, try again.</span>`;
+      } else if (sudoAttempts === 2) {
+        return `<span class="error">[sudo] password for visitor: </span>
+
+<span class="error">Sorry, try again.</span>
+<span class="warning">2 incorrect password attempts</span>`;
+      } else if (sudoAttempts === 3) {
+        return `<span class="error">${failArt}</span>
+
+<span class="error">sudo: 3 incorrect password attempts</span>
+
+<span class="warning">This incident will be reported to the administrator.</span>
+
+Just kidding! 😄 You don't need sudo here.
+Try 'help' to see what you CAN do.`;
+      } else {
+        return `<span class="warning">Nice try, but you still don't have sudo access! 😏</span>`;
+      }
+    },
+
+    exit: () => {
+      setTimeout(() => window.location.href = '/', 500);
+      return `<span class="success">Exiting... Redirecting to home page...</span>`;
+    },
+
+    clear: () => {
+      if (outputDiv) {
+        outputDiv.innerHTML = '';
+      }
+      return '';
+    },
+
+    matrix: () => {
+      return `<span class="success">Entering the Matrix...</span>
+
+<span class="label">Wake up, visitor...</span>
+
+The Matrix has you...
+Follow the white rabbit. 🐰
+
+Knock, knock, ${window.location.pathname}
+
+<span class="info">Unfortunately, no one can be told what The Matrix is.</span>
+<span class="info">You have to see it for yourself.</span>
+
+<a href="/blog" class="link">Take the red pill</a> - See how deep the rabbit hole goes (read the blog)
+<a href="/" class="link">Take the blue pill</a> - Return to the safe home page
+
+<span class="warning">Remember: All I'm offering is the truth. Nothing more.</span>
+`;
+    }
+  };
+
+  // Handle input
+  input?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      const command = input.value.trim().toLowerCase();
+      if (command) {
+        commandHistory.push(command);
+        historyIndex = commandHistory.length;
+        executeCommand(command);
+        input.value = '';
+      }
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (historyIndex > 0) {
+        historyIndex--;
+        input.value = commandHistory[historyIndex];
+      }
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (historyIndex < commandHistory.length - 1) {
+        historyIndex++;
+        input.value = commandHistory[historyIndex];
+      } else {
+        historyIndex = commandHistory.length;
+        input.value = '';
+      }
+    }
+  });
+
+  function executeCommand(cmd: string) {
+    if (!outputDiv) return;
+
+    // Display command
+    const commandLine = document.createElement('div');
+    commandLine.className = 'line';
+    commandLine.innerHTML = `<span class="prompt-symbol">visitor@404:~$</span> ${cmd}`;
+    outputDiv.appendChild(commandLine);
+
+    // Execute command
+    let output = '';
+    if (commands[cmd]) {
+      output = commands[cmd]();
+    } else {
+      output = `<span class="error">Command not found: ${cmd}</span>
+
+<span class="info">Type 'help' to see available commands</span>
+
+<span class="warning">Did you mean one of these?</span>
+${Object.keys(commands).slice(0, 5).map(c => `  • ${c}`).join('\n')}`;
+    }
+
+    if (output && cmd !== 'clear') {
+      const outputLine = document.createElement('div');
+      outputLine.className = 'line';
+      outputLine.innerHTML = output;
+      outputDiv.appendChild(outputLine);
+    }
+
+    // Scroll to bottom
+    const terminal = document.getElementById('terminal');
+    if (terminal) {
+      terminal.scrollTop = terminal.scrollHeight;
+    }
+  }
+
+  // Focus input on load
+  window.addEventListener('load', () => {
+    input?.focus();
+  });
+
+  // Keep focus on input
+  document.addEventListener('click', () => {
+    input?.focus();
+  });
+</script>
