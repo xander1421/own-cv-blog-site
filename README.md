@@ -1,4 +1,4 @@
-# xander1421@localhost:~$ - DevOps CV & Blog
+# xander1421@alexpruteanu.cloud:~$ - DevOps CV & Blog
 
 A modern, cyberpunk-styled personal website showcasing my DevOps experience, skills, and blog posts. Built with Astro for blazing-fast performance.
 
