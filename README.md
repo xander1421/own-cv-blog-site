@@ -93,10 +93,6 @@ The static output will be in `./dist/` and ready to deploy.
 - **GitHub**: [xander1421](https://github.com/xander1421)
 - **LinkedIn**: [alexandru-prt](https://linkedin.com/in/alexandru-prt)
 
-## 🎯 Easter Egg
-
-Try entering the Konami code on any page: ↑ ↑ ↓ ↓ ← → ← → B A
-
 ---
 
 Built with ❤️ and ☕
