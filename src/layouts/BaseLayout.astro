@@ -102,7 +102,7 @@ const keywords = [
     <!-- RSS Feed -->
     <link rel="alternate" type="application/rss+xml" title="Alexandru Pruteanu Blog" href="/rss.xml" />
 
-    <!-- Fonts - Optimized loading -->
+    <!-- Fonts - Optimized loading with font-display swap -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -111,17 +111,37 @@ const keywords = [
       href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap"
     >
     <link
+      id="font-stylesheet"
       href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap"
       rel="stylesheet"
       media="print"
-      onload="this.media='all'"
     >
+    <script is:inline>
+      // Non-blocking font load
+      const fontLink = document.getElementById('font-stylesheet');
+      if (fontLink) {
+        fontLink.addEventListener('load', function() {
+          this.media = 'all';
+        });
+      }
+    </script>
     <noscript>
       <link
         href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap"
         rel="stylesheet"
       >
     </noscript>
+
+    <!-- Inline critical CSS for instant above-the-fold rendering -->
+    <style>
+      :root{--color-primary:#00ffcc;--color-bg:#0a0a0a;--color-surface:#121212;--color-text:#e0e0e0;--color-text-dim:#808080}
+      *{margin:0;padding:0;box-sizing:border-box}
+      html{background-color:var(--color-bg);color:var(--color-text);font-family:monospace;line-height:1.6}
+      body{min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}
+      header{background:var(--color-surface);border-bottom:1px solid var(--color-primary);position:relative;z-index:100}
+      nav{max-width:1200px;margin:0 auto;padding:1.5rem 2rem;display:flex;justify-content:space-between;align-items:center}
+      main{flex:1;max-width:1200px;width:100%;margin:0 auto;padding:3rem 2rem}
+    </style>
   </head>
   <body>
     <!-- Matrix Rain Effect Canvas -->
@@ -1119,12 +1139,16 @@ const keywords = [
     }
   });
 
-  // Matrix Rain Effect
-  const canvas = document.getElementById('matrix-rain') as HTMLCanvasElement;
-  if (canvas) {
+  // Matrix Rain Effect - Defer to not block initial render
+  function initMatrixRain() {
+    const canvas = document.getElementById('matrix-rain') as HTMLCanvasElement;
+    if (!canvas) return;
+
     const ctx = canvas.getContext('2d');
-    if (ctx) {
-      // Set canvas to full window size
+    if (!ctx) return;
+
+    // Set canvas to full window size - batch read operation
+    requestAnimationFrame(() => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
 
@@ -1175,25 +1199,39 @@ const keywords = [
       // Animation loop
       const interval = setInterval(draw, 50);
 
-      // Handle window resize
+      // Debounced resize handler to prevent forced reflows
+      let resizeTimeout: ReturnType<typeof setTimeout>;
       window.addEventListener('resize', () => {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+          requestAnimationFrame(() => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
 
-        // Recalculate columns
-        const newColumns = canvas.width / fontSize;
-        drops.length = newColumns;
-        for (let i = 0; i < newColumns; i++) {
-          if (drops[i] === undefined) {
-            drops[i] = Math.random() * -100;
-          }
-        }
+            // Recalculate columns
+            const newColumns = canvas.width / fontSize;
+            drops.length = newColumns;
+            for (let i = 0; i < newColumns; i++) {
+              if (drops[i] === undefined) {
+                drops[i] = Math.random() * -100;
+              }
+            }
+          });
+        }, 150);
       });
 
       // Clean up on page unload
       window.addEventListener('beforeunload', () => {
         clearInterval(interval);
       });
-    }
+    }); // Close requestAnimationFrame
+  } // Close initMatrixRain function
+
+  // Defer matrix rain initialization until browser is idle
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(initMatrixRain, { timeout: 2000 });
+  } else {
+    // Fallback for browsers that don't support requestIdleCallback
+    setTimeout(initMatrixRain, 1000);
   }
 </script>

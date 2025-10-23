@@ -12,4 +12,18 @@ export default defineConfig({
       wrap: true,
     },
   },
+  vite: {
+    build: {
+      // Inline small CSS files to reduce requests
+      assetsInlineLimit: 4096,
+      // CSS code splitting optimization
+      cssCodeSplit: true,
+      rollupOptions: {
+        output: {
+          // Aggressive code splitting for better caching
+          manualChunks: undefined,
+        },
+      },
+    },
+  },
 });
