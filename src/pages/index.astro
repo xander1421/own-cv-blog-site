@@ -142,7 +142,15 @@ const websiteSchema = {
 
           {post.data.image && (
             <a href={`/blog/${post.slug}`} class="post-image-link">
-              <img src={`/images/blog/${post.data.image.replace('./', '')}`} alt={post.data.title} class="post-image" loading="lazy" />
+              <img
+                src={`/images/blog/${post.data.image.replace('./', '')}`}
+                alt={post.data.title}
+                class="post-image"
+                loading="lazy"
+                decoding="async"
+                width="600"
+                height="220"
+              />
             </a>
           )}
 
@@ -155,7 +163,7 @@ const websiteSchema = {
           </div>
 
           <a href={`/blog/${post.slug}`} class="read-more">
-            Read more →
+            Read<span class="sr-only"> full article: {post.data.title}</span> more →
           </a>
         </article>
       ))}
@@ -428,13 +436,13 @@ const websiteSchema = {
   }
 
   .tag-3 {
-    background: rgba(138, 43, 226, 0.08);
-    border: 1px solid rgba(138, 43, 226, 0.3);
-    color: #8a2be2;
+    background: rgba(168, 85, 247, 0.08);
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    color: #b580ff;
   }
 
   .tag-3:hover {
-    background: rgba(138, 43, 226, 0.15);
+    background: rgba(168, 85, 247, 0.15);
     transform: translateY(-2px);
   }
 

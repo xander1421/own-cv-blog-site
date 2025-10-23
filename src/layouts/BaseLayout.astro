@@ -102,10 +102,26 @@ const keywords = [
     <!-- RSS Feed -->
     <link rel="alternate" type="application/rss+xml" title="Alexandru Pruteanu Blog" href="/rss.xml" />
 
-    <!-- Fonts -->
+    <!-- Fonts - Optimized loading -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap"
+    >
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
+    >
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap"
+        rel="stylesheet"
+      >
+    </noscript>
   </head>
   <body>
     <!-- Matrix Rain Effect Canvas -->
@@ -323,6 +339,8 @@ const keywords = [
     background-size: 400px 400px, 350px 350px, 450px 450px;
     background-position: 0 0, 200px 200px, 100px -100px;
     animation: cloudFactoryShift 60s linear infinite;
+    will-change: transform;
+    transform: translateZ(0);
   }
 
   @keyframes cloudFactoryShift {
@@ -777,10 +795,23 @@ const keywords = [
 
   .secret-hint {
     margin-top: 0.5rem;
-    color: rgba(128, 128, 128, 0.4);
+    color: rgba(150, 150, 150, 0.7);
     font-family: 'Share Tech Mono', monospace;
     font-size: 0.7rem;
     letter-spacing: 0.05em;
+  }
+
+  /* Screen reader only text */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
   }
 
   /* Typography */
