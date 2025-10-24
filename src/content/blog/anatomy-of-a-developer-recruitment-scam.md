@@ -10,9 +10,7 @@ I write about building secure systems—implementing the Signal Protocol, design
 
 A few days ago, I encountered a sophisticated recruitment scam that I immediately identified through systematic security analysis. Here's the technical forensic breakdown of the attack methodology and defensive strategies.
 
-**Update**: While writing this post, I received **another** recruitment scam attempt on LinkedIn—this time I caught it before they sent the malicious repo. I've included the real conversation below to show these attacks are active **right now**.
-
-## The Real Conversation: Active Scam Attempt (October 2025)
+## The Scam Begins: LinkedIn Conversation (October 2025)
 
 On October 23, 2025, I received this message on LinkedIn from "Mehdi Boutaraamt":
 
@@ -27,7 +25,7 @@ On October 23, 2025, I received this message on LinkedIn from "Mehdi Boutaraamt"
 
 **Immediate red flags:**
 - ❌ Unsolicited LinkedIn message
-- ❌ Fintech + crypto (same attack vector as SmartPay scam)
+- ❌ Fintech + crypto (high-risk combination for wallet harvesting scams)
 - ❌ $70-90/hour (above market rate to create urgency)
 - ❌ Vague "impressed by your background"
 
@@ -93,30 +91,39 @@ I'm asking about **Amazon Go-style store tracking** (cameras + computer vision),
 3. **Barcode scanning has zero relation to "walletless crypto checkout"**
 4. They agreed with my intentionally confusing question because **they're reading from a script**
 
-**What comes next (if I had responded):**
-1. "Thanks for your resume! Here's our GitHub/Bitbucket repo"
-2. "Please clone and run the demo to evaluate the code quality"
-3. Malicious `postinstall` hook executes
-4. MetaMask connection request
-5. Wallet harvesting
+At this point, I knew it was a scam. But I decided to play along to see the full attack chain and document it.
 
-**This is the exact same scam pattern as the SmartPay repository I analyzed.**
+**The next day (Thursday):**
+
+> **Me** (12:50 PM):
+> *[Sent my website and GitHub portfolio links]*
+
+> **Mehdi** (1:22 PM):
+> "Here's our frontend demo. Can you review it and let me know your thoughts?"
+> *[Sent Bitbucket repository: https://bitbucket.org/smartpay2025/smartpay]*
+
+> **Me** (1:32 PM):
+> "review the frontend? i can take a quick look"
+
+I then analyzed the repository using static analysis (never executing the code). Within 20 minutes, I identified the malicious patterns:
+
+> **Me** (2:12 PM):
+> "this is a nice scam. you will make a good blog post))"
+
+Mehdi never responded. His LinkedIn account was later banned.
 
 ---
 
-## The First Scam: SmartPay Repository Analysis
+## SmartPay Repository Analysis
 
-Before the LinkedIn conversation above, I had analyzed a similar scam repository. Here's how that one worked:
+Now let's dive into the technical analysis of the malicious repository Mehdi sent: `https://bitbucket.org/smartpay2025/smartpay.git`
 
-It started with a recruiter reaching out about a "fintech startup" opportunity:
+This is a common pattern in recruitment scams—after the initial conversation, they send a professional-looking codebase disguised as a "demo application" for evaluation. The goal is to get you to run malicious code under the pretense of a technical assessment.
 
-> *"We're impressed with your profile. We're looking for a Senior Full-Stack Developer for a fintech startup. $120K-$150K, fully remote. As part of our technical assessment, please clone and run our MVP demo application to evaluate the codebase quality."*
-
-They provide a Bitbucket repository: `https://bitbucket.org/smartpay2025/smartpay.git`
-
-**Red flag #1**: The assessment comes *before* any real interview.
-
-**Red flag #2**: They want you to *run* code, not review it.
+**Key red flags:**
+- ❌ The assessment comes *before* any real interview
+- ❌ They want you to *run* code, not just review it
+- ❌ The request comes with time pressure and urgency
 
 While job seekers may face psychological pressure to act quickly, proper security protocols mandate thorough vetting before any code execution.
 
