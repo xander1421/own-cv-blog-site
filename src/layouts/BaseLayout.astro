@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import Analytics from '@vercel/analytics/astro';
 
 export interface Props {
   title: string;
@@ -218,6 +219,7 @@ const keywords = [
       </div>
       <p>&copy; 2025 Alexandru Pruteanu | DevOps Engineer</p>
     </footer>
+    <Analytics />
   </body>
 </html>
 
