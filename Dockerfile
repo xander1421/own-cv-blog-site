@@ -1,35 +1,36 @@
 # Stage 1: Build the application
-FROM node:latest AS builder
+FROM oven/bun:alpine AS builder
 
 # Set working directory
 WORKDIR /app
 
 # Copy package files
-COPY package*.json ./
+COPY package.json bun.lock* ./
 
 # Install dependencies
-RUN npm ci
+RUN bun install --frozen-lockfile
 
 # Copy all files
 COPY . .
 
 # Build the Astro site
-RUN npm run build
+RUN bun run build
 
-# Stage 2: Serve the application
-FROM node:latest AS runtime
+# Stage 2: Serve with nginx
+FROM nginx:alpine-slim
 
-# Install a simple http server
-RUN npm install -g serve
-
-# Set working directory
-WORKDIR /app
+# Copy custom nginx config
+COPY nginx.conf /etc/nginx/nginx.conf
 
 # Copy built files from builder stage
-COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/dist /usr/share/nginx/html
 
-# Expose port
-EXPOSE 3000
+# Expose port 80
+EXPOSE 80
 
-# Serve the dist folder
-CMD ["serve", "dist", "-p", "3000", "-s"]
+# Health check
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+  CMD wget --quiet --tries=1 --spider http://localhost/ || exit 1
+
+# Start nginx
+CMD ["nginx", "-g", "daemon off;"]
