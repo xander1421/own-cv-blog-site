@@ -6,7 +6,7 @@ tags: ["DevOps", "Career", "Learning", "Linux", "AWS", "Docker", "Python"]
 image: "./so-you-want-to-learn-devops.webp"
 ---
 
-A friend recently asked me to help guide someone into DevOps. They're doing junior freelance work at Uber but want a permanent DevOps position. The problem? They need to learn the fundamentals.
+A friend recently asked me to help guide someone into DevOps. They're doing junior freelance work but want a permanent DevOps position. The problem? They need to learn the fundamentals.
 
 I can't personally mentor everyone who wants to break into DevOps. But I can write down the exact learning path I'd recommend - the skills that actually matter, the courses worth taking, and the hands-on practice that'll get you hired.
 
