@@ -237,20 +237,43 @@ const blogPostSchema = {
 </BaseLayout>
 
 <style is:global>
+  /* Pre code block wrapper for blur effect */
+  pre {
+    position: relative !important;
+    margin: 2.5rem 0 !important;
+    border-radius: 6px !important;
+    overflow: hidden !important;
+  }
+  
+  /* Create frosted glass effect behind code blocks */
+  pre::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    background: rgba(18, 18, 18, 0.24) !important;
+    backdrop-filter: blur(20px) brightness(0.8) !important;
+    -webkit-backdrop-filter: blur(20px) brightness(0.8) !important;
+    z-index: -1 !important;
+    border-radius: 6px !important;
+  }
+  
   /* Shiki code block styling */
   .shiki {
-    background: rgba(18, 18, 18, 0.95) !important;
+    background: rgba(18, 18, 18, 0.42) !important;
     border: 2px solid rgba(0, 255, 204, 0.2);
     border-left: 4px solid var(--color-primary);
     padding: 1.8rem;
     overflow-x: auto;
-    margin: 2.5rem 0;
+    margin: 0;
     line-height: 1.6;
     border-radius: 6px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
     position: relative;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(30px) saturate(120%);
+    -webkit-backdrop-filter: blur(30px) saturate(120%);
   }
 
   .shiki code {
@@ -492,19 +515,36 @@ const blogPostSchema = {
     line-height: 1.7;
   }
 
-  .post-content :global(code) {
+  /* Inline code styling */
+  .post-content :global(code:not(.shiki code)) {
     background: rgba(0, 255, 204, 0.1);
     padding: 0.25rem 0.5rem;
     border: 1px solid rgba(0, 255, 204, 0.2);
     color: var(--color-primary);
     font-family: 'Share Tech Mono', monospace;
     font-size: 0.92em;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
   }
 
-  .post-content :global(pre code) {
-    background: none;
-    border: none;
-    padding: 0;
+  /* Pre block code should not have these styles */
+  .post-content :global(pre code),
+  .post-content :global(.shiki code) {
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+  
+  /* Ensure pre blocks have blur */
+  .post-content :global(pre) {
+    position: relative;
+    background: rgba(18, 18, 18, 0.85) !important;
+    backdrop-filter: blur(50px) !important;
+    -webkit-backdrop-filter: blur(50px) !important;
+    border-radius: 6px;
+    overflow: hidden;
   }
 
   .post-content :global(a) {

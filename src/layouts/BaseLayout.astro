@@ -151,13 +151,10 @@ const keywords = [
     <!-- Matrix Rain Effect Canvas -->
     <canvas id="matrix-rain" class="matrix-background"></canvas>
 
-    <div class="server-rack-bg"></div>
-    <div class="cloud-factory"></div>
     <div class="perspective-grid"></div>
     <div class="data-streams"></div>
     <div class="scanlines"></div>
     <div class="noise"></div>
-    <div class="neural-network"></div>
     <div class="hologram-grid"></div>
     <div class="glitch-overlay"></div>
     <header>
@@ -287,98 +284,17 @@ const keywords = [
   }
 
   /* Force hardware acceleration and 60fps */
-  .neural-network,
   .hologram-grid,
   .scanlines,
   .noise,
   .glitch-overlay,
-  .server-rack-bg,
-  .cloud-factory,
   .perspective-grid,
   .data-streams {
     -webkit-backface-visibility: hidden;
     -webkit-perspective: 1000;
   }
 
-  /* 80s Anime Noir Server Rack Background */
-  .server-rack-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    pointer-events: none;
-    z-index: 0;
-    opacity: 0.15;
-    background-image:
-      /* Vertical server rack panels */
-      repeating-linear-gradient(
-        90deg,
-        transparent 0px,
-        rgba(150, 100, 255, 0.1) 2px,
-        rgba(150, 100, 255, 0.2) 4px,
-        transparent 6px,
-        transparent 80px
-      ),
-      /* Horizontal rack segments */
-      repeating-linear-gradient(
-        0deg,
-        transparent 0px,
-        rgba(255, 0, 110, 0.05) 1px,
-        transparent 2px,
-        transparent 40px
-      ),
-      /* Accent highlights */
-      repeating-linear-gradient(
-        90deg,
-        transparent 0px,
-        rgba(0, 255, 204, 0.15) 1px,
-        transparent 2px,
-        transparent 240px
-      );
-    filter: blur(4px);
-    animation: rackPulse 6s ease-in-out infinite;
-  }
 
-  @keyframes rackPulse {
-    0%, 100% {
-      opacity: 0.15;
-    }
-    50% {
-      opacity: 0.22;
-    }
-  }
-
-  /* Cloud Factory Infrastructure */
-  .cloud-factory {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    pointer-events: none;
-    z-index: 0;
-    opacity: 0.08;
-    background:
-      /* Large infrastructure blocks */
-      linear-gradient(135deg, transparent 30%, rgba(100, 150, 255, 0.15) 32%, transparent 34%),
-      linear-gradient(225deg, transparent 50%, rgba(255, 150, 50, 0.12) 52%, transparent 54%),
-      linear-gradient(45deg, transparent 70%, rgba(150, 100, 255, 0.1) 72%, transparent 74%);
-    background-size: 400px 400px, 350px 350px, 450px 450px;
-    background-position: 0 0, 200px 200px, 100px -100px;
-    animation: cloudFactoryShift 60s linear infinite;
-    will-change: transform;
-    transform: translateZ(0);
-  }
-
-  @keyframes cloudFactoryShift {
-    0% {
-      background-position: 0 0, 200px 200px, 100px -100px;
-    }
-    100% {
-      background-position: 400px 400px, 600px 600px, 500px 300px;
-    }
-  }
 
   /* Perspective Grid - 80s style vanishing point */
   .perspective-grid {
@@ -538,31 +454,13 @@ const keywords = [
 
   /* Removed heavy glitch effects for better readability */
 
-  /* Neural Network Background - Global (simplified) */
-  .neural-network {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    opacity: 0.05;
-    background-image:
-      linear-gradient(rgba(0, 255, 204, 0.08) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0, 255, 204, 0.08) 1px, transparent 1px);
-    background-size: 60px 60px;
-    pointer-events: none;
-    z-index: 1;
-  }
 
   /* Reduce effects on mobile for performance */
   @media (max-width: 768px) {
-    .neural-network,
     .hologram-grid {
       opacity: 0.02;
     }
 
-    .server-rack-bg,
-    .cloud-factory,
     .perspective-grid {
       opacity: 0.05;
     }
