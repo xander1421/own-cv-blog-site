@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Comments from '../../components/Comments.astro';
 import { getCollection } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 
@@ -184,6 +185,9 @@ const blogPostSchema = {
         </div>
       </section>
     )}
+
+    <!-- Comments Section -->
+    <Comments />
 
     <footer class="post-footer">
       <div class="share-section">

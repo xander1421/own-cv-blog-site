@@ -1,0 +1,95 @@
+---
+// Component for blog post comments using Utterances
+---
+
+<div class="comments-container">
+  <h2 class="comments-title">Comments</h2>
+  <p class="comments-subtitle">
+    Join the discussion! Sign in with GitHub to leave a comment.
+  </p>
+  
+  <script 
+    src="https://utteranc.es/client.js"
+    data-repo="xander1421/own-cv-blog-site"
+    data-issue-term="pathname"
+    data-theme="github-dark"
+    data-label="💬 blog-comment"
+    crossorigin="anonymous"
+    async>
+  </script>
+</div>
+
+<style>
+  .comments-container {
+    margin-top: 4rem;
+    padding-top: 3rem;
+    border-top: 1px solid rgba(0, 255, 204, 0.2);
+    max-width: 100%;
+  }
+  
+  .comments-title {
+    color: var(--color-primary);
+    font-family: 'Orbitron', monospace;
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 10px rgba(0, 255, 204, 0.3);
+  }
+  
+  .comments-subtitle {
+    color: var(--color-text-dim);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+  }
+  
+  /* Override Utterances styles to match your theme */
+  :global(.utterances) {
+    max-width: none !important;
+  }
+  
+  :global(.utterances-frame) {
+    background: transparent !important;
+  }
+  
+  /* Add a loading animation while Utterances loads */
+  .comments-container:has(script:not(.utterances-frame)) {
+    min-height: 200px;
+    position: relative;
+  }
+  
+  .comments-container:has(script:not(.utterances-frame))::after {
+    content: 'Loading comments...';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--color-primary);
+    font-family: 'Share Tech Mono', monospace;
+    animation: pulse 1.5s infinite;
+  }
+  
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 0.5;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+  
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    .comments-container {
+      margin-top: 3rem;
+      padding-top: 2rem;
+    }
+    
+    .comments-title {
+      font-size: 1.5rem;
+    }
+    
+    .comments-subtitle {
+      font-size: 0.85rem;
+    }
+  }
+</style>
