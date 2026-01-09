@@ -147,6 +147,9 @@ const blogPostSchema = {
       <Content />
     </div>
 
+    <!-- Comments Section -->
+    <Comments />
+
     {relatedPosts.length > 0 && (
       <section class="related-posts">
         <h2 class="related-posts-title">Related Posts</h2>
@@ -185,9 +188,6 @@ const blogPostSchema = {
         </div>
       </section>
     )}
-
-    <!-- Comments Section -->
-    <Comments />
 
     <footer class="post-footer">
       <div class="share-section">
