@@ -15,13 +15,15 @@ import BlackHole from '../components/BlackHole.astro';
       <canvas id="blackhole-canvas" class="blackhole-canvas"></canvas>
       
       <div class="hero-content">
-        <div class="logo-container">
-          <h1 class="logo-text">CHATTER</h1>
-          <div class="logo-pulse"></div>
+        <div class="hero-header">
+          <div class="logo-container">
+            <h1 class="logo-text">CHATTER</h1>
+            <div class="logo-pulse"></div>
+          </div>
+
+          <h2 class="tagline">The Future of Secure Communication</h2>
         </div>
-        
-        <h2 class="tagline">The Future of Secure Communication</h2>
-        
+
         <p class="hero-description">
           Real-time chat with Signal Protocol encryption, Sealed Sender privacy, and local AI that never leaves your device.
           Your messages, your data, your control.
@@ -162,16 +164,44 @@ import BlackHole from '../components/BlackHole.astro';
 </BaseLayout>
 
 <style>
+  /* Override BaseLayout main constraints for this page */
+  :global(main) {
+    max-width: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100vw !important;
+    margin-left: calc(-50vw + 50%) !important;
+  }
+
+  /* Hide BaseLayout background effects */
+  :global(.matrix-background),
+  :global(.perspective-grid),
+  :global(.data-streams),
+  :global(.scanlines),
+  :global(.hologram-grid),
+  :global(.glitch-overlay),
+  :global(.noise),
+  :global(body::before) {
+    display: none !important;
+  }
+
+  /* Override body background */
+  :global(body) {
+    background: #000000 !important;
+  }
+
   .waitlist-container {
     min-height: 100vh;
     background: #000000;
     color: #ffffff;
     overflow-x: hidden;
+    width: 100%;
   }
 
   /* Hero Section */
   .hero-section {
     position: relative;
+    z-index: 1;
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -179,28 +209,41 @@ import BlackHole from '../components/BlackHole.astro';
     padding: 2rem;
   }
 
+  /* Full viewport black hole canvas */
   .blackhole-canvas {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
     opacity: 0.8;
   }
 
   .hero-content {
     position: relative;
-    z-index: 2;
+    z-index: 10;
     max-width: 1200px;
     width: 100%;
     text-align: center;
   }
 
+  .hero-header {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 2rem 3rem;
+    border-radius: 20px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    display: inline-block;
+    margin-bottom: 2rem;
+    border: 1px solid rgba(102, 126, 234, 0.2);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+  }
+
   .logo-container {
     position: relative;
     display: inline-block;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
   }
 
   .logo-text {
@@ -237,10 +280,10 @@ import BlackHole from '../components/BlackHole.astro';
   }
 
   .tagline {
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 300;
-    margin-bottom: 1.5rem;
-    color: #a0a0a0;
+    margin: 0;
+    color: #c0c0c0;
   }
 
   .hero-description {
@@ -248,7 +291,12 @@ import BlackHole from '../components/BlackHole.astro';
     line-height: 1.8;
     max-width: 700px;
     margin: 0 auto 3rem;
-    color: #cccccc;
+    color: #e0e0e0;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 1.5rem 2rem;
+    border-radius: 12px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
   }
 
   /* Features Grid */
@@ -263,18 +311,21 @@ import BlackHole from '../components/BlackHole.astro';
   }
 
   .feature-card {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(102, 126, 234, 0.2);
     border-radius: 16px;
     padding: 1.5rem;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
     transition: all 0.3s ease;
   }
 
   .feature-card:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.8);
     border-color: rgba(102, 126, 234, 0.5);
     transform: translateY(-4px);
+    box-shadow: 0 8px 40px rgba(102, 126, 234, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
   }
 
   .feature-icon {
@@ -290,7 +341,7 @@ import BlackHole from '../components/BlackHole.astro';
 
   .feature-card p {
     font-size: 0.9rem;
-    color: #999999;
+    color: #b0b0b0;
     line-height: 1.5;
   }
 
@@ -299,10 +350,12 @@ import BlackHole from '../components/BlackHole.astro';
     max-width: 500px;
     margin: 0 auto 4rem;
     padding: 2rem;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.75);
+    border: 1px solid rgba(102, 126, 234, 0.3);
     border-radius: 20px;
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05);
   }
 
   .form-title {
@@ -315,7 +368,7 @@ import BlackHole from '../components/BlackHole.astro';
   }
 
   .form-subtitle {
-    color: #999999;
+    color: #b0b0b0;
     margin-bottom: 2rem;
   }
 
@@ -328,8 +381,8 @@ import BlackHole from '../components/BlackHole.astro';
   .email-input {
     flex: 1;
     padding: 1rem 1.5rem;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(102, 126, 234, 0.2);
     border-radius: 12px;
     color: #ffffff;
     font-size: 1rem;
@@ -337,14 +390,14 @@ import BlackHole from '../components/BlackHole.astro';
   }
 
   .email-input::placeholder {
-    color: #666666;
+    color: #888888;
   }
 
   .email-input:focus {
     outline: none;
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(0, 0, 0, 0.8);
     border-color: rgba(102, 126, 234, 0.5);
-    box-shadow: 0 0 20px rgba(102, 126, 234, 0.2);
+    box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
   }
 
   .submit-btn {
@@ -428,9 +481,12 @@ import BlackHole from '../components/BlackHole.astro';
 
   /* Tech Section */
   .tech-section {
+    position: relative;
+    z-index: 10;
     padding: 5rem 2rem;
     max-width: 1200px;
     margin: 0 auto;
+    background: rgba(0, 0, 0, 0.85);
   }
 
   .section-title {
@@ -451,16 +507,20 @@ import BlackHole from '../components/BlackHole.astro';
   }
 
   .tech-card {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(240, 147, 251, 0.2);
     border-radius: 16px;
     padding: 2rem;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
     transition: all 0.3s ease;
   }
 
   .tech-card:hover {
-    background: rgba(255, 255, 255, 0.04);
-    border-color: rgba(240, 147, 251, 0.3);
+    background: rgba(0, 0, 0, 0.8);
+    border-color: rgba(240, 147, 251, 0.5);
+    box-shadow: 0 8px 40px rgba(240, 147, 251, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1);
   }
 
   .tech-card h3 {
@@ -470,7 +530,7 @@ import BlackHole from '../components/BlackHole.astro';
   }
 
   .tech-card p {
-    color: #999999;
+    color: #b0b0b0;
     line-height: 1.7;
     margin-bottom: 1rem;
   }
@@ -506,25 +566,32 @@ import BlackHole from '../components/BlackHole.astro';
 
   .tech-badge {
     padding: 0.5rem 1.5rem;
-    background: rgba(102, 126, 234, 0.1);
-    border: 1px solid rgba(102, 126, 234, 0.3);
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(102, 126, 234, 0.4);
     border-radius: 25px;
     font-size: 0.9rem;
-    color: #667eea;
+    color: #a5b4fc;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     transition: all 0.3s ease;
   }
 
   .tech-badge:hover {
-    background: rgba(102, 126, 234, 0.2);
+    background: rgba(0, 0, 0, 0.8);
+    border-color: rgba(102, 126, 234, 0.6);
     transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2);
   }
 
   /* Footer */
   .waitlist-footer {
+    position: relative;
+    z-index: 10;
     padding: 3rem 2rem;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     text-align: center;
     color: #666666;
+    background: rgba(0, 0, 0, 0.9);
   }
 
   .footer-links {
@@ -869,10 +936,9 @@ import BlackHole from '../components/BlackHole.astro';
             let isVisible = true;
             
             function resizeCanvas() {
-              const rect = canvas.getBoundingClientRect();
               const scale = window.innerWidth > 768 ? 0.5 : 0.75; // Better performance on desktop
-              canvas.width = Math.floor(rect.width * scale);
-              canvas.height = Math.floor(rect.height * scale);
+              canvas.width = Math.floor(window.innerWidth * scale);
+              canvas.height = Math.floor(window.innerHeight * scale);
             }
             
             function render() {
