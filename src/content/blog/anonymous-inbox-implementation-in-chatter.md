@@ -9,7 +9,7 @@ image: "./anonymous-inbox-implementation-in-chatter.webp"
 
 End-to-end encryption protects message content, but metadata can be just as dangerous. When Alice sends Bob a message, even with sealed sender encryption, the server learns *something happened* between them. Over time, patterns emerge. Delivery receipts create timing correlations. And with enough observations, statistical analysis can de-anonymize even "sealed" senders.
 
-This post explores how we implemented **Anonymous Inboxes** in Chatter to break this metadata chain, based on the 2021 NDSS paper ["Improving Signal's Sealed Sender"](https://dx.doi.org/10.14722/ndss.2021.23180) by Martiny et al.
+This post explores how we implemented **Anonymous Inboxes** in Chatter to break this metadata chain, based on the 2021 NDSS paper ["Improving Signal's Sealed Sender"](https://www.ndss-symposium.org/wp-content/uploads/ndss2021_1C-4_24180_paper.pdf) by Martiny et al.
 
 ## The Problem: Statistical Disclosure Attacks
 
@@ -467,4 +467,4 @@ For users communicating over sensitive topics—journalists with sources, activi
 
 ---
 
-*This implementation is based on "Improving Signal's Sealed Sender" by Martiny et al., presented at NDSS 2021. The paper is available at [https://dx.doi.org/10.14722/ndss.2021.23180](https://dx.doi.org/10.14722/ndss.2021.23180).*
+*This implementation is based on "Improving Signal's Sealed Sender" by Martiny et al., presented at NDSS 2021. The paper is available at [ndss-symposium.org](https://www.ndss-symposium.org/wp-content/uploads/ndss2021_1C-4_24180_paper.pdf).*
