@@ -64,8 +64,55 @@ After the initial message exchange:
 - Server knows: Mailbox A sends to Mailbox B
 - Server doesn't know: Alice owns Mailbox A, Bob owns Mailbox B
 
+**Why can't the server link mailboxes to users?** The answer lies in the mathematics of blind signatures:
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                      BLIND SIGNATURE PROTOCOL                               │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                             │
+│   ALICE (authenticated)                         SERVER                      │
+│   ─────────────────────                         ──────                      │
+│                                                                             │
+│   1. Generate ephemeral keypair (pk, sk)                                    │
+│   2. Hash: h = SHA256(pk)                                                   │
+│   3. Generate random r (coprime to n)                                       │
+│   4. Blind: m' = h × rᵉ mod n                                               │
+│                                                                             │
+│              ══════════ m' (blinded) ══════════════►                        │
+│                                                                             │
+│                                         5. Sign: s' = (m')ᵈ mod n           │
+│                                            Server ONLY sees m'              │
+│                                            (looks like random garbage)      │
+│                                                                             │
+│              ◄════════ s' (blind signature) ═══════                         │
+│                                                                             │
+│   6. Unblind: s = s' × r⁻¹ mod n                                            │
+│      Result: s is valid signature on h                                      │
+│                                                                             │
+├─────────────────────────────────────────────────────────────────────────────┤
+│   THE MATH GUARANTEE:                                                       │
+│                                                                             │
+│   • Server sees: m' = h × rᵉ mod n         (random-looking, h is hidden)    │
+│   • Server computes: s' = (m')ᵈ = hᵈ × r mod n                              │
+│   • Alice unblinds: s = s' × r⁻¹ = hᵈ mod n   (valid RSA signature on h)    │
+│                                                                             │
+│   The blinding factor r perfectly masks h. The server cannot reverse        │
+│   the blinding to learn which ephemeral public key Alice is signing.        │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+**The result**: Two completely separate server logs with no cryptographic connection:
+
+| Authenticated Log | Anonymous Log |
+|-------------------|---------------|
+| "User Alice requested 3 tokens at 10:00" | "Mailbox `a1b2c3...` created at 10:05" |
+| "User Bob requested 2 tokens at 10:02" | "Mailbox `x7y8z9...` created at 10:03" |
+
+The server cannot determine which user created which mailbox—even with complete access to both logs.
+
 Even if the server logs every message, it cannot link mailboxes to user identities because:
-- Mailbox creation used blind signatures (unlinkable to user)
+- Mailbox creation used blind signatures (cryptographically unlinkable to user)
 - Mailbox authentication uses challenge-response (proves key ownership, not identity)
 - No `user_id` field exists in the mailbox database table
 
