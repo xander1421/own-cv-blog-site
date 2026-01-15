@@ -66,50 +66,11 @@ After the initial message exchange:
 
 **Why can't the server link mailboxes to users?** The answer lies in the mathematics of blind signatures:
 
-```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                      BLIND SIGNATURE PROTOCOL                               │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                             │
-│   ALICE (authenticated)                         SERVER                      │
-│   ─────────────────────                         ──────                      │
-│                                                                             │
-│   1. Generate ephemeral keypair (pk, sk)                                    │
-│   2. Hash: h = SHA256(pk)                                                   │
-│   3. Generate random r (coprime to n)                                       │
-│   4. Blind: m' = h × rᵉ mod n                                               │
-│                                                                             │
-│              ══════════ m' (blinded) ══════════════►                        │
-│                                                                             │
-│                                         5. Sign: s' = (m')ᵈ mod n           │
-│                                            Server ONLY sees m'              │
-│                                            (looks like random garbage)      │
-│                                                                             │
-│              ◄════════ s' (blind signature) ═══════                         │
-│                                                                             │
-│   6. Unblind: s = s' × r⁻¹ mod n                                            │
-│      Result: s is valid signature on h                                      │
-│                                                                             │
-├─────────────────────────────────────────────────────────────────────────────┤
-│   THE MATH GUARANTEE:                                                       │
-│                                                                             │
-│   • Server sees: m' = h × rᵉ mod n         (random-looking, h is hidden)    │
-│   • Server computes: s' = (m')ᵈ = hᵈ × r mod n                              │
-│   • Alice unblinds: s = s' × r⁻¹ = hᵈ mod n   (valid RSA signature on h)    │
-│                                                                             │
-│   The blinding factor r perfectly masks h. The server cannot reverse        │
-│   the blinding to learn which ephemeral public key Alice is signing.        │
-└─────────────────────────────────────────────────────────────────────────────┘
-```
+1. **Token Request (authenticated)**: Alice sends `blinded = hash(pk) × r^e mod n` to the server. The server signs this, but `r` is a random blinding factor—the server sees only random-looking data, never the actual public key `pk`.
 
-**The result**: Two completely separate server logs with no cryptographic connection:
+2. **Mailbox Creation (anonymous)**: Alice unblinds the signature and creates a mailbox with `(pk, signature)`. The server can verify the signature is valid, but mathematically *cannot* link this `pk` back to any token request—every blinded value looks equally random.
 
-| Authenticated Log | Anonymous Log |
-|-------------------|---------------|
-| "User Alice requested 3 tokens at 10:00" | "Mailbox `a1b2c3...` created at 10:05" |
-| "User Bob requested 2 tokens at 10:02" | "Mailbox `x7y8z9...` created at 10:03" |
-
-The server cannot determine which user created which mailbox—even with complete access to both logs.
+3. **No Correlation Possible**: The server has two separate logs: "User Alice requested 3 tokens" and "Mailbox xyz was created". There is no cryptographic link between them.
 
 Even if the server logs every message, it cannot link mailboxes to user identities because:
 - Mailbox creation used blind signatures (cryptographically unlinkable to user)

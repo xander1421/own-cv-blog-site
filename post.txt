@@ -1,0 +1,21 @@
+End-to-end encryption protects your messages. But what about metadata?
+
+Even with Signal's "sealed sender" feature hiding who sent a message, researchers found that delivery receipts create timing patterns. Their Statistical Disclosure Attack can de-anonymize users in as few as 5-10 messages.
+
+The fix? Anonymous Inboxes using blind signatures.
+
+I just published a deep dive on how we implemented this in Chatter, based on the NDSS 2021 paper "Improving Signal's Sealed Sender":
+
+The key insight: decouple user identity from mailbox identity.
+
+1. Users request tokens via blind signatures - the server signs without seeing what it's signing
+2. Users create mailboxes anonymously - the server can verify the token but can't link it to any user
+3. Messages route through ephemeral mailboxes - the server sees Mailbox A → Mailbox B, never Alice → Bob
+
+The math is elegant: a random blinding factor perfectly masks the data during signing. Two separate server logs exist with zero cryptographic connection between them.
+
+Cost to run at scale? The paper estimates ~$40/month for 10 million daily mailboxes.
+
+Read the full implementation details: https://www.alexpruteanu.cloud/blog/anonymous-inbox-implementation-in-chatter
+
+#Privacy #Cryptography #Security #Messaging #SoftwareEngineering #Go #TypeScript
