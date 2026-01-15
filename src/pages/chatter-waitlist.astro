@@ -22,33 +22,57 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <h2 class="tagline">The Future of Secure Communication</h2>
         
         <p class="hero-description">
-          Experience real-time chat with military-grade encryption, powered by the Signal Protocol.
-          Voice & video calls, AI integrations, and complete privacy—all in one platform.
+          Real-time chat with Signal Protocol encryption, Sealed Sender privacy, and local AI that never leaves your device.
+          Your messages, your data, your control.
         </p>
 
         <div class="features-grid">
           <div class="feature-card">
-            <div class="feature-icon">🔐</div>
-            <h3>End-to-End Encryption</h3>
-            <p>Signal Protocol with perfect forward secrecy</p>
+            <div class="feature-icon">👻</div>
+            <h3>Sealed Sender</h3>
+            <p>Server never sees who sent the message—only the recipient can decrypt the sender</p>
           </div>
-          
+
+          <div class="feature-card">
+            <div class="feature-icon">📮</div>
+            <h3>Anonymous Inbox</h3>
+            <p>Ephemeral mailboxes defeat traffic analysis and metadata correlation attacks</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">🧠</div>
+            <h3>Local AI</h3>
+            <p>Ollama-powered semantic search and summaries—zero data leaves your device</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">🔐</div>
+            <h3>Signal Protocol</h3>
+            <p>X3DH key exchange, Double Ratchet, and ChaCha20-Poly1305 encryption</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">📱</div>
+            <h3>Multi-Device</h3>
+            <p>QR code linking with cross-device sync and per-device identity keys</p>
+          </div>
+
           <div class="feature-card">
             <div class="feature-icon">🎥</div>
             <h3>Voice & Video</h3>
-            <p>Crystal-clear calls with LiveKit integration</p>
+            <p>LiveKit WebRTC with screen sharing and participant grid</p>
           </div>
-          
+
+          <div class="feature-card">
+            <div class="feature-icon">👁️‍🗨️</div>
+            <h3>Private Receipts</h3>
+            <p>Typing indicators and read receipts sent through anonymous channels</p>
+          </div>
+
           <div class="feature-card">
             <div class="feature-icon">🤖</div>
-            <h3>AI Powered</h3>
-            <p>Smart assistants and content moderation</p>
-          </div>
-          
-          <div class="feature-card">
-            <div class="feature-icon">📁</div>
-            <h3>File Sharing</h3>
-            <p>Resumable uploads with encryption</p>
+            <h3>AI Assistants</h3>
+            <p>Claude, GPT, and Gemini integrations with @mention triggers</p>
           </div>
         </div>
 
@@ -80,20 +104,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </form>
         </div>
 
-        <div class="stats-container">
-          <div class="stat">
-            <span class="stat-number">12</span>
-            <span class="stat-label">Services</span>
-          </div>
-          <div class="stat">
-            <span class="stat-number">DDD</span>
-            <span class="stat-label">Architecture</span>
-          </div>
-          <div class="stat">
-            <span class="stat-number">E2E</span>
-            <span class="stat-label">Encrypted</span>
-          </div>
-        </div>
       </div>
     </section>
 
@@ -103,20 +113,19 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       
       <div class="tech-grid">
         <div class="tech-card">
-          <h3>Domain-Driven Design</h3>
-          <p>Modular monolith architecture with clear service boundaries, dependency injection, and the flexibility to scale into microservices when needed.</p>
-          <a href="/blog/why-i-chose-monolithic-architecture-for-chatter" class="tech-link">Learn more →</a>
-        </div>
-        
-        <div class="tech-card">
-          <h3>Signal Protocol</h3>
-          <p>Military-grade encryption with X3DH key exchange, Double Ratchet algorithm, and Sealed Sender for complete metadata privacy.</p>
+          <h3>Sealed Sender & Anonymous Inbox</h3>
+          <p>Beyond E2E encryption—the server never sees sender metadata. Ephemeral mailboxes with blind signatures defeat traffic analysis attacks.</p>
           <a href="/blog/signal-protocol-implementation-in-chatter" class="tech-link">Deep dive →</a>
         </div>
-        
+
         <div class="tech-card">
-          <h3>Post-Quantum Ready</h3>
-          <p>Hybrid cryptography combining Curve25519 with Kyber KEM, ensuring your messages stay secure even against quantum computers.</p>
+          <h3>Privacy-Preserving Local AI</h3>
+          <p>Ollama integration for semantic search and message summaries. All AI inference runs locally—your messages never leave your device.</p>
+        </div>
+
+        <div class="tech-card">
+          <h3>Zero-Knowledge Architecture</h3>
+          <p>SQLCipher encrypted local storage, privacy-preserving typing indicators, and anonymous read receipts. We can't read your data—by design.</p>
         </div>
       </div>
 
@@ -126,13 +135,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <span class="tech-badge">Go</span>
           <span class="tech-badge">React 19</span>
           <span class="tech-badge">TypeScript</span>
+          <span class="tech-badge">Electron</span>
           <span class="tech-badge">PostgreSQL</span>
           <span class="tech-badge">Redis</span>
           <span class="tech-badge">ConnectRPC</span>
           <span class="tech-badge">Temporal</span>
           <span class="tech-badge">SpiceDB</span>
           <span class="tech-badge">LiveKit</span>
-          <span class="tech-badge">Vault</span>
+          <span class="tech-badge">Ollama</span>
+          <span class="tech-badge">SQLCipher</span>
         </div>
       </div>
     </section>
