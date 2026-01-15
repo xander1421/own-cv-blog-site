@@ -984,39 +984,67 @@ import BlackHole from '../components/BlackHole.astro';
     }
   }
 
-  // Waitlist form handler
+  // Waitlist form handler with Supabase
+  const SUPABASE_URL = 'https://fsnwduufbbqxyylwzabg.supabase.co';
+  const SUPABASE_ANON_KEY = 'sb_publishable_pKxCqZDi95BLe4rbTQOdrw_n-wmn17a';
+
   const form = document.getElementById('waitlist-form') as HTMLFormElement;
   const message = document.getElementById('form-message') as HTMLDivElement;
-  
+  const submitBtn = form?.querySelector('.submit-btn') as HTMLButtonElement;
+
   if (form) {
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      
+
       const formData = new FormData(form);
-      const email = formData.get('email') as string;
-      
+      const email = (formData.get('email') as string)?.toLowerCase().trim();
+
       if (!email) {
         message.textContent = 'Please enter a valid email address';
         message.className = 'form-message error';
         return;
       }
-      
-      // Store in localStorage for now (in production, this would be an API call)
-      const waitlist = JSON.parse(localStorage.getItem('chatter-waitlist') || '[]');
-      
-      if (waitlist.includes(email)) {
-        message.textContent = "You're already on the waitlist!";
-        message.className = 'form-message error';
-      } else {
-        waitlist.push(email);
-        localStorage.setItem('chatter-waitlist', JSON.stringify(waitlist));
-        
-        message.textContent = "Welcome aboard! We'll notify you when Chatter launches.";
-        message.className = 'form-message success';
-        
-        form.reset();
+
+      // Disable button while submitting
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.querySelector('.btn-text')!.textContent = 'Joining...';
       }
-      
+
+      try {
+        const response = await fetch(`${SUPABASE_URL}/rest/v1/waitlist`, {
+          method: 'POST',
+          headers: {
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+            'Content-Type': 'application/json',
+            'Prefer': 'return=minimal'
+          },
+          body: JSON.stringify({ email })
+        });
+
+        if (response.ok) {
+          message.textContent = "Welcome aboard! We'll notify you when Chatter launches.";
+          message.className = 'form-message success';
+          form.reset();
+        } else if (response.status === 409) {
+          // Duplicate email (unique constraint violation)
+          message.textContent = "You're already on the waitlist!";
+          message.className = 'form-message error';
+        } else {
+          throw new Error('Failed to join waitlist');
+        }
+      } catch (error) {
+        message.textContent = 'Something went wrong. Please try again.';
+        message.className = 'form-message error';
+      } finally {
+        // Re-enable button
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.querySelector('.btn-text')!.textContent = 'Join Now';
+        }
+      }
+
       setTimeout(() => {
         message.className = 'form-message';
         message.textContent = '';
