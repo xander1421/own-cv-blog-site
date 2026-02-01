@@ -4,8 +4,8 @@ import BlackHole from '../components/BlackHole.astro';
 ---
 
 <BaseLayout
-  title="Chatter - Join the Waitlist"
-  description="Be among the first to experience Chatter - a secure, real-time chat platform with end-to-end encryption, voice/video calling, and AI integrations."
+  title="Chatter - Private Encrypted Messaging with Sealed Sender & Metadata Protection"
+  description="End-to-end encrypted messaging that protects your metadata, not just content. No phone number required. Sealed Sender, anonymous inboxes, and local AI search. Open source."
   image="/chatter-og.png"
   type="website"
 >
@@ -15,88 +15,40 @@ import BlackHole from '../components/BlackHole.astro';
       <canvas id="blackhole-canvas" class="blackhole-canvas"></canvas>
       
       <div class="hero-content">
+        <!-- Problem-focused headline -->
         <div class="hero-header">
           <div class="logo-container">
             <h1 class="logo-text">CHATTER</h1>
             <div class="logo-pulse"></div>
           </div>
-
-          <h2 class="tagline">The Future of Secure Communication</h2>
+          <h2 class="tagline">Your messages are encrypted.<br/><span class="highlight">But your metadata isn't.</span></h2>
         </div>
 
         <p class="hero-description">
-          Real-time chat with Signal Protocol encryption, Sealed Sender privacy, and local AI that never leaves your device.
-          Your messages, your data, your control.
+          Most "secure" messengers encrypt content but leak who you talk to, when, and how often.
+          Chatter uses <strong>Sealed Sender</strong> and <strong>anonymous inboxes</strong> so even we can't see your social graph.
         </p>
 
-        <div class="features-grid">
-          <div class="feature-card">
-            <div class="feature-icon">👻</div>
-            <h3>Sealed Sender</h3>
-            <p>Server never sees who sent the message—only the recipient can decrypt the sender</p>
-          </div>
-
-          <div class="feature-card">
-            <div class="feature-icon">📮</div>
-            <h3>Anonymous Inbox</h3>
-            <p>Ephemeral mailboxes defeat traffic analysis and metadata correlation attacks</p>
-          </div>
-
-          <div class="feature-card">
-            <div class="feature-icon">🧠</div>
-            <h3>Local AI</h3>
-            <p>Ollama-powered semantic search and summaries—zero data leaves your device</p>
-          </div>
-
-          <div class="feature-card">
-            <div class="feature-icon">🔐</div>
-            <h3>Signal Protocol</h3>
-            <p>X3DH key exchange, Double Ratchet, and ChaCha20-Poly1305 encryption</p>
-          </div>
-
-          <div class="feature-card">
-            <div class="feature-icon">📱</div>
-            <h3>Multi-Device</h3>
-            <p>QR code linking with cross-device sync and per-device identity keys</p>
-          </div>
-
-          <div class="feature-card">
-            <div class="feature-icon">🎥</div>
-            <h3>Voice & Video</h3>
-            <p>LiveKit WebRTC with screen sharing and participant grid</p>
-          </div>
-
-          <div class="feature-card">
-            <div class="feature-icon">👁️‍🗨️</div>
-            <h3>Private Receipts</h3>
-            <p>Typing indicators and read receipts sent through anonymous channels</p>
-          </div>
-
-          <div class="feature-card">
-            <div class="feature-icon">🤖</div>
-            <h3>AI Assistants</h3>
-            <p>Claude, GPT, and Gemini integrations with @mention triggers</p>
-          </div>
-        </div>
-
-        <!-- Waitlist Form -->
+        <!-- Waitlist Form - moved up for conversion -->
         <div class="waitlist-form-container">
-          <h3 class="form-title">Join the Waitlist</h3>
-          <p class="form-subtitle">Be the first to know when we launch</p>
-          
+          <div class="social-proof">
+            <span class="proof-count" id="waitlist-count">Join</span>
+            <span class="proof-text">privacy-focused users waiting for launch</span>
+          </div>
+
           <form id="waitlist-form" class="waitlist-form">
             <div class="input-group">
-              <input 
-                type="email" 
-                id="email" 
-                name="email" 
-                placeholder="Enter your email address"
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="your@email.com"
                 class="email-input"
                 required
                 pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
               />
               <button type="submit" class="submit-btn">
-                <span class="btn-text">Join Now</span>
+                <span class="btn-text">Get Early Access</span>
                 <svg class="btn-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <line x1="5" y1="12" x2="19" y2="12"></line>
                   <polyline points="12 5 19 12 12 19"></polyline>
@@ -105,25 +57,100 @@ import BlackHole from '../components/BlackHole.astro';
             </div>
             <div id="form-message" class="form-message"></div>
           </form>
+          <p class="form-note">No spam. Unsubscribe anytime. We don't sell your email (obviously).</p>
+        </div>
+
+        <!-- 4 Key Differentiators -->
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                <path d="M9 12l2 2 4-4"/>
+              </svg>
+            </div>
+            <h3>Sealed Sender</h3>
+            <p>The server never sees who sent a message. Only the recipient can decrypt the sender's identity.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                <circle cx="12" cy="16" r="1"/>
+                <path d="M7 11V7a5 5 0 0110 0v4"/>
+              </svg>
+            </div>
+            <h3>No Phone Number</h3>
+            <p>No phone, no email—just a username. Your real identity stays completely separate from your account.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+                <path d="M8 10h.01M12 10h.01M16 10h.01"/>
+              </svg>
+            </div>
+            <h3>Anonymous Inbox</h3>
+            <p>Ephemeral mailboxes with blind signatures defeat traffic analysis attacks.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="12" cy="12" r="3"/>
+                <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+              </svg>
+            </div>
+            <h3>Local AI Search</h3>
+            <p>Search and summarize your messages with Ollama. All AI runs locally—nothing leaves your device.</p>
+          </div>
         </div>
 
       </div>
     </section>
 
-    <!-- Technical Details Section -->
-    <section class="tech-section">
-      <h2 class="section-title">Built Different</h2>
-      
-      <div class="tech-grid">
-        <div class="tech-card">
-          <h3>Sealed Sender & Anonymous Inbox</h3>
-          <p>Beyond E2E encryption—the server never sees sender metadata. Ephemeral mailboxes with blind signatures defeat traffic analysis attacks.</p>
-          <a href="/blog/signal-protocol-implementation-in-chatter" class="tech-link">Deep dive →</a>
+    <!-- Beyond Encryption Section -->
+    <section class="beyond-section">
+      <h2 class="section-title">Beyond Encryption</h2>
+      <p class="section-subtitle">Encryption protects your content. We protect everything else.</p>
+
+      <div class="beyond-grid">
+        <div class="beyond-card">
+          <div class="beyond-number">01</div>
+          <h3>Hide Your Social Graph</h3>
+          <p>Who you talk to is as sensitive as what you say. Sealed Sender ensures the server never knows who sent a message—only the recipient can decrypt the sender's identity.</p>
         </div>
 
+        <div class="beyond-card">
+          <div class="beyond-number">02</div>
+          <h3>Defeat Traffic Analysis</h3>
+          <p>Anonymous inboxes with blind signatures break the correlation between sender and recipient. Your communication patterns stay invisible.</p>
+        </div>
+
+        <div class="beyond-card">
+          <div class="beyond-number">03</div>
+          <h3>No Identity Anchors</h3>
+          <p>Create an account with just a username. No phone number, no email required. Your real identity stays completely separate from your Chatter identity.</p>
+        </div>
+
+        <div class="beyond-card">
+          <div class="beyond-number">04</div>
+          <h3>AI Without Surveillance</h3>
+          <p>Search and summarize your messages with local AI. Ollama runs on your device—your data never touches our servers or any cloud.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Technical Details Section -->
+    <section class="tech-section">
+      <h2 class="section-title">How It Works</h2>
+
+      <div class="tech-grid">
         <div class="tech-card">
-          <h3>Privacy-Preserving Local AI</h3>
-          <p>Ollama integration for semantic search and message summaries. All AI inference runs locally—your messages never leave your device.</p>
+          <h3>Signal Protocol Encryption</h3>
+          <p>X3DH key exchange, Double Ratchet algorithm, and ChaCha20-Poly1305 encryption. The same cryptographic foundation trusted by billions.</p>
         </div>
 
         <div class="tech-card">
@@ -133,26 +160,27 @@ import BlackHole from '../components/BlackHole.astro';
 
         <div class="tech-card">
           <h3>Native Performance</h3>
-          <p>Built in Rust with Slint UI—no browser engine, no Electron bloat. Lightweight, native Wayland support on Linux.</p>
+          <p>Built in Rust with Slint UI—no browser engine, no Electron. Lightweight with native Wayland support on Linux.</p>
           <a href="/blog/from-react-to-rust-native-journey" class="tech-link">Why we chose Rust →</a>
+        </div>
+
+        <div class="tech-card">
+          <h3>Voice & Video</h3>
+          <p>Encrypted calls with LiveKit WebRTC. Screen sharing, participant grid, and low-latency audio.</p>
         </div>
       </div>
 
-      <div class="tech-stack">
-        <h3>Technology Stack</h3>
-        <div class="tech-badges">
-          <span class="tech-badge">Rust</span>
-          <span class="tech-badge">Slint</span>
-          <span class="tech-badge">Go</span>
-          <span class="tech-badge">PostgreSQL</span>
-          <span class="tech-badge">Redis</span>
-          <span class="tech-badge">ConnectRPC</span>
-          <span class="tech-badge">Temporal</span>
-          <span class="tech-badge">SpiceDB</span>
-          <span class="tech-badge">LiveKit</span>
-          <span class="tech-badge">Ollama</span>
-          <span class="tech-badge">SQLCipher</span>
+      <div class="open-source-banner">
+        <div class="os-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+          </svg>
         </div>
+        <div class="os-text">
+          <strong>100% Open Source</strong>
+          <span>Audit the code yourself. GPL-3.0 licensed.</span>
+        </div>
+        <a href="https://github.com/xander1421/chatter" class="os-link">View on GitHub →</a>
       </div>
     </section>
 
@@ -289,6 +317,12 @@ import BlackHole from '../components/BlackHole.astro';
     font-weight: 300;
     margin: 0;
     color: #c0c0c0;
+    line-height: 1.4;
+  }
+
+  .tagline .highlight {
+    color: #f093fb;
+    font-weight: 500;
   }
 
   .hero-description {
@@ -307,12 +341,18 @@ import BlackHole from '../components/BlackHole.astro';
   /* Features Grid */
   .features-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 2rem;
-    margin-bottom: 4rem;
-    max-width: 900px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+    max-width: 800px;
     margin-left: auto;
     margin-right: auto;
+  }
+
+  @media (max-width: 600px) {
+    .features-grid {
+      grid-template-columns: 1fr;
+    }
   }
 
   .feature-card {
@@ -324,38 +364,46 @@ import BlackHole from '../components/BlackHole.astro';
     -webkit-backdrop-filter: blur(12px);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
     transition: all 0.3s ease;
+    text-align: left;
   }
 
   .feature-card:hover {
     background: rgba(0, 0, 0, 0.8);
     border-color: rgba(102, 126, 234, 0.5);
-    transform: translateY(-4px);
+    transform: translateY(-2px);
     box-shadow: 0 8px 40px rgba(102, 126, 234, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
   }
 
   .feature-icon {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
+    color: #a5b4fc;
+  }
+
+  .feature-icon svg {
+    width: 32px;
+    height: 32px;
   }
 
   .feature-card h3 {
-    font-size: 1.1rem;
+    font-size: 1rem;
     margin-bottom: 0.5rem;
     color: #ffffff;
+    font-weight: 600;
   }
 
   .feature-card p {
-    font-size: 0.9rem;
-    color: #b0b0b0;
+    font-size: 0.85rem;
+    color: #999;
     line-height: 1.5;
+    margin: 0;
   }
 
   /* Waitlist Form */
   .waitlist-form-container {
-    max-width: 500px;
-    margin: 0 auto 4rem;
+    max-width: 480px;
+    margin: 2rem auto 0;
     padding: 2rem;
-    background: rgba(0, 0, 0, 0.75);
+    background: rgba(0, 0, 0, 0.8);
     border: 1px solid rgba(102, 126, 234, 0.3);
     border-radius: 20px;
     backdrop-filter: blur(16px);
@@ -375,6 +423,35 @@ import BlackHole from '../components/BlackHole.astro';
   .form-subtitle {
     color: #b0b0b0;
     margin-bottom: 2rem;
+  }
+
+  .social-proof {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .proof-count {
+    font-size: 1.1rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #667eea 0%, #f093fb 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .proof-text {
+    color: #888;
+    font-size: 0.95rem;
+  }
+
+  .form-note {
+    margin-top: 1rem;
+    font-size: 0.8rem;
+    color: #666;
   }
 
   .input-group {
@@ -484,6 +561,61 @@ import BlackHole from '../components/BlackHole.astro';
     margin-top: 0.5rem;
   }
 
+  /* Beyond Section */
+  .beyond-section {
+    position: relative;
+    z-index: 10;
+    padding: 5rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    background: rgba(0, 0, 0, 0.9);
+  }
+
+  .section-subtitle {
+    text-align: center;
+    color: #888;
+    font-size: 1.2rem;
+    margin-top: -2rem;
+    margin-bottom: 3rem;
+  }
+
+  .beyond-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+
+  .beyond-card {
+    padding: 2rem;
+    border-left: 2px solid rgba(102, 126, 234, 0.4);
+    transition: all 0.3s ease;
+  }
+
+  .beyond-card:hover {
+    border-left-color: #f093fb;
+    background: rgba(102, 126, 234, 0.05);
+  }
+
+  .beyond-number {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #667eea;
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.1em;
+  }
+
+  .beyond-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.75rem;
+    color: #fff;
+  }
+
+  .beyond-card p {
+    color: #999;
+    line-height: 1.7;
+    font-size: 0.95rem;
+  }
+
   /* Tech Section */
   .tech-section {
     position: relative;
@@ -588,6 +720,52 @@ import BlackHole from '../components/BlackHole.astro';
     box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2);
   }
 
+  /* Open Source Banner */
+  .open-source-banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 3rem;
+    padding: 1.5rem 2rem;
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(102, 126, 234, 0.3);
+    border-radius: 12px;
+    flex-wrap: wrap;
+  }
+
+  .os-icon {
+    color: #a5b4fc;
+  }
+
+  .os-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .os-text strong {
+    color: #fff;
+    font-size: 1rem;
+  }
+
+  .os-text span {
+    color: #888;
+    font-size: 0.85rem;
+  }
+
+  .os-link {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    margin-left: auto;
+  }
+
+  .os-link:hover {
+    color: #f093fb;
+  }
+
   /* Footer */
   .waitlist-footer {
     position: relative;
@@ -619,15 +797,16 @@ import BlackHole from '../components/BlackHole.astro';
   /* Responsive Design */
   @media (max-width: 768px) {
     .logo-text {
-      font-size: 3rem;
+      font-size: 2.5rem;
     }
 
     .tagline {
-      font-size: 1.5rem;
+      font-size: 1.2rem;
     }
 
     .hero-description {
-      font-size: 1.1rem;
+      font-size: 1rem;
+      padding: 1rem;
     }
 
     .features-grid {
@@ -644,12 +823,30 @@ import BlackHole from '../components/BlackHole.astro';
       justify-content: center;
     }
 
-    .stats-container {
-      gap: 2rem;
-    }
-
     .tech-grid {
       grid-template-columns: 1fr;
+    }
+
+    .beyond-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .section-title {
+      font-size: 2rem;
+    }
+
+    .section-subtitle {
+      font-size: 1rem;
+      margin-top: -1.5rem;
+    }
+
+    .open-source-banner {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .os-link {
+      margin-left: 0;
     }
   }
 </style>
@@ -658,15 +855,15 @@ import BlackHole from '../components/BlackHole.astro';
   // Interstellar-style blackhole effect from Chatter frontend (converted to vanilla JS)
   const canvas = document.getElementById('blackhole-canvas') as HTMLCanvasElement;
   if (canvas) {
-    const gl = canvas.getContext('webgl2', { 
+    const gl = canvas.getContext('webgl2', {
       alpha: true,
-      antialias: true,
-      powerPreference: 'high-performance',
+      antialias: false,
+      powerPreference: 'low-power',
       preserveDrawingBuffer: false
     }) || canvas.getContext('webgl', {
       alpha: true,
-      antialias: true,
-      powerPreference: 'high-performance',
+      antialias: false,
+      powerPreference: 'low-power',
       preserveDrawingBuffer: false
     });
 
@@ -682,14 +879,14 @@ import BlackHole from '../components/BlackHole.astro';
         }
       `;
 
-      // Fragment shader - High quality Interstellar black hole
+      // Fragment shader - Optimized Interstellar black hole (reduced iterations for performance)
       const fragmentShaderSource = `
         precision highp float;
-        
+
         varying vec2 v_uv;
         uniform float u_time;
         uniform vec2 u_resolution;
-        
+
         #define AA 1
         #define _Speed 3.0
         #define _Steps 8.0
@@ -725,18 +922,18 @@ import BlackHole from '../components/BlackHole.astro';
             uv.y = ray.z;
           
           float brightness = value(uv * 3.0, 100.0);
-          float color = value(uv * 2.0, 20.0); 
+          float color = value(uv * 2.0, 20.0);
           brightness = pow(brightness, 256.0);
           brightness = brightness * 100.0;
           brightness = clamp(brightness, 0.0, 1.0);
-          
+
           vec3 stars = brightness * mix(vec3(0.5, 0.5, 0.6), vec3(0.3, 0.3, 0.4), color) * 0.5;
-          
+
           vec3 nebulae = vec3(0.0);
           float nebula = value(uv * 0.5, 5.0);
           nebula = pow(nebula, 8.0) * 0.02;
           nebulae = vec3(nebula) * vec3(0.2, 0.1, 0.3);
-          
+
           return vec4(stars + nebulae, 1.0);
         }
         
@@ -840,8 +1037,8 @@ import BlackHole from '../components/BlackHole.astro';
             vec4 glow = vec4(0.0); 
             vec4 outCol = vec4(100.0);
             
-            for (int disks = 0; disks < 12; disks++) {
-              for (int h = 0; h < 4; h++) {
+            for (int disks = 0; disks < 8; disks++) {
+              for (int h = 0; h < 2; h++) {
                 float dotpos = dot(pos, pos);
                 float invDist = inversesqrt(dotpos);
                 float centDist = dotpos * invDist;
@@ -939,45 +1136,63 @@ import BlackHole from '../components/BlackHole.astro';
             let startTime = Date.now();
             let animationId: number;
             let isVisible = true;
-            
+            let isTabVisible = true;
+            let lastFrameTime = 0;
+            const targetFPS = 30; // Cap at 30fps for performance
+            const frameInterval = 1000 / targetFPS;
+
             function resizeCanvas() {
-              const scale = window.innerWidth > 768 ? 0.5 : 0.75; // Better performance on desktop
+              // Lower resolution for better GPU performance
+              const scale = window.innerWidth > 768 ? 0.5 : 0.75;
               canvas.width = Math.floor(window.innerWidth * scale);
               canvas.height = Math.floor(window.innerHeight * scale);
             }
-            
-            function render() {
-              if (!isVisible) {
+
+            function render(currentTime: number) {
+              // Skip if tab or canvas not visible
+              if (!isVisible || !isTabVisible) {
                 animationId = requestAnimationFrame(render);
                 return;
               }
-              
+
+              // Frame rate limiting
+              const elapsed = currentTime - lastFrameTime;
+              if (elapsed < frameInterval) {
+                animationId = requestAnimationFrame(render);
+                return;
+              }
+              lastFrameTime = currentTime - (elapsed % frameInterval);
+
               gl.viewport(0, 0, canvas.width, canvas.height);
               gl.uniform1f(timeLocation, (Date.now() - startTime) / 1000);
               gl.uniform2f(resolutionLocation, canvas.width, canvas.height);
               gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-              
+
               animationId = requestAnimationFrame(render);
             }
-            
-            // Setup visibility observer for performance
+
+            // Pause when canvas scrolled out of view
             const observer = new IntersectionObserver(
               (entries) => {
                 isVisible = entries[0]?.isIntersecting ?? false;
               },
               { threshold: 0.1 }
             );
-            
             observer.observe(canvas);
-            
+
+            // Pause when tab is not visible
+            document.addEventListener('visibilitychange', () => {
+              isTabVisible = !document.hidden;
+            });
+
             resizeCanvas();
             window.addEventListener('resize', resizeCanvas);
-            render();
+            requestAnimationFrame(render);
             
             // Cleanup on page navigation
-            window.addEventListener('beforeunload', () => {
+            window.addEventListener('pagehide', () => {
               observer.disconnect();
-              cancelAnimationFrame(animationId);
+              if (animationId) cancelAnimationFrame(animationId);
               gl.deleteProgram(program);
               gl.deleteShader(vertexShader);
               gl.deleteShader(fragmentShader);
@@ -992,6 +1207,28 @@ import BlackHole from '../components/BlackHole.astro';
   // Waitlist form handler with Supabase
   const SUPABASE_URL = 'https://fsnwduufbbqxyylwzabg.supabase.co';
   const SUPABASE_ANON_KEY = 'sb_publishable_pKxCqZDi95BLe4rbTQOdrw_n-wmn17a';
+
+  // Fetch waitlist count for social proof (only show if > 10)
+  async function fetchWaitlistCount() {
+    try {
+      const response = await fetch(`${SUPABASE_URL}/rest/v1/waitlist?select=count`, {
+        method: 'HEAD',
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+          'Prefer': 'count=exact'
+        }
+      });
+      const count = parseInt(response.headers.get('content-range')?.split('/')[1] || '0');
+      const countEl = document.getElementById('waitlist-count');
+      if (countEl && count >= 10) {
+        countEl.textContent = `${count}+`;
+      }
+    } catch (e) {
+      // Silently fail - social proof is not critical
+    }
+  }
+  fetchWaitlistCount();
 
   const form = document.getElementById('waitlist-form') as HTMLFormElement;
   const message = document.getElementById('form-message') as HTMLDivElement;
