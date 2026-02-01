@@ -1,65 +1,48 @@
 ---
-title: "From React to Rust: Why I Rebuilt My Chat App Three Times to Learn Native is the Answer"
+title: "From React to Rust: Why I Switched to Native Mid-Project"
 date: "2026-02-01"
-description: "The journey from browser-based React to Electron to Flutter to native Rust—and why each layer I removed made the app better."
-tags: ["Rust", "React", "Electron", "Flutter", "Wayland", "Native", "Signal Protocol", "Slint", "Performance"]
+description: "Building a chat app taught me that every abstraction layer has a cost—and some costs only become clear when you're deep in development."
+tags: ["Rust", "React", "Electron", "Flutter", "Wayland", "Native", "Signal Protocol", "Slint"]
 image: "/images/blog/from-react-to-rust-native-journey.webp"
 ---
 
-I built the same chat app three times. Each iteration taught me something the previous one couldn't: that every layer between your code and the hardware is a layer of problems.
+I'm building [Chatter](https://github.com/xander1421/chatter), a secure messaging app with Signal Protocol encryption. I've now started the client three times in three different stacks. This isn't a story about finding the "best" technology—it's about discovering what matters when you're actually building something.
 
-This is the story of building [Chatter](https://github.com/xander1421/chatter), a secure messaging app with Signal Protocol encryption, and why I finally landed on native Rust after trying React, Electron, and Flutter.
+## Why Not Just Use the Browser?
 
-## Version 1: React in the Browser
+I started thinking about this project as a web app. React, TypeScript, modern tooling. But Signal Protocol has requirements that browsers can't satisfy:
 
-I started where most developers start—the browser. React, TypeScript, a modern stack. The UI came together quickly. Hot reload. Component libraries. The JavaScript ecosystem's instant gratification.
+- **Secure random number generation** - `crypto.getRandomValues` has limitations for cryptographic use
+- **Protected memory** - JavaScript's garbage collector can leave secrets in memory
+- **Constant-time operations** - JS JIT optimizers can break timing guarantees
+- **System keychain access** - Browsers are sandboxed from OS credential storage
 
-Then I tried to implement Signal Protocol.
+Signal's reference implementation (`libsignal`) is written in Rust with bindings for Java, Swift, and Node.js—not browsers. The browser sandbox that protects users also limits what you can build.
 
-```typescript
-// What I wanted to do
-import { SignalProtocolStore } from '@aspect/signal-protocol';
-const session = await SessionCipher.encryptMessage(recipientId, plaintext);
-```
+## Starting with What I Knew: React + Electron
 
-The problem: Signal's reference implementation (`libsignal`) is written in Rust with bindings for Java, Swift, and Node.js. **Not for browsers.**
+So I went with Electron. Now I had Node.js, which has `@signalapp/libsignal-client` bindings. The UI came together quickly using React.
 
-Why? Cryptographic operations require:
-- Secure random number generation (`crypto.getRandomValues` has limitations)
-- Protected memory (JavaScript's garbage collector can leave secrets in memory)
-- Constant-time operations (JS JIT optimizers break timing guarantees)
-- Access to system keychain (browsers are sandboxed)
+Electron worked. I got Signal Protocol encryption running. The app functioned.
 
-I could use WebCrypto for basic operations, but Signal Protocol needs X3DH key agreement, Double Ratchet, sealed sender certificates—a full cryptographic stack that doesn't exist in browser-safe JavaScript.
-
-**Lesson 1:** The browser sandbox that protects users also limits what you can build.
-
-## Version 2: Electron Wrapper
-
-The obvious solution: wrap React in Electron. Now I had Node.js, which has `@aspect/libsignal-client` bindings. Problem solved?
-
-Not quite.
+But with each feature I added, the app felt heavier. Not dramatically—just a little slower to start, a little more sluggish. The kind of thing you rationalize as "development mode overhead."
 
 ### The IPC Bridge Problem
 
-Electron runs two processes: the **main process** (Node.js, full system access) and the **renderer process** (Chromium, sandboxed). They communicate through IPC (Inter-Process Communication).
+Electron runs two processes: the **main process** (Node.js, full system access) and the **renderer process** (Chromium, sandboxed). They communicate through IPC.
 
-Every operation that touches libsignal or the system requires an IPC call:
+Every call to libsignal, every database query, every system notification requires serialization:
 
 ```javascript
 // preload.cjs - 401 lines of bridge code
 contextBridge.exposeInMainWorld('electronAPI', {
   signal: {
-    initializeMessageDatabase: (userId) => ipcRenderer.invoke('signal:initializeMessageDatabase', userId),
-    storeMessage: (data) => ipcRenderer.invoke('signal:storeMessage', data),
-    getMessage: (messageId) => ipcRenderer.invoke('signal:getMessage', messageId),
     encryptMessage: (data) => ipcRenderer.invoke('signal:encryptMessage', data),
     decryptMessage: (data) => ipcRenderer.invoke('signal:decryptMessage', data),
     // ... 50+ more methods
   },
   notifications: { /* more IPC */ },
-  ollama: { /* more IPC */ },
-  models: { /* more IPC */ },
+  database: { /* more IPC */ },
 });
 ```
 
@@ -73,15 +56,15 @@ ipcMain.handle('signal:encryptMessage', async (event, data) => {
 });
 ```
 
-**1,531 lines of glue code** just to bridge two processes in the same application.
+**1,531 lines of glue code** that does nothing except shuttle data between processes.
 
 ### The Layer Cake
 
-Here's what happens when a user sends a message in the Electron version:
+Here's what happens when a user sends a message in Electron:
 
 ```mermaid
 flowchart TD
-    A["User clicks 'Send'"] --> B["React state update"]
+    A["User clicks Send"] --> B["React state update"]
     B --> C["TypeScript handler"]
     C --> D["IPC serialize (JSON)"]
     D --> E["Electron IPC channel"]
@@ -89,22 +72,23 @@ flowchart TD
     F --> G["Node.js N-API binding"]
     G --> H["libsignal Rust FFI"]
     H --> I["Actual encryption"]
-    I --> J["Return up the entire stack"]
+    I --> J["Return up the stack"]
 
     style A fill:#e74c3c,color:#fff
     style I fill:#27ae60,color:#fff
 ```
 
-Eight layers. JSON serialization at every IPC boundary. The renderer can't directly call Rust—it goes through JavaScript bindings, through Node, through IPC, through React.
+Eight layers. JSON serialization at every IPC boundary.
 
-### Wayland Pain
+### Wayland Workarounds
 
-Then there's Wayland. Electron is built on Chromium, and Chromium's Linux support assumes X11. On Wayland, I needed:
+On my Hyprland setup, Electron needed special handling:
 
 ```javascript
-// electron.cjs - Platform detection gymnastics
+// electron.cjs - Platform detection
 const isWayland = process.platform === 'linux' &&
-  (process.env.XDG_SESSION_TYPE === 'wayland' || Boolean(process.env.WAYLAND_DISPLAY));
+  (process.env.XDG_SESSION_TYPE === 'wayland' ||
+   Boolean(process.env.WAYLAND_DISPLAY));
 
 if (isWayland) {
   app.commandLine.appendSwitch('enable-features', 'WebRTCPipeWireCapturer');
@@ -118,68 +102,68 @@ if (process.platform === 'linux' && app.isPackaged) {
 }
 ```
 
-Electron doesn't recognize Hyprland or Sway as valid desktops. Screen sharing requires PipeWire flags. Color management breaks on some compositors. Every Chromium update brings new workarounds.
+Electron is built on Chromium, which assumes X11. Every Chromium update can bring new workarounds.
 
 ### The Numbers
 
-| Metric | Electron Version |
-|--------|------------------|
+| What | Size |
+|------|------|
 | `node_modules` | 1.5 GB |
-| Dependencies | 2,000+ packages |
-| TypeScript code | 139,000 lines |
 | IPC bridge code | 1,531 lines |
-| Processes at runtime | 5-10 |
-| RAM usage | 500 MB - 1.5 GB |
-| Startup time | 2-5 seconds |
 
-**Lesson 2:** Electron gives you desktop access, but at the cost of running a browser engine for your UI.
+## Trying Flutter: The X11 Realization
 
-## Version 3: Flutter
+I wanted something that compiled to native code. Flutter promised that—single codebase, native performance, mobile support. I started rebuilding.
 
-Flutter promised a better path: compiled to native code, single codebase for mobile and desktop, direct access to platform APIs through plugins.
+Then I noticed something while debugging on my Hyprland setup. The app was running under XWayland, not native Wayland. Flutter was falling back to X11 compatibility mode.
 
-```dart
-// main.dart - Clean start
-import 'package:libsignal/libsignal.dart';
+This wasn't a bug I could fix. It was just how Flutter worked on Linux at the time. The framework I chose for "native" performance was running through a compatibility layer.
 
-void main() async {
-  await LibSignal.init();  // Rust FFI, no IPC!
-  runApp(const ChatterApp());
-}
+That realization—that I was adding abstraction layers without even knowing it—made me stop mid-development on the Flutter version.
+
+## Why Rust
+
+The argument for Rust wasn't primarily about performance. It was about two things:
+
+### 1. One Language, No Bridges
+
+libsignal is written in Rust. With Rust, I can call Signal Protocol functions directly—no FFI overhead, no serialization, no 1,531 lines of bridge code.
+
+Here's message encryption in the Rust version:
+
+```mermaid
+flowchart TD
+    A["User clicks Send"] --> B["Slint UI event"]
+    B --> C["Rust handler"]
+    C --> D["Signal Protocol (Rust)"]
+    D --> E["Done"]
+
+    style A fill:#e74c3c,color:#fff
+    style E fill:#27ae60,color:#fff
 ```
 
-The architecture was cleaner. libsignal could be called directly through Dart FFI to Rust. No IPC serialization. No Node.js middle layer.
+Four layers instead of eight. No serialization boundaries.
 
-But then I ran it on my Hyprland desktop.
+### 2. The Compiler Catches Things Others Don't
 
-### Flutter's Linux Desktop Limitations
+Rust prevents entire categories of bugs at compile time:
 
-Flutter uses its own rendering engine (Skia/Impeller) and its own windowing abstraction. On Linux desktop, this means:
+| Issue | TypeScript/Dart | Rust |
+|-------|-----------------|------|
+| Null pointer | Runtime crash | `Option<T>` - must handle explicitly |
+| Data races | Runtime crash (maybe) | Won't compile |
+| Use-after-free | GC usually handles it | Won't compile |
+| Buffer overflow | Possible | Won't compile |
+| Memory leaks | GC may retain secrets | Explicit control |
 
-- **No system theme integration** - GTK/Qt themes don't apply, the app looks out of place
-- **Limited compositor features** - No access to Hyprland's workspace IPC, layer shell, etc.
-- **Separate ecosystem** - Platform integrations require plugins that may or may not exist
+For a messaging app handling encryption keys, "the runtime usually catches it" isn't reassuring.
 
-Flutter works great for mobile. On Linux desktops, especially tiling window managers like Hyprland, it feels like a mobile app running on desktop.
+### What the Code Looks Like
 
-**Lesson 3:** Flutter is excellent for mobile, but Linux desktop isn't its priority.
-
-## Version 4: Native Rust
-
-Three failed attempts taught me what I needed:
-
-1. **Direct hardware access** - No IPC, no bridges, no VMs
-2. **Native Wayland support** - First-class, not bolted on
-3. **Signal Protocol in-process** - Rust calling Rust, no FFI overhead
-4. **Single codebase, all platforms** - But truly native on each
-
-The answer was staring at me the whole time. libsignal is written in Rust. My backend is Go. The only reason I used TypeScript and Dart was familiarity.
-
-### The Slint Stack
-
-I chose [Slint](https://slint.dev) for the UI—a Rust-native GUI framework that compiles to native code on every platform:
+I chose [Slint](https://slint.dev) for the UI—a Rust-native GUI framework:
 
 ```toml
+# Cargo.toml
 [dependencies]
 slint = "1.9"
 tokio = { version = "1", features = ["full"] }
@@ -192,31 +176,12 @@ ed25519-dalek = "2"
 aes-gcm = "0.10"
 ```
 
-Here's the same message encryption flow in native Rust:
-
-```mermaid
-flowchart TD
-    A["User clicks 'Send'"] --> B["Slint UI event"]
-    B --> C["Rust handler"]
-    C --> D["Rust Signal Protocol"]
-    D --> E["Done"]
-
-    style A fill:#e74c3c,color:#fff
-    style E fill:#27ae60,color:#fff
-```
-
-Four layers. No serialization. No IPC. No JavaScript.
-
-### What the Code Looks Like
-
 ```rust
-// One language, one file, direct crypto access
+// One language, direct crypto access
 async fn send_message(&self, recipient: &str, plaintext: &[u8]) -> Result<()> {
-    // Direct call - no IPC, no serialization
     let session = self.signal_store.load_session(recipient).await?;
     let ciphertext = session.encrypt(plaintext)?;
 
-    // gRPC to server - Rust tonic, not JS fetch
     self.client.send_message(SendRequest {
         recipient_id: recipient.into(),
         ciphertext: ciphertext.into(),
@@ -227,37 +192,25 @@ async fn send_message(&self, recipient: &str, plaintext: &[u8]) -> Result<()> {
 ```
 
 ```slint
-// ui/chat.slint - Declarative, hot-reloadable
-export component MessageInput {
-    callback send(string);
+// ui/app.slint - Declarative UI
+global Theme {
+    out property <color> background: #1a1a2e;
+    out property <color> primary: #4f46e5;
+    out property <color> text: #f8fafc;
+}
 
-    HorizontalLayout {
-        input := TextInput {
-            placeholder: "Type a message...";
-        }
-        Button {
-            text: "Send";
-            clicked => { send(input.text); input.text = ""; }
-        }
-    }
+export struct MessageData {
+    id: string,
+    author-name: string,
+    content: string,
+    timestamp: string,
+    is-own: bool,
 }
 ```
 
-### The Numbers
+### Cross-Platform Compilation
 
-| Metric | Electron | Flutter | Rust + Slint |
-|--------|----------|---------|--------------|
-| Dependencies size | 1.5 GB | 500 MB | ~50 MB |
-| Runtime processes | 5-10 | 1 | 1 |
-| RAM usage | 500MB-1.5GB | 200-400 MB | 50-150 MB |
-| Startup time | 2-5 sec | 1-2 sec | <1 sec |
-| Wayland support | Workarounds | Partial | Native |
-| Mobile support | No | Yes | Yes |
-| NPU/ML access | Via Node | Via plugins | Direct |
-
-### One Codebase, All Platforms
-
-The same Rust code compiles to:
+Rust compiles to native code on each platform:
 
 ```bash
 cargo build --release                              # Linux
@@ -267,81 +220,71 @@ cargo apk build --release                          # Android
 cargo build --release --target aarch64-apple-ios   # iOS
 ```
 
-And because it's native, I get:
-- **NPU access** on mobile (ONNX Runtime with CoreML/NNAPI backends)
-- **Direct D-Bus** for desktop integration (notifications, tray icons)
-- **System keychain** through native APIs, not Electron workarounds
-- **Native Wayland** through Slint's winit backend
+Currently I'm developing on Linux. Mobile builds are planned but not yet tested.
 
-### The Security Argument
+## The Real-World Experience
 
-For a secure messaging app, the language matters. Rust's guarantees aren't just nice-to-have:
+### Fewer Layers, Better Focus
 
-| Vulnerability Class | TypeScript/Dart | Rust |
-|---------------------|-----------------|------|
-| Buffer overflow | Possible | Compile-time prevented |
-| Use-after-free | GC hides it | Compile-time prevented |
-| Data races | Runtime crash | Compile-time prevented |
-| Null pointer | Runtime crash | `Option<T>` enforced |
-| Memory secrets | GC may retain | Explicit zeroization |
+With Electron, I was constantly context-switching: React components, TypeScript handlers, IPC serialization, Node.js handlers, native bindings. Five mental models for one feature.
 
-When your app handles encryption keys, "the runtime usually catches it" isn't good enough.
+With Rust + Slint, it's two: the UI markup and Rust code. When something breaks, there's one place to look. When I add a feature, I write it once. The cognitive load is genuinely lower despite Rust being a "harder" language.
 
-### The Trade-offs
+### Development vs Runtime Trade-off
 
-Rust isn't free. The costs are real:
+Rust shifts the cost from runtime to compile time—and from users to developers:
 
-- **Steep learning curve** - Ownership, lifetimes, and the borrow checker take time to internalize
-- **Slower iteration** - Compile times are longer than Go or TypeScript (45+ seconds for full builds)
-- **Smaller UI ecosystem** - Fewer ready-made components compared to React or Flutter
+| | Development | User's Machine |
+|---|-------------|----------------|
+| **Electron** | Fast iteration, any laptop works | Ships browser engine, high RAM |
+| **Rust** | Slower builds, needs decent CPU | 11 MB binary, minimal RAM |
+
+My development machine needs good hardware for reasonable compile times. But users get a lightweight app that doesn't ship a browser engine. That trade-off feels right—I have a fast machine, my users might not.
+
+### The Coding Experience
+
+Rust's strictness is polarizing, but for me it's become a better experience:
+
+- **No null pointer surprises** - If it compiles, `Option<T>` is handled
+- **No "works on my machine"** - The type system catches platform differences
+- **Refactoring confidence** - Change a type, compiler shows every place that breaks
+- **Fewer runtime bugs** - Problems surface at compile time, not in production
+
+The borrow checker is annoying until you internalize it. Then it's like having a code reviewer who catches memory bugs before you commit.
+
+## The Trade-offs
+
+Rust isn't free:
+
+- **Learning curve** - Ownership and borrowing take time to internalize
+- **Hardware requirements** - Compile times need decent CPU; my builds take 45+ seconds
+- **Slower iteration** - Hot reload doesn't exist like in React/Flutter
+- **Smaller UI ecosystem** - Fewer ready-made components than React or Flutter
 - **Slint licensing** - GPL-3.0 free tier means your app must also be GPL (commercial license available)
 
-For Chatter, these trade-offs made sense—security matters more than iteration speed for a messaging app. For a CRUD app or MVP, they might not.
+The Rust client is still in development. I can't claim it's "better" because it's not finished. What I can say is that the problems I'm solving now are different—they're about application logic, not bridging between layers.
 
-## The Real Lesson
+## What I Learned
 
-Each rewrite taught me something:
+Each version taught me something:
 
-1. **React/Browser** → Security and system access have hard limits
-2. **Electron** → Layers have costs that compound
-3. **Flutter** → Great for mobile, but desktop feels like an afterthought
-4. **Rust** → Native isn't harder, it's different
+1. **Browser** - The sandbox protects users but limits what you can build. Signal Protocol needs things browsers can't provide.
 
-The irony: I spent more time managing Electron's IPC complexity than learning Rust basics.
+2. **Electron** - Abstractions have weight. IPC isn't free. 1,531 lines of bridge code is 1,531 lines that can have bugs, and every message goes through eight layers.
 
-The Rust version has:
-- **No bridge code** (no IPC glue between processes)
-- **Fewer dependencies** (no npm, no pub.dev)
-- **Fewer bugs** (the compiler catches entire categories)
-- **Better performance** (no interpretation, no GC)
-- **True portability** (native on each platform, not emulated)
+3. **Flutter** - "Cross-platform" can mean "compatibility layer you didn't know about." I was debugging my app thinking issues were Wayland-related, only to discover Flutter was running through X11 the whole time.
 
-## Advice for New Projects
+4. **Rust** - The compiler is strict because it's catching real problems. Fighting the borrow checker is frustrating until you realize it just prevented a data race in your encryption code.
 
-If I were starting today:
+## For Anyone Starting a Similar Project
 
-1. **For a web app**: Use the browser. Accept its limits.
-2. **For a desktop app on one platform**: Use native (Swift/Kotlin/Rust).
-3. **For a cross-platform desktop app**: Rust + Slint or Tauri.
-4. **For mobile**: Native (Swift/Kotlin) or Flutter if you must.
-5. **For desktop + mobile from one codebase**: Rust + Slint.
-6. **For anything involving cryptography**: Rust.
+- **If you know the web stack**: Electron works. Just understand you're shipping a browser engine and maintaining IPC bridges.
+- **If you need mobile + desktop**: Flutter is mature for mobile. Check its actual behavior on your target desktop platform.
+- **If you're handling sensitive data**: Consider what guarantees you need. Rust's strictness is a feature when security matters.
+- **If you're already fighting your tools**: That's a signal. The "sunk cost" of switching might be less than the ongoing cost of fighting.
 
-The JavaScript ecosystem's convenience is real, but so is its ceiling. When you hit that ceiling, you don't optimize your way out—you rebuild with fewer layers.
-
-## What's Next
-
-Chatter is now being built in Rust with Slint. The same codebase will run on:
-- Linux (native Wayland)
-- macOS
-- Windows
-- Android
-- iOS
-
-With Signal Protocol encryption, on-device AI (users can download their own models), and proper system integration on each platform.
-
-It took three rewrites to learn that native isn't the hard path—it's the honest one. Every abstraction promises to save time and costs it back somewhere else. Rust and Slint cost time upfront in learning, then pay it back in every feature that just works.
+I'm not done building Chatter. The Rust version is in progress. But I'm no longer debugging IPC serialization or wondering why my "native" app is running through X11. The problems I have now are the problems I actually want to solve.
 
 ---
 
-*The Chatter client is open source under GPL-3.0.*
+*Chatter is open source under GPL-3.0. Development continues.*
