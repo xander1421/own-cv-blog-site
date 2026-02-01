@@ -1,203 +1,136 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import BlackHole from '../components/BlackHole.astro';
 ---
 
 <BaseLayout
-  title="Chatter - Private Encrypted Messaging with Sealed Sender & Metadata Protection"
-  description="End-to-end encrypted messaging that protects your metadata, not just content. No phone number required. Sealed Sender, anonymous inboxes, and local AI search. Open source."
+  title="Chatter - Private Encrypted Messaging with Metadata Protection"
+  description="End-to-end encrypted messaging that protects your metadata, not just content. No phone number required. Sealed Sender, anonymous inboxes, and local AI. Open source."
   image="/chatter-og.png"
   type="website"
 >
   <div class="waitlist-container">
-    <!-- Hero Section with Blackhole Effect -->
-    <section class="hero-section">
+    <!-- Hero Section -->
+    <section class="hero">
       <canvas id="blackhole-canvas" class="blackhole-canvas"></canvas>
-      
-      <div class="hero-content">
-        <!-- Problem-focused headline -->
-        <div class="hero-header">
-          <div class="logo-container">
-            <h1 class="logo-text">CHATTER</h1>
-            <div class="logo-pulse"></div>
-          </div>
-          <h2 class="tagline">Your messages are encrypted.<br/><span class="highlight">But your metadata isn't.</span></h2>
-        </div>
 
-        <p class="hero-description">
-          Most "secure" messengers encrypt content but leak who you talk to, when, and how often.
-          Chatter uses <strong>Sealed Sender</strong> and <strong>anonymous inboxes</strong> so even we can't see your social graph.
-        </p>
+      <div class="hero-inner">
+        <span class="eyebrow">Coming Soon</span>
+        <h1>Your messages are encrypted.<br/><span class="accent">Your metadata isn't.</span></h1>
+        <p class="lead">Most secure messengers protect what you say—but leak who you talk to, when, and how often. Chatter protects everything.</p>
 
-        <!-- Waitlist Form - moved up for conversion -->
-        <div class="waitlist-form-container">
-          <div class="social-proof">
-            <span class="proof-count" id="waitlist-count">Join</span>
-            <span class="proof-text">privacy-focused users waiting for launch</span>
-          </div>
-
-          <form id="waitlist-form" class="waitlist-form">
-            <div class="input-group">
-              <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="your@email.com"
-                class="email-input"
-                required
-                pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
-              />
-              <button type="submit" class="submit-btn">
-                <span class="btn-text">Get Early Access</span>
-                <svg class="btn-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-              </button>
-            </div>
-            <div id="form-message" class="form-message"></div>
-          </form>
-          <p class="form-note">No spam. Unsubscribe anytime. We don't sell your email (obviously).</p>
-        </div>
-
-        <!-- 4 Key Differentiators -->
-        <div class="features-grid">
-          <div class="feature-card">
-            <div class="feature-icon">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                <path d="M9 12l2 2 4-4"/>
-              </svg>
-            </div>
-            <h3>Sealed Sender</h3>
-            <p>The server never sees who sent a message. Only the recipient can decrypt the sender's identity.</p>
-          </div>
-
-          <div class="feature-card">
-            <div class="feature-icon">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                <circle cx="12" cy="16" r="1"/>
-                <path d="M7 11V7a5 5 0 0110 0v4"/>
-              </svg>
-            </div>
-            <h3>No Phone Number</h3>
-            <p>No phone, no email—just a username. Your real identity stays completely separate from your account.</p>
-          </div>
-
-          <div class="feature-card">
-            <div class="feature-icon">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
-                <path d="M8 10h.01M12 10h.01M16 10h.01"/>
-              </svg>
-            </div>
-            <h3>Anonymous Inbox</h3>
-            <p>Ephemeral mailboxes with blind signatures defeat traffic analysis attacks.</p>
-          </div>
-
-          <div class="feature-card">
-            <div class="feature-icon">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <circle cx="12" cy="12" r="3"/>
-                <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
-              </svg>
-            </div>
-            <h3>Local AI Search</h3>
-            <p>Search and summarize your messages with Ollama. All AI runs locally—nothing leaves your device.</p>
-          </div>
-        </div>
-
+        <form id="waitlist-form" class="hero-form">
+          <input type="email" id="email" name="email" placeholder="you@email.com" required />
+          <button type="submit"><span>Get Early Access</span></button>
+        </form>
+        <p id="form-message" class="form-message"></p>
+        <p class="form-note">No spam. Open source. GPL-3.0.</p>
       </div>
     </section>
 
-    <!-- Beyond Encryption Section -->
-    <section class="beyond-section">
-      <h2 class="section-title">Beyond Encryption</h2>
-      <p class="section-subtitle">Encryption protects your content. We protect everything else.</p>
+    <!-- Value Props - Horizontal, no boxes -->
+    <section class="values">
+      <div class="value">
+        <div class="value-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="value-text">
+          <strong>Sealed Sender</strong>
+          <span>Server never sees who sent the message</span>
+        </div>
+      </div>
+      <div class="value">
+        <div class="value-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+        </div>
+        <div class="value-text">
+          <strong>No Phone Required</strong>
+          <span>Just a username. That's it.</span>
+        </div>
+      </div>
+      <div class="value">
+        <div class="value-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        </div>
+        <div class="value-text">
+          <strong>Anonymous Inbox</strong>
+          <span>Ephemeral mailboxes defeat traffic analysis</span>
+        </div>
+      </div>
+      <div class="value">
+        <div class="value-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2"/></svg>
+        </div>
+        <div class="value-text">
+          <strong>Local AI</strong>
+          <span>Search stays on your device</span>
+        </div>
+      </div>
+    </section>
 
-      <div class="beyond-grid">
-        <div class="beyond-card">
-          <div class="beyond-number">01</div>
-          <h3>Hide Your Social Graph</h3>
+    <!-- Big Statement -->
+    <section class="statement">
+      <h2>Beyond <em>encryption</em></h2>
+      <p>Encryption protects your content. We protect your social graph, your communication patterns, your identity. The server knows nothing—by design.</p>
+    </section>
+
+    <!-- How it works - Alternating layout -->
+    <section class="how-it-works">
+      <div class="how-block">
+        <div class="how-number">01</div>
+        <div class="how-content">
+          <h3>Hide your social graph</h3>
           <p>Who you talk to is as sensitive as what you say. Sealed Sender ensures the server never knows who sent a message—only the recipient can decrypt the sender's identity.</p>
         </div>
+      </div>
 
-        <div class="beyond-card">
-          <div class="beyond-number">02</div>
-          <h3>Defeat Traffic Analysis</h3>
-          <p>Anonymous inboxes with blind signatures break the correlation between sender and recipient. Your communication patterns stay invisible.</p>
+      <div class="how-block reverse">
+        <div class="how-number">02</div>
+        <div class="how-content">
+          <h3>Defeat traffic analysis</h3>
+          <p>Anonymous inboxes with blind signatures break the correlation between sender and recipient. Your communication patterns stay invisible to everyone—including us.</p>
         </div>
+      </div>
 
-        <div class="beyond-card">
-          <div class="beyond-number">03</div>
-          <h3>No Identity Anchors</h3>
-          <p>Create an account with just a username. No phone number, no email required. Your real identity stays completely separate from your Chatter identity.</p>
-        </div>
-
-        <div class="beyond-card">
-          <div class="beyond-number">04</div>
-          <h3>AI Without Surveillance</h3>
-          <p>Search and summarize your messages with local AI. Ollama runs on your device—your data never touches our servers or any cloud.</p>
+      <div class="how-block">
+        <div class="how-number">03</div>
+        <div class="how-content">
+          <h3>AI without surveillance</h3>
+          <p>Search and summarize your messages with Ollama. All inference runs locally on your device. Your data never touches our servers or any cloud.</p>
         </div>
       </div>
     </section>
 
-    <!-- Technical Details Section -->
-    <section class="tech-section">
-      <h2 class="section-title">How It Works</h2>
-
-      <div class="tech-grid">
-        <div class="tech-card">
-          <h3>Signal Protocol Encryption</h3>
-          <p>X3DH key exchange, Double Ratchet algorithm, and ChaCha20-Poly1305 encryption. The same cryptographic foundation trusted by billions.</p>
+    <!-- Tech callout - Single clean block -->
+    <section class="tech-callout">
+      <div class="tech-inner">
+        <div class="tech-left">
+          <h3>Built in Rust</h3>
+          <p>Native performance. No Electron. No browser engine. Lightweight with native Wayland support on Linux.</p>
+          <a href="/blog/from-react-to-rust-native-journey" class="tech-link">Why we chose Rust &rarr;</a>
         </div>
-
-        <div class="tech-card">
-          <h3>Zero-Knowledge Architecture</h3>
-          <p>SQLCipher encrypted local storage, privacy-preserving typing indicators, and anonymous read receipts. We can't read your data—by design.</p>
+        <div class="tech-right">
+          <a href="https://github.com/xander1421/chatter" class="github-link">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            <span>View on GitHub</span>
+          </a>
+          <span class="license">100% Open Source &middot; GPL-3.0</span>
         </div>
-
-        <div class="tech-card">
-          <h3>Native Performance</h3>
-          <p>Built in Rust with Slint UI—no browser engine, no Electron. Lightweight with native Wayland support on Linux.</p>
-          <a href="/blog/from-react-to-rust-native-journey" class="tech-link">Why we chose Rust →</a>
-        </div>
-
-        <div class="tech-card">
-          <h3>Voice & Video</h3>
-          <p>Encrypted calls with LiveKit WebRTC. Screen sharing, participant grid, and low-latency audio.</p>
-        </div>
-      </div>
-
-      <div class="open-source-banner">
-        <div class="os-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-          </svg>
-        </div>
-        <div class="os-text">
-          <strong>100% Open Source</strong>
-          <span>Audit the code yourself. GPL-3.0 licensed.</span>
-        </div>
-        <a href="https://github.com/xander1421/chatter" class="os-link">View on GitHub →</a>
       </div>
     </section>
 
     <!-- Footer -->
-    <footer class="waitlist-footer">
-      <p>© 2026 Chatter. Built with passion by <a href="/" class="footer-link">Alexandru Pruteanu</a></p>
-      <div class="footer-links">
-        <a href="/blog" class="footer-link">Blog</a>
-        <a href="https://github.com/xander1421" class="footer-link">GitHub</a>
-        <a href="https://linkedin.com/in/alexandru-prt" class="footer-link">LinkedIn</a>
-      </div>
+    <footer class="footer">
+      <p>&copy; 2026 Chatter &middot; Built by <a href="/">Alexandru Pruteanu</a></p>
+      <nav>
+        <a href="/blog">Blog</a>
+        <a href="https://github.com/xander1421">GitHub</a>
+        <a href="https://linkedin.com/in/alexandru-prt">LinkedIn</a>
+      </nav>
     </footer>
   </div>
 </BaseLayout>
 
 <style>
-  /* Override BaseLayout main constraints for this page */
   :global(main) {
     max-width: none !important;
     padding: 0 !important;
@@ -206,7 +139,6 @@ import BlackHole from '../components/BlackHole.astro';
     margin-left: calc(-50vw + 50%) !important;
   }
 
-  /* Hide BaseLayout background effects */
   :global(.matrix-background),
   :global(.perspective-grid),
   :global(.data-streams),
@@ -218,31 +150,26 @@ import BlackHole from '../components/BlackHole.astro';
     display: none !important;
   }
 
-  /* Override body background */
   :global(body) {
-    background: #000000 !important;
+    background: #000 !important;
   }
 
   .waitlist-container {
+    background: #000;
+    color: #fff;
     min-height: 100vh;
-    background: #000000;
-    color: #ffffff;
-    overflow-x: hidden;
-    width: 100%;
   }
 
-  /* Hero Section */
-  .hero-section {
+  /* Hero */
+  .hero {
     position: relative;
-    z-index: 1;
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 2rem;
+    padding: 4rem 2rem;
   }
 
-  /* Full viewport black hole canvas */
   .blackhole-canvas {
     position: fixed;
     top: 0;
@@ -250,639 +177,407 @@ import BlackHole from '../components/BlackHole.astro';
     width: 100vw;
     height: 100vh;
     z-index: 0;
-    opacity: 0.8;
+    opacity: 0.7;
   }
 
-  .hero-content {
+  .hero-inner {
     position: relative;
     z-index: 10;
-    max-width: 1200px;
-    width: 100%;
+    max-width: 720px;
     text-align: center;
   }
 
-  .hero-header {
-    background: rgba(0, 0, 0, 0.7);
-    padding: 2rem 3rem;
-    border-radius: 20px;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+  .eyebrow {
     display: inline-block;
-    margin-bottom: 2rem;
-    border: 1px solid rgba(102, 126, 234, 0.2);
-    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
-  }
-
-  .logo-container {
-    position: relative;
-    display: inline-block;
-    margin-bottom: 1rem;
-  }
-
-  .logo-text {
-    font-size: 5rem;
-    font-weight: 900;
-    letter-spacing: 0.1em;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin: 0;
-    animation: glow 3s ease-in-out infinite;
-  }
-
-  @keyframes glow {
-    0%, 100% { filter: drop-shadow(0 0 20px rgba(102, 126, 234, 0.5)); }
-    50% { filter: drop-shadow(0 0 40px rgba(240, 147, 251, 0.8)); }
-  }
-
-  .logo-pulse {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 150%;
-    height: 150%;
-    background: radial-gradient(circle, rgba(102, 126, 234, 0.2) 0%, transparent 70%);
-    animation: pulse 2s ease-in-out infinite;
-  }
-
-  @keyframes pulse {
-    0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
-    50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.2; }
-  }
-
-  .tagline {
-    font-size: 1.5rem;
-    font-weight: 300;
-    margin: 0;
-    color: #c0c0c0;
-    line-height: 1.4;
-  }
-
-  .tagline .highlight {
-    color: #f093fb;
-    font-weight: 500;
-  }
-
-  .hero-description {
-    font-size: 1.25rem;
-    line-height: 1.8;
-    max-width: 700px;
-    margin: 0 auto 3rem;
-    color: #e0e0e0;
-    background: rgba(0, 0, 0, 0.6);
-    padding: 1.5rem 2rem;
-    border-radius: 12px;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-  }
-
-  /* Features Grid */
-  .features-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-    margin-top: 3rem;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  @media (max-width: 600px) {
-    .features-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  .feature-card {
-    background: rgba(0, 0, 0, 0.7);
-    border: 1px solid rgba(102, 126, 234, 0.2);
-    border-radius: 16px;
-    padding: 1.5rem;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
-    transition: all 0.3s ease;
-    text-align: left;
-  }
-
-  .feature-card:hover {
-    background: rgba(0, 0, 0, 0.8);
-    border-color: rgba(102, 126, 234, 0.5);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 40px rgba(102, 126, 234, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  }
-
-  .feature-icon {
-    margin-bottom: 0.75rem;
-    color: #a5b4fc;
-  }
-
-  .feature-icon svg {
-    width: 32px;
-    height: 32px;
-  }
-
-  .feature-card h3 {
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
-    color: #ffffff;
+    font-size: 0.75rem;
     font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #667eea;
+    margin-bottom: 1.5rem;
   }
 
-  .feature-card p {
-    font-size: 0.85rem;
-    color: #999;
-    line-height: 1.5;
-    margin: 0;
+  .hero h1 {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin: 0 0 1.5rem;
+    letter-spacing: -0.02em;
   }
 
-  /* Waitlist Form */
-  .waitlist-form-container {
-    max-width: 480px;
-    margin: 2rem auto 0;
-    padding: 2rem;
-    background: rgba(0, 0, 0, 0.8);
-    border: 1px solid rgba(102, 126, 234, 0.3);
-    border-radius: 20px;
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05);
-  }
-
-  .form-title {
-    font-size: 1.8rem;
-    margin-bottom: 0.5rem;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  .hero h1 .accent {
+    background: linear-gradient(135deg, #667eea, #f093fb);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
-  .form-subtitle {
-    color: #b0b0b0;
-    margin-bottom: 2rem;
+  .lead {
+    font-size: 1.25rem;
+    color: #999;
+    line-height: 1.6;
+    margin: 0 0 2.5rem;
   }
 
-  .social-proof {
+  .hero-form {
     display: flex;
-    align-items: center;
+    gap: 0.75rem;
+    max-width: 420px;
+    margin: 0 auto 1rem;
+  }
+
+  .hero-form input {
+    flex: 1;
+    padding: 1rem 1.25rem;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    color: #fff;
+    font-size: 1rem;
+  }
+
+  .hero-form input::placeholder {
+    color: #666;
+  }
+
+  .hero-form input:focus {
+    outline: none;
+    border-color: #667eea;
+    background: rgba(255,255,255,0.08);
+  }
+
+  .hero-form button {
+    padding: 1rem 1.75rem;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .hero-form button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+  }
+
+  .form-message {
+    min-height: 1.5rem;
+    font-size: 0.9rem;
+    margin: 0;
+  }
+
+  .form-message.success { color: #4ade80; }
+  .form-message.error { color: #f87171; }
+
+  .form-note {
+    font-size: 0.8rem;
+    color: #555;
+    margin: 0.5rem 0 0;
+  }
+
+  /* Values - Horizontal strip */
+  .values {
+    position: relative;
+    z-index: 10;
+    display: flex;
     justify-content: center;
-    gap: 0.5rem;
-    margin-bottom: 1.5rem;
+    gap: 4rem;
+    padding: 4rem 2rem;
+    background: linear-gradient(180deg, transparent, rgba(0,0,0,0.95));
     flex-wrap: wrap;
   }
 
-  .proof-count {
-    font-size: 1.1rem;
+  .value {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    max-width: 220px;
+  }
+
+  .value-icon {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    color: #667eea;
+  }
+
+  .value-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .value-text strong {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+
+  .value-text span {
+    font-size: 0.85rem;
+    color: #777;
+    line-height: 1.4;
+  }
+
+  /* Statement */
+  .statement {
+    position: relative;
+    z-index: 10;
+    padding: 8rem 2rem;
+    text-align: center;
+    background: #000;
+  }
+
+  .statement h2 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
     font-weight: 700;
+    margin: 0 0 1.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  .statement h2 em {
+    font-style: normal;
+    background: linear-gradient(135deg, #667eea, #f093fb);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .statement p {
+    font-size: 1.25rem;
+    color: #888;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  /* How it works */
+  .how-it-works {
+    position: relative;
+    z-index: 10;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 4rem 2rem 8rem;
+  }
+
+  .how-block {
+    display: flex;
+    align-items: flex-start;
+    gap: 3rem;
+    margin-bottom: 4rem;
+  }
+
+  .how-block.reverse {
+    flex-direction: row-reverse;
+    text-align: right;
+  }
+
+  .how-number {
+    flex-shrink: 0;
+    font-size: 4rem;
+    font-weight: 800;
+    line-height: 1;
     background: linear-gradient(135deg, #667eea 0%, #f093fb 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    opacity: 0.3;
   }
 
-  .proof-text {
-    color: #888;
-    font-size: 0.95rem;
-  }
-
-  .form-note {
-    margin-top: 1rem;
-    font-size: 0.8rem;
-    color: #666;
-  }
-
-  .input-group {
-    display: flex;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-  }
-
-  .email-input {
-    flex: 1;
-    padding: 1rem 1.5rem;
-    background: rgba(0, 0, 0, 0.6);
-    border: 1px solid rgba(102, 126, 234, 0.2);
-    border-radius: 12px;
-    color: #ffffff;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-  }
-
-  .email-input::placeholder {
-    color: #888888;
-  }
-
-  .email-input:focus {
-    outline: none;
-    background: rgba(0, 0, 0, 0.8);
-    border-color: rgba(102, 126, 234, 0.5);
-    box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
-  }
-
-  .submit-btn {
-    padding: 1rem 2rem;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border: none;
-    border-radius: 12px;
-    color: #ffffff;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .submit-btn:hover {
-    transform: translateX(4px);
-    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
-  }
-
-  .btn-arrow {
-    transition: transform 0.3s ease;
-  }
-
-  .submit-btn:hover .btn-arrow {
-    transform: translateX(4px);
-  }
-
-  .form-message {
-    text-align: center;
-    font-size: 0.95rem;
-    padding: 0.75rem;
-    border-radius: 8px;
-    display: none;
-  }
-
-  .form-message.success {
-    display: block;
-    background: rgba(74, 222, 128, 0.1);
-    border: 1px solid rgba(74, 222, 128, 0.3);
-    color: #4ade80;
-  }
-
-  .form-message.error {
-    display: block;
-    background: rgba(248, 113, 113, 0.1);
-    border: 1px solid rgba(248, 113, 113, 0.3);
-    color: #f87171;
-  }
-
-  /* Stats Container */
-  .stats-container {
-    display: flex;
-    justify-content: center;
-    gap: 4rem;
-    margin-top: 3rem;
-  }
-
-  .stat {
-    text-align: center;
-  }
-
-  .stat-number {
-    display: block;
-    font-size: 2.5rem;
-    font-weight: 700;
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .stat-label {
-    display: block;
-    font-size: 0.9rem;
-    color: #666666;
-    margin-top: 0.5rem;
-  }
-
-  /* Beyond Section */
-  .beyond-section {
-    position: relative;
-    z-index: 10;
-    padding: 5rem 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-    background: rgba(0, 0, 0, 0.9);
-  }
-
-  .section-subtitle {
-    text-align: center;
-    color: #888;
-    font-size: 1.2rem;
-    margin-top: -2rem;
-    margin-bottom: 3rem;
-  }
-
-  .beyond-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-  }
-
-  .beyond-card {
-    padding: 2rem;
-    border-left: 2px solid rgba(102, 126, 234, 0.4);
-    transition: all 0.3s ease;
-  }
-
-  .beyond-card:hover {
-    border-left-color: #f093fb;
-    background: rgba(102, 126, 234, 0.05);
-  }
-
-  .beyond-number {
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: #667eea;
-    margin-bottom: 0.75rem;
-    letter-spacing: 0.1em;
-  }
-
-  .beyond-card h3 {
-    font-size: 1.3rem;
-    margin-bottom: 0.75rem;
-    color: #fff;
-  }
-
-  .beyond-card p {
-    color: #999;
-    line-height: 1.7;
-    font-size: 0.95rem;
-  }
-
-  /* Tech Section */
-  .tech-section {
-    position: relative;
-    z-index: 10;
-    padding: 5rem 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-    background: rgba(0, 0, 0, 0.85);
-  }
-
-  .section-title {
-    font-size: 3rem;
-    text-align: center;
-    margin-bottom: 3rem;
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .tech-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-bottom: 4rem;
-  }
-
-  .tech-card {
-    background: rgba(0, 0, 0, 0.7);
-    border: 1px solid rgba(240, 147, 251, 0.2);
-    border-radius: 16px;
-    padding: 2rem;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
-    transition: all 0.3s ease;
-  }
-
-  .tech-card:hover {
-    background: rgba(0, 0, 0, 0.8);
-    border-color: rgba(240, 147, 251, 0.5);
-    box-shadow: 0 8px 40px rgba(240, 147, 251, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  }
-
-  .tech-card h3 {
+  .how-content h3 {
     font-size: 1.5rem;
-    margin-bottom: 1rem;
-    color: #ffffff;
+    font-weight: 600;
+    margin: 0 0 0.75rem;
   }
 
-  .tech-card p {
-    color: #b0b0b0;
+  .how-content p {
+    font-size: 1rem;
+    color: #888;
     line-height: 1.7;
-    margin-bottom: 1rem;
+    margin: 0;
+  }
+
+  /* Tech callout */
+  .tech-callout {
+    position: relative;
+    z-index: 10;
+    padding: 4rem 2rem;
+    background: rgba(255,255,255,0.02);
+    border-top: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .tech-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .tech-left h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem;
+  }
+
+  .tech-left p {
+    font-size: 0.95rem;
+    color: #777;
+    margin: 0 0 0.75rem;
+    max-width: 400px;
   }
 
   .tech-link {
+    font-size: 0.9rem;
     color: #667eea;
     text-decoration: none;
     font-weight: 500;
-    transition: color 0.3s ease;
   }
 
   .tech-link:hover {
     color: #f093fb;
   }
 
-  .tech-stack {
-    text-align: center;
-    margin-top: 4rem;
-  }
-
-  .tech-stack h3 {
-    font-size: 1.5rem;
-    margin-bottom: 2rem;
-    color: #ffffff;
-  }
-
-  .tech-badges {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
-  }
-
-  .tech-badge {
-    padding: 0.5rem 1.5rem;
-    background: rgba(0, 0, 0, 0.6);
-    border: 1px solid rgba(102, 126, 234, 0.4);
-    border-radius: 25px;
-    font-size: 0.9rem;
-    color: #a5b4fc;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    transition: all 0.3s ease;
-  }
-
-  .tech-badge:hover {
-    background: rgba(0, 0, 0, 0.8);
-    border-color: rgba(102, 126, 234, 0.6);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2);
-  }
-
-  /* Open Source Banner */
-  .open-source-banner {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1.5rem;
-    margin-top: 3rem;
-    padding: 1.5rem 2rem;
-    background: rgba(0, 0, 0, 0.6);
-    border: 1px solid rgba(102, 126, 234, 0.3);
-    border-radius: 12px;
-    flex-wrap: wrap;
-  }
-
-  .os-icon {
-    color: #a5b4fc;
-  }
-
-  .os-text {
+  .tech-right {
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
+    align-items: flex-end;
+    gap: 0.5rem;
   }
 
-  .os-text strong {
+  .github-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
     color: #fff;
-    font-size: 1rem;
-  }
-
-  .os-text span {
-    color: #888;
-    font-size: 0.85rem;
-  }
-
-  .os-link {
-    color: #667eea;
     text-decoration: none;
+    font-size: 0.9rem;
     font-weight: 500;
-    transition: color 0.3s ease;
-    margin-left: auto;
+    transition: border-color 0.2s, background 0.2s;
   }
 
-  .os-link:hover {
-    color: #f093fb;
+  .github-link svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .github-link:hover {
+    border-color: #667eea;
+    background: rgba(102, 126, 234, 0.1);
+  }
+
+  .license {
+    font-size: 0.75rem;
+    color: #555;
   }
 
   /* Footer */
-  .waitlist-footer {
+  .footer {
     position: relative;
     z-index: 10;
     padding: 3rem 2rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
     text-align: center;
-    color: #666666;
-    background: rgba(0, 0, 0, 0.9);
   }
 
-  .footer-links {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    margin-top: 1rem;
+  .footer p {
+    font-size: 0.85rem;
+    color: #555;
+    margin: 0 0 1rem;
   }
 
-  .footer-link {
-    color: #999999;
+  .footer a {
+    color: #777;
     text-decoration: none;
-    transition: color 0.3s ease;
   }
 
-  .footer-link:hover {
+  .footer a:hover {
     color: #667eea;
   }
 
-  /* Responsive Design */
+  .footer nav {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+  }
+
+  .footer nav a {
+    font-size: 0.85rem;
+  }
+
+  /* Responsive */
   @media (max-width: 768px) {
-    .logo-text {
+    .values {
+      gap: 2rem;
+    }
+
+    .value {
+      max-width: 100%;
+      width: 100%;
+    }
+
+    .hero-form {
+      flex-direction: column;
+    }
+
+    .how-block,
+    .how-block.reverse {
+      flex-direction: column;
+      text-align: left;
+    }
+
+    .how-number {
       font-size: 2.5rem;
     }
 
-    .tagline {
-      font-size: 1.2rem;
-    }
-
-    .hero-description {
-      font-size: 1rem;
-      padding: 1rem;
-    }
-
-    .features-grid {
-      grid-template-columns: 1fr;
-      gap: 1rem;
-    }
-
-    .input-group {
+    .tech-inner {
       flex-direction: column;
+      align-items: flex-start;
     }
 
-    .submit-btn {
-      width: 100%;
-      justify-content: center;
-    }
-
-    .tech-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .beyond-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .section-title {
-      font-size: 2rem;
-    }
-
-    .section-subtitle {
-      font-size: 1rem;
-      margin-top: -1.5rem;
-    }
-
-    .open-source-banner {
-      flex-direction: column;
-      text-align: center;
-    }
-
-    .os-link {
-      margin-left: 0;
+    .tech-right {
+      align-items: flex-start;
     }
   }
 </style>
 
 <script>
-  // Interstellar-style blackhole effect from Chatter frontend (converted to vanilla JS)
+  // Black hole shader - Original high quality version
   const canvas = document.getElementById('blackhole-canvas') as HTMLCanvasElement;
   if (canvas) {
     const gl = canvas.getContext('webgl2', {
       alpha: true,
-      antialias: false,
-      powerPreference: 'low-power',
+      antialias: true,
+      powerPreference: 'high-performance',
       preserveDrawingBuffer: false
     }) || canvas.getContext('webgl', {
       alpha: true,
-      antialias: false,
-      powerPreference: 'low-power',
+      antialias: true,
+      powerPreference: 'high-performance',
       preserveDrawingBuffer: false
     });
 
     if (gl) {
-      // Vertex shader
       const vertexShaderSource = `
         attribute vec2 a_position;
         varying vec2 v_uv;
-        
         void main() {
           v_uv = a_position;
           gl_Position = vec4(a_position, 0.0, 1.0);
         }
       `;
 
-      // Fragment shader - Optimized Interstellar black hole (reduced iterations for performance)
       const fragmentShaderSource = `
         precision highp float;
-
         varying vec2 v_uv;
         uniform float u_time;
         uniform vec2 u_resolution;
@@ -891,312 +586,179 @@ import BlackHole from '../components/BlackHole.astro';
         #define _Speed 3.0
         #define _Steps 8.0
         #define _Size 0.4
-        
-        float hash(float x) { 
-          return fract(sin(x) * 152754.742);
-        }
-        
-        float hash(vec2 x) {    
-          return hash(x.x + hash(x.y));
-        }
-        
+
+        float hash(float x) { return fract(sin(x) * 152754.742); }
+        float hash(vec2 x) { return hash(x.x + hash(x.y)); }
+
         float value(vec2 p, float f) {
           float bl = hash(floor(p * f + vec2(0., 0.)));
           float br = hash(floor(p * f + vec2(1., 0.)));
           float tl = hash(floor(p * f + vec2(0., 1.)));
           float tr = hash(floor(p * f + vec2(1., 1.)));
-          
-          vec2 fr = fract(p * f);    
-          fr = (3.0 - 2.0 * fr) * fr * fr;    
-          float b = mix(bl, br, fr.x);    
+          vec2 fr = fract(p * f);
+          fr = (3.0 - 2.0 * fr) * fr * fr;
+          float b = mix(bl, br, fr.x);
           float t = mix(tl, tr, fr.x);
           return mix(b, t, fr.y);
         }
-        
+
         vec4 background(vec3 ray) {
           vec2 uv = ray.xy;
-          
-          if (abs(ray.x) > 0.5)
-            uv.x = ray.z;
-          else if (abs(ray.y) > 0.5)
-            uv.y = ray.z;
-          
+          if (abs(ray.x) > 0.5) uv.x = ray.z;
+          else if (abs(ray.y) > 0.5) uv.y = ray.z;
           float brightness = value(uv * 3.0, 100.0);
           float color = value(uv * 2.0, 20.0);
-          brightness = pow(brightness, 256.0);
-          brightness = brightness * 100.0;
+          brightness = pow(brightness, 256.0) * 100.0;
           brightness = clamp(brightness, 0.0, 1.0);
-
           vec3 stars = brightness * mix(vec3(0.5, 0.5, 0.6), vec3(0.3, 0.3, 0.4), color) * 0.5;
-
-          vec3 nebulae = vec3(0.0);
-          float nebula = value(uv * 0.5, 5.0);
-          nebula = pow(nebula, 8.0) * 0.02;
-          nebulae = vec3(nebula) * vec3(0.2, 0.1, 0.3);
-
+          float nebula = pow(value(uv * 0.5, 5.0), 8.0) * 0.02;
+          vec3 nebulae = vec3(nebula) * vec3(0.2, 0.1, 0.3);
           return vec4(stars + nebulae, 1.0);
         }
-        
+
         vec4 raymarchDisk(vec3 ray, vec3 zeroPos) {
-          vec3 position = zeroPos;      
+          vec3 position = zeroPos;
           float lengthPos = length(position.xz);
           float dist = min(1.0, lengthPos * (1.0 / _Size) * 0.5) * _Size * 0.4 * (1.0 / _Steps) / abs(ray.y);
-          
-          position += dist * _Steps * ray * 0.5;     
-          
+          position += dist * _Steps * ray * 0.5;
           vec2 deltaPos;
           deltaPos.x = -zeroPos.z * 0.01 + zeroPos.x;
           deltaPos.y = zeroPos.x * 0.01 + zeroPos.z;
           deltaPos = normalize(deltaPos - zeroPos.xz);
-          
-          float parallel = dot(ray.xz, deltaPos);
-          parallel /= sqrt(lengthPos);
-          parallel *= 0.5;
+          float parallel = dot(ray.xz, deltaPos) / sqrt(lengthPos) * 0.5;
           float redShift = parallel + 0.3;
-          redShift *= redShift;
-          redShift = clamp(redShift, 0.0, 1.0);
-          
+          redShift = clamp(redShift * redShift, 0.0, 1.0);
           float disMix = clamp((lengthPos - _Size * 2.0) * (1.0 / _Size) * 0.24, 0.0, 1.0);
           vec3 insideCol = mix(vec3(0.9, 0.3, 0.9), vec3(0.3, 0.1, 0.3), disMix);
-          
           insideCol *= mix(vec3(0.5, 0.3, 0.5), vec3(2.0, 1.0, 2.0), redShift);
-          insideCol *= 1.0;
-          redShift += 0.12;
-          redShift *= redShift;
-          
+          redShift = (redShift + 0.12) * (redShift + 0.12);
           vec4 o = vec4(0.0);
-          
-          for (float i = 0.0; i < _Steps; i++) {                      
-            position -= dist * ray;  
-            
-            float intensity = clamp(1.0 - abs((i - 0.8) * (1.0 / _Steps) * 2.0), 0.0, 1.0); 
-            float lengthPos = length(position.xz);
-            float distMult = 1.0;
-            
-            distMult *= clamp((lengthPos - _Size * 0.75) * (1.0 / _Size) * 1.5, 0.0, 1.0);        
-            distMult *= clamp((_Size * 10.0 - lengthPos) * (1.0 / _Size) * 0.20, 0.0, 1.0);
+          for (float i = 0.0; i < _Steps; i++) {
+            position -= dist * ray;
+            float intensity = clamp(1.0 - abs((i - 0.8) * (1.0 / _Steps) * 2.0), 0.0, 1.0);
+            float lp = length(position.xz);
+            float distMult = clamp((lp - _Size * 0.75) * (1.0 / _Size) * 1.5, 0.0, 1.0);
+            distMult *= clamp((_Size * 10.0 - lp) * (1.0 / _Size) * 0.20, 0.0, 1.0);
             distMult *= distMult;
-            
-            float u = lengthPos + u_time * _Size * 0.3 + intensity * _Size * 0.2;
-            
-            vec2 xy;
+            float u = lp + u_time * _Size * 0.3 + intensity * _Size * 0.2;
             float rot = mod(u_time * _Speed, 8192.0);
-            xy.x = -position.z * sin(rot) + position.x * cos(rot);
-            xy.y = position.x * sin(rot) + position.z * cos(rot);
-            
-            float x = abs(xy.x / xy.y);         
-            float angle = 0.02 * atan(x);
-            
-            const float f = 70.0;
-            float noise = value(vec2(angle, u * (1.0 / _Size) * 0.05), f);
-            noise = noise * 0.66 + 0.33 * value(vec2(angle, u * (1.0 / _Size) * 0.05), f * 2.0);     
-            
-            float extraWidth = noise * 1.0 * (1.0 - clamp(i * (1.0 / _Steps) * 2.0 - 1.0, 0.0, 1.0));
-            
+            vec2 xy = vec2(-position.z * sin(rot) + position.x * cos(rot), position.x * sin(rot) + position.z * cos(rot));
+            float angle = 0.02 * atan(abs(xy.x / xy.y));
+            float noise = value(vec2(angle, u * (1.0 / _Size) * 0.05), 70.0);
+            noise = noise * 0.66 + 0.33 * value(vec2(angle, u * (1.0 / _Size) * 0.05), 140.0);
+            float extraWidth = noise * (1.0 - clamp(i * (1.0 / _Steps) * 2.0 - 1.0, 0.0, 1.0));
             float alpha = clamp(noise * (intensity + extraWidth) * ((1.0 / _Size) * 10.0 + 0.01) * dist * distMult, 0.0, 1.0);
-            
             vec3 col = 2.0 * mix(vec3(0.3, 0.2, 0.15) * insideCol, insideCol, min(1.0, intensity * 2.0));
             o = clamp(vec4(col * alpha + o.rgb * (1.0 - alpha), o.a * (1.0 - alpha) + alpha), vec4(0.0), vec4(1.0));
-            
-            lengthPos *= (1.0 / _Size);
-            
-            o.rgb += redShift * (intensity * 1.0 + 0.5) * (1.0 / _Steps) * 100.0 * distMult / (lengthPos * lengthPos);
-          }  
-          
-          o.rgb = clamp(o.rgb - 0.005, 0.0, 1.0);
-          return o;
-        }
-        
-        void Rotate(inout vec3 vector, vec2 angle) {
-          vector.yz = cos(angle.y) * vector.yz + sin(angle.y) * vec2(-1, 1) * vector.zy;
-          vector.xz = cos(angle.x) * vector.xz + sin(angle.x) * vec2(-1, 1) * vector.zx;
-        }
-        
-        void main() {
-          vec4 colOut = vec4(0.0);
-          
-          vec2 fragCoord = gl_FragCoord.xy;
-          
-          vec2 fragCoordRot;
-          fragCoordRot.x = fragCoord.x * 0.985 + fragCoord.y * 0.174;
-          fragCoordRot.y = fragCoord.y * 0.985 - fragCoord.x * 0.174;
-          fragCoordRot += vec2(-0.06, 0.12) * u_resolution.xy;
-          
-          for (int j = 0; j < AA; j++)
-          for (int i = 0; i < AA; i++) {
-            vec3 ray = normalize(vec3((fragCoordRot - u_resolution.xy * 0.5 + vec2(float(i), float(j)) / float(AA)) / u_resolution.x, 1.0)); 
-            vec3 pos = vec3(0.0, 0.05, -10.0);
-            vec2 angle = vec2(u_time * 0.1, 0.2);      
-            angle.y = 3.14 + 0.1 + 3.14;
-            float dist = length(pos);
-            Rotate(pos, angle);
-            angle.xy -= min(0.3 / dist, 3.14) * vec2(1.0, 0.5);
-            Rotate(ray, angle);
-            
-            vec4 col = vec4(0.0); 
-            vec4 glow = vec4(0.0); 
-            vec4 outCol = vec4(100.0);
-            
-            for (int disks = 0; disks < 8; disks++) {
-              for (int h = 0; h < 2; h++) {
-                float dotpos = dot(pos, pos);
-                float invDist = inversesqrt(dotpos);
-                float centDist = dotpos * invDist;
-                float stepDist = 0.92 * abs(pos.y / ray.y);
-                float farLimit = centDist * 0.5;
-                float closeLimit = centDist * 0.1 + 0.05 * centDist * centDist * (1.0 / _Size);
-                stepDist = min(stepDist, min(farLimit, closeLimit));
-                
-                float invDistSqr = invDist * invDist;
-                float bendForce = stepDist * invDistSqr * _Size * 0.625;
-                ray = normalize(ray - (bendForce * invDist) * pos);
-                pos += stepDist * ray; 
-                
-                glow += vec4(0.9, 0.3, 0.9, 1.0) * (0.01 * stepDist * invDistSqr * invDistSqr * clamp(centDist * 2.0 - 1.2, 0.0, 1.0));
-              }
-              
-              float dist2 = length(pos);
-              
-              if (dist2 < _Size * 0.1) {
-                outCol = vec4(col.rgb * col.a + glow.rgb * (1.0 - col.a), 1.0);
-                break;
-              }
-              else if (dist2 > _Size * 1000.0) {                   
-                vec4 bg = background(ray);
-                outCol = vec4(col.rgb * col.a + bg.rgb * (1.0 - col.a) + glow.rgb * (1.0 - col.a), 1.0);       
-                break;
-              }
-              else if (abs(pos.y) <= _Size * 0.002) {                             
-                vec4 diskCol = raymarchDisk(ray, pos);
-                pos.y = 0.0;
-                pos += abs(_Size * 0.001 / ray.y) * ray;  
-                col = vec4(diskCol.rgb * (1.0 - col.a) + col.rgb, col.a + diskCol.a * (1.0 - col.a));
-              }    
-            }
-            
-            if (outCol.r == 100.0)
-              outCol = vec4(col.rgb + glow.rgb * (col.a + glow.a), 1.0);
-            
-            col = outCol;
-            col.rgb = pow(col.rgb, vec3(0.6));
-            
-            colOut += col / float(AA * AA);
+            o.rgb += redShift * (intensity + 0.5) * (1.0 / _Steps) * 100.0 * distMult / (lp * lp * (1.0 / _Size) * (1.0 / _Size));
           }
-          
-          gl_FragColor = colOut;
+          return clamp(o - 0.005, vec4(0.0), vec4(1.0));
+        }
+
+        void Rotate(inout vec3 v, vec2 a) {
+          v.yz = cos(a.y) * v.yz + sin(a.y) * vec2(-1, 1) * v.zy;
+          v.xz = cos(a.x) * v.xz + sin(a.x) * vec2(-1, 1) * v.zx;
+        }
+
+        void main() {
+          vec2 fc = gl_FragCoord.xy;
+          vec2 fcr = vec2(fc.x * 0.985 + fc.y * 0.174, fc.y * 0.985 - fc.x * 0.174) + vec2(-0.06, 0.12) * u_resolution;
+          vec3 ray = normalize(vec3((fcr - u_resolution * 0.5) / u_resolution.x, 1.0));
+          vec3 pos = vec3(0.0, 0.05, -10.0);
+          vec2 angle = vec2(u_time * 0.1, 3.14 + 0.1 + 3.14);
+          float d = length(pos);
+          Rotate(pos, angle);
+          angle.xy -= min(0.3 / d, 3.14) * vec2(1.0, 0.5);
+          Rotate(ray, angle);
+          vec4 col = vec4(0.0), glow = vec4(0.0), outCol = vec4(100.0);
+          for (int disks = 0; disks < 12; disks++) {
+            for (int h = 0; h < 4; h++) {
+              float dotpos = dot(pos, pos);
+              float invDist = inversesqrt(dotpos);
+              float centDist = dotpos * invDist;
+              float stepDist = min(0.92 * abs(pos.y / ray.y), min(centDist * 0.5, centDist * 0.1 + 0.05 * centDist * centDist * (1.0 / _Size)));
+              float invDistSqr = invDist * invDist;
+              ray = normalize(ray - (stepDist * invDistSqr * _Size * 0.625 * invDist) * pos);
+              pos += stepDist * ray;
+              glow += vec4(0.9, 0.3, 0.9, 1.0) * (0.01 * stepDist * invDistSqr * invDistSqr * clamp(centDist * 2.0 - 1.2, 0.0, 1.0));
+            }
+            float d2 = length(pos);
+            if (d2 < _Size * 0.1) { outCol = vec4(col.rgb * col.a + glow.rgb * (1.0 - col.a), 1.0); break; }
+            else if (d2 > _Size * 1000.0) { vec4 bg = background(ray); outCol = vec4(col.rgb * col.a + bg.rgb * (1.0 - col.a) + glow.rgb * (1.0 - col.a), 1.0); break; }
+            else if (abs(pos.y) <= _Size * 0.002) {
+              vec4 diskCol = raymarchDisk(ray, pos);
+              pos.y = 0.0; pos += abs(_Size * 0.001 / ray.y) * ray;
+              col = vec4(diskCol.rgb * (1.0 - col.a) + col.rgb, col.a + diskCol.a * (1.0 - col.a));
+            }
+          }
+          if (outCol.r == 100.0) outCol = vec4(col.rgb + glow.rgb * (col.a + glow.a), 1.0);
+          gl_FragColor = vec4(pow(outCol.rgb, vec3(0.6)), 1.0);
         }
       `;
 
-      // Compile shader function
       function compileShader(type: number, source: string): WebGLShader | null {
         const shader = gl.createShader(type);
         if (!shader) return null;
-        
         gl.shaderSource(shader, source);
         gl.compileShader(shader);
-        
         if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
           console.error('Shader error:', gl.getShaderInfoLog(shader));
           gl.deleteShader(shader);
           return null;
         }
-        
         return shader;
       }
 
       const vertexShader = compileShader(gl.VERTEX_SHADER, vertexShaderSource);
       const fragmentShader = compileShader(gl.FRAGMENT_SHADER, fragmentShaderSource);
-      
+
       if (vertexShader && fragmentShader) {
         const program = gl.createProgram();
         if (program) {
           gl.attachShader(program, vertexShader);
           gl.attachShader(program, fragmentShader);
           gl.linkProgram(program);
-          
+
           if (gl.getProgramParameter(program, gl.LINK_STATUS)) {
-            // Setup geometry
-            const positions = new Float32Array([
-              -1, -1, 1, -1, -1, 1, 1, 1
-            ]);
-            
+            const positions = new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]);
             const buffer = gl.createBuffer();
             gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
             gl.bufferData(gl.ARRAY_BUFFER, positions, gl.STATIC_DRAW);
-            
             const positionLocation = gl.getAttribLocation(program, 'a_position');
             gl.enableVertexAttribArray(positionLocation);
             gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
-            
             const timeLocation = gl.getUniformLocation(program, 'u_time');
             const resolutionLocation = gl.getUniformLocation(program, 'u_resolution');
-            
             gl.useProgram(program);
-            
+
             let startTime = Date.now();
             let animationId: number;
             let isVisible = true;
-            let isTabVisible = true;
-            let lastFrameTime = 0;
-            const targetFPS = 30; // Cap at 30fps for performance
-            const frameInterval = 1000 / targetFPS;
 
             function resizeCanvas() {
-              // Lower resolution for better GPU performance
               const scale = window.innerWidth > 768 ? 0.5 : 0.75;
               canvas.width = Math.floor(window.innerWidth * scale);
               canvas.height = Math.floor(window.innerHeight * scale);
             }
 
-            function render(currentTime: number) {
-              // Skip if tab or canvas not visible
-              if (!isVisible || !isTabVisible) {
-                animationId = requestAnimationFrame(render);
-                return;
-              }
-
-              // Frame rate limiting
-              const elapsed = currentTime - lastFrameTime;
-              if (elapsed < frameInterval) {
-                animationId = requestAnimationFrame(render);
-                return;
-              }
-              lastFrameTime = currentTime - (elapsed % frameInterval);
-
+            function render() {
+              if (!isVisible) { animationId = requestAnimationFrame(render); return; }
               gl.viewport(0, 0, canvas.width, canvas.height);
               gl.uniform1f(timeLocation, (Date.now() - startTime) / 1000);
               gl.uniform2f(resolutionLocation, canvas.width, canvas.height);
               gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-
               animationId = requestAnimationFrame(render);
             }
 
-            // Pause when canvas scrolled out of view
-            const observer = new IntersectionObserver(
-              (entries) => {
-                isVisible = entries[0]?.isIntersecting ?? false;
-              },
-              { threshold: 0.1 }
-            );
+            const observer = new IntersectionObserver((entries) => { isVisible = entries[0]?.isIntersecting ?? false; }, { threshold: 0.1 });
             observer.observe(canvas);
-
-            // Pause when tab is not visible
-            document.addEventListener('visibilitychange', () => {
-              isTabVisible = !document.hidden;
-            });
-
             resizeCanvas();
             window.addEventListener('resize', resizeCanvas);
-            requestAnimationFrame(render);
-            
-            // Cleanup on page navigation
-            window.addEventListener('pagehide', () => {
+            render();
+
+            window.addEventListener('beforeunload', () => {
               observer.disconnect();
-              if (animationId) cancelAnimationFrame(animationId);
-              gl.deleteProgram(program);
-              gl.deleteShader(vertexShader);
-              gl.deleteShader(fragmentShader);
-              gl.deleteBuffer(buffer);
+              cancelAnimationFrame(animationId);
             });
           }
         }
@@ -1204,93 +766,36 @@ import BlackHole from '../components/BlackHole.astro';
     }
   }
 
-  // Waitlist form handler with Supabase
+  // Waitlist form
   const SUPABASE_URL = 'https://fsnwduufbbqxyylwzabg.supabase.co';
   const SUPABASE_ANON_KEY = 'sb_publishable_pKxCqZDi95BLe4rbTQOdrw_n-wmn17a';
 
-  // Fetch waitlist count for social proof (only show if > 10)
-  async function fetchWaitlistCount() {
-    try {
-      const response = await fetch(`${SUPABASE_URL}/rest/v1/waitlist?select=count`, {
-        method: 'HEAD',
-        headers: {
-          'apikey': SUPABASE_ANON_KEY,
-          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-          'Prefer': 'count=exact'
-        }
-      });
-      const count = parseInt(response.headers.get('content-range')?.split('/')[1] || '0');
-      const countEl = document.getElementById('waitlist-count');
-      if (countEl && count >= 10) {
-        countEl.textContent = `${count}+`;
-      }
-    } catch (e) {
-      // Silently fail - social proof is not critical
-    }
-  }
-  fetchWaitlistCount();
-
   const form = document.getElementById('waitlist-form') as HTMLFormElement;
   const message = document.getElementById('form-message') as HTMLDivElement;
-  const submitBtn = form?.querySelector('.submit-btn') as HTMLButtonElement;
 
   if (form) {
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
+      const email = (new FormData(form).get('email') as string)?.toLowerCase().trim();
+      if (!email) { message.textContent = 'Please enter a valid email'; message.className = 'form-message error'; return; }
 
-      const formData = new FormData(form);
-      const email = (formData.get('email') as string)?.toLowerCase().trim();
-
-      if (!email) {
-        message.textContent = 'Please enter a valid email address';
-        message.className = 'form-message error';
-        return;
-      }
-
-      // Disable button while submitting
-      if (submitBtn) {
-        submitBtn.disabled = true;
-        submitBtn.querySelector('.btn-text')!.textContent = 'Joining...';
-      }
+      const btn = form.querySelector('button') as HTMLButtonElement;
+      btn.disabled = true;
+      btn.textContent = 'Joining...';
 
       try {
         const response = await fetch(`${SUPABASE_URL}/rest/v1/waitlist`, {
           method: 'POST',
-          headers: {
-            'apikey': SUPABASE_ANON_KEY,
-            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-            'Content-Type': 'application/json',
-            'Prefer': 'return=minimal'
-          },
+          headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}`, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
           body: JSON.stringify({ email })
         });
+        if (response.ok) { message.textContent = "You're in! We'll notify you at launch."; message.className = 'form-message success'; form.reset(); }
+        else if (response.status === 409) { message.textContent = "You're already on the list!"; message.className = 'form-message error'; }
+        else throw new Error();
+      } catch { message.textContent = 'Something went wrong. Try again.'; message.className = 'form-message error'; }
+      finally { btn.disabled = false; btn.innerHTML = '<span>Get Early Access</span>'; }
 
-        if (response.ok) {
-          message.textContent = "Welcome aboard! We'll notify you when Chatter launches.";
-          message.className = 'form-message success';
-          form.reset();
-        } else if (response.status === 409) {
-          // Duplicate email (unique constraint violation)
-          message.textContent = "You're already on the waitlist!";
-          message.className = 'form-message error';
-        } else {
-          throw new Error('Failed to join waitlist');
-        }
-      } catch (error) {
-        message.textContent = 'Something went wrong. Please try again.';
-        message.className = 'form-message error';
-      } finally {
-        // Re-enable button
-        if (submitBtn) {
-          submitBtn.disabled = false;
-          submitBtn.querySelector('.btn-text')!.textContent = 'Join Now';
-        }
-      }
-
-      setTimeout(() => {
-        message.className = 'form-message';
-        message.textContent = '';
-      }, 5000);
+      setTimeout(() => { message.className = 'form-message'; message.textContent = ''; }, 5000);
     });
   }
 </script>
