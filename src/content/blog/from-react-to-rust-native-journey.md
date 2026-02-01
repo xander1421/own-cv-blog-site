@@ -3,7 +3,7 @@ title: "From React to Rust: Why I Switched to Native Mid-Project"
 date: "2026-02-01"
 description: "Building a chat app taught me that every abstraction layer has a cost—and some costs only become clear when you're deep in development."
 tags: ["Rust", "React", "Electron", "Flutter", "Wayland", "Native", "Signal Protocol", "Slint"]
-image: "/images/blog/from-react-to-rust-native-journey.webp"
+image: "./from-react-to-rust-native-journey.webp"
 ---
 
 I'm building [Chatter](https://github.com/xander1421/chatter), a secure messaging app with Signal Protocol encryption. I've now started the client three times in three different stacks. This isn't a story about finding the "best" technology—it's about discovering what matters when you're actually building something.

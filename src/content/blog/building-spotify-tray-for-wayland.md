@@ -3,7 +3,7 @@ title: "Building a Spotify System Tray for Wayland and Hyprland"
 date: "2026-01-31"
 description: "How to add a Spotify tray icon on Wayland with minimize to tray, media controls, and why Linux desktop integration requires understanding five different subsystems."
 tags: ["Linux", "Wayland", "Spotify", "Hyprland", "System Tray", "Go", "D-Bus", "MPRIS"]
-image: "/images/blog/building-spotify-tray-for-wayland.webp"
+image: "./building-spotify-tray-for-wayland.webp"
 ---
 
 I wanted a simple thing: a **Spotify system tray icon** on my Wayland desktop. Click to show/hide the window, scroll to change tracks, middle-click to pause. Telegram does this. Discord does this. How hard could it be?
