@@ -6,7 +6,7 @@ import mermaid from 'astro-mermaid';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://alexpruteanu.cloud',
-  integrations: [sitemap(), mermaid()],
+  integrations: [sitemap(), mermaid({ theme: 'dark' })],
   markdown: {
     shikiConfig: {
       theme: 'tokyo-night',
