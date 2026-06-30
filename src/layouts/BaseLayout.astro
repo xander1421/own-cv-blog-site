@@ -181,20 +181,25 @@ const keywords = [
         <a href="/" class="logo">
           <span class="terminal-prompt">alexpruteanu@cloud</span>
         </a>
-        <a href="/chatter-waitlist" class="chatter-nav-link">
-          <canvas id="mini-blackhole" class="mini-blackhole"></canvas>
-          <span>CHATTER</span>
-        </a>
-        <div class="nav-links">
-          <a href="/services">Services</a>
-          <a href="/blog">Blog</a>
-          <a href="/projects">Projects</a>
-          <a href="/about">About</a>
-          <button id="search-button" class="search-btn" aria-label="Search">
-            <span>🔍</span>
-            <span class="search-shortcut">/</span>
-          </button>
-          <a href="https://cal.eu/alexpruteanu" class="nav-cta">Book a call</a>
+        <button id="nav-toggle" class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="primary-nav">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="nav-menu" id="primary-nav">
+          <a href="/chatter-waitlist" class="chatter-nav-link">
+            <canvas id="mini-blackhole" class="mini-blackhole"></canvas>
+            <span>CHATTER</span>
+          </a>
+          <div class="nav-links">
+            <a href="/services">Services</a>
+            <a href="/blog">Blog</a>
+            <a href="/projects">Projects</a>
+            <a href="/about">About</a>
+            <button id="search-button" class="search-btn" aria-label="Search">
+              <span>🔍</span>
+              <span class="search-shortcut">/</span>
+            </button>
+            <a href="https://cal.eu/alexpruteanu" class="nav-cta">Book a call</a>
+          </div>
         </div>
       </nav>
     </header>
@@ -616,6 +621,47 @@ const keywords = [
     text-shadow: none;
   }
 
+  /* On desktop the menu's children flow as direct nav items (logo · chatter · links) */
+  .nav-menu {
+    display: contents;
+  }
+
+  /* Hamburger toggle — hidden on desktop, shown on small screens */
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 210;
+  }
+
+  .nav-toggle span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    margin: 0 auto;
+    background: var(--color-primary);
+    transition: transform 0.25s ease, opacity 0.2s ease;
+  }
+
+  nav.open .nav-toggle span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  nav.open .nav-toggle span:nth-child(2) {
+    opacity: 0;
+  }
+
+  nav.open .nav-toggle span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
   /* Search Button — plain icon, sits among the text links */
   .search-btn {
     background: none;
@@ -992,6 +1038,50 @@ const keywords = [
   }
 
   /* Responsive */
+  /* Hamburger / collapsible menu: small tablets and phones */
+  @media (max-width: 860px) {
+    nav {
+      position: relative;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-toggle {
+      display: flex;
+    }
+
+    .nav-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.25rem;
+      padding: 1.75rem 1.5rem;
+      background: var(--color-surface);
+      border-bottom: 1px solid var(--color-primary);
+      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.5);
+      z-index: 200;
+    }
+
+    nav.open .nav-menu {
+      display: flex;
+    }
+
+    .nav-links {
+      flex-direction: column;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .search-shortcut {
+      display: none;
+    }
+  }
+
   @media (max-width: 768px) {
     h1 {
       font-size: 2rem;
@@ -1008,35 +1098,6 @@ const keywords = [
       font-size: 0.85rem;
     }
 
-    .nav-links {
-      gap: 0.75rem;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .nav-links a {
-      font-size: 0.8rem;
-    }
-
-    .search-btn {
-      padding: 0.4rem 0.75rem;
-      font-size: 0.8rem;
-    }
-
-    .search-shortcut {
-      display: none;
-    }
-
-    .chatter-nav-link {
-      padding: 0.3rem 0.6rem;
-      font-size: 0.75rem;
-    }
-
-    .mini-blackhole {
-      width: 20px;
-      height: 20px;
-    }
-
     main {
       padding: 2rem 1rem;
     }
@@ -1047,49 +1108,12 @@ const keywords = [
   }
 
   @media (max-width: 480px) {
-    /* Stack the header: logo, then the Chatter pill, then the links row */
     nav {
       padding: 0.75rem 1rem;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .logo {
-      justify-content: center;
     }
 
     .terminal-prompt {
       font-size: 0.7rem;
-    }
-
-    .chatter-nav-link {
-      padding: 0.35rem 0.9rem;
-      font-size: 0.75rem;
-    }
-
-    .mini-blackhole {
-      width: 18px;
-      height: 18px;
-    }
-
-    .nav-links {
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 0.75rem;
-    }
-
-    .nav-links a {
-      font-size: 0.75rem;
-    }
-
-    .nav-links a.nav-cta {
-      padding: 0.4rem 0.8rem;
-    }
-
-    .search-btn {
-      padding: 0.35rem 0.6rem;
-      font-size: 0.75rem;
     }
 
     footer {
@@ -1504,6 +1528,28 @@ const keywords = [
 
   // Init mini blackhole after a short delay
   setTimeout(initMiniBlackhole, 500);
+
+  // Mobile hamburger menu
+  const navEl = document.querySelector('nav');
+  const navToggle = document.getElementById('nav-toggle');
+  const navMenu = document.getElementById('primary-nav');
+  if (navEl && navToggle && navMenu) {
+    const setOpen = (open: boolean) => {
+      navEl.classList.toggle('open', open);
+      navToggle.setAttribute('aria-expanded', String(open));
+    };
+    navToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      setOpen(!navEl.classList.contains('open'));
+    });
+    // Close when a menu link is tapped
+    navMenu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+    // Close on Escape or outside click
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
+    document.addEventListener('click', (e) => {
+      if (navEl.classList.contains('open') && !navEl.contains(e.target as Node)) setOpen(false);
+    });
+  }
 
   // Scroll progress bar (site-wide)
   const progressBar = document.getElementById('reading-progress');
