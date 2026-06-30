@@ -1,0 +1,29 @@
+# Alexandru Pruteanu — DevOps & Cloud Consultant
+
+> DevOps and cloud consultant with 6+ years of experience. I make production fast, cheap, and reliable — AWS, Kubernetes, cost optimization, and zero-downtime CI/CD. I also review software architecture, audit and harden AI-built apps, take ideas to production, and provide battle-tested building blocks (auth, user, encrypted file services). Plain-spoken, outcome-first, no buzzwords. Based in Europe, working worldwide. Book a free discovery call at https://cal.eu/alexpruteanu.
+
+## Services
+
+- [DevOps & Cloud Consulting (overview)](https://alexpruteanu.cloud/services): All services, grouped into DevOps & Cloud and Product, Architecture & Build.
+- [Cloud migration](https://alexpruteanu.cloud/services/cloud-migration): Migrate to AWS or GCP with no downtime and no big-bang rewrite; multi-account setup, Transit Gateway networking, Terraform, Multi-AZ.
+- [Kubernetes consulting](https://alexpruteanu.cloud/services/kubernetes): Production EKS/GKE that scales on demand and shrinks the bill (Karpenter + spot), hardened distroless containers, GitOps with ArgoCD.
+- [Cloud cost optimization](https://alexpruteanu.cloud/services/cost-optimization): Cut the AWS/GCP bill 20–40% with ARM/Graviton, right-sizing, Spot, and Savings Plans — without hurting reliability.
+- [CI/CD & Infrastructure as Code](https://alexpruteanu.cloud/services/cicd-iac): Zero-downtime rolling deploys, Trivy-gated pipelines, and Terraform-managed, reproducible infrastructure.
+- [AI-built app audit & rescue](https://alexpruteanu.cloud/services/ai-app-audit): Audit and harden apps built with Cursor, Claude, Copilot, or ChatGPT — security, architecture, and data-model review, with fixes.
+- [Software architecture review](https://alexpruteanu.cloud/services/architecture-review): An honest second opinion on what scales, what breaks, and what to fix — monolith vs microservices without dogma.
+- [Idea to production](https://alexpruteanu.cloud/services/idea-to-production): Take an idea or prototype to a real, shipped, production-grade app — architecture, build, security, and infrastructure.
+- [Production building blocks](https://alexpruteanu.cloud/services/building-blocks): Drop-in auth, user, and encrypted file services adapted from a real encrypted-messenger codebase — skip rebuilding the hard, risky parts.
+
+## Side project
+
+- [Chatter (side project)](https://alexpruteanu.cloud/projects/chatter): A privacy-first encrypted messenger Alexandru is building on the side — one Rust client (Slint) for every platform, running on Linux, Windows, and Android today with iOS and macOS planned, on a Go backend with Signal Protocol end-to-end encryption. In active development; it's how he stays hands-on across the whole stack, from cryptography to deployment.
+
+## Writing
+
+- [Blog](https://alexpruteanu.cloud/blog): Articles on DevOps, AWS, Kubernetes, Terraform, containers, CI/CD, and security — written from real production experience, with concrete examples.
+
+## Contact
+
+- Book a free 30-minute discovery call: https://cal.eu/alexpruteanu
+- GitHub: https://github.com/xander1421
+- LinkedIn: https://linkedin.com/in/alexandru-prt

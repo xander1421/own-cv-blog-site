@@ -1,0 +1,168 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+  readingTime: number;
+}
+
+const { post, readingTime } = Astro.props;
+---
+
+<article class="post-card">
+  <div class="post-meta">
+    <time datetime={post.data.date.toISOString()}>
+      {post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+    </time>
+    <span class="reading-time">• {readingTime} min read</span>
+  </div>
+
+  <h3 class="post-title">
+    <a href={`/blog/${post.id}`}>{post.data.title}</a>
+  </h3>
+
+  {post.data.image && (
+    <a href={`/blog/${post.id}`} class="post-image-link">
+      <img
+        src={`/images/blog/${post.data.image.replace('./', '')}`}
+        alt={post.data.title}
+        class="post-image"
+        loading="lazy"
+        decoding="async"
+        width="600"
+        height="220"
+      />
+    </a>
+  )}
+
+  <p class="post-description">{post.data.description}</p>
+
+  <div class="post-tags">
+    {post.data.tags.map((tag: string, index: number) => (
+      <span class={`tag tag-${index % 5}`}>{tag}</span>
+    ))}
+  </div>
+
+  <a href={`/blog/${post.id}`} class="read-more">Read more →</a>
+</article>
+
+<style>
+  .post-card {
+    background: rgba(0, 255, 204, 0.02);
+    border: 1px solid rgba(0, 255, 204, 0.1);
+    padding: 2rem;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .post-card:hover {
+    border-color: rgba(0, 255, 204, 0.3);
+    transform: translateY(-4px);
+    background: rgba(0, 255, 204, 0.05);
+  }
+
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    min-height: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .post-meta time {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--color-text-dim);
+    letter-spacing: 0.03em;
+  }
+
+  .reading-time {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+
+  .post-title {
+    margin-bottom: 1rem;
+    min-height: 5.5rem;
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .post-title a {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--color-text);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    line-height: 1.3;
+  }
+
+  .post-title a:hover {
+    color: var(--color-primary);
+  }
+
+  .post-image-link {
+    display: block;
+    margin: 0 -2rem 1.5rem;
+    overflow: hidden;
+  }
+
+  .post-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+    display: block;
+    border-top: 2px solid rgba(0, 255, 204, 0.2);
+    border-bottom: 2px solid rgba(0, 255, 204, 0.2);
+  }
+
+  .post-card:hover .post-image {
+    transform: scale(1.05);
+  }
+
+  .post-description {
+    color: var(--color-text-dim);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+  }
+
+  .post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    padding: 0.4rem 0.8rem;
+    letter-spacing: 0.03em;
+    transition: all 0.3s ease;
+  }
+
+  .tag-0 { background: rgba(0, 255, 204, 0.08); border: 1px solid rgba(0, 255, 204, 0.3); color: #00ffcc; }
+  .tag-1 { background: rgba(255, 0, 110, 0.08); border: 1px solid rgba(255, 0, 110, 0.3); color: #ff006e; }
+  .tag-2 { background: rgba(255, 183, 0, 0.08); border: 1px solid rgba(255, 183, 0, 0.3); color: #ffb700; }
+  .tag-3 { background: rgba(168, 85, 247, 0.08); border: 1px solid rgba(168, 85, 247, 0.3); color: #b580ff; }
+  .tag-4 { background: rgba(0, 191, 255, 0.08); border: 1px solid rgba(0, 191, 255, 0.3); color: #00bfff; }
+
+  .read-more {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    align-self: flex-start;
+  }
+
+  .read-more:hover {
+    letter-spacing: 0.05em;
+  }
+</style>

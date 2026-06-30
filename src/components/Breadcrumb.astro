@@ -1,0 +1,65 @@
+---
+export interface Crumb {
+  label: string;
+  href?: string;
+}
+
+interface Props {
+  items: Crumb[];
+}
+
+const { items } = Astro.props;
+const siteUrl = 'https://alexpruteanu.cloud';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": items.map((it, i) => ({
+    "@type": "ListItem",
+    "position": i + 1,
+    "name": it.label,
+    ...(it.href ? { item: new URL(it.href, siteUrl).toString() } : {}),
+  })),
+};
+---
+
+<nav class="crumbs" aria-label="Breadcrumb">
+  {items.map((it, i) => (
+    <Fragment>
+      {i > 0 && <span class="sep">/</span>}
+      {it.href ? <a href={it.href}>{it.label}</a> : <span class="current">{it.label}</span>}
+    </Fragment>
+  ))}
+</nav>
+
+<script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
+
+<style>
+  .crumbs {
+    display: block;
+    max-width: none;
+    margin: 0 0 2rem;
+    padding: 0;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--color-text-dim);
+  }
+
+  .crumbs a {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .crumbs a:hover {
+    text-decoration: underline;
+  }
+
+  .crumbs .sep {
+    margin: 0 0.5rem;
+    opacity: 0.55;
+  }
+
+  .crumbs .current {
+    color: var(--color-text-dim);
+  }
+</style>

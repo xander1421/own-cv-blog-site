@@ -1,0 +1,1540 @@
+---
+import { getCollection } from 'astro:content';
+import { SERVICES } from '../data/services';
+import Analytics from '@vercel/analytics/astro';
+
+export interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  type?: 'website' | 'article';
+  publishedTime?: string;
+  modifiedTime?: string;
+  tags?: string[];
+  author?: string;
+}
+
+const {
+  title,
+  description = "DevOps & cloud consultant with 6+ years building scalable cloud infrastructure. Cloud migration, Kubernetes, cost optimization, AWS, Terraform, CI/CD.",
+  image = "/width=3840.webp",
+  type = "website",
+  publishedTime,
+  modifiedTime,
+  tags = [],
+  author = "Alexandru Pruteanu"
+} = Astro.props;
+
+// Build the search index: blog posts + service pages
+const allPosts = await getCollection('blog');
+const searchData = [
+  {
+    title: 'Services — DevOps & Cloud Consulting',
+    description: 'Cloud migration, Kubernetes, cloud cost optimization, and CI/CD consulting.',
+    url: '/services',
+    tags: ['Services', 'Consulting', 'DevOps'],
+  },
+  ...SERVICES.map(s => ({
+    title: s.title,
+    description: s.description,
+    url: `/services/${s.slug}`,
+    tags: ['Services', s.nav],
+  })),
+  ...allPosts.map(post => ({
+    title: post.data.title,
+    description: post.data.description,
+    url: `/blog/${post.id}`,
+    tags: post.data.tags,
+  })),
+];
+
+// SEO metadata
+const siteUrl = 'https://alexpruteanu.cloud';
+const canonicalURL = new URL(Astro.url.pathname, siteUrl);
+const fullTitle = `${title} | Alexandru Pruteanu`;
+const imageURL = new URL(image, siteUrl);
+
+// Keywords for SEO (consultancy-focused: what you fix / who you help)
+const keywords = [
+  'DevOps consultant',
+  'cloud consulting',
+  'cloud migration consultant',
+  'Kubernetes consulting',
+  'AWS consulting',
+  'cloud cost optimization',
+  'DevOps consulting services',
+  'Terraform',
+  'CI/CD',
+  'Infrastructure as Code',
+  'Alexandru Pruteanu',
+  ...tags
+].join(', ');
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Primary Meta Tags -->
+    <title>{fullTitle}</title>
+    <meta name="title" content={fullTitle} />
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content={author} />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={imageURL} />
+    <meta property="og:site_name" content="Alexandru Pruteanu - DevOps Engineer" />
+    <meta property="og:locale" content="en_US" />
+    {publishedTime && <meta property="article:published_time" content={publishedTime} />}
+    {modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
+    {tags.map(tag => <meta property="article:tag" content={tag} />)}
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalURL} />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageURL} />
+    <meta name="twitter:creator" content="@alexandru_prt" />
+
+    <!-- Additional SEO -->
+    <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow" />
+    <meta name="theme-color" content="#00ffcc" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- RSS Feed -->
+    <link rel="alternate" type="application/rss+xml" title="Alexandru Pruteanu Blog" href="/rss.xml" />
+
+    <!-- Fonts - Optimized loading with font-display swap -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap"
+    >
+    <link
+      id="font-stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap"
+      rel="stylesheet"
+      media="print"
+    >
+    <script is:inline>
+      // Non-blocking font load
+      const fontLink = document.getElementById('font-stylesheet');
+      if (fontLink) {
+        fontLink.addEventListener('load', function() {
+          this.media = 'all';
+        });
+      }
+    </script>
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap"
+        rel="stylesheet"
+      >
+    </noscript>
+
+    <!-- Inline critical CSS for instant above-the-fold rendering -->
+    <style>
+      :root{--color-primary:#00ffcc;--color-bg:#0a0a0a;--color-surface:#121212;--color-text:#e0e0e0;--color-text-dim:#808080}
+      *{margin:0;padding:0;box-sizing:border-box}
+      html{background-color:var(--color-bg);color:var(--color-text);font-family:monospace;line-height:1.6}
+      body{min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}
+      header{background:var(--color-surface);border-bottom:1px solid var(--color-primary);position:relative;z-index:100}
+      nav{max-width:1200px;margin:0 auto;padding:1.5rem 2rem;display:flex;justify-content:space-between;align-items:center}
+      main{flex:1;max-width:1200px;width:100%;margin:0 auto;padding:3rem 2rem}
+      footer{background:var(--color-surface);border-top:1px solid var(--color-primary);padding:0.5rem 2rem 1rem 2rem;text-align:center;color:var(--color-text-dim)}
+      @media(max-width:768px){footer{padding:0.5rem 2rem 6rem 2rem}}
+      @media(max-width:480px){footer{padding:0.5rem 1.5rem 7rem 1.5rem}}
+    </style>
+  </head>
+  <body>
+    <!-- Reading / scroll progress bar (site-wide) -->
+    <div id="reading-progress" class="reading-progress-bar"></div>
+
+    <!-- Matrix Rain Effect Canvas -->
+    <canvas id="matrix-rain" class="matrix-background"></canvas>
+
+    <div class="perspective-grid"></div>
+    <div class="data-streams"></div>
+    <div class="scanlines"></div>
+    <div class="noise"></div>
+    <div class="hologram-grid"></div>
+    <div class="glitch-overlay"></div>
+    <header>
+      <nav>
+        <a href="/" class="logo">
+          <span class="terminal-prompt">alexpruteanu@cloud</span>
+        </a>
+        <a href="/chatter-waitlist" class="chatter-nav-link">
+          <canvas id="mini-blackhole" class="mini-blackhole"></canvas>
+          <span>CHATTER</span>
+        </a>
+        <div class="nav-links">
+          <a href="/services">Services</a>
+          <a href="/blog">Blog</a>
+          <a href="/projects">Projects</a>
+          <a href="/about">About</a>
+          <button id="search-button" class="search-btn" aria-label="Search">
+            <span>🔍</span>
+            <span class="search-shortcut">/</span>
+          </button>
+          <a href="https://cal.eu/alexpruteanu" class="nav-cta">Book a call</a>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Search Modal -->
+    <div id="search-modal" class="search-modal" style="display: none;" data-posts={JSON.stringify(searchData)}>
+      <div class="search-modal-content">
+        <div class="search-header">
+          <input
+            type="text"
+            id="search-input"
+            placeholder="Search services and posts..."
+            autocomplete="off"
+          />
+          <button id="close-search" class="close-btn">✕</button>
+        </div>
+        <div id="search-results" class="search-results"></div>
+      </div>
+    </div>
+    <main>
+      <slot />
+    </main>
+    <footer>
+      <p class="secret-hint">Some codes never expire // Est. 1986</p>
+      <div class="footer-links">
+        <a href="https://github.com/xander1421" target="_blank" rel="noopener" aria-label="GitHub">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+          </svg>
+        </a>
+        <a href="https://linkedin.com/in/alexandru-prt" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+          </svg>
+        </a>
+      </div>
+      <p>&copy; 2025 Alexandru Pruteanu | DevOps Engineer</p>
+    </footer>
+
+    <!-- Back to Top (site-wide) -->
+    <button id="back-to-top" class="back-to-top-button" aria-label="Back to top">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="18 15 12 9 6 15"></polyline>
+      </svg>
+    </button>
+    <Analytics />
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --color-primary: #00ffcc;
+    --color-secondary: #ff006e;
+    --color-bg: #0a0a0a;
+    --color-surface: #121212;
+    --color-text: #e0e0e0;
+    --color-text-dim: #808080;
+    --color-accent: #ffb700;
+    --font-heading: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    --font-mono: 'Share Tech Mono', monospace;
+  }
+
+  /* Matrix Rain Background */
+  .matrix-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    opacity: 0.04;
+    pointer-events: none;
+  }
+
+  /* Global background gradients */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background:
+      radial-gradient(ellipse at center, rgba(0, 255, 204, 0.05) 0%, transparent 70%),
+      radial-gradient(circle at 20% 80%, rgba(255, 0, 110, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(255, 183, 0, 0.03) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: 'Share Tech Mono', monospace;
+    line-height: 1.6;
+    min-height: 100%;
+  }
+
+  body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Force hardware acceleration and 60fps */
+  .hologram-grid,
+  .scanlines,
+  .noise,
+  .glitch-overlay,
+  .perspective-grid,
+  .data-streams {
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 1000;
+  }
+
+
+
+  /* Perspective Grid - 80s style vanishing point */
+  .perspective-grid {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 60vh;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.12;
+    background-image:
+      /* Horizontal lines converging to vanishing point */
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent calc(5vh - 1px),
+        rgba(255, 0, 110, 0.3) calc(5vh - 1px),
+        rgba(255, 0, 110, 0.3) 5vh
+      );
+    transform: perspective(400px) rotateX(45deg);
+    transform-origin: bottom center;
+  }
+
+  /* Animated Data Streams */
+  .data-streams {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.06;
+    overflow: hidden;
+  }
+
+  .data-streams::before,
+  .data-streams::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 100vh;
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(0, 255, 204, 0.6) 20%,
+      rgba(0, 255, 204, 0.8) 50%,
+      rgba(0, 255, 204, 0.6) 80%,
+      transparent 100%
+    );
+    animation: dataStreamFlow 8s linear infinite;
+  }
+
+  .data-streams::before {
+    left: 15%;
+    animation-delay: 0s;
+  }
+
+  .data-streams::after {
+    right: 25%;
+    animation-delay: 4s;
+  }
+
+  @keyframes dataStreamFlow {
+    0% {
+      transform: translateY(-100vh);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(100vh);
+      opacity: 0;
+    }
+  }
+
+  /* Cyber effects (toned down) */
+  .scanlines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.05),
+      rgba(0, 0, 0, 0.05) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+    z-index: 1000;
+    opacity: 0.5;
+  }
+
+  .noise {
+    display: none;
+  }
+
+  /* Header */
+  header {
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-primary);
+    box-shadow: 0 0 20px rgba(0, 255, 204, 0.3);
+    position: relative;
+    z-index: 100;
+  }
+
+  nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .logo {
+    display: flex;
+    text-decoration: none;
+    color: var(--color-primary);
+    font-family: 'Share Tech Mono', monospace;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .terminal-prompt {
+    font-size: 1.1rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    color: var(--color-primary);
+    white-space: nowrap;
+  }
+
+  .terminal-prompt::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: var(--color-primary);
+    border-radius: 50%;
+    margin-right: 0.5rem;
+    animation: blink 1.5s infinite;
+  }
+
+  /* Chatter Nav Link with Mini Blackhole */
+  .chatter-nav-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem 0.5rem 0.7rem;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%);
+    border: 1px solid rgba(102, 126, 234, 0.3);
+    border-radius: 20px;
+    color: #a5b4fc;
+    font-size: 0.85rem;
+    font-family: 'Share Tech Mono', monospace;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .chatter-nav-link span {
+    margin-right: 0.5rem;
+  }
+
+  .chatter-nav-link:hover {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.25) 0%, rgba(118, 75, 162, 0.25) 100%);
+    border-color: rgba(102, 126, 234, 0.5);
+    color: #c4b5fd;
+    text-shadow: 0 0 10px rgba(167, 139, 250, 0.5);
+    transform: translateY(-1px);
+  }
+
+  .mini-blackhole {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+  }
+
+  @keyframes blink {
+    0%, 50% {
+      opacity: 1;
+    }
+    51%, 100% {
+      opacity: 0;
+    }
+  }
+
+  /* Removed heavy glitch effects for better readability */
+
+
+  /* Reduce effects on mobile for performance */
+  @media (max-width: 768px) {
+    .hologram-grid {
+      opacity: 0.02;
+    }
+
+    .perspective-grid {
+      opacity: 0.05;
+    }
+
+    .data-streams {
+      display: none;
+    }
+
+    nav {
+      padding: 1rem 1.5rem;
+    }
+
+    .terminal-prompt {
+      font-size: 0.85rem;
+    }
+  }
+
+  /* Holographic Grid Effect - Global (subtle) */
+  .hologram-grid {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background:
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 3px,
+        rgba(0, 255, 204, 0.015) 3px,
+        rgba(0, 255, 204, 0.015) 4px
+      );
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .nav-links a {
+    color: var(--color-text-dim);
+    text-decoration: none;
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .nav-links a:hover {
+    color: var(--color-primary);
+    text-shadow: 0 0 10px rgba(0, 255, 204, 0.5);
+  }
+
+  .nav-links a:not(.chatter-nav-link):not(.nav-cta)::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--color-primary);
+    transition: width 0.3s ease;
+  }
+
+  .nav-links a:not(.chatter-nav-link):not(.nav-cta):hover::after {
+    width: 100%;
+  }
+
+  /* Primary nav CTA (far-right action slot) */
+  .nav-links a.nav-cta {
+    background: var(--color-primary);
+    color: #06201b;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .nav-links a.nav-cta:hover {
+    color: #06201b;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(0, 255, 204, 0.35);
+    text-shadow: none;
+  }
+
+  /* Search Button — plain icon, sits among the text links */
+  .search-btn {
+    background: none;
+    border: none;
+    color: var(--color-text-dim);
+    padding: 0.25rem;
+    cursor: pointer;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    transition: color 0.3s ease;
+  }
+
+  .search-btn:hover {
+    color: var(--color-primary);
+  }
+
+  .search-shortcut {
+    font-size: 0.7rem;
+    opacity: 0.5;
+    border: 1px solid currentColor;
+    border-radius: 3px;
+    padding: 0 0.3rem;
+    line-height: 1.4;
+  }
+
+  /* Search Modal */
+  .search-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
+    z-index: 9999;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 10vh;
+  }
+
+  .search-modal-content {
+    width: 90%;
+    max-width: 600px;
+    background: var(--color-surface);
+    border: 2px solid var(--color-primary);
+    border-radius: 8px;
+    box-shadow: 0 0 40px rgba(0, 255, 204, 0.3);
+    overflow: hidden;
+  }
+
+  .search-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    border-bottom: 1px solid rgba(0, 255, 204, 0.2);
+  }
+
+  #search-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--color-text);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1.1rem;
+    outline: none;
+  }
+
+  #search-input::placeholder {
+    color: var(--color-text-dim);
+  }
+
+  .close-btn {
+    background: transparent;
+    border: none;
+    color: var(--color-text-dim);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.25rem 0.5rem;
+    transition: color 0.3s ease;
+  }
+
+  .close-btn:hover {
+    color: var(--color-primary);
+  }
+
+  .search-results {
+    max-height: 60vh;
+    overflow-y: auto;
+    padding: 1rem;
+  }
+
+  .search-result-item {
+    padding: 1rem;
+    border: 1px solid rgba(0, 255, 204, 0.2);
+    margin-bottom: 0.75rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  .search-result-item:hover {
+    border-color: var(--color-primary);
+    background: rgba(0, 255, 204, 0.05);
+    transform: translateX(4px);
+  }
+
+  .search-result-title {
+    color: var(--color-primary);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .search-result-description {
+    color: var(--color-text-dim);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .search-result-tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .search-result-tag {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    background: rgba(0, 255, 204, 0.1);
+    border: 1px solid rgba(0, 255, 204, 0.3);
+    border-radius: 3px;
+    color: var(--color-primary);
+  }
+
+  .search-no-results {
+    text-align: center;
+    color: var(--color-text-dim);
+    padding: 2rem;
+    font-family: 'Share Tech Mono', monospace;
+  }
+
+  /* Main content */
+  main {
+    flex: 1;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+  }
+
+  /* Footer */
+  footer {
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-primary);
+    padding: 0.5rem 2rem 1rem 2rem;
+    text-align: center;
+    color: var(--color-text-dim);
+    font-size: 0.9rem;
+  }
+
+  /* Scroll progress bar (site-wide) */
+  .reading-progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+    box-shadow: 0 0 10px var(--color-primary);
+    z-index: 9999;
+    transition: width 0.1s ease-out;
+  }
+
+  /* Back to Top (site-wide) */
+  .back-to-top-button {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 50px;
+    height: 50px;
+    background: rgba(0, 255, 204, 0.15);
+    border: 2px solid var(--color-primary);
+    color: var(--color-primary);
+    cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 9998;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  .back-to-top-button.visible {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .back-to-top-button:hover {
+    background: var(--color-primary);
+    color: var(--color-bg);
+    transform: translateY(-3px);
+    box-shadow: 0 0 25px rgba(0, 255, 204, 0.5), 0 6px 20px rgba(0, 0, 0, 0.4);
+  }
+
+  .back-to-top-button:active {
+    transform: translateY(-1px);
+  }
+
+  .back-to-top-button svg {
+    transition: transform 0.3s ease;
+  }
+
+  .back-to-top-button:hover svg {
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 768px) {
+    .back-to-top-button {
+      width: 45px;
+      height: 45px;
+      bottom: 1.5rem;
+      right: 1.5rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .back-to-top-button {
+      width: 40px;
+      height: 40px;
+      bottom: 1rem;
+      right: 1rem;
+    }
+    .back-to-top-button svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  footer > p:first-child {
+    margin-bottom: 1.5rem;
+  }
+
+  footer > p:last-child {
+    margin-top: 1.5rem;
+  }
+
+  .reliability {
+    margin-top: 0.5rem;
+    color: var(--color-primary);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.85rem;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    align-items: center;
+    margin: 1.5rem 0 2rem 0;
+  }
+
+  .footer-links a {
+    color: var(--color-text-dim);
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .footer-links a:hover {
+    color: var(--color-primary);
+    transform: translateY(-2px);
+  }
+
+  .footer-links svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .secret-hint {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    color: rgba(150, 150, 150, 0.7);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+  }
+
+  /* Screen reader only text */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  /* Typography */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    color: var(--color-primary);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  h1 {
+    font-size: 3rem;
+    font-weight: 900;
+  }
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  p {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.8;
+  }
+
+  a {
+    color: var(--color-primary);
+    transition: all 0.3s ease;
+  }
+
+  a:hover {
+    color: var(--color-accent);
+    text-shadow: 0 0 5px currentColor;
+  }
+
+  /* Blockquotes */
+  blockquote {
+    border-left: 3px solid var(--color-secondary);
+    padding-left: 1.5rem;
+    margin: 2rem 0;
+    font-style: italic;
+    color: var(--color-text-dim);
+    background: linear-gradient(90deg, rgba(255, 0, 110, 0.1) 0%, transparent 100%);
+    padding: 1rem 1.5rem;
+  }
+
+  /* Code blocks */
+  pre {
+    background: var(--color-surface);
+    border: 1px solid rgba(0, 255, 204, 0.2);
+    padding: 1rem;
+    overflow-x: auto;
+    margin: 1rem 0;
+    border-radius: 4px;
+  }
+
+  code {
+    font-family: 'Share Tech Mono', monospace;
+    color: var(--color-accent);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 2rem;
+    }
+    h2 {
+      font-size: 1.5rem;
+    }
+
+    nav {
+      padding: 1rem 1.5rem;
+    }
+
+    .terminal-prompt {
+      font-size: 0.85rem;
+    }
+
+    .nav-links {
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .nav-links a {
+      font-size: 0.8rem;
+    }
+
+    .search-btn {
+      padding: 0.4rem 0.75rem;
+      font-size: 0.8rem;
+    }
+
+    .search-shortcut {
+      display: none;
+    }
+
+    .chatter-nav-link {
+      padding: 0.3rem 0.6rem;
+      font-size: 0.75rem;
+    }
+
+    .mini-blackhole {
+      width: 20px;
+      height: 20px;
+    }
+
+    main {
+      padding: 2rem 1rem;
+    }
+
+    footer {
+      padding: 0.5rem 2rem 6rem 2rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    nav {
+      padding: 0.75rem 1rem;
+      justify-content: center;
+      gap: 0.75rem;
+    }
+
+    .logo {
+      width: 100%;
+      justify-content: center;
+      margin-bottom: 0.25rem;
+    }
+
+    .terminal-prompt {
+      font-size: 0.7rem;
+    }
+
+    .nav-links {
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .nav-links a {
+      font-size: 0.75rem;
+    }
+
+    .nav-links a.nav-cta {
+      padding: 0.4rem 0.8rem;
+    }
+
+    .search-btn {
+      padding: 0.35rem 0.6rem;
+      font-size: 0.75rem;
+    }
+
+    .chatter-nav-link span {
+      display: none;
+    }
+
+    .chatter-nav-link {
+      padding: 0.3rem;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      justify-content: center;
+    }
+
+    .mini-blackhole {
+      width: 22px;
+      height: 22px;
+    }
+
+    footer {
+      padding: 0.5rem 1.5rem 7rem 1.5rem;
+    }
+  }
+</style>
+
+<script>
+  // Easter egg hint
+  console.log("🎮 Some say the old ways still work...");
+
+  // Random system messages
+  const messages = [
+    'AWS_DEPLOYMENT_COMPLETE',
+    'KUBERNETES_CLUSTER_SCALING',
+    'TERRAFORM_APPLY_SUCCESS',
+    'CI/CD_PIPELINE_RUNNING',
+    'DOCKER_CONTAINERS_HEALTHY',
+    'INFRASTRUCTURE_AS_CODE_ACTIVE',
+    'MONITORING_SYSTEMS_ONLINE',
+    'AUTOMATION_PROTOCOLS_ENGAGED'
+  ];
+
+  setInterval(() => {
+    const corruption = document.querySelector('.data-corruption');
+    if (corruption && Math.random() > 0.7) {
+      const spans = corruption.querySelectorAll('span');
+      const randomSpan = spans[Math.floor(Math.random() * spans.length)];
+      const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+      randomSpan.textContent = randomMessage;
+    }
+  }, 3000);
+
+  // Konami Code easter egg
+  const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+  let konamiIndex = 0;
+
+  document.addEventListener('keydown', (e) => {
+    const key = e.key.toLowerCase();
+
+    if (key === konamiCode[konamiIndex] || e.key === konamiCode[konamiIndex]) {
+      konamiIndex++;
+
+      if (konamiIndex === konamiCode.length) {
+        // Success! Flash effect and redirect
+        const body = document.body;
+        body.style.transition = 'opacity 0.2s';
+        body.style.opacity = '0.3';
+
+        setTimeout(() => {
+          body.style.opacity = '1';
+        }, 100);
+
+        setTimeout(() => {
+          body.style.opacity = '0.3';
+        }, 200);
+
+        setTimeout(() => {
+          body.style.opacity = '1';
+          window.location.href = '/neural-link';
+        }, 300);
+
+        konamiIndex = 0;
+      }
+    } else {
+      konamiIndex = 0;
+    }
+  });
+
+  // Global Search Functionality
+  const searchModal = document.getElementById('search-modal');
+  const searchButton = document.getElementById('search-button');
+  const closeSearch = document.getElementById('close-search');
+  const searchInput = document.getElementById('search-input') as HTMLInputElement;
+  const searchResults = document.getElementById('search-results');
+
+  // Get search data from data attribute
+  const postsData = searchModal?.getAttribute('data-posts');
+  const posts = postsData ? JSON.parse(postsData) : [];
+
+  // Open search modal
+  function openSearch() {
+    if (searchModal && searchInput) {
+      searchModal.style.display = 'flex';
+      // Use setTimeout to ensure the modal is rendered before focusing
+      setTimeout(() => {
+        searchInput.focus();
+      }, 10);
+    }
+  }
+
+  // Close search modal
+  function closeSearchModal() {
+    if (searchModal) {
+      searchModal.style.display = 'none';
+      if (searchInput) searchInput.value = '';
+      if (searchResults) searchResults.innerHTML = '';
+    }
+  }
+
+  // Search function
+  function performSearch(query: string) {
+    if (!query.trim()) {
+      if (searchResults) searchResults.innerHTML = '';
+      return;
+    }
+
+    const lowercaseQuery = query.toLowerCase();
+    const results = posts.filter((post: any) => {
+      return (
+        post.title.toLowerCase().includes(lowercaseQuery) ||
+        post.description.toLowerCase().includes(lowercaseQuery) ||
+        post.tags.some((tag: string) => tag.toLowerCase().includes(lowercaseQuery))
+      );
+    });
+
+    if (results.length === 0) {
+      if (searchResults) {
+        searchResults.innerHTML = '<div class="search-no-results">No results found. Try different keywords.</div>';
+      }
+      return;
+    }
+
+    if (searchResults) {
+      searchResults.innerHTML = results.map((post: any) => `
+        <div class="search-result-item" data-url="${post.url}">
+          <div class="search-result-title">${post.title}</div>
+          <div class="search-result-description">${post.description}</div>
+          <div class="search-result-tags">
+            ${post.tags.map((tag: string) => `<span class="search-result-tag">${tag}</span>`).join('')}
+          </div>
+        </div>
+      `).join('');
+
+      // Add click handlers to results
+      document.querySelectorAll('.search-result-item').forEach((item) => {
+        item.addEventListener('click', () => {
+          const url = item.getAttribute('data-url');
+          if (url) window.location.href = url;
+        });
+      });
+    }
+  }
+
+  // Keyboard shortcut - Register with capture phase to prevent browser default
+  window.addEventListener('keydown', (e: KeyboardEvent) => {
+    // Open search with "/" (unless typing in an input)
+    if (e.key === '/' && !(e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement)) {
+      e.preventDefault();
+      openSearch();
+      return;
+    }
+
+    // Also support Ctrl+K or Cmd+K
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+      e.preventDefault();
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+      openSearch();
+      return false;
+    }
+
+    // Close on Escape
+    if (e.key === 'Escape') {
+      closeSearchModal();
+    }
+  }, { capture: true });
+
+  // Event listeners
+  searchButton?.addEventListener('click', openSearch);
+  closeSearch?.addEventListener('click', closeSearchModal);
+
+  // Search input handler
+  searchInput?.addEventListener('input', (e) => {
+    performSearch((e.target as HTMLInputElement).value);
+  });
+
+  // Close when clicking outside modal
+  searchModal?.addEventListener('click', (e) => {
+    if (e.target === searchModal) {
+      closeSearchModal();
+    }
+  });
+
+  // Matrix Rain Effect - Defer to not block initial render
+  function initMatrixRain() {
+    // Respect reduced-motion: skip the animation entirely (a11y + Core Web Vitals)
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const canvas = document.getElementById('matrix-rain') as HTMLCanvasElement;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    // Set canvas to full window size - batch read operation
+    requestAnimationFrame(() => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      // Matrix characters - katakana, latin letters, and numbers
+      const matrixChars = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲンABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()';
+      const chars = matrixChars.split('');
+
+      const fontSize = 14;
+      const columns = Math.floor(canvas.width / fontSize);
+
+      // Array to store y-position of each column
+      const drops: number[] = [];
+      for (let i = 0; i < columns; i++) {
+        drops[i] = Math.random() * -100; // Start at random heights
+      }
+
+      // Draw function
+      function draw() {
+        if (!ctx || !canvas) return;
+
+        // Fade effect - creates the trail
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Set text style
+        ctx.fillStyle = '#00ffcc'; // Your primary cyan color
+        ctx.font = `${fontSize}px 'Share Tech Mono', monospace`;
+
+        // Draw characters
+        for (let i = 0; i < drops.length; i++) {
+          // Random character
+          const char = chars[Math.floor(Math.random() * chars.length)];
+          const x = i * fontSize;
+          const y = drops[i] * fontSize;
+
+          ctx.fillText(char, x, y);
+
+          // Reset drop to top randomly after it crosses the screen
+          if (y > canvas.height && Math.random() > 0.975) {
+            drops[i] = 0;
+          }
+
+          // Move drop down
+          drops[i]++;
+        }
+      }
+
+      // Animation loop — paused while the tab is hidden to stop background CPU churn
+      let interval: ReturnType<typeof setInterval> | null = setInterval(draw, 50);
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+          if (interval) { clearInterval(interval); interval = null; }
+        } else if (!interval) {
+          interval = setInterval(draw, 50);
+        }
+      });
+
+      // Debounced resize handler to prevent forced reflows
+      let resizeTimeout: ReturnType<typeof setTimeout>;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+          requestAnimationFrame(() => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            // Recalculate columns
+            const newColumns = Math.floor(canvas.width / fontSize);
+            drops.length = newColumns;
+            for (let i = 0; i < newColumns; i++) {
+              if (drops[i] === undefined) {
+                drops[i] = Math.random() * -100;
+              }
+            }
+          });
+        }, 150);
+      });
+
+      // Clean up on page unload
+      window.addEventListener('beforeunload', () => {
+        if (interval) clearInterval(interval);
+      });
+    }); // Close requestAnimationFrame
+  } // Close initMatrixRain function
+
+  // Defer matrix rain initialization until browser is idle
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(initMatrixRain, { timeout: 2000 });
+  } else {
+    // Fallback for browsers that don't support requestIdleCallback
+    setTimeout(initMatrixRain, 1000);
+  }
+
+  // Mini Blackhole for nav
+  function initMiniBlackhole() {
+    const canvas = document.getElementById('mini-blackhole') as HTMLCanvasElement;
+    if (!canvas) return;
+
+    const reducedMotion = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
+    const glCtx = canvas.getContext('webgl', { alpha: true, antialias: true });
+    if (!glCtx) return;
+    const gl = glCtx;
+
+    canvas.width = 48;
+    canvas.height = 48;
+
+    const vertexShader = gl.createShader(gl.VERTEX_SHADER);
+    if (!vertexShader) return;
+    gl.shaderSource(vertexShader, `
+      attribute vec2 a_position;
+      varying vec2 v_uv;
+      void main() {
+        v_uv = a_position;
+        gl_Position = vec4(a_position, 0.0, 1.0);
+      }
+    `);
+    gl.compileShader(vertexShader);
+
+    const fragmentShader = gl.createShader(gl.FRAGMENT_SHADER);
+    if (!fragmentShader) return;
+    gl.shaderSource(fragmentShader, `
+      precision mediump float;
+      varying vec2 v_uv;
+      uniform float u_time;
+
+      void main() {
+        vec2 uv = v_uv;
+        float dist = length(uv);
+
+        // Black hole center
+        float hole = smoothstep(0.15, 0.1, dist);
+
+        // Accretion disk
+        float angle = atan(uv.y, uv.x) + u_time * 2.0;
+        float disk = smoothstep(0.5, 0.2, dist) * smoothstep(0.1, 0.2, dist);
+        disk *= 0.5 + 0.5 * sin(angle * 3.0 + u_time * 4.0);
+
+        // Glow
+        float glow = 0.02 / (dist + 0.1);
+
+        // Colors - purple/pink gradient
+        vec3 diskColor = mix(
+          vec3(0.4, 0.3, 0.9),
+          vec3(0.9, 0.3, 0.8),
+          0.5 + 0.5 * sin(angle + u_time)
+        );
+
+        vec3 col = diskColor * disk * 1.5;
+        col += vec3(0.5, 0.3, 0.7) * glow;
+        col = mix(col, vec3(0.0), hole);
+
+        float alpha = max(max(disk, glow * 0.5), hole);
+        gl_FragColor = vec4(col, alpha * 0.9);
+      }
+    `);
+    gl.compileShader(fragmentShader);
+
+    const program = gl.createProgram();
+    if (!program) return;
+    gl.attachShader(program, vertexShader);
+    gl.attachShader(program, fragmentShader);
+    gl.linkProgram(program);
+
+    const positions = new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]);
+    const buffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+    gl.bufferData(gl.ARRAY_BUFFER, positions, gl.STATIC_DRAW);
+
+    const posLoc = gl.getAttribLocation(program, 'a_position');
+    gl.enableVertexAttribArray(posLoc);
+    gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
+
+    const timeLoc = gl.getUniformLocation(program, 'u_time');
+    gl.useProgram(program);
+
+    const startTime = Date.now();
+    let rafId = 0;
+    let running = !reducedMotion;
+
+    function drawFrame() {
+      gl.viewport(0, 0, 48, 48);
+      gl.clearColor(0, 0, 0, 0);
+      gl.clear(gl.COLOR_BUFFER_BIT);
+      gl.enable(gl.BLEND);
+      gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+      gl.uniform1f(timeLoc, (Date.now() - startTime) / 1000);
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    }
+
+    function loop() {
+      if (!running) return;
+      drawFrame();
+      rafId = requestAnimationFrame(loop);
+    }
+
+    if (reducedMotion) {
+      // One static frame — no continuous loop
+      drawFrame();
+    } else {
+      loop();
+      // Pause the render loop while the tab is hidden
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+          running = false;
+          cancelAnimationFrame(rafId);
+        } else if (!running) {
+          running = true;
+          loop();
+        }
+      });
+    }
+  }
+
+  // Init mini blackhole after a short delay
+  setTimeout(initMiniBlackhole, 500);
+
+  // Scroll progress bar (site-wide)
+  const progressBar = document.getElementById('reading-progress');
+  function updateReadingProgress() {
+    if (!progressBar) return;
+    const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0;
+    progressBar.style.width = Math.min(progress, 100) + '%';
+  }
+  if (progressBar) {
+    window.addEventListener('scroll', updateReadingProgress, { passive: true });
+    window.addEventListener('resize', updateReadingProgress);
+    window.addEventListener('load', updateReadingProgress);
+  }
+
+  // Back to Top (site-wide)
+  const backToTopButton = document.getElementById('back-to-top');
+  function toggleBackToTopButton() {
+    if (!backToTopButton) return;
+    backToTopButton.classList.toggle('visible', window.scrollY > 300);
+  }
+  if (backToTopButton) {
+    backToTopButton.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    window.addEventListener('scroll', toggleBackToTopButton, { passive: true });
+    window.addEventListener('load', toggleBackToTopButton);
+  }
+</script>
