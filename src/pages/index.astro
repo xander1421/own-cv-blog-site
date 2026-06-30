@@ -167,7 +167,7 @@ const faqSchema = {
       <span class="kicker">DevOps &amp; Cloud Consulting</span>
 
       <h1 class="headline">
-        Cut your cloud bill.<br />Kill the 3am wake-ups.
+        Cut your cloud bill.<br />Kill the 3am wake&#8209;ups.
       </h1>
 
       <p class="subhead">
@@ -1199,6 +1199,11 @@ const faqSchema = {
       padding: 3rem 1.5rem 2.5rem;
     }
 
+    .headline {
+      font-size: clamp(1.8rem, 8vw, 2.4rem);
+      line-height: 1.15;
+    }
+
     .section-inner {
       padding: 3rem 1.5rem;
     }
@@ -1286,6 +1291,7 @@ const faqSchema = {
 
     .proof-stats {
       flex-direction: column;
+      align-items: center;
       gap: 1.5rem;
     }
 
