@@ -812,16 +812,17 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         void main() {
           vec2 R = u_resolution;
           vec2 uv = gl_FragCoord.xy / R;
-          // fit to the shorter viewport axis so the hole keeps a consistent size
-          // across aspect ratios (landscape scales x, portrait scales y)
+          // FOV follows aspect: zoomed/dramatic on landscape, widened on portrait so the
+          // hole shrinks and sits above the text instead of swallowing the layout
           float aspect = R.x / R.y;
+          float t = clamp((aspect - 0.5) / 0.9, 0.0, 1.0); // 0 = tall phone, 1 = >=1.4 wide
+          float fovDeg = mix(95.0, FOV, t);
+          float yoff = mix(0.22, 0.45, t);
           vec2 ndc = (2.0 * uv - 1.0);
-          float yscale = 1.0;
-          if (aspect > 1.0) { ndc.x *= aspect; }
-          else { yscale = 1.0 / aspect; ndc.y *= yscale; }
-          ndc.y -= 0.45 * yscale; // shift up on screen (starts sooner), scaled to viewport
+          ndc.x *= aspect;
+          ndc.y -= yoff; // shift up on screen (starts sooner)
 
-          float f = tan(radians(FOV) * 0.5);
+          float f = tan(radians(fovDeg) * 0.5);
           vec3 ro = vec3(CAM_X, CAM_Y, CAM_Z);
           // gentle auto-orbit so the background feels alive
           float yaw = u_time * 0.05;
