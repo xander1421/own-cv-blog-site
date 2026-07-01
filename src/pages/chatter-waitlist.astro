@@ -179,7 +179,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     position: fixed;
     inset: 0;
     z-index: 1;
-    background: rgba(0, 0, 0, 0.25);
+    background: rgba(0, 0, 0, 0.45);
     pointer-events: none;
   }
 
@@ -221,7 +221,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   .lead {
     font-size: 1.25rem;
-    color: #cbd5e1;
+    color: #fff;
     line-height: 1.6;
     margin: 0 0 2.5rem;
     text-shadow: 0 1px 12px rgba(0,0,0,0.8);
@@ -247,7 +247,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   .form-note {
     font-size: 0.8rem;
-    color: #555;
+    color: #fff;
     margin: 0.5rem 0 0;
   }
 
@@ -291,7 +291,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   .value-text span {
     font-size: 0.85rem;
-    color: #777;
+    color: #fff;
     line-height: 1.4;
   }
 
@@ -321,7 +321,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   .statement p {
     font-size: 1.25rem;
-    color: #888;
+    color: #fff;
     max-width: 600px;
     margin: 0 auto;
     line-height: 1.7;
@@ -368,7 +368,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   .how-content p {
     font-size: 1rem;
-    color: #888;
+    color: #fff;
     line-height: 1.7;
     margin: 0;
   }
@@ -401,7 +401,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   .tech-left p {
     font-size: 0.95rem;
-    color: #777;
+    color: #fff;
     margin: 0 0 0.75rem;
     max-width: 400px;
   }
@@ -451,7 +451,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   .license {
     font-size: 0.75rem;
-    color: #555;
+    color: #fff;
   }
 
   /* Responsive */
@@ -518,6 +518,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         varying vec2 v_uv;
         uniform float u_time;
         uniform vec2 u_resolution;
+        uniform float u_scroll; // 0 at top of hero -> 1 scrolled a viewport down
 
         // ── Schwarzschild geodesic black hole ──
         // Ported from a WGSL compute renderer to a single WebGL fragment pass.
@@ -656,9 +657,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           float yr = pos.y / max(1e-3, half_h);
           float vfall = exp(-yr * yr * 2.4);
           if (vfall < 0.01) return 0.0;
-          float ang = atan(pos.z, pos.x);
-          float spiral = ang + SWIRL * u_time - log(max(rho, 1e-3)) * 2.4;
-          vec3 q = vec3(rho * 0.55, spiral * 0.65, pos.y * 0.9) * NOISE_SCALE;
+          // match disk_sample's seam-free twisted-Cartesian frame
+          float twist = SWIRL * u_time - log(max(rho, 1e-3)) * 2.4;
+          float ct = cos(twist), st = sin(twist);
+          vec3 q = vec3((pos.x * ct - pos.z * st) * 0.5,
+                        (pos.x * st + pos.z * ct) * 0.5,
+                        pos.y * 0.9) * NOISE_SCALE;
           float radial = pow(clamp(DISK_INNER / max(rho, 1e-3), 0.0, 1.0), 1.6);
           return smoothstep(0.33, 1.05, cloud_noise(q, 4, 46.0)) * radial * vfall;
         }
@@ -676,21 +680,28 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           float radial = pow(clamp(DISK_INNER / max(rho, 1e-3), 0.0, 1.0), 1.15);
           if (radial * vfall * 1.4 < 0.004) return vec4(0.0);
 
-          float ang = atan(pos.z, pos.x);
-          float spiral = ang + SWIRL * u_time - log(max(rho, 1e-3)) * 2.4;
-          vec3 q = vec3(rho * 0.9, spiral * 0.22, pos.y * 1.1) * NOISE_SCALE;
+          float ang = atan(pos.z, pos.x); // for the color wave only (used via sin -> seam-free)
+          // sample noise in a Cartesian frame twisted by the log-spiral + time: gives the
+          // spiral arms with no atan branch-cut seam across the disk
+          float twist = SWIRL * u_time - log(max(rho, 1e-3)) * 2.4;
+          float ct = cos(twist), st = sin(twist);
+          vec3 q = vec3((pos.x * ct - pos.z * st) * 0.5,
+                        (pos.x * st + pos.z * ct) * 0.5,
+                        pos.y * 1.1) * NOISE_SCALE;
 
           vec2 eddy = curl2(q * 2.2 + 9.0) * 0.3;
           q += vec3(eddy.x, eddy.y, 0.0);
 
-          float cloud = cloud_noise(q, 6, 46.0);
-          float fine = cloud_noise(q * 2.6 + 21.0, 4, 30.0);
-          float n = cloud * (0.5 + 0.55 * fine);
-          float dens = smoothstep(0.28, 1.15, n);
+          float cloud = cloud_noise(q, 4, 26.0);
+          float fine = cloud_noise(q * 1.9 + 21.0, 2, 16.0);
+          float n = cloud * (0.78 + 0.22 * fine);
+          // continuous textured gas with a soft floor, so one midplane sample reads as
+          // solid filaments instead of the sparse dots a hard threshold would stipple into
+          float dens = 0.35 + 0.65 * smoothstep(0.05, 0.85, n);
           float macro_n = cloud_noise(q * 0.22 + 50.0, 3, 16.0);
-          dens *= mix(0.2, 1.4, smoothstep(0.15, 1.0, macro_n));
-          float dust = smoothstep(0.35, 0.92, cloud_noise(q * 0.45 + 30.0, 3, 22.0));
-          dens *= (1.0 - 0.72 * dust);
+          dens *= mix(0.55, 1.3, smoothstep(0.15, 1.0, macro_n));
+          float dust = smoothstep(0.4, 0.95, cloud_noise(q * 0.45 + 30.0, 3, 22.0));
+          dens *= (1.0 - 0.4 * dust);
           dens *= radial * vfall;
           if (dens < 0.004) return vec4(0.0);
 
@@ -733,18 +744,23 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           float comp = el * (1.0 + el * 0.012) / (1.0 + el * max(0.005, HIGHLIGHT));
           emis *= comp / el;
 
-          // recolor using the two hero-accent colors, shifting as a wave that travels
-          // around the disk as it rotates (spiral already carries angle + swirl*time)
+          // recolor using the two hero-accent colors as a smooth wave that sweeps
+          // around the disk over time
           float ci = max(emis.r, max(emis.g, emis.b));
           vec3 cA = vec3(0.400, 0.494, 0.918); // #667eea
           vec3 cB = vec3(0.941, 0.576, 0.984); // #f093fb
-          float wave = 0.5 + 0.5 * sin(spiral * 1.5);
+          // smooth azimuthal sweep that rotates with time (not tied to the tight spiral)
+          float wave = 0.5 + 0.5 * sin(ang + u_time * 0.4);
           vec3 base = mix(cA, cB, wave);
           vec3 tint = base * mix(0.85, 1.9, radial);
           emis = ci * tint;
 
-          float alpha = clamp(dens * DISK_DENSITY, 0.0, 1.0);
-          return vec4(emis * dens, alpha);
+          // analytic slab column: how much gas the ray traverses through the Gaussian
+          // thickness in one crossing (grazing rays see more). Replaces 16 substeps.
+          float col_len = min(half_h / max(abs(photon_dir.y), 0.14), 3.0);
+          float dd = dens * col_len;
+          float alpha = clamp(dd * DISK_DENSITY * 1.5, 0.0, 1.0);
+          return vec4(emis * dd * 1.25, alpha);
         }
 
         vec3 starfield(vec3 dir) {
@@ -816,14 +832,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           // hole shrinks and sits above the text instead of swallowing the layout
           float aspect = R.x / R.y;
           float t = clamp((aspect - 0.5) / 0.9, 0.0, 1.0); // 0 = tall phone, 1 = >=1.4 wide
-          float fovDeg = mix(95.0, FOV, t);
-          float yoff = mix(0.22, 0.45, t);
+          float fovDeg = mix(70.0, FOV, t);
+          float zoom = mix(2.6, 1.0, t) * 1.1;  // portrait pulls the camera back; *1.1 = 10% smaller overall
+          zoom *= mix(1.0, 0.45, u_scroll); // scroll down -> camera moves in -> zoom into the hole
+          float yoff = mix(0.15, 0.45, t);
           vec2 ndc = (2.0 * uv - 1.0);
           ndc.x *= aspect;
           ndc.y -= yoff; // shift up on screen (starts sooner)
 
           float f = tan(radians(fovDeg) * 0.5);
-          vec3 ro = vec3(CAM_X, CAM_Y, CAM_Z);
+          vec3 ro = vec3(CAM_X, CAM_Y, CAM_Z) * zoom;
           // gentle auto-orbit so the background feels alive
           float yaw = u_time * 0.05;
           vec3 rd = normalize(vec3(ndc * f, 1.0));
@@ -848,6 +866,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             if (r > ESCAPE_R && dot(rpos, rvel) > 0.0) break;
 
             float dt = clamp(0.10 * (r - HORIZON * 0.9), 0.015, 1.2);
+            // tighten steps near the disk plane so midplane crossings interpolate cleanly
+            if (abs(rpos.y) < 1.2 && length(rpos.xz) < DISK_OUTER + 2.0) dt = min(dt, 0.28);
 
             // RK4 geodesic step
             vec3 k1v = rvel;                    vec3 k1a = accel(rpos, h2);
@@ -868,26 +888,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             float rho_a = length(rpos.xz);
             float rho_b = length(npos.xz);
             bool in_annulus = max(rho_a, rho_b) > DISK_INNER - 1.0 && min(rho_a, rho_b) < DISK_OUTER + 1.0;
-            bool crossing = (rpos.y * npos.y < 0.0);
-            bool near_plane = abs(rpos.y) < DISK_THICK * 2.0 + seglen;
-            if (in_annulus && (crossing || near_plane)) {
-              float dither = hash13(vec3(gl_FragCoord.xy, u_time));
-              int subs = int(clamp(seglen / 0.05 + 1.0, 1.0, 16.0));
-              float inv = 1.0 / float(subs);
-              for (int s = 0; s < 16; s++) {
-                if (s >= subs) break;
-                if (col.a > 0.99) break;
-                float t = (float(s) + dither) * inv;
-                vec3 sp = mix(rpos, npos, t);
-                vec4 smp = disk_sample(sp, photon_dir);
-                if (smp.a > 0.0) {
-                  float a = clamp(smp.a * seglen * inv * 1.6, 0.0, 1.0);
-                  float tt = clamp(1.0 - col.a, 0.001, 1.0);
-                  // neutral extinction so the accent hues survive (reddening turned the disk orange)
-                  vec3 trans = vec3(tt);
-                  col = vec4(col.rgb + smp.rgb * seglen * inv * 1.3 * trans,
-                             col.a + (1.0 - col.a) * a);
-                }
+            // thin disk: one stable sample at the midplane crossing (no dither, no substeps)
+            if (in_annulus && rpos.y * npos.y < 0.0) {
+              float tc = rpos.y / (rpos.y - npos.y);   // interpolate the segment to y = 0
+              vec3 cp = mix(rpos, npos, tc);
+              vec4 smp = disk_sample(cp, photon_dir);
+              if (smp.a > 0.0) {
+                float tt = clamp(1.0 - col.a, 0.001, 1.0);
+                col = vec4(col.rgb + smp.rgb * tt, col.a + (1.0 - col.a) * clamp(smp.a, 0.0, 1.0));
               }
             }
 
@@ -961,6 +969,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
             const timeLocation = gl.getUniformLocation(program, 'u_time');
             const resolutionLocation = gl.getUniformLocation(program, 'u_resolution');
+            const scrollLocation = gl.getUniformLocation(program, 'u_scroll');
             gl.useProgram(program);
 
             let startTime = Date.now();
@@ -972,7 +981,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
             function resizeCanvas() {
               const dpr = 1.0; // Cap DPR: heavy geodesic shader, background doesn't need retina
-              const scale = window.innerWidth > 768 ? 0.5 : 0.45;
+              const scale = window.innerWidth > 768 ? 0.65 : 0.55;
               canvas.width = Math.floor(window.innerWidth * scale * dpr);
               canvas.height = Math.floor(window.innerHeight * scale * dpr);
             }
@@ -989,6 +998,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               gl.viewport(0, 0, canvas.width, canvas.height);
               gl.uniform1f(timeLocation, (Date.now() - startTime) / 1000);
               gl.uniform2f(resolutionLocation, canvas.width, canvas.height);
+              // scroll through the first viewport drives the zoom-in
+              const scroll = Math.min(window.scrollY / window.innerHeight, 1.0);
+              gl.uniform1f(scrollLocation, scroll);
               gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
             }
 
