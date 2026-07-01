@@ -812,8 +812,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         void main() {
           vec2 R = u_resolution;
           vec2 uv = gl_FragCoord.xy / R;
-          vec2 ndc = (2.0 * uv - 1.0) * vec2(R.x / R.y, 1.0);
-          ndc.y -= 0.45; // shift the black hole up on screen (starts sooner)
+          // fit to the shorter viewport axis so the hole keeps a consistent size
+          // across aspect ratios (landscape scales x, portrait scales y)
+          float aspect = R.x / R.y;
+          vec2 ndc = (2.0 * uv - 1.0);
+          float yscale = 1.0;
+          if (aspect > 1.0) { ndc.x *= aspect; }
+          else { yscale = 1.0 / aspect; ndc.y *= yscale; }
+          ndc.y -= 0.45 * yscale; // shift up on screen (starts sooner), scaled to viewport
 
           float f = tan(radians(FOV) * 0.5);
           vec3 ro = vec3(CAM_X, CAM_Y, CAM_Z);
