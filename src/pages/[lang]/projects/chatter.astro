@@ -1,0 +1,12 @@
+---
+import ProjectDetail from '../../../components/pages/ProjectDetail.astro';
+import { nonDefaultLocales, type Lang } from '../../../i18n/ui';
+
+export function getStaticPaths() {
+  return nonDefaultLocales.map((lang) => ({ params: { lang } }));
+}
+
+const lang = Astro.params.lang as Lang;
+---
+
+<ProjectDetail lang={lang} />

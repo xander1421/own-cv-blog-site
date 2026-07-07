@@ -1,0 +1,376 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../Breadcrumb.astro';
+import { getService, getServices } from '../../data/services';
+import { getLocalizedPath, useTranslations, type Lang } from '../../i18n/ui';
+
+export interface Props {
+  lang: Lang;
+  slug: string;
+}
+
+const { lang, slug } = Astro.props;
+const t = useTranslations(lang);
+const service = getService(slug, lang);
+const all = getServices(lang);
+const siteUrl = 'https://alexpruteanu.cloud';
+const related = all.filter((s) => s.slug !== service.slug);
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": service.title,
+  "serviceType": service.title,
+  "url": `${siteUrl}${getLocalizedPath(`/services/${service.slug}`, lang)}`,
+  "description": service.description,
+  "areaServed": "Worldwide",
+  "provider": {
+    "@type": "Person",
+    "name": "Alexandru Pruteanu",
+    "url": siteUrl,
+    "jobTitle": "DevOps & Cloud Consultant",
+  },
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": service.faqs.map((f) => ({
+    "@type": "Question",
+    "name": f.q,
+    "acceptedAnswer": { "@type": "Answer", "text": f.a },
+  })),
+};
+---
+
+<BaseLayout title={service.title} description={service.description} type="website" localized>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+  <article class="service-page">
+    <Breadcrumb items={[{ label: t('breadcrumb.home'), href: getLocalizedPath('/', lang) }, { label: t('svc.kicker'), href: getLocalizedPath('/services', lang) }, { label: service.nav }]} />
+
+    <div class="svc-hero">
+      <div class="svc-hero-text">
+        <h1>{service.h1}</h1>
+        <p class="svc-lead">{service.lead}</p>
+        <a href="https://cal.eu/alexpruteanu" class="cta-primary">{t('svc.bookDiscovery')}</a>
+      </div>
+      <div class="svc-hero-art" aria-hidden="true">
+        <svg viewBox="0 0 240 240" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="120" cy="120" r="100" stroke-dasharray="3 11" opacity="0.25" />
+          <circle cx="120" cy="120" r="74" opacity="0.12" />
+          <circle cx="120" cy="20" r="4" fill="currentColor" stroke="none" opacity="0.7" />
+          <circle cx="220" cy="120" r="3.5" fill="currentColor" stroke="none" opacity="0.5" />
+          <circle cx="120" cy="220" r="3" fill="currentColor" stroke="none" opacity="0.4" />
+          <circle cx="20" cy="120" r="2.5" fill="currentColor" stroke="none" opacity="0.35" />
+          <g transform="translate(120,120) scale(3.4)" stroke-width="0.8">
+            <g transform="translate(-12,-12)" set:html={service.icon} />
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <section class="svc-block">
+      <h2>{t('svc.hereBecause')}</h2>
+      <ul class="svc-list problems">
+        {service.problems.map((p) => <li>{p}</li>)}
+      </ul>
+    </section>
+
+    <section class="svc-block">
+      <h2>{t('svc.whatYouGet')}</h2>
+      <ul class="svc-list deliverables">
+        {service.deliverables.map((d) => <li>{d}</li>)}
+      </ul>
+      <div class="svc-outcome">
+        <span class="tldr">{t('svc.tldr')}</span>
+        <p>{service.outcome}</p>
+      </div>
+    </section>
+
+    <section class="svc-block">
+      <h2>{t('svc.commonQuestions')}</h2>
+      {service.faqs.map((f) => (
+        <details class="faq-item">
+          <summary>{f.q}</summary>
+          <p>{f.a}</p>
+        </details>
+      ))}
+    </section>
+
+    <section class="svc-cta">
+      <h2>{t('svc.fitHeading')}</h2>
+      <p>{t('svc.fitBody')}</p>
+      <a href="https://cal.eu/alexpruteanu" class="cta-primary">{t('svc.bookDiscovery')}</a>
+    </section>
+
+    <section class="svc-related">
+      <h2>{t('svc.otherHelp')}</h2>
+      <div class="related-grid">
+        {related.map((r) => (
+          <a class="related-card" href={getLocalizedPath(`/services/${r.slug}`, lang)}>
+            <strong>{r.nav}</strong>
+            <span>{r.h1}</span>
+          </a>
+        ))}
+      </div>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .service-page {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 3rem 2rem 5rem;
+  }
+
+  .svc-hero {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 2.5rem;
+    align-items: center;
+  }
+
+  .svc-hero-art {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    color: var(--color-primary);
+  }
+
+  .svc-hero-art::before {
+    content: '';
+    position: absolute;
+    inset: 12%;
+    background: radial-gradient(circle, rgba(0, 255, 204, 0.18), transparent 70%);
+    filter: blur(22px);
+    z-index: 0;
+  }
+
+  .svc-hero-art svg {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+  }
+
+  .svc-hero h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 4.5vw, 3rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.12;
+    margin: 0 0 1.25rem;
+    background: linear-gradient(100deg, #e0e0e0 30%, var(--color-primary) 75%, #00bfff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  .svc-lead {
+    font-size: 1.2rem;
+    line-height: 1.65;
+    color: var(--color-text-dim);
+    margin: 0 0 2rem;
+  }
+
+  .cta-primary {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: var(--color-primary);
+    color: #06201b;
+    font-weight: 700;
+    font-size: 1.05rem;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .cta-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0, 255, 204, 0.3);
+  }
+
+  .svc-block {
+    margin-top: 3.5rem;
+  }
+
+  .svc-block h2 {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin: 0 0 1.5rem;
+  }
+
+  .svc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  .svc-list li {
+    position: relative;
+    padding-left: 1.8rem;
+    color: var(--color-text-dim);
+    line-height: 1.6;
+  }
+
+  .svc-list li::before {
+    position: absolute;
+    left: 0;
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+
+  .problems li::before { content: '–'; }
+  .deliverables li::before { content: '✓'; }
+
+  .svc-outcome {
+    margin: 1.75rem 0 0;
+    padding: 1.25rem 1.5rem;
+    border-left: 3px solid var(--color-primary);
+    background: rgba(0, 255, 204, 0.04);
+  }
+
+  .svc-outcome .tldr {
+    display: inline-block;
+    margin-bottom: 0.6rem;
+    padding: 0.15rem 0.55rem;
+    border-radius: 4px;
+    background: var(--color-primary);
+    color: #06201b;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+  }
+
+  .svc-outcome p {
+    margin: 0;
+    color: var(--color-text);
+    line-height: 1.6;
+    font-size: 1.05rem;
+  }
+
+  /* FAQ (shared look with home) */
+  .faq-item {
+    border-bottom: 1px solid rgba(0, 255, 204, 0.12);
+  }
+
+  .faq-item summary {
+    cursor: pointer;
+    list-style: none;
+    padding: 1.1rem 2.5rem 1.1rem 0;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--color-text);
+    position: relative;
+  }
+
+  .faq-item summary::-webkit-details-marker { display: none; }
+
+  .faq-item summary::after {
+    content: '+';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.5rem;
+    line-height: 1;
+    color: var(--color-primary);
+  }
+
+  .faq-item[open] summary::after { content: '−'; }
+  .faq-item summary:hover { color: var(--color-primary); }
+
+  .faq-item p {
+    margin: 0 0 1.1rem;
+    color: var(--color-text-dim);
+    line-height: 1.7;
+  }
+
+  .svc-cta {
+    margin-top: 4rem;
+    padding: 2.5rem;
+    text-align: center;
+    border: 1px solid rgba(0, 255, 204, 0.15);
+    border-radius: 12px;
+    background: rgba(0, 255, 204, 0.04);
+  }
+
+  .svc-cta h2 {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--color-text);
+    margin: 0 0 0.75rem;
+  }
+
+  .svc-cta p {
+    color: var(--color-text-dim);
+    margin: 0 0 1.75rem;
+  }
+
+  .svc-related {
+    margin-top: 4rem;
+  }
+
+  .svc-related h2 {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-dim);
+    margin: 0 0 1.25rem;
+  }
+
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+
+  .related-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: 1.25rem;
+    border: 1px solid rgba(0, 255, 204, 0.15);
+    border-radius: 10px;
+    text-decoration: none;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+  }
+
+  .related-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(0, 255, 204, 0.4);
+  }
+
+  .related-card strong { color: var(--color-primary); font-size: 1rem; }
+  .related-card span { color: var(--color-text-dim); font-size: 0.85rem; line-height: 1.4; }
+
+  @media (max-width: 768px) {
+    .service-page { padding: 2rem 1.5rem 3.5rem; }
+
+    .svc-hero {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .svc-hero-art {
+      order: -1;
+    }
+
+    .svc-hero-art svg {
+      max-width: 160px;
+    }
+  }
+</style>

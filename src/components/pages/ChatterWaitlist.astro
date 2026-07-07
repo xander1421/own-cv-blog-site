@@ -1,0 +1,1054 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getChatterWaitlistContent } from '../../i18n/content/chatterWaitlist';
+import type { Lang } from '../../i18n/ui';
+
+export interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const c = getChatterWaitlistContent(lang);
+---
+
+<BaseLayout
+  title={c.metaTitle}
+  description={c.metaDescription}
+  image="/chatter-og.png"
+  type="website"
+  localized
+>
+  <div class="waitlist-container">
+    <!-- One page-wide dark scrim over the blackhole for consistent readability -->
+    <div class="page-overlay" aria-hidden="true"></div>
+    <!-- Hero Section -->
+    <section class="hero">
+      <canvas id="blackhole-canvas" class="blackhole-canvas"></canvas>
+
+      <div class="hero-inner">
+        <span class="eyebrow">{c.eyebrow}</span>
+        <h1>{c.heroH1a}<br/><span class="accent" set:html={c.heroH1b}></span></h1>
+        <p class="lead">{c.heroLead}</p>
+
+        <a href="https://github.com/xander1421/chatter" class="hero-cta">{c.heroCta}</a>
+        <p class="form-note">{c.formNote}</p>
+      </div>
+    </section>
+
+    <!-- Value Props - Horizontal, no boxes -->
+    <section class="values">
+      <div class="value">
+        <div class="value-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="value-text">
+          <strong>{c.value1Title}</strong>
+          <span>{c.value1Text}</span>
+        </div>
+      </div>
+      <div class="value">
+        <div class="value-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+        </div>
+        <div class="value-text">
+          <strong>{c.value2Title}</strong>
+          <span set:html={c.value2Text}></span>
+        </div>
+      </div>
+      <div class="value">
+        <div class="value-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        </div>
+        <div class="value-text">
+          <strong>{c.value3Title}</strong>
+          <span>{c.value3Text}</span>
+        </div>
+      </div>
+      <div class="value">
+        <div class="value-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2"/></svg>
+        </div>
+        <div class="value-text">
+          <strong>{c.value4Title}</strong>
+          <span>{c.value4Text}</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Big Statement -->
+    <section class="statement">
+      <h2>{c.statementH2a}<em>{c.statementH2b}</em></h2>
+      <p>{c.statementP}</p>
+    </section>
+
+    <!-- How it works - Alternating layout -->
+    <section class="how-it-works">
+      <div class="how-block">
+        <div class="how-number">01</div>
+        <div class="how-content">
+          <h3>{c.how1Title}</h3>
+          <p set:html={c.how1P}></p>
+        </div>
+      </div>
+
+      <div class="how-block reverse">
+        <div class="how-number">02</div>
+        <div class="how-content">
+          <h3>{c.how2Title}</h3>
+          <p>{c.how2P}</p>
+        </div>
+      </div>
+
+      <div class="how-block">
+        <div class="how-number">03</div>
+        <div class="how-content">
+          <h3>{c.how3Title}</h3>
+          <p>{c.how3P}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tech callout - Single clean block -->
+    <section class="tech-callout">
+      <div class="tech-inner">
+        <div class="tech-left">
+          <h3>{c.techTitle}</h3>
+          <p>{c.techP}</p>
+          <a href="/blog/from-react-to-rust-native-journey" class="tech-link" set:html={c.techLink}></a>
+        </div>
+        <div class="tech-right">
+          <a href="https://github.com/xander1421/chatter" class="github-link">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            <span>{c.githubCta}</span>
+          </a>
+          <span class="license" set:html={c.license}></span>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  :global(main) {
+    max-width: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100vw !important;
+    margin-left: calc(-50vw + 50%) !important;
+  }
+
+  :global(.matrix-background),
+  :global(.perspective-grid),
+  :global(.data-streams),
+  :global(.scanlines),
+  :global(.hologram-grid),
+  :global(.glitch-overlay),
+  :global(.noise),
+  :global(body::before) {
+    display: none !important;
+  }
+
+  :global(body) {
+    background: #000 !important;
+  }
+
+  /* Keep the site footer above the page-wide scrim so it stays readable */
+  :global(body > footer) {
+    position: relative;
+    z-index: 5;
+  }
+
+  .waitlist-container {
+    background: #000;
+    color: #fff;
+    min-height: 100vh;
+  }
+
+  /* Hero */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+  }
+
+  .blackhole-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    opacity: 0.7;
+  }
+
+  /* Single page-wide scrim: dims the whole blackhole uniformly so every section reads cleanly */
+  .page-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.45);
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 10;
+    max-width: 720px;
+    text-align: center;
+    padding: 3rem 2rem;
+  }
+
+  .eyebrow {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #a5b4fc;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin: 0 0 1.5rem;
+    letter-spacing: -0.02em;
+    text-shadow: 0 2px 24px rgba(0,0,0,0.9);
+  }
+
+  .hero h1 .accent {
+    background: linear-gradient(135deg, #667eea, #f093fb);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: none;
+  }
+
+  .lead {
+    font-size: 1.25rem;
+    color: #fff;
+    line-height: 1.6;
+    margin: 0 0 2.5rem;
+    text-shadow: 0 1px 12px rgba(0,0,0,0.8);
+  }
+
+  .hero-cta {
+    display: inline-block;
+    padding: 1.1rem 1.925rem;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border-radius: 8px;
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-decoration: none;
+    margin-bottom: 1rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .hero-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+  }
+
+  .form-note {
+    font-size: 0.8rem;
+    color: #fff;
+    margin: 0.5rem 0 0;
+  }
+
+  /* Values - Horizontal strip */
+  .values {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    padding: 4rem 2rem;
+    background: linear-gradient(180deg, transparent, rgba(0,0,0,0.95));
+    flex-wrap: wrap;
+  }
+
+  .value {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    max-width: 220px;
+  }
+
+  .value-icon {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    color: #667eea;
+  }
+
+  .value-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .value-text strong {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+
+  .value-text span {
+    font-size: 0.85rem;
+    color: #fff;
+    line-height: 1.4;
+  }
+
+  /* Statement */
+  .statement {
+    position: relative;
+    z-index: 10;
+    padding: 8rem 2rem;
+    text-align: center;
+    background: #000;
+  }
+
+  .statement h2 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    margin: 0 0 1.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  .statement h2 em {
+    font-style: normal;
+    background: linear-gradient(135deg, #667eea, #f093fb);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .statement p {
+    font-size: 1.25rem;
+    color: #fff;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  /* How it works */
+  .how-it-works {
+    position: relative;
+    z-index: 10;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 4rem 2rem 8rem;
+  }
+
+  .how-block {
+    display: flex;
+    align-items: flex-start;
+    gap: 3rem;
+    margin-bottom: 4rem;
+  }
+
+  .how-block.reverse {
+    flex-direction: row-reverse;
+    text-align: right;
+  }
+
+  .how-number {
+    flex-shrink: 0;
+    font-size: 4rem;
+    font-weight: 800;
+    line-height: 1;
+    background: linear-gradient(135deg, #667eea 0%, #f093fb 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    opacity: 0.3;
+  }
+
+  .how-content h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0 0 0.75rem;
+  }
+
+  .how-content p {
+    font-size: 1rem;
+    color: #fff;
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  /* Tech callout */
+  .tech-callout {
+    position: relative;
+    z-index: 10;
+    padding: 4rem 2rem;
+    background: rgba(255,255,255,0.02);
+    border-top: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .tech-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .tech-left h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem;
+  }
+
+  .tech-left p {
+    font-size: 0.95rem;
+    color: #fff;
+    margin: 0 0 0.75rem;
+    max-width: 400px;
+  }
+
+  .tech-link {
+    font-size: 0.9rem;
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .tech-link:hover {
+    color: #f093fb;
+  }
+
+  .tech-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+  }
+
+  .github-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .github-link svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .github-link:hover {
+    border-color: #667eea;
+    background: rgba(102, 126, 234, 0.1);
+  }
+
+  .license {
+    font-size: 0.75rem;
+    color: #fff;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .values {
+      gap: 2rem;
+    }
+
+    .value {
+      max-width: 100%;
+      width: 100%;
+    }
+
+    .how-block,
+    .how-block.reverse {
+      flex-direction: column;
+      text-align: left;
+    }
+
+    .how-number {
+      font-size: 2.5rem;
+    }
+
+    .tech-inner {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .tech-right {
+      align-items: flex-start;
+    }
+  }
+</style>
+
+<script>
+  // Black hole shader - Original high quality version
+  const canvas = document.getElementById('blackhole-canvas') as HTMLCanvasElement;
+  if (canvas) {
+    const glCtx = canvas.getContext('webgl2', {
+      alpha: true,
+      antialias: true,
+      powerPreference: 'high-performance',
+      preserveDrawingBuffer: false
+    }) || canvas.getContext('webgl', {
+      alpha: true,
+      antialias: true,
+      powerPreference: 'high-performance',
+      preserveDrawingBuffer: false
+    });
+
+    if (glCtx) {
+      const gl = glCtx;
+      const vertexShaderSource = `
+        attribute vec2 a_position;
+        varying vec2 v_uv;
+        void main() {
+          v_uv = a_position;
+          gl_Position = vec4(a_position, 0.0, 1.0);
+        }
+      `;
+
+      const fragmentShaderSource = `
+        precision highp float;
+        varying vec2 v_uv;
+        uniform float u_time;
+        uniform vec2 u_resolution;
+        uniform float u_scroll; // 0 at top of hero -> 1 scrolled a viewport down
+
+        // ── Schwarzschild geodesic black hole ──
+        // Ported from a WGSL compute renderer to a single WebGL fragment pass.
+        // Geometry (RK4 light bending + accretion disk + photon ring) kept intact;
+        // compute-only extras (TAA, bloom pyramid, blackbody LUT) dropped/approximated.
+        // Length unit: 1 = one Schwarzschild radius. Horizon at 1, photon sphere at 1.5.
+
+        const float PI = 3.14159265359;
+        const float HORIZON = 1.0;
+        const float ESCAPE_R = 60.0;
+        const int   MAX_STEPS = 140;
+
+        // Disk / optics constants (baked from the native app's tuned params)
+        const float DISK_INNER = 3.0;
+        const float DISK_OUTER = 14.0;
+        const float DISK_THICK = 0.45;
+        const float DISK_BRIGHT = 1.0;
+        const float DISK_DENSITY = 1.8;
+        const float NOISE_SCALE = 1.0;
+        const float SWIRL = 0.25;
+        const float TEMP = 2.5;
+        const float DOPPLER = 0.55;
+        const float BEAMING = 2.2;
+        const float RING_GLOW = 3.0;
+        const float STAR_DENSITY = 1.0;
+        const float SAT = 3.0;
+        const float HIGHLIGHT = 0.08;
+        const float EXPOSURE = 1.5;
+        // soft gravitational lensing halo around the shadow (the old look's purple glow)
+        const vec3  HALO_COL = vec3(0.400, 0.494, 0.918);
+        const float HALO = 0.13;
+
+        // Camera (cam_y above the plane, looking slightly down at the disk)
+        const float CAM_X = 0.0;
+        const float CAM_Y = 1.6;
+        const float CAM_Z = -18.0;
+        const float CAM_PITCH = -0.08;
+        const float FOV = 42.0;
+
+        vec3 rotX(vec3 v, float a) { float s = sin(a); float c = cos(a); return vec3(v.x, c*v.y - s*v.z, s*v.y + c*v.z); }
+        vec3 rotY(vec3 v, float a) { float s = sin(a); float c = cos(a); return vec3(c*v.x - s*v.z, v.y, s*v.x + c*v.z); }
+
+        // Dave Hoskins hash
+        float hash13(vec3 q) {
+          vec3 p3 = fract(q * vec3(0.1031, 0.1107, 0.0973));
+          p3 += dot(p3, p3.yzx + 19.19);
+          return fract((p3.x + p3.y) * p3.z);
+        }
+
+        float vnoise(vec3 x) {
+          vec3 i = floor(x);
+          vec3 f = fract(x);
+          vec3 u = f * f * (3.0 - 2.0 * f);
+          float n000 = hash13(i + vec3(0.,0.,0.));
+          float n100 = hash13(i + vec3(1.,0.,0.));
+          float n010 = hash13(i + vec3(0.,1.,0.));
+          float n110 = hash13(i + vec3(1.,1.,0.));
+          float n001 = hash13(i + vec3(0.,0.,1.));
+          float n101 = hash13(i + vec3(1.,0.,1.));
+          float n011 = hash13(i + vec3(0.,1.,1.));
+          float n111 = hash13(i + vec3(1.,1.,1.));
+          float nx00 = mix(n000, n100, u.x);
+          float nx10 = mix(n010, n110, u.x);
+          float nx01 = mix(n001, n101, u.x);
+          float nx11 = mix(n011, n111, u.x);
+          return mix(mix(nx00, nx10, u.y), mix(nx01, nx11, u.y), u.z);
+        }
+
+        float fbm(vec3 x) {
+          float v = 0.0;
+          float amp = 0.5;
+          vec3 pos = x;
+          for (int i = 0; i < 4; i++) {
+            v += amp * vnoise(pos);
+            pos = pos * 2.02 + vec3(11.3, 7.7, 3.1);
+            amp *= 0.5;
+          }
+          return v;
+        }
+
+        // multifractal noise -> wispy filaments. octaves passed at runtime -> fixed
+        // loop bound with a conditional break (GLSL ES 1.00 requires constant bounds).
+        float cloud_noise(vec3 p, int octaves, float contrast) {
+          float acc = 1.0;
+          float freq = 1.0;
+          for (int i = 0; i < 6; i++) {
+            if (i >= octaves) break;
+            acc *= 1.0 + 0.1 * (vnoise(p * freq) * 2.0 - 1.0);
+            freq *= 3.0;
+          }
+          return log(1.0 + pow(max(0.0, acc), contrast));
+        }
+
+        vec2 curl2(vec3 p) {
+          float e = 0.5;
+          float nx1 = vnoise(p + vec3(e, 0.0, 0.0));
+          float nx0 = vnoise(p - vec3(e, 0.0, 0.0));
+          float ny1 = vnoise(p + vec3(0.0, e, 0.0));
+          float ny0 = vnoise(p - vec3(0.0, e, 0.0));
+          return vec2(ny1 - ny0, -(nx1 - nx0)) / (2.0 * e);
+        }
+
+        // analytic blackbody (Tanner Helland approx) replacing the LUT texture pass
+        vec3 blackbody(float T) {
+          T = clamp(T, 1000.0, 40000.0);
+          float t = T / 100.0;
+          float r, g, b;
+          if (t <= 66.0) r = 1.0;
+          else r = clamp(1.292936 * pow(t - 60.0, -0.1332047), 0.0, 1.0);
+          if (t <= 66.0) g = clamp(0.3900816 * log(t) - 0.6318414, 0.0, 1.0);
+          else g = clamp(1.129891 * pow(t - 60.0, -0.0755148), 0.0, 1.0);
+          if (t >= 66.0) b = 1.0;
+          else if (t <= 19.0) b = 0.0;
+          else b = clamp(0.5432068 * log(t - 10.0) - 1.196254, 0.0, 1.0);
+          return vec3(r, g, b);
+        }
+
+        // orbital Doppler x gravitational redshift of the orbiting gas
+        float disk_gfactor(vec3 pos, vec3 photon_dir) {
+          float rho = max(length(pos.xz), HORIZON + 1e-3);
+          float beta = clamp(sqrt(0.5 / rho), 0.0, 0.95);
+          float gamma = inversesqrt(max(1e-4, 1.0 - beta * beta));
+          vec3 tangent = normalize(vec3(-pos.z, 0.0, pos.x));
+          float cos_a = dot(tangent, -photon_dir);
+          float doppler = 1.0 / max(1e-3, gamma * (1.0 - beta * cos_a));
+          float grav = sqrt(max(1e-3, 1.0 - 1.0 / rho));
+          return doppler * grav;
+        }
+
+        // cheap one-tap density toward the core, for the lighting gradient
+        float disk_density_cheap(vec3 pos) {
+          float rho = length(pos.xz);
+          if (rho < DISK_INNER || rho > DISK_OUTER) return 0.0;
+          float edge = (rho - DISK_INNER) / max(1e-3, DISK_OUTER - DISK_INNER);
+          float half_h = DISK_THICK * (0.35 + 1.25 * (1.0 - edge));
+          float yr = pos.y / max(1e-3, half_h);
+          float vfall = exp(-yr * yr * 2.4);
+          if (vfall < 0.01) return 0.0;
+          // match disk_sample's seam-free twisted-Cartesian frame
+          float twist = SWIRL * u_time - log(max(rho, 1e-3)) * 2.4;
+          float ct = cos(twist), st = sin(twist);
+          vec3 q = vec3((pos.x * ct - pos.z * st) * 0.5,
+                        (pos.x * st + pos.z * ct) * 0.5,
+                        pos.y * 0.9) * NOISE_SCALE;
+          float radial = pow(clamp(DISK_INNER / max(rho, 1e-3), 0.0, 1.0), 1.6);
+          return smoothstep(0.33, 1.05, cloud_noise(q, 4, 46.0)) * radial * vfall;
+        }
+
+        vec4 disk_sample(vec3 pos, vec3 photon_dir) {
+          float rho = length(pos.xz);
+          if (rho < DISK_INNER || rho > DISK_OUTER) return vec4(0.0);
+
+          float edge = (rho - DISK_INNER) / max(1e-3, DISK_OUTER - DISK_INNER);
+          float half_h = DISK_THICK * (0.35 + 1.25 * (1.0 - edge));
+          float yr = pos.y / max(1e-3, half_h);
+          float vfall = exp(-yr * yr * 2.4);
+          if (vfall < 0.01) return vec4(0.0);
+
+          float radial = pow(clamp(DISK_INNER / max(rho, 1e-3), 0.0, 1.0), 1.15);
+          if (radial * vfall * 1.4 < 0.004) return vec4(0.0);
+
+          float ang = atan(pos.z, pos.x); // for the color wave only (used via sin -> seam-free)
+          // sample noise in a Cartesian frame twisted by the log-spiral + time: gives the
+          // spiral arms with no atan branch-cut seam across the disk
+          float twist = SWIRL * u_time - log(max(rho, 1e-3)) * 2.4;
+          float ct = cos(twist), st = sin(twist);
+          vec3 q = vec3((pos.x * ct - pos.z * st) * 0.5,
+                        (pos.x * st + pos.z * ct) * 0.5,
+                        pos.y * 1.1) * NOISE_SCALE;
+
+          vec2 eddy = curl2(q * 2.2 + 9.0) * 0.3;
+          q += vec3(eddy.x, eddy.y, 0.0);
+
+          float cloud = cloud_noise(q, 4, 26.0);
+          float fine = cloud_noise(q * 1.9 + 21.0, 2, 16.0);
+          float n = cloud * (0.78 + 0.22 * fine);
+          // threshold density: gaps fall to zero -> filaments. The column is integrated by
+          // the loop's dithered substeps, so no soft floor needed (that was the single-sample hack).
+          float dens = smoothstep(0.30, 1.0, n);
+          float macro_n = cloud_noise(q * 0.22 + 50.0, 3, 16.0);
+          dens *= mix(0.55, 1.3, smoothstep(0.15, 1.0, macro_n));
+          float dust = smoothstep(0.4, 0.95, cloud_noise(q * 0.45 + 30.0, 3, 22.0));
+          dens *= (1.0 - 0.4 * dust);
+          dens *= radial * vfall;
+          if (dens < 0.004) return vec4(0.0);
+
+          // self-shadow
+          vec3 shadow_q = q + vec3(0.0, 0.0, half_h * 0.9 * NOISE_SCALE + 0.4);
+          float occ = smoothstep(0.3, 1.2, cloud_noise(shadow_q, 3, 38.0));
+          float shade = 1.0 - 0.45 * occ;
+
+          // temperature falls with radius, rises in dense filaments
+          float T_radial = (2200.0 + 4200.0 * TEMP) * pow(clamp(DISK_INNER / max(rho, 1e-3), 0.0, 1.0), 0.85);
+          float T_local = T_radial * mix(0.78, 1.3, smoothstep(0.3, 1.2, cloud));
+          float g_raw = disk_gfactor(pos, photon_dir);
+          float g = 1.0 + (g_raw - 1.0) * DOPPLER;
+          float T_obs = clamp(T_local, 1200.0, 26000.0); // redshift power = 0 in the source
+          vec3 emis = blackbody(T_obs);
+
+          float lum = dot(emis, vec3(0.2126, 0.7152, 0.0722));
+          emis = max(vec3(0.0), mix(vec3(lum), emis, SAT));
+
+          float core_d = (rho - DISK_INNER) / max(1e-3, DISK_INNER * 0.5);
+          emis += vec3(1.0, 0.34, 0.10) * exp(-core_d * core_d) * 1.5;
+
+          float lit_d = (rho - DISK_INNER) / max(1e-3, DISK_INNER * 0.01);
+          emis += vec3(1.0, 0.74, 0.48) * exp(-lit_d * lit_d) * RING_GLOW * 0.7;
+
+          float face = abs(photon_dir.y);
+          float view = mix(0.4, 1.15, smoothstep(0.0, 0.6, face));
+
+          float beam_raw = pow(max(g, 1e-3), BEAMING);
+          float beam = beam_raw / (1.0 + 0.12 * max(0.0, beam_raw - 1.0));
+          emis *= DISK_BRIGHT * (0.35 + 3.0 * radial) * beam * shade * view;
+
+          vec3 light_dir = normalize(-pos + vec3(1e-4, 1e-4, 1e-4));
+          float grad = disk_density_cheap(pos + light_dir * 0.5) - dens;
+          float lvl = max(emis.r, max(emis.g, emis.b));
+          emis += vec3(1.0, 0.45, 0.16) * max(0.0, grad) * lvl * 1.3;
+          emis += vec3(0.22, 0.5, 1.0) * max(0.0, -grad) * lvl * 3.6;
+
+          float el = max(emis.r, max(emis.g, max(emis.b, 1e-4)));
+          float comp = el * (1.0 + el * 0.012) / (1.0 + el * max(0.005, HIGHLIGHT));
+          emis *= comp / el;
+
+          // recolor using the two hero-accent colors as a smooth wave that sweeps
+          // around the disk over time
+          float ci = max(emis.r, max(emis.g, emis.b));
+          vec3 cA = vec3(0.400, 0.494, 0.918); // #667eea
+          vec3 cB = vec3(0.941, 0.576, 0.984); // #f093fb
+          // smooth azimuthal sweep that rotates with time (not tied to the tight spiral)
+          float wave = 0.5 + 0.5 * sin(ang + u_time * 0.4);
+          vec3 base = mix(cA, cB, wave);
+          vec3 tint = base * mix(0.85, 1.9, radial);
+          emis = ci * tint;
+
+          // per-point emission + density; the ray-march loop integrates the column
+          // via dithered substeps (grazing rays accumulate more samples = thicker column).
+          float alpha = clamp(dens * DISK_DENSITY, 0.0, 1.0);
+          return vec4(emis * dens, alpha);
+        }
+
+        vec3 starfield(vec3 dir) {
+          vec3 col = vec3(0.0);
+          vec3 d = normalize(dir);
+          float scale = 200.0;
+          for (int k = 0; k < 3; k++) {
+            vec3 pos = d * scale;
+            vec3 cell = floor(pos);
+            float h = hash13(cell);
+            if (h > 0.982) {
+              vec3 local = fract(pos) - 0.5;
+              float dist = length(local);
+              float bright = pow(smoothstep(0.22, 0.0, dist), 2.0);
+              float tone = hash13(cell + 5.3);
+              vec3 tint = mix(vec3(1.0, 0.82, 0.62), vec3(0.72, 0.84, 1.0), tone);
+              col += bright * tint * (0.4 + 1.1 * fract(h * 113.0));
+            }
+            d = d.yzx * 1.7 + 4.1;
+            scale *= 2.1;
+          }
+          return col * STAR_DENSITY * 2.6;
+        }
+
+        vec3 galaxy(vec3 dir) {
+          vec3 d = normalize(dir);
+          vec3 bn = normalize(vec3(0.62, 0.70, 0.36));
+          float warp = fbm(d * 1.3 + 4.0) - 0.5;
+          float h = dot(d, bn) + 0.25 * warp;
+          float band = exp(-h * h * 9.0);
+          if (band < 0.002) return vec3(0.0);
+          float neb = fbm(d * 2.5 + 21.0);
+          float wisp = fbm(d * 6.0 + warp * 2.0 + 7.0);
+          float fine = fbm(d * 13.0 + 40.0);
+          float dust = smoothstep(0.4, 0.85, fbm(d * 4.0 + 50.0));
+          float hue = fbm(d * 1.8 + 60.0);
+          vec3 col = mix(vec3(0.010, 0.022, 0.065), vec3(0.03, 0.09, 0.14), neb);
+          col = mix(col, vec3(0.10, 0.06, 0.09), smoothstep(0.55, 0.95, hue) * 0.5);
+          col += vec3(0.06, 0.09, 0.18) * pow(wisp, 3.0);
+          col += vec3(0.10, 0.12, 0.16) * pow(fine, 5.0);
+          col *= band * (0.25 + 0.9 * neb) * (1.0 - 0.6 * dust);
+          return col * STAR_DENSITY * 0.5;
+        }
+
+        // photon acceleration a = -1.5 h^2 r / r^5  (rs = 1)
+        vec3 accel(vec3 pos, float h2) {
+          float r2 = dot(pos, pos);
+          float r = sqrt(r2);
+          float r5 = max(r2 * r2 * r, 1e-6);
+          return -1.5 * h2 * pos / r5;
+        }
+
+        // aces-based hue preserving tonemap (replaces the compute bloom/exposure chain)
+        float aces_scalar(float x) {
+          return clamp((x * (2.51 * x + 0.03)) / (x * (2.43 * x + 0.59) + 0.14), 0.0, 1.0);
+        }
+        vec3 tonemap(vec3 c) {
+          float peak = max(max(c.r, c.g), max(c.b, 1e-5));
+          vec3 ratio = c / peak;
+          float desat = clamp((peak - 1.5) / 3.5, 0.0, 0.85);
+          ratio = mix(ratio, vec3(1.0), desat);
+          return ratio * aces_scalar(peak);
+        }
+
+        void main() {
+          vec2 R = u_resolution;
+          vec2 uv = gl_FragCoord.xy / R;
+          // FOV follows aspect: zoomed/dramatic on landscape, widened on portrait so the
+          // hole shrinks and sits above the text instead of swallowing the layout
+          float aspect = R.x / R.y;
+          float t = clamp((aspect - 0.5) / 0.9, 0.0, 1.0); // 0 = tall phone, 1 = >=1.4 wide
+          float fovDeg = mix(70.0, FOV, t);
+          float zoom = mix(2.6, 1.0, t) * 1.1;  // portrait pulls the camera back; *1.1 = 10% smaller overall
+          zoom *= mix(1.0, 0.45, u_scroll); // scroll down -> camera moves in -> zoom into the hole
+          float yoff = mix(0.15, 0.45, t);
+          vec2 ndc = (2.0 * uv - 1.0);
+          ndc.x *= aspect;
+          ndc.y -= yoff; // shift up on screen (starts sooner)
+
+          float f = tan(radians(fovDeg) * 0.5);
+          vec3 ro = vec3(CAM_X, CAM_Y, CAM_Z) * zoom;
+          // gentle auto-orbit so the background feels alive
+          float yaw = u_time * 0.05;
+          vec3 rd = normalize(vec3(ndc * f, 1.0));
+          rd = rotY(rotX(rd, CAM_PITCH), yaw);
+          ro = rotY(ro, yaw);
+
+          vec3 cr = cross(ro, rd);
+          float h2 = dot(cr, cr);
+
+          vec3 rpos = ro;
+          vec3 rvel = rd;
+          vec4 col = vec4(0.0);
+          vec3 photon_dir = rd;
+          float turn = 0.0;
+          float halo = 0.0;
+          bool captured = false;
+
+          for (int i = 0; i < MAX_STEPS; i++) {
+            if (col.a > 0.99) break;
+            float r = length(rpos);
+            if (r < HORIZON * 1.001) { captured = true; break; }
+            if (r > ESCAPE_R && dot(rpos, rvel) > 0.0) break;
+
+            float dt = clamp(0.10 * (r - HORIZON * 0.9), 0.015, 1.2);
+            // tighten steps near the disk plane so midplane crossings interpolate cleanly
+            if (abs(rpos.y) < 1.2 && length(rpos.xz) < DISK_OUTER + 2.0) dt = min(dt, 0.28);
+
+            // RK4 geodesic step
+            vec3 k1v = rvel;                    vec3 k1a = accel(rpos, h2);
+            vec3 k2v = rvel + 0.5 * dt * k1a;   vec3 k2a = accel(rpos + 0.5 * dt * k1v, h2);
+            vec3 k3v = rvel + 0.5 * dt * k2a;   vec3 k3a = accel(rpos + 0.5 * dt * k2v, h2);
+            vec3 k4v = rvel + dt * k3a;         vec3 k4a = accel(rpos + dt * k3v, h2);
+            vec3 npos = rpos + (dt / 6.0) * (k1v + 2.0 * k2v + 2.0 * k3v + k4v);
+            vec3 nvel = rvel + (dt / 6.0) * (k1a + 2.0 * k2a + 2.0 * k3a + k4a);
+
+            vec3 seg = npos - rpos;
+            float seglen = length(seg);
+            if (seglen > 1e-6) {
+              vec3 nd = seg / seglen;
+              turn += acos(clamp(dot(photon_dir, nd), -1.0, 1.0));
+              photon_dir = nd;
+            }
+
+            float rho_a = length(rpos.xz);
+            float rho_b = length(npos.xz);
+            bool in_annulus = max(rho_a, rho_b) > DISK_INNER - 1.0 && min(rho_a, rho_b) < DISK_OUTER + 1.0;
+            bool crossing = rpos.y * npos.y < 0.0;
+            bool near_plane = abs(rpos.y) < DISK_THICK * 2.0 + seglen;
+            // march the disk slab with dithered substeps so edge-on columns are sampled
+            // in depth (the single midplane sample is what banded into concentric rings)
+            if (in_annulus && (crossing || near_plane)) {
+              float dither = hash13(vec3(gl_FragCoord.xy, 1.0));
+              int subs = int(clamp(seglen / 0.06 + 1.0, 1.0, 24.0));
+              float inv = 1.0 / float(subs);
+              for (int s = 0; s < 24; s++) {
+                if (s >= subs || col.a > 0.99) break;
+                float ts = (float(s) + dither) * inv;
+                vec3 sp = mix(rpos, npos, ts);
+                vec4 smp = disk_sample(sp, photon_dir);
+                if (smp.a > 0.0) {
+                  float a = clamp(smp.a * seglen * inv * 1.6, 0.0, 1.0);
+                  float tr = clamp(1.0 - col.a, 0.001, 1.0);
+                  col = vec4(col.rgb + smp.rgb * seglen * inv * 1.3 * tr, col.a + (1.0 - col.a) * a);
+                }
+              }
+            }
+
+            // accumulate lensing glow: strong near the hole, falls off with distance
+            halo += dt / (r * r * r) * smoothstep(7.0, 1.2, r);
+
+            rpos = npos;
+            rvel = nvel;
+          }
+
+          // photon ring glow
+          if (!captured) {
+            float glow = smoothstep(1.6, 7.0, turn) * RING_GLOW;
+            if (glow > 0.001) {
+              vec3 glow_col = mix(vec3(0.400, 0.494, 0.918), vec3(0.941, 0.576, 0.984), smoothstep(5.0, 9.0, turn));
+              float ang = atan(photon_dir.z, photon_dir.x);
+              float tex = 0.55 + 0.55 * cloud_noise(vec3(ang * 2.4 + SWIRL * u_time, turn * 0.5, 5.0), 3, 18.0);
+              col = vec4(col.rgb + glow * glow_col * tex * (1.0 - col.a) * 0.9, col.a);
+            }
+          }
+          if (!captured && col.a < 0.99) {
+            vec3 bg = starfield(photon_dir) + galaxy(photon_dir);
+            col = vec4(col.rgb + bg * (1.0 - col.a), col.a);
+          }
+
+          // gravitational lensing halo (behind the disk it already occludes via col.a)
+          col = vec4(col.rgb + clamp(halo * HALO, 0.0, 1.5) * HALO_COL * (1.0 - col.a), col.a);
+
+          // exposure -> tonemap -> gamma -> subtle sat -> vignette
+          vec3 color = tonemap(col.rgb * EXPOSURE);
+          color = pow(color, vec3(0.9));
+          float luma = dot(color, vec3(0.2126, 0.7152, 0.0722));
+          color = mix(vec3(luma), color, 1.08);
+          vec2 qv = uv - 0.5;
+          color *= 1.0 - dot(qv, qv) * 0.55;
+
+          // dither: break up 8-bit banding on the disk's smooth radial gradient
+          // (concentric arcs are iso-brightness contours quantized to the framebuffer)
+          color += (hash13(vec3(gl_FragCoord.xy, 1.0)) - 0.5) / 255.0;
+
+          gl_FragColor = vec4(color, 1.0);
+        }
+      `;
+
+      function compileShader(type: number, source: string): WebGLShader | null {
+        const shader = gl.createShader(type);
+        if (!shader) return null;
+        gl.shaderSource(shader, source);
+        gl.compileShader(shader);
+        if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+          console.error('Shader error:', gl.getShaderInfoLog(shader));
+          gl.deleteShader(shader);
+          return null;
+        }
+        return shader;
+      }
+
+      const vertexShader = compileShader(gl.VERTEX_SHADER, vertexShaderSource);
+      const fragmentShader = compileShader(gl.FRAGMENT_SHADER, fragmentShaderSource);
+
+      if (vertexShader && fragmentShader) {
+        const program = gl.createProgram();
+        if (program) {
+          gl.attachShader(program, vertexShader);
+          gl.attachShader(program, fragmentShader);
+          gl.linkProgram(program);
+
+          if (gl.getProgramParameter(program, gl.LINK_STATUS)) {
+            const positions = new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]);
+            const buffer = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+            gl.bufferData(gl.ARRAY_BUFFER, positions, gl.STATIC_DRAW);
+            const positionLocation = gl.getAttribLocation(program, 'a_position');
+            gl.enableVertexAttribArray(positionLocation);
+            gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
+            const timeLocation = gl.getUniformLocation(program, 'u_time');
+            const resolutionLocation = gl.getUniformLocation(program, 'u_resolution');
+            const scrollLocation = gl.getUniformLocation(program, 'u_scroll');
+            gl.useProgram(program);
+
+            let startTime = Date.now();
+            let animationId: number;
+            let isVisible = true;
+            let lastRenderTime = 0;
+            const targetFPS = 30; // 30fps is enough for slow animation
+            const frameInterval = 1000 / targetFPS;
+
+            function resizeCanvas() {
+              const isMobile = window.innerWidth <= 768;
+              // Render near device pixels on mobile so the event-horizon edge stays crisp
+              // on high-DPR phones (S25U ~3.5x); desktop keeps its cheap 1x backing store.
+              const dpr = Math.min(window.devicePixelRatio || 1, isMobile ? 2.5 : 1.5);
+              const scale = isMobile ? 0.9 : 0.65;
+              let w = Math.floor(window.innerWidth * scale * dpr);
+              let h = Math.floor(window.innerHeight * scale * dpr);
+              // ponytail: area clamp keeps the heavy geodesic shader affordable on weak GPUs
+              const MAX_PIXELS = 2_000_000, area = w * h;
+              if (area > MAX_PIXELS) { const k = Math.sqrt(MAX_PIXELS / area); w = (w * k) | 0; h = (h * k) | 0; }
+              canvas.width = w;
+              canvas.height = h;
+            }
+
+            function render(currentTime: number) {
+              animationId = requestAnimationFrame(render);
+
+              // Skip frame if not visible or not enough time passed
+              if (!isVisible) return;
+              const delta = currentTime - lastRenderTime;
+              if (delta < frameInterval) return;
+              lastRenderTime = currentTime - (delta % frameInterval);
+
+              gl.viewport(0, 0, canvas.width, canvas.height);
+              gl.uniform1f(timeLocation, (Date.now() - startTime) / 1000);
+              gl.uniform2f(resolutionLocation, canvas.width, canvas.height);
+              // scroll across the whole page drives the zoom-in (0 at top, 1 at footer)
+              const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+              const scroll = maxScroll > 0 ? Math.min(window.scrollY / maxScroll, 1.0) : 0.0;
+              gl.uniform1f(scrollLocation, scroll);
+              gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+            }
+
+            const observer = new IntersectionObserver((entries) => { isVisible = entries[0]?.isIntersecting ?? false; }, { threshold: 0.1 });
+            observer.observe(canvas);
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+            requestAnimationFrame(render);
+
+            window.addEventListener('beforeunload', () => {
+              observer.disconnect();
+              cancelAnimationFrame(animationId);
+            });
+          }
+        }
+      }
+    }
+  }
+
+</script>
