@@ -1,0 +1,15 @@
+---
+import ServiceDetail from '../../../components/pages/ServiceDetail.astro';
+import { SERVICE_META } from '../../../data/services';
+import { nonDefaultLocales, type Lang } from '../../../i18n/ui';
+
+export function getStaticPaths() {
+  return nonDefaultLocales.flatMap((lang) =>
+    SERVICE_META.map((s) => ({ params: { lang, service: s.slug } })),
+  );
+}
+
+const { lang, service } = Astro.params as { lang: Lang; service: string };
+---
+
+<ServiceDetail lang={lang} slug={service} />

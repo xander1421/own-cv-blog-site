@@ -1,0 +1,1304 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { SERVICES } from '../../data/services';
+import { useTranslations, type Lang } from '../../i18n/ui';
+import { getHomeContent } from '../../i18n/content/home';
+
+const { lang = 'en' } = Astro.props as { lang?: Lang };
+const c = getHomeContent(lang);
+const t = useTranslations(lang);
+
+const allPosts = await getCollection('blog');
+
+// Function to calculate reading time
+function calculateReadingTime(content: string): number {
+  const plainText = content
+    .replace(/```[\s\S]*?```/g, '')
+    .replace(/`[^`]*`/g, '')
+    .replace(/#{1,6}\s/g, '')
+    .replace(/[*_~`]/g, '')
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+    .replace(/\n+/g, ' ');
+
+  const words = plainText.trim().split(/\s+/).filter(word => word.length > 0);
+  const readingTime = Math.ceil(words.length / 200);
+  return readingTime;
+}
+
+const sortedPosts = allPosts.sort((a, b) =>
+  new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+const featuredPosts = sortedPosts.slice(0, 3).map(post => ({
+  ...post,
+  readingTime: calculateReadingTime(post.body ?? '')
+}));
+
+// JSON-LD structured data for Person schema (optimized for recruiters and search)
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Alexandru Pruteanu",
+  "alternateName": "Alex Pruteanu",
+  "url": "https://alexpruteanu.cloud",
+  "image": "https://alexpruteanu.cloud/width=3840.webp",
+  "jobTitle": "DevOps Engineer",
+  "description": "DevOps Engineer with 6+ years of experience building scalable cloud infrastructures using AWS, Kubernetes, and Terraform",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "Yopeso"
+  },
+  "sameAs": [
+    "https://github.com/xander1421",
+    "https://linkedin.com/in/alexandru-prt",
+    "https://alexpruteanu.cloud"
+  ],
+  "email": "alexpruteanu@hotmail.com",
+  "knowsAbout": [
+    "DevOps",
+    "Cloud Infrastructure",
+    "AWS",
+    "Google Cloud Platform",
+    "Kubernetes",
+    "Docker",
+    "Terraform",
+    "Infrastructure as Code",
+    "CI/CD",
+    "Jenkins",
+    "GitHub Actions",
+    "Ansible",
+    "Helm",
+    "Site Reliability Engineering",
+    "Monitoring",
+    "Observability",
+    "Security",
+    "IAM",
+    "RBAC",
+    "Encryption"
+  ]
+};
+
+// WebSite schema for the main site
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Alexandru Pruteanu - DevOps Engineer",
+  "url": "https://alexpruteanu.cloud",
+  "description": "Technical blog and portfolio of Alexandru Pruteanu, DevOps Engineer specializing in cloud infrastructure, Kubernetes, and scalable systems",
+  "author": {
+    "@type": "Person",
+    "name": "Alexandru Pruteanu"
+  },
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "https://alexpruteanu.cloud/blog?search={search_term_string}"
+    },
+    "query-input": "required name=search_term_string"
+  }
+};
+
+// ProfessionalService schema — declares the consulting offering itself
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Alexandru Pruteanu — DevOps & Cloud Consulting",
+  "url": "https://alexpruteanu.cloud",
+  "image": "https://alexpruteanu.cloud/width=3840.webp",
+  "description": "DevOps and cloud consulting for growing teams: cloud migration to AWS and Kubernetes, infrastructure cost optimization, CI/CD, and reliability engineering.",
+  "areaServed": "Worldwide",
+  "availableLanguage": ["English", "Romanian", "Portuguese", "Russian"],
+  "priceRange": "$$",
+  "provider": {
+    "@type": "Person",
+    "name": "Alexandru Pruteanu",
+    "url": "https://alexpruteanu.cloud"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "DevOps, Cloud & Product Consulting Services",
+    "itemListElement": SERVICES.map((s) => ({
+      "@type": "Offer",
+      "itemOffered": { "@type": "Service", "name": s.title, "description": s.description, "url": `https://alexpruteanu.cloud/services/${s.slug}` },
+    })),
+  }
+};
+
+// FAQPage schema — mirrors the visible FAQ section for rich results
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What does a DevOps consultant actually do for my team?",
+      "acceptedAnswer": { "@type": "Answer", "text": "I find what's slow, expensive, or fragile in your infrastructure and fix it — then set things up so your own team can run it after I leave. The goal is to make myself unnecessary, not to lock you into me." }
+    },
+    {
+      "@type": "Question",
+      "name": "Will migrating to the cloud cause downtime?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No scary big-bang weekend. We move one piece at a time, keep production running the whole way, and roll back the moment anything looks off. Most migrations finish without users noticing." }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I actually need Kubernetes?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Honestly, often not. If a handful of containers or managed services do the job, that's what you get. Kubernetes only goes in when your scale or complexity actually earns the extra moving parts." }
+    },
+    {
+      "@type": "Question",
+      "name": "How do you charge?",
+      "acceptedAnswer": { "@type": "Answer", "text": "It starts with a free call and a look at your stack. From there you get a fixed-scope proposal or a day rate — your choice. You approve the plan and the cost before any work begins." }
+    },
+    {
+      "@type": "Question",
+      "name": "How soon can we start, and do you work with my existing team?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Usually within a week or two. I work alongside your engineers rather than over them, document everything as I go, and hand it over so nothing depends on me being around." }
+    }
+  ]
+};
+---
+
+<BaseLayout
+  title={c.meta.title}
+  description={c.meta.description}
+  localized
+>
+  <!-- JSON-LD Schema for Person and WebSite -->
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  <section class="hero">
+    <div class="hero-content">
+      <span class="kicker" set:html={c.heroKicker}></span>
+
+      <h1 class="headline"><Fragment set:html={c.heroTitleA} /><br /><Fragment set:html={c.heroTitleB} /></h1>
+
+      <p class="subhead" set:html={c.heroSubhead}></p>
+
+      <div class="cta-row">
+        <a href="https://cal.eu/alexpruteanu" class="cta-primary" set:html={c.ctaBookCall}></a>
+        <span class="cta-note" set:html={c.ctaNote}></span>
+      </div>
+
+      <ul class="proof-stats">
+        <li><strong set:html={c.proofStat1Value}></strong><span set:html={c.proofStat1Label}></span></li>
+        <li><strong set:html={c.proofStat2Value}></strong><span set:html={c.proofStat2Label}></span></li>
+        <li><strong set:html={c.proofStat3Value}></strong><span set:html={c.proofStat3Label}></span></li>
+      </ul>
+
+      <ul class="service-pills">
+        <li set:html={c.servicePill1}></li>
+        <li set:html={c.servicePill2}></li>
+        <li set:html={c.servicePill3}></li>
+        <li set:html={c.servicePill4}></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="services">
+    <div class="section-inner">
+      <span class="kicker" set:html={c.servicesKicker}></span>
+      <h2 class="section-h" set:html={c.servicesHeading}></h2>
+      <div class="roadmap">
+        <span class="road-line" aria-hidden="true"></span>
+
+        <article class="service-card stop">
+          <span class="stop-node" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17.5 19a4.5 4.5 0 0 0 0-9 6 6 0 0 0-11.6-1.5A4 4 0 0 0 6 19z"/>
+              <path d="M12 16v-5"/><path d="m9.5 13 2.5-2.5 2.5 2.5"/>
+            </svg>
+          </span>
+          <div class="stop-body">
+            <h3><a href="/services/cloud-migration" set:html={c.serviceCard1Title}></a></h3>
+            <p set:html={c.serviceCard1Body}></p>
+          </div>
+        </article>
+
+        <article class="service-card stop">
+          <span class="stop-node" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2.5 20 7v10l-8 4.5L4 17V7z"/>
+              <path d="M12 7v5l4 2"/><path d="m12 12-4 2"/>
+            </svg>
+          </span>
+          <div class="stop-body">
+            <h3><a href="/services/kubernetes" set:html={c.serviceCard2Title}></a></h3>
+            <p set:html={c.serviceCard2Body}></p>
+          </div>
+        </article>
+
+        <article class="service-card stop">
+          <span class="stop-node" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4.5 3.5v8"/><rect x="3" y="5.5" width="3" height="4" rx="0.4"/><path d="M9.5 6v9.5"/><rect x="8" y="8" width="3" height="5" rx="0.4" fill="currentColor"/><path d="M14.5 9v9.5"/><rect x="13" y="11" width="3" height="5" rx="0.4"/><path d="M19.5 12v8.5"/><rect x="18" y="14" width="3" height="5" rx="0.4" fill="currentColor"/>
+            </svg>
+          </span>
+          <div class="stop-body">
+            <h3><a href="/services/cost-optimization" set:html={c.serviceCard3Title}></a></h3>
+            <p set:html={c.serviceCard3Body}></p>
+          </div>
+        </article>
+
+        <article class="service-card stop">
+          <span class="stop-node" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3.5 12a8.5 8.5 0 0 1 14.4-6.2"/><path d="M18.5 2.5v3.6h-3.6"/><path d="M20.5 12a8.5 8.5 0 0 1-14.4 6.2"/><path d="M5.5 21.5v-3.6h3.6"/>
+            </svg>
+          </span>
+          <div class="stop-body">
+            <h3><a href="/services/cicd-iac" set:html={c.serviceCard4Title}></a></h3>
+            <p set:html={c.serviceCard4Body}></p>
+          </div>
+        </article>
+
+        <div class="road-end">
+          <span class="road-end-node" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11Z"/>
+              <circle cx="12" cy="10" r="2.5"/>
+            </svg>
+          </span>
+        </div>
+      </div>
+
+      <p class="road-end-text" set:html={c.roadEndText}></p>
+
+      <p class="services-more"><Fragment set:html={c.servicesMoreLead} /><a href="/services/architecture-review" set:html={c.servicesMoreArchitecture}></a>,<a href="/services/ai-app-audit" set:html={c.servicesMoreAudit}></a>, and<a href="/services/idea-to-production" set:html={c.servicesMoreIdea}></a>.<a href="/services" class="services-more-all" set:html={c.servicesMoreAll}></a></p>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section class="process">
+    <div class="section-inner">
+      <span class="kicker" set:html={c.processKicker}></span>
+      <h2 class="section-h" set:html={c.processHeading}></h2>
+      <ol class="steps">
+        <li>
+          <span class="step-num">01</span>
+          <h3 set:html={c.step1Title}></h3>
+          <p set:html={c.step1Body}></p>
+        </li>
+        <li>
+          <span class="step-num">02</span>
+          <h3 set:html={c.step2Title}></h3>
+          <p set:html={c.step2Body}></p>
+        </li>
+        <li>
+          <span class="step-num">03</span>
+          <h3 set:html={c.step3Title}></h3>
+          <p set:html={c.step3Body}></p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Side project -->
+  <section class="flagship">
+    <div class="section-inner">
+      <span class="kicker" set:html={c.flagshipKicker}></span>
+      <h2 class="section-h" set:html={c.flagshipHeading}></h2>
+      <p class="flagship-lead" set:html={c.flagshipLead}></p>
+      <div class="flagship-row">
+        <span class="flagship-stat"><strong set:html={c.flagshipStat1Value}></strong><Fragment set:html={c.flagshipStat1Label} /></span>
+        <span class="flagship-stat"><strong set:html={c.flagshipStat2Value}></strong><Fragment set:html={c.flagshipStat2Label} /></span>
+        <span class="flagship-stat"><strong set:html={c.flagshipStat3Value}></strong><Fragment set:html={c.flagshipStat3Label} /></span>
+        <span class="flagship-stat"><strong set:html={c.flagshipStat4Value}></strong><Fragment set:html={c.flagshipStat4Label} /></span>
+        <span class="flagship-stat"><strong set:html={c.flagshipStat5Value}></strong><Fragment set:html={c.flagshipStat5Label} /></span>
+      </div>
+      <div class="flagship-links">
+        <a href="/projects/chatter" class="flagship-cta" set:html={c.flagshipMoreCta}></a>
+        <a href="/projects" class="flagship-link2" set:html={c.flagshipAllProjects}></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="about">
+    <div class="section-inner about-inner">
+      <span class="kicker" set:html={c.aboutKicker}></span>
+      <h2 class="section-h" set:html={c.aboutHeading}></h2>
+      <p set:html={c.aboutBody}></p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq">
+    <div class="section-inner">
+      <span class="kicker" set:html={c.faqKicker}></span>
+      <h2 class="section-h" set:html={c.faqHeading}></h2>
+
+      <details class="faq-item">
+        <summary set:html={c.faq1Q}></summary>
+        <p set:html={c.faq1A}></p>
+      </details>
+
+      <details class="faq-item">
+        <summary set:html={c.faq2Q}></summary>
+        <p set:html={c.faq2A}></p>
+      </details>
+
+      <details class="faq-item">
+        <summary set:html={c.faq3Q}></summary>
+        <p set:html={c.faq3A}></p>
+      </details>
+
+      <details class="faq-item">
+        <summary set:html={c.faq4Q}></summary>
+        <p set:html={c.faq4A}></p>
+      </details>
+
+      <details class="faq-item">
+        <summary set:html={c.faq5Q}></summary>
+        <p set:html={c.faq5A}></p>
+      </details>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="cta-band">
+    <div class="section-inner">
+      <h2 set:html={c.ctaBandHeading}></h2>
+      <p set:html={c.ctaBandBody}></p>
+      <a href="https://cal.eu/alexpruteanu" class="cta-primary" set:html={c.ctaBookCall}></a>
+    </div>
+  </section>
+
+  <section class="featured-posts">
+    <div class="section-header">
+      <h2 class="section-title" set:html={c.latestPosts}></h2>
+      <a href="/blog" class="view-all-link" set:html={c.viewAllPosts}></a>
+    </div>
+
+    <div class="posts-grid">
+      {featuredPosts.map((post) => (
+        <article class="post-card">
+          <div class="post-meta">
+            <time datetime={post.data.date.toISOString()}>
+              {post.data.date.toLocaleDateString(lang, {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+              })}
+            </time>
+            <span class="reading-time">• {post.readingTime} {t('post.minRead')}</span>
+          </div>
+
+          <h3 class="post-title">
+            <a href={`/blog/${post.id}`}>{post.data.title}</a>
+          </h3>
+
+          {post.data.image && (
+            <a href={`/blog/${post.id}`} class="post-image-link">
+              <img
+                src={`/images/blog/${post.data.image.replace('./', '')}`}
+                alt={post.data.title}
+                class="post-image"
+                loading="lazy"
+                decoding="async"
+                width="600"
+                height="220"
+                fetchpriority="low"
+              />
+            </a>
+          )}
+
+          <p class="post-description">{post.data.description}</p>
+
+          <div class="post-tags">
+            {post.data.tags.map((tag: string, index: number) => (
+              <span class={`tag tag-${index % 5}`}>{tag}</span>
+            ))}
+          </div>
+
+          <a href={`/blog/${post.id}`} class="read-more">
+            <span class="sr-only">{post.data.title} — </span><Fragment set:html={t('post.readMore')} />
+          </a>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    padding: 5rem 2rem 4rem;
+    border-bottom: 1px solid rgba(0, 255, 204, 0.1);
+  }
+
+  .hero-content {
+    max-width: 820px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .kicker {
+    display: inline-block;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.85rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: 1.5rem;
+  }
+
+  /* Clean, professional headline — not the techy display font */
+  .headline {
+    font-family: var(--font-heading);
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    font-weight: 800;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    margin: 0 0 1.5rem;
+    background: linear-gradient(100deg, #e0e0e0 30%, var(--color-primary) 70%, #00bfff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  .subhead {
+    font-size: 1.2rem;
+    line-height: 1.65;
+    color: var(--color-text-dim);
+    max-width: 640px;
+    margin: 0 auto 2.5rem;
+  }
+
+  .cta-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 3.5rem;
+  }
+
+  .cta-primary {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: var(--color-primary);
+    color: #06201b;
+    font-weight: 700;
+    font-size: 1.05rem;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .cta-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0, 255, 204, 0.3);
+  }
+
+  .cta-note {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.9rem;
+    color: var(--color-text-dim);
+  }
+
+  /* Proof metrics */
+  .proof-stats {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+  }
+
+  .proof-stats li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 200px;
+  }
+
+  .proof-stats strong {
+    font-family: var(--font-heading);
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: var(--color-primary);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+
+  .proof-stats span {
+    font-size: 0.9rem;
+    color: var(--color-text-dim);
+    line-height: 1.4;
+  }
+
+  /* Service pills */
+  .service-pills {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .service-pills li {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.85rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid rgba(0, 255, 204, 0.25);
+    border-radius: 999px;
+    color: var(--color-text);
+    background: rgba(0, 255, 204, 0.04);
+  }
+
+  /* Shared section scaffolding */
+  .section-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 4.5rem 2rem;
+  }
+
+  .section-h {
+    font-family: var(--font-heading);
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+    margin: 0.5rem 0 2.5rem;
+  }
+
+  /* Services — roadmap layout */
+  .roadmap {
+    position: relative;
+    max-width: 880px;
+    margin: 0 auto;
+  }
+
+  /* The "road" running down the middle */
+  .road-line {
+    position: absolute;
+    left: 50%;
+    top: 1.75rem;
+    bottom: 1.6rem;
+    border-left: 3px dashed rgba(0, 255, 204, 0.28);
+    transform: translateX(-50%);
+  }
+
+  .stop {
+    position: relative;
+    width: calc(50% - 2.75rem);
+    padding: 1.75rem;
+    margin-bottom: 2.5rem;
+    border: 1px solid rgba(0, 255, 204, 0.15);
+    border-radius: 12px;
+    background: rgba(0, 255, 204, 0.02);
+    transition: transform 0.2s ease, border-color 0.2s ease;
+  }
+
+  .stop:last-child {
+    margin-bottom: 0;
+  }
+
+  .stop:hover {
+    transform: translateY(-4px);
+    border-color: rgba(0, 255, 204, 0.4);
+  }
+
+  /* Alternate sides of the road */
+  .stop:nth-of-type(odd) {
+    margin-right: auto;
+  }
+
+  .stop:nth-of-type(even) {
+    margin-left: auto;
+  }
+
+  /* Connector from card to the road node */
+  .stop::before {
+    content: '';
+    position: absolute;
+    top: calc(1.75rem + 21px);
+    width: 2.75rem;
+    height: 2px;
+    background: rgba(0, 255, 204, 0.3);
+  }
+
+  .stop:nth-of-type(odd)::before {
+    right: -2.75rem;
+  }
+
+  .stop:nth-of-type(even)::before {
+    left: -2.75rem;
+  }
+
+  /* Node sitting on the road */
+  .stop-node {
+    position: absolute;
+    top: 1.75rem;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--color-bg);
+    border: 2px solid var(--color-primary);
+    color: var(--color-primary);
+    box-shadow: 0 0 18px rgba(0, 255, 204, 0.25);
+    z-index: 2;
+  }
+
+  .stop-node svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .stop:nth-of-type(odd) .stop-node {
+    right: -2.75rem;
+    transform: translateX(50%);
+  }
+
+  .stop:nth-of-type(even) .stop-node {
+    left: -2.75rem;
+    transform: translateX(-50%);
+  }
+
+  .stop h3 {
+    font-size: 1.25rem;
+    color: var(--color-primary);
+    margin: 0 0 0.75rem;
+  }
+
+  .stop h3 a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .stop h3 a:hover {
+    text-decoration: underline;
+  }
+
+  .stop p {
+    color: var(--color-text-dim);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Roadmap destination */
+  .road-end {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+  }
+
+  .road-end-node {
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--color-primary);
+    color: var(--color-bg);
+    box-shadow: 0 0 26px rgba(0, 255, 204, 0.5);
+    position: relative;
+    z-index: 2;
+  }
+
+  .road-end-node svg {
+    width: 26px;
+    height: 26px;
+  }
+
+  .road-end-text {
+    max-width: 480px;
+    margin: 1.5rem auto 0;
+    text-align: center;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--color-text);
+  }
+
+  .services-more {
+    max-width: 640px;
+    margin: 2.5rem auto 0;
+    text-align: center;
+    color: var(--color-text-dim);
+    line-height: 1.7;
+  }
+
+  .services-more a {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .services-more a:hover {
+    text-decoration: underline;
+  }
+
+  .services-more-all {
+    display: inline-block;
+    margin-left: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+  }
+
+  /* Process */
+  .process {
+    background: var(--color-surface);
+    border-top: 1px solid rgba(0, 255, 204, 0.1);
+    border-bottom: 1px solid rgba(0, 255, 204, 0.1);
+  }
+
+  .steps {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 2rem;
+  }
+
+  .step-num {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: rgba(0, 255, 204, 0.35);
+    line-height: 1;
+  }
+
+  .steps h3 {
+    font-size: 1.3rem;
+    color: var(--color-text);
+    margin: 0.75rem 0 0.5rem;
+  }
+
+  .steps p {
+    color: var(--color-text-dim);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Results */
+  .result-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2.5rem;
+  }
+
+  .result strong {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--color-primary);
+    line-height: 1;
+    margin-bottom: 0.75rem;
+  }
+
+  .result p {
+    color: var(--color-text-dim);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* About */
+  .about-inner {
+    max-width: 760px;
+    text-align: center;
+  }
+
+  .about-inner p {
+    font-size: 1.15rem;
+    line-height: 1.75;
+    color: var(--color-text-dim);
+    margin: 0;
+  }
+
+  /* Flagship proof band */
+  .flagship {
+    background: var(--color-surface);
+    border-top: 1px solid rgba(0, 255, 204, 0.1);
+    border-bottom: 1px solid rgba(0, 255, 204, 0.1);
+  }
+
+  .flagship-lead {
+    max-width: 760px;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--color-text-dim);
+    margin: 0 0 2rem;
+  }
+
+  .flagship-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem 2.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .flagship-stat {
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    color: var(--color-text-dim);
+  }
+
+  .flagship-stat strong {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--color-primary);
+    margin-right: 0.4rem;
+  }
+
+  .flagship-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  .flagship-cta {
+    color: var(--color-primary);
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 1.05rem;
+  }
+
+  .flagship-cta:hover {
+    text-decoration: underline;
+  }
+
+  .flagship-link2 {
+    color: var(--color-text-dim);
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    text-decoration: none;
+  }
+
+  .flagship-link2:hover {
+    color: var(--color-primary);
+  }
+
+  /* FAQ */
+  .faq .section-inner {
+    max-width: 760px;
+  }
+
+  .faq-item {
+    border-bottom: 1px solid rgba(0, 255, 204, 0.12);
+  }
+
+  .faq-item summary {
+    cursor: pointer;
+    list-style: none;
+    padding: 1.25rem 2.5rem 1.25rem 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-text);
+    position: relative;
+    transition: color 0.2s ease;
+  }
+
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-item summary::after {
+    content: '+';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.5rem;
+    line-height: 1;
+    color: var(--color-primary);
+  }
+
+  .faq-item[open] summary::after {
+    content: '−';
+  }
+
+  .faq-item summary:hover {
+    color: var(--color-primary);
+  }
+
+  .faq-item p {
+    margin: 0 0 1.25rem;
+    color: var(--color-text-dim);
+    line-height: 1.7;
+  }
+
+  /* Final CTA band */
+  .cta-band {
+    background: rgba(0, 255, 204, 0.04);
+    border-top: 1px solid rgba(0, 255, 204, 0.1);
+    border-bottom: 1px solid rgba(0, 255, 204, 0.1);
+    text-align: center;
+  }
+
+  .cta-band h2 {
+    font-family: var(--font-heading);
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+    margin: 0 0 1rem;
+  }
+
+  .cta-band p {
+    font-size: 1.15rem;
+    color: var(--color-text-dim);
+    max-width: 560px;
+    margin: 0 auto 2rem;
+    line-height: 1.6;
+  }
+
+  /* Featured Posts Section */
+  .featured-posts {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 2rem 3rem;
+  }
+
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .section-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    letter-spacing: 0.02em;
+  }
+
+  .view-all-link {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.95rem;
+    color: var(--color-text-dim);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .view-all-link:hover {
+    color: var(--color-primary);
+  }
+
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  /* Below ~1000px three columns get cramped — go single, no orphan */
+  @media (max-width: 1000px) {
+    .posts-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .post-card {
+    background: rgba(0, 255, 204, 0.02);
+    border: 1px solid rgba(0, 255, 204, 0.1);
+    padding: 2rem;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .post-card:hover {
+    border-color: rgba(0, 255, 204, 0.3);
+    transform: translateY(-4px);
+    background: rgba(0, 255, 204, 0.05);
+  }
+
+  .post-image-link {
+    display: block;
+    margin: 1.5rem -2rem;
+    overflow: hidden;
+  }
+
+  .post-image {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+    display: block;
+    border-top: 2px solid rgba(0, 255, 204, 0.2);
+    border-bottom: 2px solid rgba(0, 255, 204, 0.2);
+  }
+
+  .post-card:hover .post-image {
+    transform: scale(1.05);
+  }
+
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    min-height: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .post-meta time {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--color-text-dim);
+    letter-spacing: 0.03em;
+  }
+
+  .reading-time {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+
+  .post-title {
+    margin-bottom: 1rem;
+    min-height: 7rem;
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .post-title a {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--color-text);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    line-height: 1.3;
+  }
+
+  .post-title a:hover {
+    color: var(--color-primary);
+  }
+
+  .post-description {
+    color: var(--color-text-dim);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+  }
+
+  .post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .tag {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.75rem;
+    padding: 0.4rem 0.8rem;
+    letter-spacing: 0.03em;
+    transition: all 0.3s ease;
+  }
+
+  /* Colorful tag variants */
+  .tag-0 {
+    background: rgba(0, 255, 204, 0.08);
+    border: 1px solid rgba(0, 255, 204, 0.3);
+    color: #00ffcc;
+  }
+
+  .tag-0:hover {
+    background: rgba(0, 255, 204, 0.15);
+    transform: translateY(-2px);
+  }
+
+  .tag-1 {
+    background: rgba(255, 0, 110, 0.08);
+    border: 1px solid rgba(255, 0, 110, 0.3);
+    color: #ff006e;
+  }
+
+  .tag-1:hover {
+    background: rgba(255, 0, 110, 0.15);
+    transform: translateY(-2px);
+  }
+
+  .tag-2 {
+    background: rgba(255, 183, 0, 0.08);
+    border: 1px solid rgba(255, 183, 0, 0.3);
+    color: #ffb700;
+  }
+
+  .tag-2:hover {
+    background: rgba(255, 183, 0, 0.15);
+    transform: translateY(-2px);
+  }
+
+  .tag-3 {
+    background: rgba(168, 85, 247, 0.08);
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    color: #b580ff;
+  }
+
+  .tag-3:hover {
+    background: rgba(168, 85, 247, 0.15);
+    transform: translateY(-2px);
+  }
+
+  .tag-4 {
+    background: rgba(0, 191, 255, 0.08);
+    border: 1px solid rgba(0, 191, 255, 0.3);
+    color: #00bfff;
+  }
+
+  .tag-4:hover {
+    background: rgba(0, 191, 255, 0.15);
+    transform: translateY(-2px);
+  }
+
+  .read-more {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.9rem;
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    align-self: flex-start;
+  }
+
+  .read-more:hover {
+    letter-spacing: 0.05em;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hero {
+      padding: 3rem 1.5rem 2.5rem;
+    }
+
+    .headline {
+      font-size: clamp(1.8rem, 8vw, 2.4rem);
+      line-height: 1.15;
+    }
+
+    .section-inner {
+      padding: 3rem 1.5rem;
+    }
+
+    .subhead {
+      font-size: 1.05rem;
+    }
+
+    /* Roadmap: single column, road on the left */
+    .roadmap {
+      padding-left: 2.75rem;
+    }
+
+    .road-line {
+      left: 0.75rem;
+      transform: none;
+    }
+
+    .stop,
+    .stop:nth-of-type(odd),
+    .stop:nth-of-type(even) {
+      width: 100%;
+      margin: 0 0 1.5rem;
+    }
+
+    .stop:nth-of-type(odd) .stop-node,
+    .stop:nth-of-type(even) .stop-node {
+      left: -2rem;
+      right: auto;
+      transform: translateX(-50%);
+    }
+
+    .stop:nth-of-type(odd)::before,
+    .stop:nth-of-type(even)::before {
+      left: -2rem;
+      right: auto;
+      width: 2rem;
+    }
+
+    .road-end {
+      justify-content: flex-start;
+    }
+
+    .road-end-node {
+      margin-left: -2rem;
+      transform: translateX(-50%);
+    }
+
+    .road-end-text {
+      text-align: left;
+      margin-left: 0;
+    }
+
+    .proof-stats {
+      gap: 2rem;
+    }
+
+    .featured-posts {
+      padding: 1.5rem 1.5rem 2rem;
+    }
+
+    .section-title {
+      font-size: 1.75rem;
+    }
+
+    .posts-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .post-card {
+      padding: 1.5rem;
+    }
+
+    .post-image-link {
+      margin: 1.5rem -1.5rem;
+    }
+
+  }
+
+  @media (max-width: 480px) {
+    .hero {
+      padding: 2.5rem 1rem 2rem;
+    }
+
+    .proof-stats {
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .featured-posts {
+      padding: 1rem 1rem 1.5rem;
+    }
+
+    .section-header {
+      margin-bottom: 1.5rem;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+    }
+
+    .post-title a {
+      font-size: 1.2rem;
+    }
+
+    .post-card {
+      padding: 1.25rem;
+    }
+
+    .post-image-link {
+      margin: 1.5rem -1.25rem;
+    }
+  }
+</style>
