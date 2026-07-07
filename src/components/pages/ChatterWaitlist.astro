@@ -539,7 +539,7 @@ const c = getChatterWaitlistContent(lang);
         const float PI = 3.14159265359;
         const float HORIZON = 1.0;
         const float ESCAPE_R = 60.0;
-        const int   MAX_STEPS = 140;
+        const int   MAX_STEPS = 110; // perf: geodesic march steps (was 140); raise if photon ring thins
 
         // Disk / optics constants (baked from the native app's tuned params)
         const float DISK_INNER = 3.0;
@@ -902,9 +902,9 @@ const c = getChatterWaitlistContent(lang);
             // in depth (the single midplane sample is what banded into concentric rings)
             if (in_annulus && (crossing || near_plane)) {
               float dither = hash13(vec3(gl_FragCoord.xy, 1.0));
-              int subs = int(clamp(seglen / 0.06 + 1.0, 1.0, 24.0));
+              int subs = int(clamp(seglen / 0.06 + 1.0, 1.0, 16.0)); // perf: disk substeps (was 24)
               float inv = 1.0 / float(subs);
-              for (int s = 0; s < 24; s++) {
+              for (int s = 0; s < 16; s++) {
                 if (s >= subs || col.a > 0.99) break;
                 float ts = (float(s) + dither) * inv;
                 vec3 sp = mix(rpos, npos, ts);
@@ -1001,19 +1001,32 @@ const c = getChatterWaitlistContent(lang);
             const targetFPS = 30; // 30fps is enough for slow animation
             const frameInterval = 1000 / targetFPS;
 
+            // Scroll extent, cached. Reading scrollHeight every frame forces a synchronous
+            // layout reflow; it only changes on resize or content reflow, so recompute then.
+            let maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+            const updateMaxScroll = () => {
+              maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+            };
+
             function resizeCanvas() {
               const isMobile = window.innerWidth <= 768;
               // Render near device pixels on mobile so the event-horizon edge stays crisp
-              // on high-DPR phones (S25U ~3.5x); desktop keeps its cheap 1x backing store.
-              const dpr = Math.min(window.devicePixelRatio || 1, isMobile ? 2.5 : 1.5);
-              const scale = isMobile ? 0.9 : 0.65;
+              // on high-DPR phones (S25U ~3.5x); desktop uses a low backing store — the
+              // geodesic shader is fragment-bound, so pixel count is the dominant cost.
+              // ponytail: perf knobs. Raise dpr/scale/MAX_PIXELS for crispness, lower for FPS.
+              const dpr = Math.min(window.devicePixelRatio || 1, isMobile ? 2.5 : 1.25);
+              const scale = isMobile ? 0.9 : 0.55;
               let w = Math.floor(window.innerWidth * scale * dpr);
               let h = Math.floor(window.innerHeight * scale * dpr);
-              // ponytail: area clamp keeps the heavy geodesic shader affordable on weak GPUs
-              const MAX_PIXELS = 2_000_000, area = w * h;
+              // Area clamp keeps the heavy geodesic shader affordable on retina / 4K.
+              const MAX_PIXELS = 1_400_000, area = w * h;
               if (area > MAX_PIXELS) { const k = Math.sqrt(MAX_PIXELS / area); w = (w * k) | 0; h = (h * k) | 0; }
               canvas.width = w;
               canvas.height = h;
+              // viewport + resolution only change on resize — upload here, not per frame.
+              gl.viewport(0, 0, w, h);
+              gl.uniform2f(resolutionLocation, w, h);
+              updateMaxScroll();
             }
 
             function render(currentTime: number) {
@@ -1025,11 +1038,9 @@ const c = getChatterWaitlistContent(lang);
               if (delta < frameInterval) return;
               lastRenderTime = currentTime - (delta % frameInterval);
 
-              gl.viewport(0, 0, canvas.width, canvas.height);
               gl.uniform1f(timeLocation, (Date.now() - startTime) / 1000);
-              gl.uniform2f(resolutionLocation, canvas.width, canvas.height);
-              // scroll across the whole page drives the zoom-in (0 at top, 1 at footer)
-              const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+              // scroll drives the zoom-in (0 at top, 1 at footer). scrollY is a cheap read
+              // (no reflow); maxScroll is cached above.
               const scroll = maxScroll > 0 ? Math.min(window.scrollY / maxScroll, 1.0) : 0.0;
               gl.uniform1f(scrollLocation, scroll);
               gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
@@ -1037,12 +1048,17 @@ const c = getChatterWaitlistContent(lang);
 
             const observer = new IntersectionObserver((entries) => { isVisible = entries[0]?.isIntersecting ?? false; }, { threshold: 0.1 });
             observer.observe(canvas);
+            // Recompute the cached scroll extent when the page's content height changes
+            // (lazy images, font swap) without touching the render loop.
+            const bodyResize = new ResizeObserver(updateMaxScroll);
+            bodyResize.observe(document.body);
             resizeCanvas();
             window.addEventListener('resize', resizeCanvas);
             requestAnimationFrame(render);
 
             window.addEventListener('beforeunload', () => {
               observer.disconnect();
+              bodyResize.disconnect();
               cancelAnimationFrame(animationId);
             });
           }
