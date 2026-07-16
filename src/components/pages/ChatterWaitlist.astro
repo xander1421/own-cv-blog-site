@@ -1001,7 +1001,10 @@ const c = getChatterWaitlistContent(lang);
             let animationId: number;
             let isVisible = true;
             let lastRenderTime = 0;
-            const targetFPS = 30; // 30fps is enough for slow animation
+            // Deliberately low: reads as a glitchy, stuttering black hole (on-theme with the
+            // scanlines/glitch overlay) and cuts GPU roughly in proportion to the frame drop.
+            // ponytail: perf/vibe knob. 8 = heavy stutter, 12 = subtle stutter, 30 = smooth.
+            const targetFPS = 12;
             const frameInterval = 1000 / targetFPS;
 
             // Scroll extent, cached. Reading scrollHeight every frame forces a synchronous
