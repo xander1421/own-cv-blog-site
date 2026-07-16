@@ -13,42 +13,42 @@ export const home = {
   en: {
     // SEO / <head> (passed as props to BaseLayout — plain strings, not HTML)
     meta: {
-      title: 'DevOps & Cloud Consultant',
+      title: 'Kubernetes & Cloud Cost Engineer',
       description:
-        "DevOps & cloud consultant: I cut cloud bills and kill 3am pages with AWS, Kubernetes, and zero-downtime deploys. Plus architecture & AI-app audits.",
+        "I cut AWS and Kubernetes bills 30–50% without touching reliability — fixed-scope audits, no bodyshopping. A DevOps engineer who builds systems, not just hosts them.",
     },
 
     // Hero
-    heroKicker: 'DevOps &amp; Cloud Consulting',
-    heroTitleA: 'Cut your cloud bill.',
-    heroTitleB: 'Kill the 3am wake&#8209;ups.',
+    heroKicker: 'Kubernetes &amp; Cloud Cost Engineering',
+    heroTitleA: 'Cut your cloud bill 30–50%.',
+    heroTitleB: 'Without touching&nbsp;reliability.',
     heroSubhead:
-      "I make production fast, cheap, and boring — AWS, Kubernetes, and zero-downtime deploys that don't wake&nbsp;anyone&nbsp;up.",
+      "For scaling teams whose AWS or Kubernetes bill is growing faster than revenue. I find the waste, cut it, and keep deploys boring — and I build the systems most engineers only host. Fixed scope, no&nbsp;bodyshopping.",
     ctaBookCall: 'Book a free discovery call',
     ctaNote: '30 minutes · no obligation',
-    proofStat1Value: '5×',
-    proofStat1Label: 'smaller payloads with Protocol Buffers',
-    proofStat2Value: '30%',
-    proofStat2Label: 'lower infra spend with ARM &amp; Karpenter',
-    proofStat3Value: '6+ yrs',
-    proofStat3Label: 'shipping production cloud infrastructure',
-    servicePill1: 'Cloud migration',
+    proofStat1Value: '30–50%',
+    proofStat1Label: 'typical cloud &amp; Kubernetes cost cut',
+    proofStat2Value: '6+ yrs',
+    proofStat2Label: 'AWS, GCP &amp; Kubernetes in production',
+    proofStat3Value: 'Fixed',
+    proofStat3Label: 'scope &amp; price — approved before I start',
+    servicePill1: 'Cost optimization',
     servicePill2: 'Kubernetes',
-    servicePill3: 'CI/CD &amp; IaC',
-    servicePill4: 'Cost &amp; reliability',
+    servicePill3: 'Cloud migration',
+    servicePill4: 'CI/CD &amp; IaC',
 
     // Services
     servicesKicker: 'What I do',
     servicesHeading: 'Consulting that pays for itself',
-    serviceCard1Title: 'Cloud migration',
+    serviceCard1Title: 'Cost &amp; reliability',
     serviceCard1Body:
-      "Get onto AWS or GCP without a scary big-bang weekend. We move what's worth moving, skip what isn't, and keep everything running while we do it.",
+      'Find the line items quietly draining your budget and cut them — right-sizing, autoscaling, bin-packing, killing idle spend — then make deploys boring enough that nobody gets paged at 3am. Boring beats clever.',
     serviceCard2Title: 'Kubernetes',
     serviceCard2Body:
       "Kubernetes — but only if you actually need it. Set up to grow when traffic spikes and shrink (with the bill) when it doesn't, minus the thousands of lines of YAML nobody understands.",
-    serviceCard3Title: 'Cost &amp; reliability',
+    serviceCard3Title: 'Cloud migration',
     serviceCard3Body:
-      'Find the line items quietly draining your budget and cut them — then make deploys boring enough that nobody gets paged at 3am. Boring beats clever.',
+      "Get onto AWS or GCP without a scary big-bang weekend. We move what's worth moving, skip what isn't, and keep everything running while we do it.",
     serviceCard4Title: 'CI/CD &amp; IaC',
     serviceCard4Body:
       'Make shipping a non-event: you push, it deploys, everyone moves on. The whole setup lives in Terraform — reviewed, versioned, and rebuildable from scratch.',
@@ -74,10 +74,10 @@ export const home = {
       'I implement alongside your team, document everything, and leave you able to run it without me.',
 
     // Flagship / side project
-    flagshipKicker: 'On the side',
-    flagshipHeading: "When I'm not running infra, I'm building Chatter",
+    flagshipKicker: 'Proof I build hard systems',
+    flagshipHeading: 'I built a Signal-grade encrypted messenger from scratch',
     flagshipLead:
-      "Chatter is a privacy-first encrypted messenger I'm building on the side — one Rust client (Slint) that runs on Linux, Windows, and Android today, with iOS and macOS planned, on a Go backend with Signal Protocol end-to-end encryption. It's still in development, but it's how I stay hands-on across the whole stack, from cryptography to deployment.",
+      "Chatter is a privacy-first encrypted messenger I build solo — one Rust client (Slint) running on Linux, Windows, and Android today, with iOS and macOS planned, on a Go backend with full Signal Protocol end-to-end encryption. When I say I understand your infrastructure deeply, this is the receipt: cryptography to deployment, one person, real correctness stakes. Most DevOps consultants can only host systems like this. I build them.",
     flagshipStat1Value: '1',
     flagshipStat1Label: ' codebase',
     flagshipStat2Value: 'Go',
@@ -95,7 +95,7 @@ export const home = {
     aboutKicker: "Who you'd work with",
     aboutHeading: "Hi, I'm Alexandru",
     aboutBody:
-      "I'm a DevOps engineer with 6+ years shipping cloud infrastructure on AWS, Kubernetes, and Terraform — that's the day job, and the main spin. On the side I build Chatter, an encrypted messenger, from one cross-platform codebase — which keeps me hands-on across the whole stack. So I can also review your architecture, de-risk an AI-built app, or help take an idea to shipped. Either way, I care about boring, reliable systems and explain the trade-offs in plain language, not buzzwords.",
+      "I'm a DevOps engineer with 6+ years shipping cloud infrastructure on AWS, Kubernetes, and Terraform — and my specialty is cutting cloud and Kubernetes bills without sacrificing reliability. On my team I own security reviews and performance tuning — the same eye for risk, waste, and slow paths I bring to your stack. What sets me apart: I don't just operate systems, I build them from scratch — like Chatter, an encrypted messenger with Signal-grade cryptography I develop solo. That depth is why I find waste and risk other people miss. I care about boring, reliable systems and explain the trade-offs in plain language, not buzzwords.",
 
     // FAQ
     faqKicker: 'Questions',
@@ -127,40 +127,40 @@ export const home = {
   },
   de: {
     meta: {
-      title: 'DevOps- & Cloud-Beratung',
+      title: 'Kubernetes- & Cloud-Kosten-Engineer',
       description:
-        'DevOps- und Kubernetes-Beratung: Ich senke Ihre Cloud-Kosten (Kostenoptimierung), begleite Ihre Cloud-Migration und beende 3-Uhr-Alarme mit AWS, Kubernetes und Zero-Downtime-Deployments. Plus Architektur- und KI-App-Audits.',
+        'Ich senke AWS- und Kubernetes-Kosten um 30–50 % — ohne Einbußen bei der Zuverlässigkeit. Festpreis-Audits, kein Bodyshopping. Ein DevOps-Engineer, der Systeme baut, nicht nur betreibt.',
     },
 
-    heroKicker: 'DevOps- &amp; Cloud-Beratung',
-    heroTitleA: 'Senken Sie Ihre Cloud-Kosten.',
-    heroTitleB: 'Schluss mit den 3&#8209;Uhr&#8209;Weckrufen.',
+    heroKicker: 'Kubernetes- &amp; Cloud-Kosten-Engineering',
+    heroTitleA: 'Senken Sie Ihre Cloud-Kosten um 30–50 %.',
+    heroTitleB: 'Ohne Einbußen bei der&nbsp;Zuverlässigkeit.',
     heroSubhead:
-      'Ich mache Produktion schnell, günstig und langweilig — AWS, Kubernetes und Zero-Downtime-Deployments, die nachts&nbsp;niemanden&nbsp;wecken.',
+      'Für wachsende Teams, deren AWS- oder Kubernetes-Rechnung schneller steigt als der Umsatz. Ich finde die Verschwendung, streiche sie und halte Deployments langweilig — und ich baue die Systeme, die andere nur betreiben. Fester Umfang, kein&nbsp;Bodyshopping.',
     ctaBookCall: 'Kostenloses Erstgespräch buchen',
     ctaNote: '30 Minuten · unverbindlich',
-    proofStat1Value: '5×',
-    proofStat1Label: 'kleinere Payloads mit Protocol Buffers',
-    proofStat2Value: '30%',
-    proofStat2Label: 'weniger Infrastrukturkosten mit ARM &amp; Karpenter',
-    proofStat3Value: '6+ Jahre',
-    proofStat3Label: 'Cloud-Infrastruktur in Produktion ausgeliefert',
-    servicePill1: 'Cloud-Migration',
+    proofStat1Value: '30–50 %',
+    proofStat1Label: 'typische Senkung der Cloud- &amp; Kubernetes-Kosten',
+    proofStat2Value: '6+ Jahre',
+    proofStat2Label: 'AWS, GCP &amp; Kubernetes in Produktion',
+    proofStat3Value: 'Festpreis',
+    proofStat3Label: 'Umfang &amp; Preis — vor Beginn freigegeben',
+    servicePill1: 'Kostenoptimierung',
     servicePill2: 'Kubernetes',
-    servicePill3: 'CI/CD &amp; IaC',
-    servicePill4: 'Kosten &amp; Zuverlässigkeit',
+    servicePill3: 'Cloud-Migration',
+    servicePill4: 'CI/CD &amp; IaC',
 
     servicesKicker: 'Was ich mache',
     servicesHeading: 'Beratung, die sich selbst bezahlt macht',
-    serviceCard1Title: 'Cloud-Migration',
+    serviceCard1Title: 'Kosten &amp; Zuverlässigkeit',
     serviceCard1Body:
-      'Auf AWS oder GCP umziehen — ohne riskantes Big-Bang-Wochenende. Wir verlagern, was sich lohnt, lassen den Rest weg und halten alles am Laufen, während wir es tun.',
+      'Die Posten finden, die still Ihr Budget auffressen, und sie streichen — Right-Sizing, Autoscaling, Bin-Packing, Schluss mit ungenutzten Ressourcen — und dann Deployments so langweilig machen, dass niemand um 3 Uhr nachts geweckt wird. Langweilig schlägt clever.',
     serviceCard2Title: 'Kubernetes',
     serviceCard2Body:
       'Kubernetes — aber nur, wenn Sie es wirklich brauchen. So aufgesetzt, dass es bei Lastspitzen mitwächst und (samt Rechnung) wieder schrumpft, wenn nicht — ohne die tausenden Zeilen YAML, die keiner versteht.',
-    serviceCard3Title: 'Kosten &amp; Zuverlässigkeit',
+    serviceCard3Title: 'Cloud-Migration',
     serviceCard3Body:
-      'Die Posten finden, die still Ihr Budget auffressen, und sie streichen — und dann Deployments so langweilig machen, dass niemand um 3 Uhr nachts geweckt wird. Langweilig schlägt clever.',
+      'Auf AWS oder GCP umziehen — ohne riskantes Big-Bang-Wochenende. Wir verlagern, was sich lohnt, lassen den Rest weg und halten alles am Laufen, während wir es tun.',
     serviceCard4Title: 'CI/CD &amp; IaC',
     serviceCard4Body:
       'Releases zum Nicht-Ereignis machen: Sie pushen, es deployt, alle machen weiter. Das ganze Setup lebt in Terraform — reviewt, versioniert und von Grund auf neu aufbaubar.',
@@ -184,10 +184,10 @@ export const home = {
     step3Body:
       'Ich setze gemeinsam mit Ihrem Team um, dokumentiere alles und versetze Sie in die Lage, es ohne mich zu betreiben.',
 
-    flagshipKicker: 'Nebenbei',
-    flagshipHeading: 'Wenn ich nicht Infrastruktur betreibe, baue ich Chatter',
+    flagshipKicker: 'Beleg, dass ich schwierige Systeme baue',
+    flagshipHeading: 'Ich habe einen Messenger mit Signal-Niveau-Verschlüsselung von Grund auf gebaut',
     flagshipLead:
-      'Chatter ist ein Privacy-First-Messenger mit Ende-zu-Ende-Verschlüsselung, den ich nebenbei entwickle — ein Rust-Client (Slint), der heute auf Linux, Windows und Android läuft, mit iOS und macOS in Planung, auf einem Go-Backend mit Signal-Protocol-Ende-zu-Ende-Verschlüsselung. Es ist noch in Entwicklung, aber so bleibe ich über den gesamten Stack hinweg praktisch am Ball — von der Kryptografie bis zum Deployment.',
+      'Chatter ist ein Privacy-First-Messenger mit Ende-zu-Ende-Verschlüsselung, den ich allein entwickle — ein Rust-Client (Slint), der heute auf Linux, Windows und Android läuft, mit iOS und macOS in Planung, auf einem Go-Backend mit vollständiger Signal-Protocol-Ende-zu-Ende-Verschlüsselung. Wenn ich sage, dass ich Ihre Infrastruktur tiefgehend verstehe, ist das der Beleg: von der Kryptografie bis zum Deployment, eine Person, mit echten Korrektheitsanforderungen. Die meisten DevOps-Berater können solche Systeme nur betreiben. Ich baue sie.',
     flagshipStat1Value: '1',
     flagshipStat1Label: ' Codebase',
     flagshipStat2Value: 'Go',
@@ -204,7 +204,7 @@ export const home = {
     aboutKicker: 'Mit wem Sie arbeiten',
     aboutHeading: 'Hallo, ich bin Alexandru',
     aboutBody:
-      'Ich bin DevOps-Engineer mit über 6 Jahren Erfahrung im Ausliefern von Cloud-Infrastruktur auf AWS, Kubernetes und Terraform — das ist der Hauptjob und der Schwerpunkt. Nebenbei baue ich Chatter, einen verschlüsselten Messenger, aus einer plattformübergreifenden Codebase — was mich über den gesamten Stack praktisch hält. So kann ich auch Ihre Architektur prüfen, eine KI-gebaute App absichern oder helfen, eine Idee bis zur Auslieferung zu bringen. In jedem Fall lege ich Wert auf langweilige, zuverlässige Systeme und erkläre die Kompromisse in klarer Sprache statt in Buzzwords.',
+      'Ich bin DevOps-Engineer mit über 6 Jahren Erfahrung im Ausliefern von Cloud-Infrastruktur auf AWS, Kubernetes und Terraform — und meine Spezialität ist das Senken von Cloud- und Kubernetes-Kosten, ohne die Zuverlässigkeit zu opfern. In meinem Team verantworte ich Security-Reviews und Performance-Tuning — mit demselben Blick für Risiko, Verschwendung und langsame Pfade, den ich in Ihren Stack einbringe. Was mich auszeichnet: Ich betreibe Systeme nicht nur, ich baue sie von Grund auf — wie Chatter, einen Messenger mit Signal-Niveau-Kryptografie, den ich allein entwickle. Diese Tiefe ist der Grund, warum ich Verschwendung und Risiken finde, die andere übersehen. Mir sind langweilige, zuverlässige Systeme wichtig, und ich erkläre die Kompromisse in klarer Sprache, nicht in Buzzwords.',
 
     faqKicker: 'Fragen',
     faqHeading: 'Bevor Sie ein Gespräch buchen',
@@ -233,40 +233,40 @@ export const home = {
   },
   es: {
     meta: {
-      title: 'Consultor DevOps y Cloud',
+      title: 'Ingeniero de costes Kubernetes y Cloud',
       description:
-        'Consultoría DevOps y consultor Kubernetes: reduzco tu factura de la nube y elimino las alertas de las 3 a.m. con AWS, Kubernetes y despliegues sin downtime. Migración a la nube, revisión de arquitectura y auditorías de apps con IA.',
+        'Reduzco las facturas de AWS y Kubernetes un 30–50 % sin sacrificar la fiabilidad — auditorías de alcance cerrado, sin bodyshopping. Un ingeniero DevOps que construye sistemas, no solo los hospeda.',
     },
 
-    heroKicker: 'Consultoría DevOps &amp; Cloud',
-    heroTitleA: 'Reduce tu factura de la nube.',
-    heroTitleB: 'Acaba con las llamadas de las 3&#8209;a.&#8209;m.',
+    heroKicker: 'Ingeniería de costes Kubernetes &amp; Cloud',
+    heroTitleA: 'Reduce tu factura de la nube un 30–50 %.',
+    heroTitleB: 'Sin tocar la&nbsp;fiabilidad.',
     heroSubhead:
-      'Hago que la producción sea rápida, barata y aburrida — AWS, Kubernetes y despliegues sin downtime que no despiertan&nbsp;a&nbsp;nadie.',
+      'Para equipos en crecimiento cuya factura de AWS o Kubernetes sube más rápido que sus ingresos. Encuentro el desperdicio, lo elimino y mantengo los despliegues aburridos — y construyo los sistemas que otros solo hospedan. Alcance cerrado, sin&nbsp;bodyshopping.',
     ctaBookCall: 'Reserva una llamada gratuita',
     ctaNote: '30 minutos · sin compromiso',
-    proofStat1Value: '5×',
-    proofStat1Label: 'payloads más pequeños con Protocol Buffers',
-    proofStat2Value: '30%',
-    proofStat2Label: 'menos gasto en infraestructura con ARM &amp; Karpenter',
-    proofStat3Value: '6+ años',
-    proofStat3Label: 'desplegando infraestructura cloud en producción',
-    servicePill1: 'Migración a la nube',
+    proofStat1Value: '30–50 %',
+    proofStat1Label: 'recorte típico de costes de nube &amp; Kubernetes',
+    proofStat2Value: '6+ años',
+    proofStat2Label: 'AWS, GCP &amp; Kubernetes en producción',
+    proofStat3Value: 'Cerrado',
+    proofStat3Label: 'alcance &amp; precio — aprobados antes de empezar',
+    servicePill1: 'Optimización de costes',
     servicePill2: 'Kubernetes',
-    servicePill3: 'CI/CD &amp; IaC',
-    servicePill4: 'Costes &amp; fiabilidad',
+    servicePill3: 'Migración a la nube',
+    servicePill4: 'CI/CD &amp; IaC',
 
     servicesKicker: 'Qué hago',
     servicesHeading: 'Consultoría que se paga sola',
-    serviceCard1Title: 'Migración a la nube',
+    serviceCard1Title: 'Costes &amp; fiabilidad',
     serviceCard1Body:
-      'Múdate a AWS o GCP sin un temible fin de semana de big bang. Movemos lo que vale la pena mover, dejamos lo que no, y mantenemos todo funcionando mientras lo hacemos.',
+      'Encontrar las partidas que drenan tu presupuesto en silencio y eliminarlas — right-sizing, autoescalado, bin-packing, acabar con los recursos ociosos — y luego hacer los despliegues tan aburridos que nadie reciba una alerta a las 3 de la madrugada. Lo aburrido gana a lo ingenioso.',
     serviceCard2Title: 'Kubernetes',
     serviceCard2Body:
       'Kubernetes — pero solo si de verdad lo necesitas. Configurado para crecer cuando el tráfico se dispara y encogerse (junto con la factura) cuando no, sin las miles de líneas de YAML que nadie entiende.',
-    serviceCard3Title: 'Costes &amp; fiabilidad',
+    serviceCard3Title: 'Migración a la nube',
     serviceCard3Body:
-      'Encontrar las partidas que drenan tu presupuesto en silencio y eliminarlas — y luego hacer los despliegues tan aburridos que nadie reciba una alerta a las 3 de la madrugada. Lo aburrido gana a lo ingenioso.',
+      'Múdate a AWS o GCP sin un temible fin de semana de big bang. Movemos lo que vale la pena mover, dejamos lo que no, y mantenemos todo funcionando mientras lo hacemos.',
     serviceCard4Title: 'CI/CD &amp; IaC',
     serviceCard4Body:
       'Convierte cada release en un no-evento: haces push, se despliega, todos siguen a lo suyo. Todo el setup vive en Terraform — revisado, versionado y reconstruible desde cero.',
@@ -290,10 +290,10 @@ export const home = {
     step3Body:
       'Implemento junto a tu equipo, documento todo y te dejo capaz de operarlo sin mí.',
 
-    flagshipKicker: 'En paralelo',
-    flagshipHeading: 'Cuando no gestiono infraestructura, construyo Chatter',
+    flagshipKicker: 'Prueba de que construyo sistemas difíciles',
+    flagshipHeading: 'Construí desde cero un mensajero con cifrado de nivel Signal',
     flagshipLead:
-      'Chatter es un mensajero cifrado y centrado en la privacidad que construyo en paralelo — un único cliente en Rust (Slint) que hoy funciona en Linux, Windows y Android, con iOS y macOS previstos, sobre un backend en Go con cifrado de extremo a extremo mediante Signal Protocol. Todavía está en desarrollo, pero es como me mantengo manos a la obra en todo el stack, de la criptografía al despliegue.',
+      'Chatter es un mensajero cifrado y centrado en la privacidad que construyo yo solo — un único cliente en Rust (Slint) que hoy funciona en Linux, Windows y Android, con iOS y macOS previstos, sobre un backend en Go con cifrado de extremo a extremo completo mediante Signal Protocol. Cuando digo que entiendo tu infraestructura a fondo, esta es la prueba: de la criptografía al despliegue, una sola persona, con exigencias reales de corrección. La mayoría de los consultores DevOps solo saben hospedar sistemas así. Yo los construyo.',
     flagshipStat1Value: '1',
     flagshipStat1Label: ' base de código',
     flagshipStat2Value: 'Go',
@@ -310,7 +310,7 @@ export const home = {
     aboutKicker: 'Con quién trabajarías',
     aboutHeading: 'Hola, soy Alexandru',
     aboutBody:
-      'Soy ingeniero DevOps con más de 6 años desplegando infraestructura cloud en AWS, Kubernetes y Terraform — ese es el trabajo principal y el foco. En paralelo construyo Chatter, un mensajero cifrado, desde una única base de código multiplataforma — lo que me mantiene manos a la obra en todo el stack. Así también puedo revisar tu arquitectura, reducir el riesgo de una app hecha con IA o ayudar a llevar una idea hasta producción. En cualquier caso, me importan los sistemas aburridos y fiables, y explico los compromisos en lenguaje claro, no en palabras de moda.',
+      'Soy ingeniero DevOps con más de 6 años desplegando infraestructura cloud en AWS, Kubernetes y Terraform — y mi especialidad es recortar los costes de nube y Kubernetes sin sacrificar la fiabilidad. En mi equipo me encargo de las revisiones de seguridad y del ajuste de rendimiento — con el mismo ojo para el riesgo, el desperdicio y los cuellos de botella que aporto a tu stack. Lo que me distingue: no solo opero sistemas, los construyo desde cero — como Chatter, un mensajero con criptografía de nivel Signal que desarrollo yo solo. Esa profundidad es la razón por la que encuentro el desperdicio y los riesgos que otros pasan por alto. Me importan los sistemas aburridos y fiables, y explico los compromisos en lenguaje claro, no en palabras de moda.',
 
     faqKicker: 'Preguntas',
     faqHeading: 'Antes de reservar una llamada',
@@ -339,40 +339,40 @@ export const home = {
   },
   pt: {
     meta: {
-      title: 'Consultor DevOps e Cloud',
+      title: 'Engenheiro de custos Kubernetes e Cloud',
       description:
-        'Consultoria DevOps: reduzo sua conta de nuvem e acabo com os alertas das 3h da manhã com AWS, Kubernetes e deploys sem downtime. Migração para nuvem, otimização de custos, revisão de arquitetura e auditoria de apps com IA.',
+        'Reduzo as contas de AWS e Kubernetes em 30–50 % sem comprometer a confiabilidade — auditorias de escopo fechado, sem bodyshopping. Um engenheiro DevOps que constrói sistemas, não apenas os hospeda.',
     },
 
-    heroKicker: 'Consultoria DevOps &amp; Cloud',
-    heroTitleA: 'Reduza sua conta de nuvem.',
-    heroTitleB: 'Acabe com os alertas das 3&#8209;da&#8209;manhã.',
+    heroKicker: 'Engenharia de custos Kubernetes &amp; Cloud',
+    heroTitleA: 'Reduza sua conta de nuvem em 30–50 %.',
+    heroTitleB: 'Sem mexer na&nbsp;confiabilidade.',
     heroSubhead:
-      'Deixo a produção rápida, barata e sem graça — AWS, Kubernetes e deploys sem downtime que não acordam&nbsp;ninguém.',
+      'Para times em crescimento cuja conta de AWS ou Kubernetes sobe mais rápido que a receita. Encontro o desperdício, corto e mantenho os deploys sem graça — e construo os sistemas que os outros apenas hospedam. Escopo fechado, sem&nbsp;bodyshopping.',
     ctaBookCall: 'Agende uma conversa inicial gratuita',
     ctaNote: '30 minutos · sem compromisso',
-    proofStat1Value: '5×',
-    proofStat1Label: 'payloads menores com Protocol Buffers',
-    proofStat2Value: '30%',
-    proofStat2Label: 'menos gasto com infraestrutura usando ARM &amp; Karpenter',
-    proofStat3Value: '6+ anos',
-    proofStat3Label: 'entregando infraestrutura cloud em produção',
-    servicePill1: 'Migração para nuvem',
+    proofStat1Value: '30–50 %',
+    proofStat1Label: 'corte típico de custos de nuvem &amp; Kubernetes',
+    proofStat2Value: '6+ anos',
+    proofStat2Label: 'AWS, GCP &amp; Kubernetes em produção',
+    proofStat3Value: 'Fechado',
+    proofStat3Label: 'escopo &amp; preço — aprovados antes de começar',
+    servicePill1: 'Otimização de custos',
     servicePill2: 'Kubernetes',
-    servicePill3: 'CI/CD &amp; IaC',
-    servicePill4: 'Custos &amp; confiabilidade',
+    servicePill3: 'Migração para nuvem',
+    servicePill4: 'CI/CD &amp; IaC',
 
     servicesKicker: 'O que eu faço',
     servicesHeading: 'Consultoria que se paga sozinha',
-    serviceCard1Title: 'Migração para nuvem',
+    serviceCard1Title: 'Custos &amp; confiabilidade',
     serviceCard1Body:
-      'Vá para a AWS ou GCP sem um fim de semana de big bang assustador. Movemos o que vale a pena mover, deixamos de fora o que não vale e mantemos tudo funcionando enquanto isso.',
+      'Encontrar os itens que drenam seu orçamento em silêncio e cortá-los — right-sizing, autoescalonamento, bin-packing, acabar com recursos ociosos — e então deixar os deploys sem graça o suficiente para ninguém ser acionado às 3 da manhã. Sem graça vence esperto.',
     serviceCard2Title: 'Kubernetes',
     serviceCard2Body:
       'Kubernetes — mas só se você realmente precisar. Configurado para crescer quando o tráfego dispara e encolher (junto com a conta) quando não, sem as milhares de linhas de YAML que ninguém entende.',
-    serviceCard3Title: 'Custos &amp; confiabilidade',
+    serviceCard3Title: 'Migração para nuvem',
     serviceCard3Body:
-      'Encontrar os itens que drenam seu orçamento em silêncio e cortá-los — e então deixar os deploys sem graça o suficiente para ninguém ser acionado às 3 da manhã. Sem graça vence esperto.',
+      'Vá para a AWS ou GCP sem um fim de semana de big bang assustador. Movemos o que vale a pena mover, deixamos de fora o que não vale e mantemos tudo funcionando enquanto isso.',
     serviceCard4Title: 'CI/CD &amp; IaC',
     serviceCard4Body:
       'Transforme cada release em um não-evento: você faz o push, o deploy acontece, todos seguem em frente. Toda a configuração vive no Terraform — revisada, versionada e reconstruível do zero.',
@@ -396,10 +396,10 @@ export const home = {
     step3Body:
       'Implemento junto com o seu time, documento tudo e deixo você capaz de tocar sem mim.',
 
-    flagshipKicker: 'Nas horas vagas',
-    flagshipHeading: 'Quando não estou cuidando de infra, estou construindo o Chatter',
+    flagshipKicker: 'Prova de que construo sistemas difíceis',
+    flagshipHeading: 'Construí do zero um mensageiro com criptografia de nível Signal',
     flagshipLead:
-      'O Chatter é um mensageiro criptografado e focado em privacidade que construo nas horas vagas — um único cliente em Rust (Slint) que hoje roda no Linux, Windows e Android, com iOS e macOS planejados, sobre um backend em Go com criptografia de ponta a ponta via Signal Protocol. Ainda está em desenvolvimento, mas é assim que fico com a mão na massa em todo o stack, da criptografia ao deploy.',
+      'O Chatter é um mensageiro criptografado e focado em privacidade que construo sozinho — um único cliente em Rust (Slint) que hoje roda no Linux, Windows e Android, com iOS e macOS planejados, sobre um backend em Go com criptografia de ponta a ponta completa via Signal Protocol. Quando digo que entendo sua infraestrutura a fundo, esta é a prova: da criptografia ao deploy, uma só pessoa, com exigências reais de correção. A maioria dos consultores DevOps só sabe hospedar sistemas assim. Eu os construo.',
     flagshipStat1Value: '1',
     flagshipStat1Label: ' base de código',
     flagshipStat2Value: 'Go',
@@ -416,7 +416,7 @@ export const home = {
     aboutKicker: 'Com quem você vai trabalhar',
     aboutHeading: 'Oi, eu sou o Alexandru',
     aboutBody:
-      'Sou engenheiro DevOps com mais de 6 anos entregando infraestrutura cloud na AWS, Kubernetes e Terraform — esse é o trabalho principal e o foco. Nas horas vagas construo o Chatter, um mensageiro criptografado, a partir de uma única base de código multiplataforma — o que me mantém com a mão na massa em todo o stack. Assim também posso revisar sua arquitetura, reduzir o risco de um app feito com IA ou ajudar a levar uma ideia até a produção. De qualquer forma, me importo com sistemas sem graça e confiáveis, e explico os trade-offs em linguagem clara, não em jargões da moda.',
+      'Sou engenheiro DevOps com mais de 6 anos entregando infraestrutura cloud na AWS, Kubernetes e Terraform — e minha especialidade é cortar custos de nuvem e Kubernetes sem sacrificar a confiabilidade. No meu time sou responsável pelas revisões de segurança e pelo tuning de performance — com o mesmo olho para risco, desperdício e gargalos que trago para o seu stack. O que me diferencia: não apenas opero sistemas, eu os construo do zero — como o Chatter, um mensageiro com criptografia de nível Signal que desenvolvo sozinho. Essa profundidade é a razão pela qual encontro o desperdício e os riscos que os outros deixam passar. Me importo com sistemas sem graça e confiáveis, e explico os trade-offs em linguagem clara, não em jargões da moda.',
 
     faqKicker: 'Perguntas',
     faqHeading: 'Antes de agendar uma conversa',
@@ -445,40 +445,40 @@ export const home = {
   },
   fr: {
     meta: {
-      title: 'Consultant DevOps et Cloud',
+      title: 'Ingénieur coûts Kubernetes et Cloud',
       description:
-        "Conseil DevOps et consultant Kubernetes : je réduis votre facture cloud et j'élimine les alertes de 3h du matin avec AWS, Kubernetes et des déploiements sans interruption. Migration cloud, revue d'architecture et audits d'applications IA.",
+        "Je réduis vos factures AWS et Kubernetes de 30 à 50 % sans toucher à la fiabilité — audits à périmètre fixe, sans bodyshopping. Un ingénieur DevOps qui construit des systèmes, pas seulement les héberge.",
     },
 
-    heroKicker: 'Conseil DevOps &amp; Cloud',
-    heroTitleA: 'Réduisez votre facture cloud.',
-    heroTitleB: 'Finies les alertes de 3&#8209;h&#8209;du&#8209;matin.',
+    heroKicker: 'Ingénierie des coûts Kubernetes &amp; Cloud',
+    heroTitleA: 'Réduisez votre facture cloud de 30 à 50 %.',
+    heroTitleB: 'Sans toucher à la&nbsp;fiabilité.',
     heroSubhead:
-      'Je rends la production rapide, économique et ennuyeuse — AWS, Kubernetes et des déploiements sans interruption qui ne réveillent&nbsp;personne.',
+      "Pour les équipes en croissance dont la facture AWS ou Kubernetes grimpe plus vite que le chiffre d'affaires. Je repère le gaspillage, je le supprime et je garde les déploiements ennuyeux — et je construis les systèmes que les autres se contentent d'héberger. Périmètre fixe, sans&nbsp;bodyshopping.",
     ctaBookCall: 'Réservez un appel découverte gratuit',
     ctaNote: '30 minutes · sans engagement',
-    proofStat1Value: '5×',
-    proofStat1Label: 'charges utiles plus légères avec Protocol Buffers',
-    proofStat2Value: '30%',
-    proofStat2Label: 'de dépenses infra en moins avec ARM &amp; Karpenter',
-    proofStat3Value: '6+ ans',
-    proofStat3Label: "à livrer de l'infrastructure cloud en production",
-    servicePill1: 'Migration cloud',
+    proofStat1Value: '30–50 %',
+    proofStat1Label: 'réduction typique des coûts cloud &amp; Kubernetes',
+    proofStat2Value: '6+ ans',
+    proofStat2Label: 'AWS, GCP &amp; Kubernetes en production',
+    proofStat3Value: 'Fixe',
+    proofStat3Label: 'périmètre &amp; prix — validés avant de commencer',
+    servicePill1: 'Optimisation des coûts',
     servicePill2: 'Kubernetes',
-    servicePill3: 'CI/CD &amp; IaC',
-    servicePill4: 'Coûts &amp; fiabilité',
+    servicePill3: 'Migration cloud',
+    servicePill4: 'CI/CD &amp; IaC',
 
     servicesKicker: 'Ce que je fais',
     servicesHeading: 'Un conseil qui se rentabilise',
-    serviceCard1Title: 'Migration cloud',
+    serviceCard1Title: 'Coûts &amp; fiabilité',
     serviceCard1Body:
-      "Passez à AWS ou GCP sans week-end big-bang stressant. On déplace ce qui vaut la peine de l'être, on laisse le reste et on garde tout en marche pendant l'opération.",
+      "Repérer les postes qui vident discrètement votre budget et les supprimer — right-sizing, autoscaling, bin-packing, fin des ressources inutilisées — puis rendre les déploiements assez ennuyeux pour que personne ne soit réveillé à 3h du matin. L'ennuyeux bat l'astucieux.",
     serviceCard2Title: 'Kubernetes',
     serviceCard2Body:
       "Kubernetes — mais seulement si vous en avez vraiment besoin. Configuré pour grandir quand le trafic explose et se réduire (facture comprise) quand ce n'est pas le cas, sans les milliers de lignes de YAML que personne ne comprend.",
-    serviceCard3Title: 'Coûts &amp; fiabilité',
+    serviceCard3Title: 'Migration cloud',
     serviceCard3Body:
-      "Repérer les postes qui vident discrètement votre budget et les supprimer — puis rendre les déploiements assez ennuyeux pour que personne ne soit réveillé à 3h du matin. L'ennuyeux bat l'astucieux.",
+      "Passez à AWS ou GCP sans week-end big-bang stressant. On déplace ce qui vaut la peine de l'être, on laisse le reste et on garde tout en marche pendant l'opération.",
     serviceCard4Title: 'CI/CD &amp; IaC',
     serviceCard4Body:
       "Faites de chaque mise en production un non-événement : vous poussez, ça se déploie, tout le monde passe à autre chose. Toute la configuration vit dans Terraform — relue, versionnée et reconstructible de zéro.",
@@ -502,10 +502,10 @@ export const home = {
     step3Body:
       'Je mets en œuvre aux côtés de votre équipe, je documente tout et je vous laisse capable de le faire tourner sans moi.',
 
-    flagshipKicker: 'En parallèle',
-    flagshipHeading: "Quand je ne gère pas d'infra, je construis Chatter",
+    flagshipKicker: 'La preuve que je construis des systèmes exigeants',
+    flagshipHeading: "J'ai construit de zéro une messagerie chiffrée de niveau Signal",
     flagshipLead:
-      "Chatter est une messagerie chiffrée et respectueuse de la vie privée que je développe en parallèle — un seul client Rust (Slint) qui tourne aujourd'hui sur Linux, Windows et Android, avec iOS et macOS prévus, sur un backend Go avec un chiffrement de bout en bout via Signal Protocol. C'est encore en développement, mais c'est ainsi que je reste au contact de tout le stack, de la cryptographie au déploiement.",
+      "Chatter est une messagerie chiffrée et respectueuse de la vie privée que je développe seul — un seul client Rust (Slint) qui tourne aujourd'hui sur Linux, Windows et Android, avec iOS et macOS prévus, sur un backend Go avec un chiffrement de bout en bout complet via Signal Protocol. Quand je dis que je comprends votre infrastructure en profondeur, en voici la preuve : de la cryptographie au déploiement, une seule personne, avec de vraies exigences de correction. La plupart des consultants DevOps savent seulement héberger de tels systèmes. Moi, je les construis.",
     flagshipStat1Value: '1',
     flagshipStat1Label: ' base de code',
     flagshipStat2Value: 'Go',
@@ -522,7 +522,7 @@ export const home = {
     aboutKicker: 'Avec qui vous travailleriez',
     aboutHeading: 'Bonjour, je suis Alexandru',
     aboutBody:
-      "Je suis ingénieur DevOps avec plus de 6 ans à livrer de l'infrastructure cloud sur AWS, Kubernetes et Terraform — c'est le métier principal et l'axe central. En parallèle, je construis Chatter, une messagerie chiffrée, à partir d'une seule base de code multiplateforme — ce qui me garde au contact de tout le stack. Je peux donc aussi relire votre architecture, sécuriser une application conçue par IA ou aider à mener une idée jusqu'à sa mise en production. Dans tous les cas, je tiens aux systèmes ennuyeux et fiables, et j'explique les compromis en langage clair, pas en mots à la mode.",
+      "Je suis ingénieur DevOps avec plus de 6 ans à livrer de l'infrastructure cloud sur AWS, Kubernetes et Terraform — et ma spécialité est de réduire les coûts cloud et Kubernetes sans sacrifier la fiabilité. Dans mon équipe, je prends en charge les revues de sécurité et l'optimisation des performances — avec le même œil pour le risque, le gaspillage et les points lents que j'apporte à votre stack. Ce qui me distingue : je n'exploite pas seulement les systèmes, je les construis de zéro — comme Chatter, une messagerie à la cryptographie de niveau Signal que je développe seul. C'est cette profondeur qui me fait repérer le gaspillage et les risques que les autres laissent passer. Je tiens aux systèmes ennuyeux et fiables, et j'explique les compromis en langage clair, pas en mots à la mode.",
 
     faqKicker: 'Questions',
     faqHeading: 'Avant de réserver un appel',
@@ -551,40 +551,40 @@ export const home = {
   },
   ro: {
     meta: {
-      title: 'Consultant DevOps și cloud',
+      title: 'Inginer costuri Kubernetes și cloud',
       description:
-        'Consultant DevOps și cloud: reduc facturile cloud și pun capăt alertelor de la 3 dimineața cu AWS, Kubernetes și deploy-uri fără downtime. Plus analiză de arhitectură și audit de aplicații create cu IA.',
+        'Reduc facturile AWS și Kubernetes cu 30–50 % fără a afecta fiabilitatea — audituri cu scop fix, fără bodyshopping. Un inginer DevOps care construiește sisteme, nu doar le găzduiește.',
     },
 
-    heroKicker: 'Consultanță DevOps &amp; cloud',
-    heroTitleA: 'Reduceți factura cloud.',
-    heroTitleB: 'Gata cu trezitul la 3&#8209;dimineața.',
+    heroKicker: 'Inginerie de costuri Kubernetes &amp; cloud',
+    heroTitleA: 'Reduceți factura cloud cu 30–50 %.',
+    heroTitleB: 'Fără a afecta&nbsp;fiabilitatea.',
     heroSubhead:
-      'Fac producția rapidă, ieftină și fără surprize — AWS, Kubernetes și deploy-uri fără downtime care nu trezesc&nbsp;pe&nbsp;nimeni.',
+      'Pentru echipe în creștere a căror factură AWS sau Kubernetes crește mai repede decât veniturile. Găsesc risipa, o tai și păstrez deploy-urile plictisitoare — și construiesc sistemele pe care alții doar le găzduiesc. Scop fix, fără&nbsp;bodyshopping.',
     ctaBookCall: 'Programați o discuție gratuită de evaluare',
     ctaNote: '30 de minute · fără obligații',
-    proofStat1Value: '5×',
-    proofStat1Label: 'payload-uri mai mici cu Protocol Buffers',
-    proofStat2Value: '30%',
-    proofStat2Label: 'costuri de infrastructură mai mici cu ARM &amp; Karpenter',
-    proofStat3Value: '6+ ani',
-    proofStat3Label: 'livrând infrastructură cloud în producție',
-    servicePill1: 'Migrare în cloud',
+    proofStat1Value: '30–50 %',
+    proofStat1Label: 'reducere tipică a costurilor cloud &amp; Kubernetes',
+    proofStat2Value: '6+ ani',
+    proofStat2Label: 'AWS, GCP &amp; Kubernetes în producție',
+    proofStat3Value: 'Fix',
+    proofStat3Label: 'scop &amp; preț — aprobate înainte de a începe',
+    servicePill1: 'Optimizarea costurilor',
     servicePill2: 'Kubernetes',
-    servicePill3: 'CI/CD &amp; IaC',
-    servicePill4: 'Costuri &amp; fiabilitate',
+    servicePill3: 'Migrare în cloud',
+    servicePill4: 'CI/CD &amp; IaC',
 
     servicesKicker: 'Ce fac',
     servicesHeading: 'Consultanță care se plătește singură',
-    serviceCard1Title: 'Migrare în cloud',
+    serviceCard1Title: 'Costuri &amp; fiabilitate',
     serviceCard1Body:
-      'Ajungeți pe AWS sau GCP fără un weekend riscant de tip big-bang. Mutăm ce merită mutat, lăsăm deoparte ce nu, și menținem totul funcțional în timp ce o facem.',
+      'Găsim liniile de cost care vă golesc discret bugetul și le eliminăm — right-sizing, autoscaling, bin-packing, gata cu resursele nefolosite — apoi facem deploy-urile suficient de plictisitoare încât nimeni să nu fie alertat la 3 dimineața. Plictisitor bate ingenios.',
     serviceCard2Title: 'Kubernetes',
     serviceCard2Body:
       'Kubernetes — dar numai dacă chiar aveți nevoie. Configurat să crească la vârfuri de trafic și să se micșoreze (împreună cu factura) când nu, fără miile de linii de YAML pe care nu le înțelege nimeni.',
-    serviceCard3Title: 'Costuri &amp; fiabilitate',
+    serviceCard3Title: 'Migrare în cloud',
     serviceCard3Body:
-      'Găsim liniile de cost care vă golesc discret bugetul și le eliminăm — apoi facem deploy-urile suficient de plictisitoare încât nimeni să nu fie alertat la 3 dimineața. Plictisitor bate ingenios.',
+      'Ajungeți pe AWS sau GCP fără un weekend riscant de tip big-bang. Mutăm ce merită mutat, lăsăm deoparte ce nu, și menținem totul funcțional în timp ce o facem.',
     serviceCard4Title: 'CI/CD &amp; IaC',
     serviceCard4Body:
       'Transformați lansarea într-un non-eveniment: dați push, se face deploy, toată lumea își vede de treabă. Întreaga configurație trăiește în Terraform — revizuită, versionată și reconstruibilă de la zero.',
@@ -608,10 +608,10 @@ export const home = {
     step3Body:
       'Implementez alături de echipa dumneavoastră, documentez totul și vă las capabili să o operați fără mine.',
 
-    flagshipKicker: 'În paralel',
-    flagshipHeading: 'Când nu administrez infrastructură, construiesc Chatter',
+    flagshipKicker: 'Dovada că construiesc sisteme dificile',
+    flagshipHeading: 'Am construit de la zero un mesager cu criptare de nivel Signal',
     flagshipLead:
-      'Chatter este un mesager criptat, axat pe confidențialitate, pe care îl construiesc în paralel — un singur client Rust (Slint) care rulează astăzi pe Linux, Windows și Android, cu iOS și macOS planificate, pe un backend Go cu criptare end-to-end prin Signal Protocol. Este încă în dezvoltare, dar este modul prin care rămân implicat practic în întregul stack, de la criptografie la deployment.',
+      'Chatter este un mesager criptat, axat pe confidențialitate, pe care îl construiesc de unul singur — un singur client Rust (Slint) care rulează astăzi pe Linux, Windows și Android, cu iOS și macOS planificate, pe un backend Go cu criptare end-to-end completă prin Signal Protocol. Când spun că vă înțeleg infrastructura în profunzime, aceasta este dovada: de la criptografie la deployment, o singură persoană, cu cerințe reale de corectitudine. Majoritatea consultanților DevOps știu doar să găzduiască astfel de sisteme. Eu le construiesc.',
     flagshipStat1Value: '1',
     flagshipStat1Label: ' bază de cod',
     flagshipStat2Value: 'Go',
@@ -628,7 +628,7 @@ export const home = {
     aboutKicker: 'Cu cine ați lucra',
     aboutHeading: 'Bună, sunt Alexandru',
     aboutBody:
-      'Sunt inginer DevOps cu peste 6 ani de experiență în livrarea de infrastructură cloud pe AWS, Kubernetes și Terraform — aceasta este activitatea de zi cu zi și axa principală. În paralel construiesc Chatter, un mesager criptat, dintr-o singură bază de cod multiplatformă — ceea ce mă ține implicat practic în întregul stack. Așa că vă pot analiza și arhitectura, reduce riscurile unei aplicații create cu IA sau ajuta la ducerea unei idei până la lansare. În orice caz, îmi pasă de sistemele stabile și fiabile și explic compromisurile într-un limbaj clar, nu în cuvinte la modă.',
+      'Sunt inginer DevOps cu peste 6 ani de experiență în livrarea de infrastructură cloud pe AWS, Kubernetes și Terraform — iar specialitatea mea este reducerea costurilor cloud și Kubernetes fără a sacrifica fiabilitatea. În echipa mea mă ocup de reviziile de securitate și de optimizarea performanței — cu același ochi pentru risc, risipă și punctele lente pe care îl aduc în stack-ul dumneavoastră. Ce mă diferențiază: nu doar operez sisteme, ci le construiesc de la zero — precum Chatter, un mesager cu criptografie de nivel Signal pe care îl dezvolt de unul singur. Această profunzime este motivul pentru care găsesc risipa și riscurile pe care alții le trec cu vederea. Îmi pasă de sistemele stabile și fiabile și explic compromisurile într-un limbaj clar, nu în cuvinte la modă.',
 
     faqKicker: 'Întrebări',
     faqHeading: 'Înainte să programați o discuție',
