@@ -5,935 +5,635 @@
 // fall back to English via getAboutContent().
 //
 // Proper nouns kept verbatim in the component (not translated): company names,
-// skill/tech tags, email, external URLs, the emoji category icons, and the
-// JSON-LD Person schema. Only user-facing prose lives here.
+// skill/tech tags, email, external URLs, and the JSON-LD Person schema.
+// Only user-facing prose lives here.
 
 import type { Lang } from '../ui';
 
 export const about = {
   en: {
     // ---- meta ----
-    metaTitle: 'About — DevOps & Cloud Consultant',
+    metaTitle: 'About — Kubernetes & Cloud Cost Engineer',
     metaDescription:
-      'Alexandru Pruteanu — DevOps & cloud consultant, 6+ years building production infrastructure on AWS, Kubernetes, and Terraform, and shipping products solo.',
+      'DevOps engineer, 6+ years of AWS, GCP, and Kubernetes in production. I cut cloud bills without touching reliability — fixed-scope consulting for scaling teams.',
 
     // ---- breadcrumb + header ----
     breadcrumbHome: 'Home',
     breadcrumbAbout: 'About',
-    h1: 'About Me',
-    headerSubtitle: 'DevOps Engineer specializing in cloud infrastructure',
-    contactLabel: 'Email:',
+    h1: "Hi, I'm Alexandru",
+    headerSubtitle:
+      "I'm a DevOps engineer who cuts cloud and Kubernetes bills without touching reliability — six-plus years of AWS, GCP, and Kubernetes in production. Available for fixed-scope consulting, and worth a look if you're hiring.",
+    ctaBookCall: 'Book a free discovery call',
+    ctaBookNote: '30 minutes · no obligation',
     socialGithub: 'GitHub',
     socialLinkedin: 'LinkedIn',
-    socialChatter: 'Chatter',
 
-    // ---- professional summary ----
-    summaryHeading: 'Professional Summary',
-    summaryText:
-      'DevOps Engineer with over 6 years of hands-on experience building and managing scalable cloud infrastructures using AWS, Kubernetes, and Terraform. Proven track record automating CI/CD pipelines, container orchestration, and infrastructure provisioning across multiple environments. Adept at improving deployment reliability, monitoring, and developer productivity through modern DevOps tooling.',
+    // ---- what I do ----
+    doHeading: 'What I actually do',
+    doCard1Title: 'Cut the cloud bill',
+    doCard1Body:
+      'Right-sizing, autoscaling, bin-packing, killing idle spend. The waste is almost always there — I find it and remove it without making anything more fragile.',
+    doCard2Title: 'Make deploys boring',
+    doCard2Body:
+      "Terraform for everything, CI/CD where you push and it deploys, Kubernetes only when it's earned. Nobody gets paged at 3am for boring.",
+    doCard3Title: 'Migrate without drama',
+    doCard3Body:
+      "To AWS or GCP one piece at a time, production running the whole way. We move what's worth moving and skip what isn't.",
+    doServicesLink: 'See services & how I charge →',
 
-    // ---- technical skills (category headings; tags stay verbatim in component) ----
-    skillsHeading: 'Technical Skills',
-    skillCloud: 'Cloud & Infrastructure',
-    skillCicd: 'CI/CD & Automation',
-    skillContainers: 'Containers & Orchestration',
-    skillMonitoring: 'Monitoring & Observability',
-    skillLanguages: 'Languages & Databases',
-    skillSecurity: 'Security & Compliance',
+    // ---- proof ----
+    proofHeading: 'Proof, not promises',
+    proofChatterTitle: "I'm building an encrypted messenger from scratch",
+    proofChatterBody:
+      'Chatter is a privacy-first messenger I build solo — Rust client, Go backend, full Signal Protocol end-to-end encryption, running on Linux, Windows, and Android. Most consultants host systems like this; I build them.',
+    proofChatterLink: 'See the project →',
+    proofNumbersTitle: 'Real numbers from real jobs',
+    proofNumbersBody:
+      'At my current role I cut environment provisioning time by 40% with Terraform and Helm. Before that, at Quorum, I locked IAM down to least privilege and improved EC2 cost efficiency across environments.',
+    proofBlogTitle: 'I write about what I run',
+    proofBlogBody:
+      'Write-ups of things I have actually built and operated — no rewritten press releases.',
+    proofBlogLink: 'Read the blog →',
 
-    // ---- professional experience ----
-    experienceHeading: 'Professional Experience',
-    experienceTechLabel: 'Tech Stack:',
+    // ---- career timeline ----
+    timelineHeading: "Where I've worked",
+    timelineIntro: 'Four DevOps engineer roles, six years — the short version. Details on request, or on LinkedIn.',
+    experienceTechLabel: 'Stack:',
     jobs: [
       {
-        title: 'DevOps Engineer',
         company: 'Yopeso',
         period: 'Sep 2023 – Current',
-        achievements: [
-          'Designed and deployed AWS infrastructure using Terraform and Helm, improving environment provisioning time by 40%',
-          'Deployed and maintained Kubernetes clusters to support microservices at scale, improving system resilience and reliability',
-          'Automated infrastructure provisioning and configuration with Ansible, reducing deployment time and human error',
-        ],
-        tech: 'Terraform · AWS · Kubernetes · Helm · Jenkins · Ansible · Docker · Python · GitHub',
+        summary:
+          'AWS infrastructure with Terraform and Helm — cut environment provisioning time by 40% — plus the Kubernetes clusters that run its microservices at scale.',
+        tech: 'Terraform · AWS · Kubernetes · Helm · Ansible',
       },
       {
-        title: 'DevOps Engineer',
         company: 'Quorum',
         period: 'Feb 2022 – May 2023',
-        achievements: [
-          'Managed and provisioned AWS infrastructure using Terraform, ensuring consistent, scalable, and auditable deployments across environments',
-          'Configured and maintained key AWS services — including RDS (PostgreSQL/MySQL), Elasticache (Redis), and OpenSearch — delivering reliable and high-performance data platforms',
-          'Implemented secure IAM roles and policies to enforce least-privilege access and strengthen cloud security posture',
-          'Oversaw EC2 instance lifecycles, improving resource utilization and cost efficiency',
-          'Built and maintained CI/CD pipelines with Jenkins, GitHub Actions, and CircleCI, accelerating software delivery and reducing manual errors',
-          'Integrated Datadog for real-time infrastructure monitoring, improving uptime and observability across distributed systems',
-        ],
-        tech: 'AWS · Terraform · Jenkins · CircleCI · GitHub · Datadog · Ansible · Kubernetes · Docker',
+        summary:
+          'Owned AWS infrastructure with Terraform — RDS, ElastiCache, OpenSearch — locked IAM down to least privilege and improved EC2 cost efficiency.',
+        tech: 'AWS · Terraform · Jenkins · CircleCI · Datadog',
       },
       {
-        title: 'DevOps Engineer',
         company: 'Grid Dynamics',
         period: 'Mar 2021 – Jan 2022',
-        achievements: [
-          'Hosting client applications on Google Cloud Platform (GCP), ensuring reliable accessibility and optimal performance',
-          'Maintaining Kubernetes infrastructure leveraging the Google Kubernetes Engine (GKE), resulting in smooth orchestration of containerized applications',
-          'Establishing and maintaining CI/CD processes using tools such as Jenkins, Chef, and Spinnaker, streamlining development and deployment workflows',
-          'Testing containerized workloads with Sonar and Black Duck, affirming the quality, security, and compliance of software',
-          'Introducing new microservices into the existing stack, creating necessary pipelines and recipes using Chef for VMs and Helm for Kubernetes',
-          'Actively responding to developer feedback and making appropriate changes to the infrastructure model to eliminate bottlenecks',
-        ],
-        tech: 'Google Cloud Platform (GCP) · Helm · Spinnaker · Ansible · Kubernetes',
+        summary:
+          'Ran client workloads on GCP and GKE, built CI/CD with Jenkins, Chef, and Spinnaker, and onboarded new microservices end to end.',
+        tech: 'GCP · GKE · Helm · Spinnaker · Chef',
       },
       {
-        title: 'Machine Learning Internship',
-        company: 'Smart AItomation',
-        period: 'Nov 2020 – Feb 2021',
-        achievements: [
-          'Developed end-to-end machine learning pipelines, accelerating model deployment and reducing time-to-delivery for production ML solutions',
-          'Collected and prepared custom datasets via Selenium and BeautifulSoup, enabling high-quality data inputs for training and evaluation',
-          'Performed data analysis and visualization with Pandas and Matplotlib, uncovering insights to guide model refinement',
-          'Implemented and trained models using scikit-learn (Logistic Regression) and spaCy (Named Entity Recognition), improving accuracy and processing speed',
-          'Integrated GitHub Actions to automate CI/CD workflows, ensuring efficient and reproducible ML experiments',
-          'Deployed containerized ML applications on Heroku, enabling seamless public access to project demos and prototypes',
-        ],
-        tech: 'Python · scikit-learn · spaCy · Selenium · BeautifulSoup · Pandas · Matplotlib · GitHub Actions · Docker · Heroku',
-      },
-      {
-        title: 'DevOps Engineer',
         company: 'EBS-Integrator',
         period: 'Aug 2020 – Oct 2020',
-        achievements: [
-          'Implemented and maintained CI pipelines in GitLab, optimizing build, test, and deployment workflows across multiple environments',
-          'Developed and managed Ansible playbooks for configuration management and automated provisioning, reducing manual setup time',
-          'Built and deployed Docker containers, integrating Nginx for load balancing to enhance performance and ensure high availability',
-          'Orchestrated microservice deployments using Docker Swarm, enabling modular, scalable, and fault-tolerant application architecture',
-          'Collaborated with clients to design customized infrastructure solutions, aligning DevOps practices with specific performance and reliability goals',
-        ],
-        tech: 'GitLab · Docker Swarm · Ansible · Nginx · Redis · Elasticsearch · RabbitMQ · GitHub',
-      },
-      {
-        title: 'DevOps Internship',
-        company: 'Endava',
-        period: 'Mar 2020 – Jul 2020',
-        achievements: [
-          'Implementing GIT for the seamless control of source-code, streamlining the version control process for efficient code management',
-          'Creating and maintaining multi-branch Jenkins pipelines using Docker, thereby enhancing the automation and deployment process within the team',
-          'Leveraging Docker multi-stage builds to isolate work, ensuring clean, efficient, and error-free code development',
-          'Utilizing Python scripting skills to send build metrics from the Jenkins pipeline to Grafana for visualization and in-depth analysis',
-          'Creating a deployment pipeline to push the newest Docker application images to AWS, enhancing the efficiency of app updates and ensuring timely delivery',
-        ],
-      },
-      {
-        title: 'IT Helpdesk',
-        company: 'Gilat',
-        period: 'Apr 2017 – Apr 2020',
-        achievements: [
-          'Providing 24/6 call center support, acting as the first point of contact for troubleshooting and resolving IT issues',
-          'Specializing in the administration and troubleshooting of a wide variety of Microsoft products to maximize productivity and efficiency',
-          'Implementing secure access within our domain network to uphold high security standards and protect against potential threats',
-          'Hands-on maintenance and management of SAP systems, ensuring their optimal performance for smooth business operations',
-          'Operating and performing minor development tasks on Salesforce to enhance its functionality and user experience',
-        ],
-      },
-      {
-        title: 'IT Helpdesk',
-        company: 'Contraproducoes',
-        period: 'May 2015 – Dec 2015',
-        achievements: [
-          'Computer maintenance',
-          'Software updates',
-          'Hardware infrastructure upgrade',
-          'Customer support face to face',
-        ],
+        summary:
+          'GitLab CI pipelines, Ansible automation, and Docker Swarm orchestration for client microservice stacks.',
+        tech: 'GitLab · Docker Swarm · Ansible · Nginx',
       },
     ],
+    timelineEarlier:
+      "Earlier: a DevOps internship at Endava, a machine-learning internship at Smart AItomation, and three years of IT support at Gilat — where I learned to explain technical problems to people who don't care about YAML.",
+    timelineLinkedin: 'Full history on LinkedIn →',
 
-    // ---- additional info ----
-    educationHeading: 'Education',
-    educationDegree: 'High School Diploma',
-    languagesHeading: 'Languages',
-    languages: [
-      { name: 'Romanian', level: '(Native)' },
-      { name: 'English', level: '(C2)' },
-      { name: 'Portuguese', level: '(C1)' },
-      { name: 'Russian', level: '(B2)' },
-    ],
+    // ---- how I work ----
+    workHeading: 'How I work',
+    value1Title: 'Fixed scope, no surprises',
+    value1Body:
+      'You approve the plan and the price before any work begins. Fixed-scope proposal or day rate — your choice.',
+    value2Title: 'Plain language',
+    value2Body:
+      'I explain trade-offs without buzzwords and document everything as I go.',
+    value3Title: 'I make myself unnecessary',
+    value3Body:
+      'Everything is handed over so your team can run it without me. The goal is no lock-in — not even on me.',
+    languagesLine:
+      'Working languages: English (C2) · Romanian (native) · Portuguese (C1) · Russian (B2)',
 
     // ---- CTA ----
-    ctaHeading: "Let's Connect",
-    ctaText: 'Interested in working together or discussing DevOps practices?',
-    ctaContact: 'Contact Me',
-    ctaBlog: 'Read My Blog',
+    ctaHeading: 'Ready to talk?',
+    ctaText:
+      "If your cloud bill is growing faster than revenue, book a call. If you're hiring, my inbox is open.",
+    ctaBook: 'Book a free discovery call',
+    ctaEmail: 'Email me',
+    ctaLinkedinBtn: 'LinkedIn',
   },
   de: {
     // ---- meta ----
-    metaTitle: 'Über mich — DevOps- & Cloud-Berater',
+    metaTitle: 'Über mich — Kubernetes & Cloud-Kosten',
     metaDescription:
-      'Alexandru Pruteanu — DevOps- und Cloud-Berater mit über 6 Jahren Erfahrung im Aufbau produktiver Infrastrukturen auf AWS, Kubernetes und Terraform sowie in der eigenständigen Produktentwicklung.',
+      'DevOps-Engineer mit über 6 Jahren AWS, GCP und Kubernetes in Produktion. Ich senke Cloud-Kosten ohne Zuverlässigkeitsverlust — Beratung mit festem Umfang.',
 
     // ---- breadcrumb + header ----
     breadcrumbHome: 'Startseite',
     breadcrumbAbout: 'Über mich',
-    h1: 'Über mich',
-    headerSubtitle: 'DevOps-Engineer mit Spezialisierung auf Cloud-Infrastruktur',
-    contactLabel: 'E-Mail:',
+    h1: 'Hallo, ich bin Alexandru',
+    headerSubtitle:
+      'Ich bin DevOps-Engineer und senke Cloud- und Kubernetes-Kosten, ohne die Zuverlässigkeit anzutasten — über sechs Jahre AWS, GCP und Kubernetes in Produktion. Verfügbar für Beratung mit festem Umfang — und einen Blick wert, wenn Sie einstellen.',
+    ctaBookCall: 'Kostenloses Erstgespräch buchen',
+    ctaBookNote: '30 Minuten · unverbindlich',
     socialGithub: 'GitHub',
     socialLinkedin: 'LinkedIn',
-    socialChatter: 'Chatter',
 
-    // ---- professional summary ----
-    summaryHeading: 'Berufsprofil',
-    summaryText:
-      'DevOps-Engineer mit über 6 Jahren praktischer Erfahrung im Aufbau und Betrieb skalierbarer Cloud-Infrastrukturen mit AWS, Kubernetes und Terraform. Nachweisliche Erfolge bei der Automatisierung von CI/CD-Pipelines, der Container-Orchestrierung und der Bereitstellung von Infrastruktur über mehrere Umgebungen hinweg. Versiert darin, die Zuverlässigkeit von Deployments, das Monitoring und die Entwicklerproduktivität mithilfe moderner DevOps-Werkzeuge zu verbessern.',
+    // ---- what I do ----
+    doHeading: 'Was ich wirklich tue',
+    doCard1Title: 'Cloud-Rechnung senken',
+    doCard1Body:
+      'Right-Sizing, Autoscaling, Bin-Packing, ungenutzte Ressourcen abschalten. Die Verschwendung ist fast immer da — ich finde sie und entferne sie, ohne etwas fragiler zu machen.',
+    doCard2Title: 'Deployments langweilig machen',
+    doCard2Body:
+      'Terraform für alles, CI/CD, bei dem ein Push automatisch deployt, Kubernetes nur, wenn es sich wirklich lohnt. Für langweilige Systeme wird niemand um 3 Uhr nachts geweckt.',
+    doCard3Title: 'Migrieren ohne Drama',
+    doCard3Body:
+      'In die AWS- oder GCP-Cloud, Stück für Stück, während die Produktion durchgehend läuft. Wir migrieren, was sich lohnt, und lassen weg, was sich nicht lohnt.',
+    doServicesLink: 'Leistungen & Konditionen ansehen →',
 
-    // ---- technical skills ----
-    skillsHeading: 'Technische Fähigkeiten',
-    skillCloud: 'Cloud & Infrastruktur',
-    skillCicd: 'CI/CD & Automatisierung',
-    skillContainers: 'Container & Orchestrierung',
-    skillMonitoring: 'Monitoring & Observability',
-    skillLanguages: 'Sprachen & Datenbanken',
-    skillSecurity: 'Sicherheit & Compliance',
+    // ---- proof ----
+    proofHeading: 'Belege statt Versprechen',
+    proofChatterTitle: 'Ich baue einen verschlüsselten Messenger von Grund auf',
+    proofChatterBody:
+      'Chatter ist ein Privacy-First-Messenger, den ich im Alleingang entwickle — Rust-Client, Go-Backend, vollständige Ende-zu-Ende-Verschlüsselung mit dem Signal-Protokoll, lauffähig auf Linux, Windows und Android. Die meisten Berater hosten solche Systeme nur; ich baue sie.',
+    proofChatterLink: 'Zum Projekt →',
+    proofNumbersTitle: 'Echte Zahlen aus echten Jobs',
+    proofNumbersBody:
+      'In meiner aktuellen Rolle habe ich die Bereitstellungszeit von Umgebungen mit Terraform und Helm um 40 % verkürzt. Davor habe ich bei Quorum IAM auf das Least-Privilege-Prinzip umgestellt und die EC2-Kosteneffizienz über alle Umgebungen hinweg verbessert.',
+    proofBlogTitle: 'Ich schreibe über das, was ich betreibe',
+    proofBlogBody:
+      'Berichte über Dinge, die ich tatsächlich gebaut und betrieben habe — keine umformulierten Pressemitteilungen.',
+    proofBlogLink: 'Blog lesen →',
 
-    // ---- professional experience ----
-    experienceHeading: 'Berufserfahrung',
-    experienceTechLabel: 'Tech-Stack:',
+    // ---- career timeline ----
+    timelineHeading: 'Wo ich gearbeitet habe',
+    timelineIntro: 'Vier Stationen als DevOps-Engineer, sechs Jahre — die Kurzfassung. Details auf Anfrage oder auf LinkedIn.',
+    experienceTechLabel: 'Stack:',
     jobs: [
       {
-        title: 'DevOps-Engineer',
         company: 'Yopeso',
         period: 'Sep. 2023 – Aktuell',
-        achievements: [
-          'AWS-Infrastruktur mit Terraform und Helm konzipiert und bereitgestellt und damit die Bereitstellungszeit von Umgebungen um 40 % verbessert',
-          'Kubernetes-Cluster zur Unterstützung von Microservices im großen Maßstab bereitgestellt und gepflegt und damit die Widerstandsfähigkeit und Zuverlässigkeit des Systems verbessert',
-          'Infrastrukturbereitstellung und -konfiguration mit Ansible automatisiert und damit Bereitstellungszeit und menschliche Fehler reduziert',
-        ],
-        tech: 'Terraform · AWS · Kubernetes · Helm · Jenkins · Ansible · Docker · Python · GitHub',
+        summary:
+          'AWS-Infrastruktur mit Terraform und Helm — Bereitstellungszeit von Umgebungen um 40 % verkürzt — plus die Kubernetes-Cluster, auf denen die Microservices im großen Maßstab laufen.',
+        tech: 'Terraform · AWS · Kubernetes · Helm · Ansible',
       },
       {
-        title: 'DevOps-Engineer',
         company: 'Quorum',
         period: 'Feb. 2022 – Mai 2023',
-        achievements: [
-          'AWS-Infrastruktur mit Terraform verwaltet und bereitgestellt und damit konsistente, skalierbare und prüfbare Deployments über alle Umgebungen hinweg sichergestellt',
-          'Zentrale AWS-Dienste — darunter RDS (PostgreSQL/MySQL), Elasticache (Redis) und OpenSearch — konfiguriert und gepflegt und damit zuverlässige und leistungsstarke Datenplattformen bereitgestellt',
-          'Sichere IAM-Rollen und -Richtlinien implementiert, um den Zugriff nach dem Least-Privilege-Prinzip durchzusetzen und die Cloud-Sicherheit zu stärken',
-          'Den Lebenszyklus von EC2-Instanzen überwacht und damit Ressourcennutzung und Kosteneffizienz verbessert',
-          'CI/CD-Pipelines mit Jenkins, GitHub Actions und CircleCI aufgebaut und gepflegt und damit die Softwareauslieferung beschleunigt und manuelle Fehler reduziert',
-          'Datadog für das Echtzeit-Monitoring der Infrastruktur integriert und damit Verfügbarkeit und Observability über verteilte Systeme hinweg verbessert',
-        ],
-        tech: 'AWS · Terraform · Jenkins · CircleCI · GitHub · Datadog · Ansible · Kubernetes · Docker',
+        summary:
+          'AWS-Infrastruktur mit Terraform verantwortet — RDS, ElastiCache, OpenSearch — IAM auf Least Privilege umgestellt und die EC2-Kosteneffizienz verbessert.',
+        tech: 'AWS · Terraform · Jenkins · CircleCI · Datadog',
       },
       {
-        title: 'DevOps-Engineer',
         company: 'Grid Dynamics',
         period: 'März 2021 – Jan. 2022',
-        achievements: [
-          'Client-Anwendungen auf der Google Cloud Platform (GCP) gehostet und damit zuverlässige Erreichbarkeit und optimale Leistung sichergestellt',
-          'Kubernetes-Infrastruktur mit der Google Kubernetes Engine (GKE) gepflegt und damit eine reibungslose Orchestrierung containerisierter Anwendungen erreicht',
-          'CI/CD-Prozesse mit Werkzeugen wie Jenkins, Chef und Spinnaker eingerichtet und gepflegt und damit Entwicklungs- und Bereitstellungsabläufe optimiert',
-          'Containerisierte Workloads mit Sonar und Black Duck getestet und damit Qualität, Sicherheit und Compliance der Software bestätigt',
-          'Neue Microservices in den bestehenden Stack eingeführt und die erforderlichen Pipelines und Rezepte mit Chef für VMs und Helm für Kubernetes erstellt',
-          'Aktiv auf Entwicklerfeedback reagiert und das Infrastrukturmodell entsprechend angepasst, um Engpässe zu beseitigen',
-        ],
-        tech: 'Google Cloud Platform (GCP) · Helm · Spinnaker · Ansible · Kubernetes',
+        summary:
+          'Client-Workloads auf GCP und GKE betrieben, CI/CD mit Jenkins, Chef und Spinnaker aufgebaut und neue Microservices von Anfang bis Ende eingeführt.',
+        tech: 'GCP · GKE · Helm · Spinnaker · Chef',
       },
       {
-        title: 'Praktikum Machine Learning',
-        company: 'Smart AItomation',
-        period: 'Nov. 2020 – Feb. 2021',
-        achievements: [
-          'End-to-End-Machine-Learning-Pipelines entwickelt und damit die Modellbereitstellung beschleunigt und die Auslieferungszeit für produktive ML-Lösungen verkürzt',
-          'Individuelle Datensätze mit Selenium und BeautifulSoup erfasst und aufbereitet und damit hochwertige Dateneingaben für Training und Evaluierung ermöglicht',
-          'Datenanalyse und -visualisierung mit Pandas und Matplotlib durchgeführt und damit Erkenntnisse zur Verfeinerung der Modelle gewonnen',
-          'Modelle mit scikit-learn (Logistische Regression) und spaCy (Named Entity Recognition) implementiert und trainiert und damit Genauigkeit und Verarbeitungsgeschwindigkeit verbessert',
-          'GitHub Actions integriert, um CI/CD-Workflows zu automatisieren und effiziente, reproduzierbare ML-Experimente sicherzustellen',
-          'Containerisierte ML-Anwendungen auf Heroku bereitgestellt und damit einen nahtlosen öffentlichen Zugang zu Projektdemos und Prototypen ermöglicht',
-        ],
-        tech: 'Python · scikit-learn · spaCy · Selenium · BeautifulSoup · Pandas · Matplotlib · GitHub Actions · Docker · Heroku',
-      },
-      {
-        title: 'DevOps-Engineer',
         company: 'EBS-Integrator',
         period: 'Aug. 2020 – Okt. 2020',
-        achievements: [
-          'CI-Pipelines in GitLab implementiert und gepflegt und damit Build-, Test- und Bereitstellungsabläufe über mehrere Umgebungen hinweg optimiert',
-          'Ansible-Playbooks für Konfigurationsmanagement und automatisierte Bereitstellung entwickelt und verwaltet und damit den manuellen Einrichtungsaufwand reduziert',
-          'Docker-Container erstellt und bereitgestellt und Nginx für das Load Balancing integriert, um die Leistung zu steigern und hohe Verfügbarkeit sicherzustellen',
-          'Microservice-Deployments mit Docker Swarm orchestriert und damit eine modulare, skalierbare und fehlertolerante Anwendungsarchitektur ermöglicht',
-          'Mit Kunden zusammengearbeitet, um maßgeschneiderte Infrastrukturlösungen zu entwerfen und DevOps-Praktiken an spezifischen Leistungs- und Zuverlässigkeitszielen auszurichten',
-        ],
-        tech: 'GitLab · Docker Swarm · Ansible · Nginx · Redis · Elasticsearch · RabbitMQ · GitHub',
-      },
-      {
-        title: 'Praktikum DevOps',
-        company: 'Endava',
-        period: 'März 2020 – Juli 2020',
-        achievements: [
-          'GIT für die nahtlose Verwaltung von Quellcode eingeführt und damit den Versionskontrollprozess für ein effizientes Code-Management optimiert',
-          'Multi-Branch-Jenkins-Pipelines mit Docker erstellt und gepflegt und damit den Automatisierungs- und Bereitstellungsprozess im Team verbessert',
-          'Docker-Multi-Stage-Builds genutzt, um Arbeitsschritte zu isolieren und eine saubere, effiziente und fehlerfreie Codeentwicklung sicherzustellen',
-          'Python-Skripting eingesetzt, um Build-Metriken aus der Jenkins-Pipeline zur Visualisierung und detaillierten Analyse an Grafana zu senden',
-          'Eine Bereitstellungs-Pipeline erstellt, um die neuesten Docker-Anwendungs-Images an AWS zu übertragen, und damit die Effizienz von App-Updates gesteigert und eine termingerechte Auslieferung sichergestellt',
-        ],
-      },
-      {
-        title: 'IT-Helpdesk',
-        company: 'Gilat',
-        period: 'Apr. 2017 – Apr. 2020',
-        achievements: [
-          'Rund-um-die-Uhr-Support im Callcenter (24/6) geleistet und als erste Anlaufstelle für die Fehlerbehebung und Lösung von IT-Problemen fungiert',
-          'Auf die Administration und Fehlerbehebung einer Vielzahl von Microsoft-Produkten spezialisiert, um Produktivität und Effizienz zu maximieren',
-          'Sicheren Zugriff innerhalb unseres Domänennetzwerks implementiert, um hohe Sicherheitsstandards einzuhalten und vor potenziellen Bedrohungen zu schützen',
-          'SAP-Systeme praktisch gewartet und verwaltet und damit ihre optimale Leistung für einen reibungslosen Geschäftsbetrieb sichergestellt',
-          'Salesforce betrieben und kleinere Entwicklungsaufgaben durchgeführt, um Funktionalität und Benutzererlebnis zu verbessern',
-        ],
-      },
-      {
-        title: 'IT-Helpdesk',
-        company: 'Contraproducoes',
-        period: 'Mai 2015 – Dez. 2015',
-        achievements: [
-          'Computerwartung',
-          'Software-Updates',
-          'Aufrüstung der Hardware-Infrastruktur',
-          'Kundenbetreuung vor Ort',
-        ],
+        summary:
+          'GitLab-CI-Pipelines, Ansible-Automatisierung und Docker-Swarm-Orchestrierung für Microservice-Stacks von Kunden.',
+        tech: 'GitLab · Docker Swarm · Ansible · Nginx',
       },
     ],
+    timelineEarlier:
+      'Davor: ein DevOps-Praktikum bei Endava, ein Machine-Learning-Praktikum bei Smart AItomation und drei Jahre IT-Support bei Gilat — wo ich gelernt habe, technische Probleme Menschen zu erklären, die sich nicht für YAML interessieren.',
+    timelineLinkedin: 'Vollständiger Werdegang auf LinkedIn →',
 
-    // ---- additional info ----
-    educationHeading: 'Ausbildung',
-    educationDegree: 'Abitur',
-    languagesHeading: 'Sprachen',
-    languages: [
-      { name: 'Rumänisch', level: '(Muttersprache)' },
-      { name: 'Englisch', level: '(C2)' },
-      { name: 'Portugiesisch', level: '(C1)' },
-      { name: 'Russisch', level: '(B2)' },
-    ],
+    // ---- how I work ----
+    workHeading: 'Wie ich arbeite',
+    value1Title: 'Fester Umfang, keine Überraschungen',
+    value1Body:
+      'Sie genehmigen Plan und Preis, bevor die Arbeit beginnt. Angebot mit festem Umfang oder Tagessatz — Ihre Wahl.',
+    value2Title: 'Klare Sprache',
+    value2Body:
+      'Ich erkläre Kompromisse ohne Buzzwords und dokumentiere alles im laufenden Betrieb.',
+    value3Title: 'Ich mache mich überflüssig',
+    value3Body:
+      'Alles wird so übergeben, dass Ihr Team es ohne mich betreiben kann. Das Ziel ist kein Lock-in — auch nicht an mich.',
+    languagesLine:
+      'Arbeitssprachen: Englisch (C2) · Rumänisch (Muttersprache) · Portugiesisch (C1) · Russisch (B2)',
 
     // ---- CTA ----
-    ctaHeading: 'Kontakt aufnehmen',
-    ctaText: 'Interesse an einer Zusammenarbeit oder an einem Austausch über DevOps-Praktiken?',
-    ctaContact: 'Kontaktieren Sie mich',
-    ctaBlog: 'Meinen Blog lesen',
+    ctaHeading: 'Bereit für ein Gespräch?',
+    ctaText:
+      'Wenn Ihre Cloud-Rechnung schneller wächst als Ihr Umsatz, buchen Sie ein Gespräch. Wenn Sie einstellen, ist mein Postfach offen.',
+    ctaBook: 'Kostenloses Erstgespräch buchen',
+    ctaEmail: 'E-Mail schreiben',
+    ctaLinkedinBtn: 'LinkedIn',
   },
   es: {
     // ---- meta ----
-    metaTitle: 'Sobre mí — Consultor DevOps y Cloud',
+    metaTitle: 'Sobre mí — Kubernetes y costes cloud',
     metaDescription:
-      'Alexandru Pruteanu — consultor DevOps y cloud con más de 6 años construyendo infraestructura en producción sobre AWS, Kubernetes y Terraform, y lanzando productos en solitario.',
+      'Ingeniero DevOps con más de 6 años de AWS, GCP y Kubernetes en producción. Reduzco facturas cloud sin tocar la fiabilidad — consultoría de alcance fijo.',
 
     // ---- breadcrumb + header ----
     breadcrumbHome: 'Inicio',
     breadcrumbAbout: 'Sobre mí',
-    h1: 'Sobre mí',
-    headerSubtitle: 'Ingeniero DevOps especializado en infraestructura cloud',
-    contactLabel: 'Correo:',
+    h1: 'Hola, soy Alexandru',
+    headerSubtitle:
+      'Soy un ingeniero DevOps que reduce facturas de cloud y Kubernetes sin tocar la fiabilidad — más de seis años de AWS, GCP y Kubernetes en producción. Disponible para consultoría de alcance fijo, y vale la pena echar un vistazo si estás contratando.',
+    ctaBookCall: 'Reserva una llamada gratuita',
+    ctaBookNote: '30 minutos · sin compromiso',
     socialGithub: 'GitHub',
     socialLinkedin: 'LinkedIn',
-    socialChatter: 'Chatter',
 
-    // ---- professional summary ----
-    summaryHeading: 'Perfil profesional',
-    summaryText:
-      'Ingeniero DevOps con más de 6 años de experiencia práctica construyendo y gestionando infraestructuras cloud escalables con AWS, Kubernetes y Terraform. Trayectoria comprobada en la automatización de pipelines de CI/CD, la orquestación de contenedores y el aprovisionamiento de infraestructura en múltiples entornos. Con soltura para mejorar la fiabilidad de los despliegues, la monitorización y la productividad de los desarrolladores mediante herramientas modernas de DevOps.',
+    // ---- what I do ----
+    doHeading: 'Lo que realmente hago',
+    doCard1Title: 'Reducir la factura cloud',
+    doCard1Body:
+      'Right-sizing, autoescalado, bin-packing, eliminar gasto ocioso. El desperdicio casi siempre está ahí — lo encuentro y lo elimino sin hacer nada más frágil.',
+    doCard2Title: 'Hacer aburridos los despliegues',
+    doCard2Body:
+      'Terraform para todo, CI/CD donde haces push y se despliega, Kubernetes solo cuando se lo merece. A nadie le despiertan a las 3 de la mañana por algo aburrido.',
+    doCard3Title: 'Migrar sin drama',
+    doCard3Body:
+      'A AWS o GCP pieza a pieza, con producción funcionando todo el tiempo. Movemos lo que vale la pena mover y omitimos lo que no.',
+    doServicesLink: 'Ver servicios y tarifas →',
 
-    // ---- technical skills ----
-    skillsHeading: 'Habilidades técnicas',
-    skillCloud: 'Cloud e infraestructura',
-    skillCicd: 'CI/CD y automatización',
-    skillContainers: 'Contenedores y orquestación',
-    skillMonitoring: 'Monitorización y observabilidad',
-    skillLanguages: 'Lenguajes y bases de datos',
-    skillSecurity: 'Seguridad y cumplimiento',
+    // ---- proof ----
+    proofHeading: 'Pruebas, no promesas',
+    proofChatterTitle: 'Estoy construyendo un mensajero cifrado desde cero',
+    proofChatterBody:
+      'Chatter es un mensajero centrado en la privacidad que desarrollo en solitario — cliente en Rust, backend en Go, cifrado de extremo a extremo completo con el protocolo Signal, funcionando en Linux, Windows y Android. La mayoría de los consultores solo alojan sistemas así; yo los construyo.',
+    proofChatterLink: 'Ver el proyecto →',
+    proofNumbersTitle: 'Números reales de trabajos reales',
+    proofNumbersBody:
+      'En mi puesto actual reduje en un 40 % el tiempo de aprovisionamiento de entornos con Terraform y Helm. Antes, en Quorum, apliqué el principio de privilegios mínimos en IAM y mejoré la eficiencia de costes de EC2 en todos los entornos.',
+    proofBlogTitle: 'Escribo sobre lo que opero',
+    proofBlogBody:
+      'Artículos sobre cosas que realmente he construido y operado — nada de notas de prensa reescritas.',
+    proofBlogLink: 'Leer el blog →',
 
-    // ---- professional experience ----
-    experienceHeading: 'Experiencia profesional',
-    experienceTechLabel: 'Stack tecnológico:',
+    // ---- career timeline ----
+    timelineHeading: 'Dónde he trabajado',
+    timelineIntro: 'Cuatro puestos como ingeniero DevOps, seis años — la versión corta. Detalles bajo petición, o en LinkedIn.',
+    experienceTechLabel: 'Stack:',
     jobs: [
       {
-        title: 'Ingeniero DevOps',
         company: 'Yopeso',
         period: 'sept. 2023 – Actualidad',
-        achievements: [
-          'Diseñé y desplegué infraestructura en AWS con Terraform y Helm, mejorando en un 40 % el tiempo de aprovisionamiento de entornos',
-          'Desplegué y mantuve clústeres de Kubernetes para dar soporte a microservicios a gran escala, mejorando la resiliencia y la fiabilidad del sistema',
-          'Automaticé el aprovisionamiento y la configuración de la infraestructura con Ansible, reduciendo el tiempo de despliegue y el error humano',
-        ],
-        tech: 'Terraform · AWS · Kubernetes · Helm · Jenkins · Ansible · Docker · Python · GitHub',
+        summary:
+          'Infraestructura en AWS con Terraform y Helm — reduje en un 40 % el tiempo de aprovisionamiento de entornos — además de los clústeres de Kubernetes que ejecutan sus microservicios a gran escala.',
+        tech: 'Terraform · AWS · Kubernetes · Helm · Ansible',
       },
       {
-        title: 'Ingeniero DevOps',
         company: 'Quorum',
         period: 'feb. 2022 – may. 2023',
-        achievements: [
-          'Gestioné y aprovisioné infraestructura en AWS con Terraform, garantizando despliegues consistentes, escalables y auditables en todos los entornos',
-          'Configuré y mantuve servicios clave de AWS —incluidos RDS (PostgreSQL/MySQL), Elasticache (Redis) y OpenSearch—, ofreciendo plataformas de datos fiables y de alto rendimiento',
-          'Implementé roles y políticas de IAM seguros para aplicar el acceso con privilegios mínimos y reforzar la postura de seguridad en la nube',
-          'Supervisé el ciclo de vida de las instancias EC2, mejorando el uso de recursos y la eficiencia de costes',
-          'Construí y mantuve pipelines de CI/CD con Jenkins, GitHub Actions y CircleCI, acelerando la entrega de software y reduciendo los errores manuales',
-          'Integré Datadog para la monitorización de la infraestructura en tiempo real, mejorando la disponibilidad y la observabilidad en sistemas distribuidos',
-        ],
-        tech: 'AWS · Terraform · Jenkins · CircleCI · GitHub · Datadog · Ansible · Kubernetes · Docker',
+        summary:
+          'Responsable de la infraestructura en AWS con Terraform — RDS, ElastiCache, OpenSearch — apliqué privilegios mínimos en IAM y mejoré la eficiencia de costes de EC2.',
+        tech: 'AWS · Terraform · Jenkins · CircleCI · Datadog',
       },
       {
-        title: 'Ingeniero DevOps',
         company: 'Grid Dynamics',
         period: 'mar. 2021 – ene. 2022',
-        achievements: [
-          'Alojamiento de aplicaciones de clientes en Google Cloud Platform (GCP), garantizando una accesibilidad fiable y un rendimiento óptimo',
-          'Mantenimiento de la infraestructura de Kubernetes aprovechando Google Kubernetes Engine (GKE), logrando una orquestación fluida de aplicaciones en contenedores',
-          'Establecimiento y mantenimiento de procesos de CI/CD con herramientas como Jenkins, Chef y Spinnaker, agilizando los flujos de desarrollo y despliegue',
-          'Pruebas de cargas de trabajo en contenedores con Sonar y Black Duck, confirmando la calidad, la seguridad y el cumplimiento del software',
-          'Incorporación de nuevos microservicios al stack existente, creando los pipelines y las recetas necesarias con Chef para máquinas virtuales y Helm para Kubernetes',
-          'Respuesta activa a los comentarios de los desarrolladores y ajustes adecuados del modelo de infraestructura para eliminar cuellos de botella',
-        ],
-        tech: 'Google Cloud Platform (GCP) · Helm · Spinnaker · Ansible · Kubernetes',
+        summary:
+          'Operé cargas de trabajo de clientes en GCP y GKE, construí CI/CD con Jenkins, Chef y Spinnaker, e incorporé nuevos microservicios de principio a fin.',
+        tech: 'GCP · GKE · Helm · Spinnaker · Chef',
       },
       {
-        title: 'Prácticas en Machine Learning',
-        company: 'Smart AItomation',
-        period: 'nov. 2020 – feb. 2021',
-        achievements: [
-          'Desarrollé pipelines de machine learning de extremo a extremo, acelerando el despliegue de modelos y reduciendo el tiempo de entrega de soluciones de ML en producción',
-          'Recopilé y preparé conjuntos de datos personalizados con Selenium y BeautifulSoup, habilitando entradas de datos de alta calidad para el entrenamiento y la evaluación',
-          'Realicé análisis y visualización de datos con Pandas y Matplotlib, descubriendo información para guiar el refinamiento de los modelos',
-          'Implementé y entrené modelos con scikit-learn (regresión logística) y spaCy (reconocimiento de entidades nombradas), mejorando la precisión y la velocidad de procesamiento',
-          'Integré GitHub Actions para automatizar los flujos de CI/CD, asegurando experimentos de ML eficientes y reproducibles',
-          'Desplegué aplicaciones de ML en contenedores en Heroku, permitiendo un acceso público sin fricciones a las demos y los prototipos del proyecto',
-        ],
-        tech: 'Python · scikit-learn · spaCy · Selenium · BeautifulSoup · Pandas · Matplotlib · GitHub Actions · Docker · Heroku',
-      },
-      {
-        title: 'Ingeniero DevOps',
         company: 'EBS-Integrator',
         period: 'ago. 2020 – oct. 2020',
-        achievements: [
-          'Implementé y mantuve pipelines de CI en GitLab, optimizando los flujos de compilación, prueba y despliegue en múltiples entornos',
-          'Desarrollé y gestioné playbooks de Ansible para la gestión de configuración y el aprovisionamiento automatizado, reduciendo el tiempo de configuración manual',
-          'Construí y desplegué contenedores Docker, integrando Nginx para el balanceo de carga con el fin de mejorar el rendimiento y garantizar una alta disponibilidad',
-          'Orquesté despliegues de microservicios con Docker Swarm, habilitando una arquitectura de aplicaciones modular, escalable y tolerante a fallos',
-          'Colaboré con clientes para diseñar soluciones de infraestructura personalizadas, alineando las prácticas de DevOps con objetivos específicos de rendimiento y fiabilidad',
-        ],
-        tech: 'GitLab · Docker Swarm · Ansible · Nginx · Redis · Elasticsearch · RabbitMQ · GitHub',
-      },
-      {
-        title: 'Prácticas en DevOps',
-        company: 'Endava',
-        period: 'mar. 2020 – jul. 2020',
-        achievements: [
-          'Implementación de GIT para el control fluido del código fuente, agilizando el proceso de control de versiones para una gestión eficiente del código',
-          'Creación y mantenimiento de pipelines multirrama de Jenkins con Docker, mejorando así el proceso de automatización y despliegue dentro del equipo',
-          'Uso de compilaciones multietapa de Docker para aislar el trabajo, garantizando un desarrollo de código limpio, eficiente y sin errores',
-          'Uso de scripting en Python para enviar métricas de compilación desde el pipeline de Jenkins a Grafana para su visualización y análisis en profundidad',
-          'Creación de un pipeline de despliegue para enviar las imágenes más recientes de aplicaciones Docker a AWS, mejorando la eficiencia de las actualizaciones y asegurando una entrega puntual',
-        ],
-      },
-      {
-        title: 'Soporte técnico de TI',
-        company: 'Gilat',
-        period: 'abr. 2017 – abr. 2020',
-        achievements: [
-          'Prestación de soporte de centro de llamadas 24/6, actuando como primer punto de contacto para la resolución de problemas de TI',
-          'Especialización en la administración y resolución de problemas de una amplia variedad de productos de Microsoft para maximizar la productividad y la eficiencia',
-          'Implementación de acceso seguro dentro de nuestra red de dominio para mantener altos estándares de seguridad y proteger frente a posibles amenazas',
-          'Mantenimiento y gestión prácticos de sistemas SAP, garantizando su rendimiento óptimo para una operación empresarial fluida',
-          'Operación y realización de tareas menores de desarrollo en Salesforce para mejorar su funcionalidad y la experiencia de usuario',
-        ],
-      },
-      {
-        title: 'Soporte técnico de TI',
-        company: 'Contraproducoes',
-        period: 'may. 2015 – dic. 2015',
-        achievements: [
-          'Mantenimiento de equipos informáticos',
-          'Actualizaciones de software',
-          'Mejora de la infraestructura de hardware',
-          'Atención al cliente presencial',
-        ],
+        summary:
+          'Pipelines de CI en GitLab, automatización con Ansible y orquestación con Docker Swarm para stacks de microservicios de clientes.',
+        tech: 'GitLab · Docker Swarm · Ansible · Nginx',
       },
     ],
+    timelineEarlier:
+      'Antes: unas prácticas de DevOps en Endava, unas prácticas de machine learning en Smart AItomation y tres años de soporte de TI en Gilat — donde aprendí a explicar problemas técnicos a gente a la que no le importa el YAML.',
+    timelineLinkedin: 'Historial completo en LinkedIn →',
 
-    // ---- additional info ----
-    educationHeading: 'Formación',
-    educationDegree: 'Bachillerato',
-    languagesHeading: 'Idiomas',
-    languages: [
-      { name: 'Rumano', level: '(Nativo)' },
-      { name: 'Inglés', level: '(C2)' },
-      { name: 'Portugués', level: '(C1)' },
-      { name: 'Ruso', level: '(B2)' },
-    ],
+    // ---- how I work ----
+    workHeading: 'Cómo trabajo',
+    value1Title: 'Alcance fijo, sin sorpresas',
+    value1Body:
+      'Apruebas el plan y el precio antes de que empiece cualquier trabajo. Propuesta de alcance fijo o tarifa diaria — tú eliges.',
+    value2Title: 'Lenguaje claro',
+    value2Body:
+      'Explico los pros y contras sin palabras de moda y documento todo sobre la marcha.',
+    value3Title: 'Me hago innecesario',
+    value3Body:
+      'Todo se entrega para que tu equipo pueda operarlo sin mí. El objetivo es cero dependencia — ni siquiera de mí.',
+    languagesLine:
+      'Idiomas de trabajo: inglés (C2) · rumano (nativo) · portugués (C1) · ruso (B2)',
 
     // ---- CTA ----
-    ctaHeading: 'Conectemos',
-    ctaText: '¿Te interesa colaborar o hablar sobre prácticas de DevOps?',
-    ctaContact: 'Contáctame',
-    ctaBlog: 'Leer mi blog',
+    ctaHeading: '¿Hablamos?',
+    ctaText:
+      'Si tu factura cloud crece más rápido que tus ingresos, reserva una llamada. Si estás contratando, mi bandeja de entrada está abierta.',
+    ctaBook: 'Reserva una llamada gratuita',
+    ctaEmail: 'Escríbeme',
+    ctaLinkedinBtn: 'LinkedIn',
   },
   pt: {
     // ---- meta ----
-    metaTitle: 'Sobre mim — Consultor DevOps e Cloud',
+    metaTitle: 'Sobre mim — Kubernetes e custos cloud',
     metaDescription:
-      'Alexandru Pruteanu — consultor DevOps e cloud com mais de 6 anos construindo infraestrutura em produção na AWS, no Kubernetes e no Terraform, e lançando produtos de forma independente.',
+      'Engenheiro DevOps com mais de 6 anos de AWS, GCP e Kubernetes em produção. Reduzo faturas cloud sem tocar na confiabilidade — consultoria de escopo fixo.',
 
     // ---- breadcrumb + header ----
     breadcrumbHome: 'Início',
     breadcrumbAbout: 'Sobre mim',
-    h1: 'Sobre mim',
-    headerSubtitle: 'Engenheiro DevOps especializado em infraestrutura cloud',
-    contactLabel: 'E-mail:',
+    h1: 'Olá, sou o Alexandru',
+    headerSubtitle:
+      'Sou um engenheiro DevOps que reduz faturas de cloud e Kubernetes sem tocar na confiabilidade — mais de seis anos de AWS, GCP e Kubernetes em produção. Disponível para consultoria de escopo fixo, e vale a pena dar uma olhada se você está contratando.',
+    ctaBookCall: 'Agende uma chamada gratuita',
+    ctaBookNote: '30 minutos · sem compromisso',
     socialGithub: 'GitHub',
     socialLinkedin: 'LinkedIn',
-    socialChatter: 'Chatter',
 
-    // ---- professional summary ----
-    summaryHeading: 'Resumo profissional',
-    summaryText:
-      'Engenheiro DevOps com mais de 6 anos de experiência prática construindo e gerenciando infraestruturas cloud escaláveis com AWS, Kubernetes e Terraform. Histórico comprovado na automação de pipelines de CI/CD, na orquestração de containers e no provisionamento de infraestrutura em múltiplos ambientes. Habilidoso em melhorar a confiabilidade dos deploys, o monitoramento e a produtividade dos desenvolvedores por meio de ferramentas modernas de DevOps.',
+    // ---- what I do ----
+    doHeading: 'O que eu realmente faço',
+    doCard1Title: 'Reduzir a fatura cloud',
+    doCard1Body:
+      'Right-sizing, autoscaling, bin-packing, eliminar gasto ocioso. O desperdício quase sempre está lá — eu o encontro e removo sem tornar nada mais frágil.',
+    doCard2Title: 'Tornar os deploys entediantes',
+    doCard2Body:
+      'Terraform para tudo, CI/CD em que você faz push e o deploy acontece, Kubernetes só quando ele se justifica. Ninguém é acordado às 3 da manhã por algo entediante.',
+    doCard3Title: 'Migrar sem drama',
+    doCard3Body:
+      'Para AWS ou GCP, peça por peça, com a produção rodando o tempo todo. Movemos o que vale a pena mover e pulamos o que não vale.',
+    doServicesLink: 'Ver serviços e valores →',
 
-    // ---- technical skills ----
-    skillsHeading: 'Habilidades técnicas',
-    skillCloud: 'Cloud e infraestrutura',
-    skillCicd: 'CI/CD e automação',
-    skillContainers: 'Containers e orquestração',
-    skillMonitoring: 'Monitoramento e observabilidade',
-    skillLanguages: 'Linguagens e bancos de dados',
-    skillSecurity: 'Segurança e conformidade',
+    // ---- proof ----
+    proofHeading: 'Provas, não promessas',
+    proofChatterTitle: 'Estou construindo um mensageiro criptografado do zero',
+    proofChatterBody:
+      'O Chatter é um mensageiro com foco em privacidade que desenvolvo sozinho — cliente em Rust, backend em Go, criptografia de ponta a ponta completa com o protocolo Signal, rodando em Linux, Windows e Android. A maioria dos consultores apenas hospeda sistemas assim; eu os construo.',
+    proofChatterLink: 'Ver o projeto →',
+    proofNumbersTitle: 'Números reais de trabalhos reais',
+    proofNumbersBody:
+      'No meu cargo atual, reduzi em 40% o tempo de provisionamento de ambientes com Terraform e Helm. Antes, na Quorum, apliquei o privilégio mínimo no IAM e melhorei a eficiência de custos do EC2 em todos os ambientes.',
+    proofBlogTitle: 'Escrevo sobre o que opero',
+    proofBlogBody:
+      'Textos sobre coisas que realmente construí e operei — nada de comunicados de imprensa reescritos.',
+    proofBlogLink: 'Ler o blog →',
 
-    // ---- professional experience ----
-    experienceHeading: 'Experiência profissional',
-    experienceTechLabel: 'Stack de tecnologias:',
+    // ---- career timeline ----
+    timelineHeading: 'Onde trabalhei',
+    timelineIntro: 'Quatro cargos como engenheiro DevOps, seis anos — a versão curta. Detalhes sob demanda, ou no LinkedIn.',
+    experienceTechLabel: 'Stack:',
     jobs: [
       {
-        title: 'Engenheiro DevOps',
         company: 'Yopeso',
         period: 'set. 2023 – Atual',
-        achievements: [
-          'Projetei e implantei infraestrutura na AWS com Terraform e Helm, melhorando em 40% o tempo de provisionamento de ambientes',
-          'Implantei e mantive clusters de Kubernetes para dar suporte a microsserviços em larga escala, aumentando a resiliência e a confiabilidade do sistema',
-          'Automatizei o provisionamento e a configuração da infraestrutura com Ansible, reduzindo o tempo de deploy e o erro humano',
-        ],
-        tech: 'Terraform · AWS · Kubernetes · Helm · Jenkins · Ansible · Docker · Python · GitHub',
+        summary:
+          'Infraestrutura na AWS com Terraform e Helm — reduzi em 40% o tempo de provisionamento de ambientes — além dos clusters de Kubernetes que rodam seus microsserviços em larga escala.',
+        tech: 'Terraform · AWS · Kubernetes · Helm · Ansible',
       },
       {
-        title: 'Engenheiro DevOps',
         company: 'Quorum',
         period: 'fev. 2022 – mai. 2023',
-        achievements: [
-          'Gerenciei e provisionei infraestrutura na AWS com Terraform, garantindo deploys consistentes, escaláveis e auditáveis em todos os ambientes',
-          'Configurei e mantive serviços essenciais da AWS — incluindo RDS (PostgreSQL/MySQL), Elasticache (Redis) e OpenSearch —, entregando plataformas de dados confiáveis e de alto desempenho',
-          'Implementei papéis e políticas de IAM seguros para aplicar o acesso com privilégio mínimo e fortalecer a postura de segurança na nuvem',
-          'Supervisionei o ciclo de vida das instâncias EC2, melhorando o uso de recursos e a eficiência de custos',
-          'Construí e mantive pipelines de CI/CD com Jenkins, GitHub Actions e CircleCI, acelerando a entrega de software e reduzindo erros manuais',
-          'Integrei o Datadog para o monitoramento da infraestrutura em tempo real, melhorando a disponibilidade e a observabilidade em sistemas distribuídos',
-        ],
-        tech: 'AWS · Terraform · Jenkins · CircleCI · GitHub · Datadog · Ansible · Kubernetes · Docker',
+        summary:
+          'Responsável pela infraestrutura na AWS com Terraform — RDS, ElastiCache, OpenSearch — apliquei privilégio mínimo no IAM e melhorei a eficiência de custos do EC2.',
+        tech: 'AWS · Terraform · Jenkins · CircleCI · Datadog',
       },
       {
-        title: 'Engenheiro DevOps',
         company: 'Grid Dynamics',
         period: 'mar. 2021 – jan. 2022',
-        achievements: [
-          'Hospedagem de aplicações de clientes no Google Cloud Platform (GCP), garantindo acessibilidade confiável e desempenho ideal',
-          'Manutenção da infraestrutura de Kubernetes com o Google Kubernetes Engine (GKE), resultando em uma orquestração fluida de aplicações em containers',
-          'Estabelecimento e manutenção de processos de CI/CD com ferramentas como Jenkins, Chef e Spinnaker, otimizando os fluxos de desenvolvimento e deploy',
-          'Testes de cargas de trabalho em containers com Sonar e Black Duck, confirmando a qualidade, a segurança e a conformidade do software',
-          'Introdução de novos microsserviços na stack existente, criando os pipelines e as receitas necessárias com Chef para VMs e Helm para Kubernetes',
-          'Resposta ativa ao feedback dos desenvolvedores e ajustes adequados no modelo de infraestrutura para eliminar gargalos',
-        ],
-        tech: 'Google Cloud Platform (GCP) · Helm · Spinnaker · Ansible · Kubernetes',
+        summary:
+          'Operei cargas de trabalho de clientes no GCP e no GKE, construí CI/CD com Jenkins, Chef e Spinnaker e integrei novos microsserviços de ponta a ponta.',
+        tech: 'GCP · GKE · Helm · Spinnaker · Chef',
       },
       {
-        title: 'Estágio em Machine Learning',
-        company: 'Smart AItomation',
-        period: 'nov. 2020 – fev. 2021',
-        achievements: [
-          'Desenvolvi pipelines de machine learning de ponta a ponta, acelerando a implantação de modelos e reduzindo o tempo de entrega de soluções de ML em produção',
-          'Coletei e preparei conjuntos de dados personalizados com Selenium e BeautifulSoup, viabilizando entradas de dados de alta qualidade para treinamento e avaliação',
-          'Realizei análise e visualização de dados com Pandas e Matplotlib, revelando insights para orientar o refinamento dos modelos',
-          'Implementei e treinei modelos com scikit-learn (regressão logística) e spaCy (reconhecimento de entidades nomeadas), melhorando a precisão e a velocidade de processamento',
-          'Integrei o GitHub Actions para automatizar os fluxos de CI/CD, garantindo experimentos de ML eficientes e reproduzíveis',
-          'Implantei aplicações de ML em containers no Heroku, permitindo acesso público sem atritos às demonstrações e aos protótipos do projeto',
-        ],
-        tech: 'Python · scikit-learn · spaCy · Selenium · BeautifulSoup · Pandas · Matplotlib · GitHub Actions · Docker · Heroku',
-      },
-      {
-        title: 'Engenheiro DevOps',
         company: 'EBS-Integrator',
         period: 'ago. 2020 – out. 2020',
-        achievements: [
-          'Implementei e mantive pipelines de CI no GitLab, otimizando os fluxos de build, teste e deploy em múltiplos ambientes',
-          'Desenvolvi e gerenciei playbooks de Ansible para gerenciamento de configuração e provisionamento automatizado, reduzindo o tempo de configuração manual',
-          'Construí e implantei containers Docker, integrando o Nginx para balanceamento de carga a fim de aprimorar o desempenho e garantir alta disponibilidade',
-          'Orquestrei deploys de microsserviços com Docker Swarm, viabilizando uma arquitetura de aplicações modular, escalável e tolerante a falhas',
-          'Colaborei com clientes para projetar soluções de infraestrutura personalizadas, alinhando as práticas de DevOps a metas específicas de desempenho e confiabilidade',
-        ],
-        tech: 'GitLab · Docker Swarm · Ansible · Nginx · Redis · Elasticsearch · RabbitMQ · GitHub',
-      },
-      {
-        title: 'Estágio em DevOps',
-        company: 'Endava',
-        period: 'mar. 2020 – jul. 2020',
-        achievements: [
-          'Implementação do GIT para o controle fluido do código-fonte, otimizando o processo de controle de versão para um gerenciamento eficiente do código',
-          'Criação e manutenção de pipelines multibranch do Jenkins com Docker, aprimorando assim o processo de automação e deploy na equipe',
-          'Uso de builds multiestágio do Docker para isolar o trabalho, garantindo um desenvolvimento de código limpo, eficiente e livre de erros',
-          'Uso de scripts em Python para enviar métricas de build do pipeline do Jenkins ao Grafana para visualização e análise aprofundada',
-          'Criação de um pipeline de deploy para enviar as imagens mais recentes de aplicações Docker à AWS, aumentando a eficiência das atualizações e garantindo entrega pontual',
-        ],
-      },
-      {
-        title: 'Suporte técnico de TI',
-        company: 'Gilat',
-        period: 'abr. 2017 – abr. 2020',
-        achievements: [
-          'Prestação de suporte de call center 24/6, atuando como primeiro ponto de contato para a resolução de problemas de TI',
-          'Especialização na administração e resolução de problemas de uma ampla variedade de produtos Microsoft para maximizar a produtividade e a eficiência',
-          'Implementação de acesso seguro em nossa rede de domínio para manter altos padrões de segurança e proteger contra possíveis ameaças',
-          'Manutenção e gerenciamento práticos de sistemas SAP, garantindo seu desempenho ideal para uma operação de negócios fluida',
-          'Operação e execução de pequenas tarefas de desenvolvimento no Salesforce para aprimorar sua funcionalidade e a experiência do usuário',
-        ],
-      },
-      {
-        title: 'Suporte técnico de TI',
-        company: 'Contraproducoes',
-        period: 'maio 2015 – dez. 2015',
-        achievements: [
-          'Manutenção de computadores',
-          'Atualizações de software',
-          'Upgrade da infraestrutura de hardware',
-          'Atendimento ao cliente presencial',
-        ],
+        summary:
+          'Pipelines de CI no GitLab, automação com Ansible e orquestração com Docker Swarm para stacks de microsserviços de clientes.',
+        tech: 'GitLab · Docker Swarm · Ansible · Nginx',
       },
     ],
+    timelineEarlier:
+      'Antes disso: um estágio de DevOps na Endava, um estágio de machine learning na Smart AItomation e três anos de suporte de TI na Gilat — onde aprendi a explicar problemas técnicos para pessoas que não se importam com YAML.',
+    timelineLinkedin: 'Histórico completo no LinkedIn →',
 
-    // ---- additional info ----
-    educationHeading: 'Formação',
-    educationDegree: 'Ensino médio',
-    languagesHeading: 'Idiomas',
-    languages: [
-      { name: 'Romeno', level: '(Nativo)' },
-      { name: 'Inglês', level: '(C2)' },
-      { name: 'Português', level: '(C1)' },
-      { name: 'Russo', level: '(B2)' },
-    ],
+    // ---- how I work ----
+    workHeading: 'Como eu trabalho',
+    value1Title: 'Escopo fixo, sem surpresas',
+    value1Body:
+      'Você aprova o plano e o preço antes de qualquer trabalho começar. Proposta de escopo fixo ou diária — você escolhe.',
+    value2Title: 'Linguagem clara',
+    value2Body:
+      'Explico os trade-offs sem jargão e documento tudo enquanto trabalho.',
+    value3Title: 'Eu me torno desnecessário',
+    value3Body:
+      'Tudo é entregue de forma que sua equipe possa operar sem mim. O objetivo é zero dependência — nem mesmo de mim.',
+    languagesLine:
+      'Idiomas de trabalho: inglês (C2) · romeno (nativo) · português (C1) · russo (B2)',
 
     // ---- CTA ----
-    ctaHeading: 'Vamos nos conectar',
-    ctaText: 'Tem interesse em trabalhar em conjunto ou conversar sobre práticas de DevOps?',
-    ctaContact: 'Fale comigo',
-    ctaBlog: 'Ler meu blog',
+    ctaHeading: 'Vamos conversar?',
+    ctaText:
+      'Se a sua fatura cloud cresce mais rápido que a receita, agende uma chamada. Se você está contratando, minha caixa de entrada está aberta.',
+    ctaBook: 'Agende uma chamada gratuita',
+    ctaEmail: 'Envie um e-mail',
+    ctaLinkedinBtn: 'LinkedIn',
   },
   fr: {
     // ---- meta ----
-    metaTitle: 'À propos — Consultant DevOps et Cloud',
+    metaTitle: 'À propos — Kubernetes et coûts cloud',
     metaDescription:
-      'Alexandru Pruteanu — consultant DevOps et cloud fort de plus de 6 ans à concevoir des infrastructures en production sur AWS, Kubernetes et Terraform, et à lancer des produits en solo.',
+      'Ingénieur DevOps, plus de 6 ans d’AWS, GCP et Kubernetes en production. Je réduis les factures cloud sans toucher à la fiabilité — conseil à périmètre fixe.',
 
     // ---- breadcrumb + header ----
     breadcrumbHome: 'Accueil',
     breadcrumbAbout: 'À propos',
-    h1: 'À propos de moi',
-    headerSubtitle: "Ingénieur DevOps spécialisé dans l'infrastructure cloud",
-    contactLabel: 'E-mail :',
+    h1: 'Bonjour, je suis Alexandru',
+    headerSubtitle:
+      'Je suis un ingénieur DevOps qui réduit les factures cloud et Kubernetes sans toucher à la fiabilité — plus de six ans d’AWS, GCP et Kubernetes en production. Disponible pour du conseil à périmètre fixe, et un profil à considérer si vous recrutez.',
+    ctaBookCall: 'Réserver un appel découverte gratuit',
+    ctaBookNote: '30 minutes · sans engagement',
     socialGithub: 'GitHub',
     socialLinkedin: 'LinkedIn',
-    socialChatter: 'Chatter',
 
-    // ---- professional summary ----
-    summaryHeading: 'Profil professionnel',
-    summaryText:
-      "Ingénieur DevOps fort de plus de 6 ans d'expérience concrète dans la conception et la gestion d'infrastructures cloud évolutives avec AWS, Kubernetes et Terraform. Expérience éprouvée dans l'automatisation des pipelines CI/CD, l'orchestration de conteneurs et le provisionnement d'infrastructure sur de multiples environnements. À l'aise pour améliorer la fiabilité des déploiements, la supervision et la productivité des développeurs grâce à des outils DevOps modernes.",
+    // ---- what I do ----
+    doHeading: 'Ce que je fais vraiment',
+    doCard1Title: 'Réduire la facture cloud',
+    doCard1Body:
+      'Right-sizing, autoscaling, bin-packing, suppression des dépenses inutiles. Le gaspillage est presque toujours là — je le trouve et je l’élimine sans rien fragiliser.',
+    doCard2Title: 'Rendre les déploiements ennuyeux',
+    doCard2Body:
+      'Terraform pour tout, une CI/CD où un push suffit à déployer, Kubernetes seulement quand il est justifié. Personne n’est réveillé à 3 h du matin pour un système ennuyeux.',
+    doCard3Title: 'Migrer sans drame',
+    doCard3Body:
+      'Vers AWS ou GCP, morceau par morceau, avec la production qui tourne en continu. On migre ce qui en vaut la peine et on laisse de côté le reste.',
+    doServicesLink: 'Voir les services et les tarifs →',
 
-    // ---- technical skills ----
-    skillsHeading: 'Compétences techniques',
-    skillCloud: 'Cloud et infrastructure',
-    skillCicd: 'CI/CD et automatisation',
-    skillContainers: 'Conteneurs et orchestration',
-    skillMonitoring: 'Supervision et observabilité',
-    skillLanguages: 'Langages et bases de données',
-    skillSecurity: 'Sécurité et conformité',
+    // ---- proof ----
+    proofHeading: 'Des preuves, pas des promesses',
+    proofChatterTitle: 'Je construis une messagerie chiffrée à partir de zéro',
+    proofChatterBody:
+      'Chatter est une messagerie axée sur la confidentialité que je développe en solo — client en Rust, backend en Go, chiffrement de bout en bout complet avec le protocole Signal, fonctionnant sur Linux, Windows et Android. La plupart des consultants ne font qu’héberger ce genre de systèmes ; moi, je les construis.',
+    proofChatterLink: 'Voir le projet →',
+    proofNumbersTitle: 'De vrais chiffres, de vrais postes',
+    proofNumbersBody:
+      'À mon poste actuel, j’ai réduit de 40 % le temps de provisionnement des environnements avec Terraform et Helm. Avant cela, chez Quorum, j’ai appliqué le principe du moindre privilège dans IAM et amélioré l’efficacité des coûts EC2 sur tous les environnements.',
+    proofBlogTitle: 'J’écris sur ce que j’exploite',
+    proofBlogBody:
+      'Des articles sur des choses que j’ai réellement construites et exploitées — pas de communiqués de presse réécrits.',
+    proofBlogLink: 'Lire le blog →',
 
-    // ---- professional experience ----
-    experienceHeading: 'Expérience professionnelle',
-    experienceTechLabel: 'Stack technique :',
+    // ---- career timeline ----
+    timelineHeading: 'Où j’ai travaillé',
+    timelineIntro: 'Quatre postes d’ingénieur DevOps, six ans — la version courte. Détails sur demande, ou sur LinkedIn.',
+    experienceTechLabel: 'Stack :',
     jobs: [
       {
-        title: 'Ingénieur DevOps',
         company: 'Yopeso',
         period: 'sept. 2023 – Actuel',
-        achievements: [
-          "Conception et déploiement d'une infrastructure AWS avec Terraform et Helm, réduisant de 40 % le temps de provisionnement des environnements",
-          'Déploiement et maintenance de clusters Kubernetes pour prendre en charge des microservices à grande échelle, améliorant la résilience et la fiabilité du système',
-          "Automatisation du provisionnement et de la configuration de l'infrastructure avec Ansible, réduisant le temps de déploiement et les erreurs humaines",
-        ],
-        tech: 'Terraform · AWS · Kubernetes · Helm · Jenkins · Ansible · Docker · Python · GitHub',
+        summary:
+          'Infrastructure AWS avec Terraform et Helm — temps de provisionnement des environnements réduit de 40 % — plus les clusters Kubernetes qui font tourner ses microservices à grande échelle.',
+        tech: 'Terraform · AWS · Kubernetes · Helm · Ansible',
       },
       {
-        title: 'Ingénieur DevOps',
         company: 'Quorum',
         period: 'févr. 2022 – mai 2023',
-        achievements: [
-          "Gestion et provisionnement d'une infrastructure AWS avec Terraform, garantissant des déploiements cohérents, évolutifs et auditables sur tous les environnements",
-          'Configuration et maintenance de services AWS clés — dont RDS (PostgreSQL/MySQL), Elasticache (Redis) et OpenSearch —, offrant des plateformes de données fiables et performantes',
-          'Mise en place de rôles et de politiques IAM sécurisés pour appliquer le principe du moindre privilège et renforcer la posture de sécurité cloud',
-          "Supervision du cycle de vie des instances EC2, améliorant l'utilisation des ressources et l'efficacité des coûts",
-          'Création et maintenance de pipelines CI/CD avec Jenkins, GitHub Actions et CircleCI, accélérant la livraison logicielle et réduisant les erreurs manuelles',
-          "Intégration de Datadog pour la supervision de l'infrastructure en temps réel, améliorant la disponibilité et l'observabilité des systèmes distribués",
-        ],
-        tech: 'AWS · Terraform · Jenkins · CircleCI · GitHub · Datadog · Ansible · Kubernetes · Docker',
+        summary:
+          'Responsable de l’infrastructure AWS avec Terraform — RDS, ElastiCache, OpenSearch — application du moindre privilège dans IAM et amélioration de l’efficacité des coûts EC2.',
+        tech: 'AWS · Terraform · Jenkins · CircleCI · Datadog',
       },
       {
-        title: 'Ingénieur DevOps',
         company: 'Grid Dynamics',
         period: 'mars 2021 – janv. 2022',
-        achievements: [
-          'Hébergement des applications clientes sur Google Cloud Platform (GCP), garantissant une accessibilité fiable et des performances optimales',
-          "Maintenance de l'infrastructure Kubernetes en s'appuyant sur Google Kubernetes Engine (GKE), assurant une orchestration fluide des applications conteneurisées",
-          'Mise en place et maintenance de processus CI/CD avec des outils tels que Jenkins, Chef et Spinnaker, rationalisant les flux de développement et de déploiement',
-          'Test des charges de travail conteneurisées avec Sonar et Black Duck, confirmant la qualité, la sécurité et la conformité du logiciel',
-          'Introduction de nouveaux microservices dans la stack existante, création des pipelines et des recettes nécessaires avec Chef pour les VM et Helm pour Kubernetes',
-          "Réponse active aux retours des développeurs et adaptation du modèle d'infrastructure pour éliminer les goulots d'étranglement",
-        ],
-        tech: 'Google Cloud Platform (GCP) · Helm · Spinnaker · Ansible · Kubernetes',
+        summary:
+          'Exploitation des charges de travail clientes sur GCP et GKE, mise en place de la CI/CD avec Jenkins, Chef et Spinnaker, et intégration de nouveaux microservices de bout en bout.',
+        tech: 'GCP · GKE · Helm · Spinnaker · Chef',
       },
       {
-        title: 'Stage en Machine Learning',
-        company: 'Smart AItomation',
-        period: 'nov. 2020 – févr. 2021',
-        achievements: [
-          'Développement de pipelines de machine learning de bout en bout, accélérant le déploiement des modèles et réduisant les délais de livraison des solutions de ML en production',
-          "Collecte et préparation de jeux de données personnalisés avec Selenium et BeautifulSoup, permettant des données d'entrée de haute qualité pour l'entraînement et l'évaluation",
-          "Analyse et visualisation de données avec Pandas et Matplotlib, révélant des informations pour guider l'affinement des modèles",
-          "Implémentation et entraînement de modèles avec scikit-learn (régression logistique) et spaCy (reconnaissance d'entités nommées), améliorant la précision et la vitesse de traitement",
-          'Intégration de GitHub Actions pour automatiser les flux CI/CD, garantissant des expériences de ML efficaces et reproductibles',
-          "Déploiement d'applications de ML conteneurisées sur Heroku, offrant un accès public fluide aux démonstrations et prototypes du projet",
-        ],
-        tech: 'Python · scikit-learn · spaCy · Selenium · BeautifulSoup · Pandas · Matplotlib · GitHub Actions · Docker · Heroku',
-      },
-      {
-        title: 'Ingénieur DevOps',
         company: 'EBS-Integrator',
         period: 'août 2020 – oct. 2020',
-        achievements: [
-          'Implémentation et maintenance de pipelines CI dans GitLab, optimisant les flux de build, de test et de déploiement sur de multiples environnements',
-          'Développement et gestion de playbooks Ansible pour la gestion de configuration et le provisionnement automatisé, réduisant le temps de configuration manuelle',
-          "Construction et déploiement de conteneurs Docker, avec intégration de Nginx pour la répartition de charge afin d'améliorer les performances et d'assurer une haute disponibilité",
-          'Orchestration des déploiements de microservices avec Docker Swarm, permettant une architecture applicative modulaire, évolutive et tolérante aux pannes',
-          "Collaboration avec les clients pour concevoir des solutions d'infrastructure sur mesure, alignant les pratiques DevOps sur des objectifs précis de performance et de fiabilité",
-        ],
-        tech: 'GitLab · Docker Swarm · Ansible · Nginx · Redis · Elasticsearch · RabbitMQ · GitHub',
-      },
-      {
-        title: 'Stage en DevOps',
-        company: 'Endava',
-        period: 'mars 2020 – juil. 2020',
-        achievements: [
-          'Mise en place de GIT pour un contrôle fluide du code source, rationalisant le processus de gestion de versions pour une gestion efficace du code',
-          "Création et maintenance de pipelines Jenkins multi-branches avec Docker, améliorant ainsi le processus d'automatisation et de déploiement au sein de l'équipe",
-          'Utilisation des builds multi-étapes de Docker pour isoler le travail, garantissant un développement de code propre, efficace et sans erreur',
-          'Utilisation de scripts Python pour envoyer les métriques de build du pipeline Jenkins vers Grafana à des fins de visualisation et d\'analyse approfondie',
-          "Création d'un pipeline de déploiement pour pousser les dernières images d'applications Docker vers AWS, améliorant l'efficacité des mises à jour et garantissant une livraison dans les délais",
-        ],
-      },
-      {
-        title: 'Support informatique',
-        company: 'Gilat',
-        period: 'avr. 2017 – avr. 2020',
-        achievements: [
-          "Fourniture d'un support de centre d'appels 24/6, en tant que premier point de contact pour le dépannage et la résolution des problèmes informatiques",
-          "Spécialisation dans l'administration et le dépannage d'une grande variété de produits Microsoft afin de maximiser la productivité et l'efficacité",
-          "Mise en place d'un accès sécurisé au sein de notre réseau de domaine pour maintenir des normes de sécurité élevées et protéger contre les menaces potentielles",
-          "Maintenance et gestion pratiques des systèmes SAP, garantissant leurs performances optimales pour un fonctionnement fluide de l'entreprise",
-          "Exploitation et réalisation de tâches de développement mineures sur Salesforce pour améliorer ses fonctionnalités et l'expérience utilisateur",
-        ],
-      },
-      {
-        title: 'Support informatique',
-        company: 'Contraproducoes',
-        period: 'mai 2015 – déc. 2015',
-        achievements: [
-          'Maintenance informatique',
-          'Mises à jour logicielles',
-          "Mise à niveau de l'infrastructure matérielle",
-          'Support client en présentiel',
-        ],
+        summary:
+          'Pipelines CI GitLab, automatisation Ansible et orchestration Docker Swarm pour les stacks de microservices des clients.',
+        tech: 'GitLab · Docker Swarm · Ansible · Nginx',
       },
     ],
+    timelineEarlier:
+      'Avant cela : un stage DevOps chez Endava, un stage en machine learning chez Smart AItomation et trois ans de support informatique chez Gilat — où j’ai appris à expliquer des problèmes techniques à des gens qui se moquent du YAML.',
+    timelineLinkedin: 'Parcours complet sur LinkedIn →',
 
-    // ---- additional info ----
-    educationHeading: 'Formation',
-    educationDegree: 'Baccalauréat',
-    languagesHeading: 'Langues',
-    languages: [
-      { name: 'Roumain', level: '(Langue maternelle)' },
-      { name: 'Anglais', level: '(C2)' },
-      { name: 'Portugais', level: '(C1)' },
-      { name: 'Russe', level: '(B2)' },
-    ],
+    // ---- how I work ----
+    workHeading: 'Comment je travaille',
+    value1Title: 'Périmètre fixe, zéro surprise',
+    value1Body:
+      'Vous validez le plan et le prix avant le début de tout travail. Proposition à périmètre fixe ou tarif journalier — à vous de choisir.',
+    value2Title: 'Un langage clair',
+    value2Body:
+      'J’explique les compromis sans jargon et je documente tout au fur et à mesure.',
+    value3Title: 'Je me rends inutile',
+    value3Body:
+      'Tout est transmis pour que votre équipe puisse l’exploiter sans moi. L’objectif : aucune dépendance — pas même envers moi.',
+    languagesLine:
+      'Langues de travail : anglais (C2) · roumain (langue maternelle) · portugais (C1) · russe (B2)',
 
     // ---- CTA ----
-    ctaHeading: 'Restons en contact',
-    ctaText: 'Vous souhaitez collaborer ou échanger sur les pratiques DevOps ?',
-    ctaContact: 'Me contacter',
-    ctaBlog: 'Lire mon blog',
+    ctaHeading: 'Prêt à en parler ?',
+    ctaText:
+      'Si votre facture cloud croît plus vite que votre chiffre d’affaires, réservez un appel. Si vous recrutez, ma boîte mail est ouverte.',
+    ctaBook: 'Réserver un appel découverte gratuit',
+    ctaEmail: 'M’écrire',
+    ctaLinkedinBtn: 'LinkedIn',
   },
   ro: {
     // ---- meta ----
-    metaTitle: 'Despre mine — Consultant DevOps și Cloud',
+    metaTitle: 'Despre mine — Kubernetes și costuri cloud',
     metaDescription:
-      'Alexandru Pruteanu — consultant DevOps și cloud cu peste 6 ani de experiență în construirea de infrastructuri de producție pe AWS, Kubernetes și Terraform și în lansarea de produse pe cont propriu.',
+      'Inginer DevOps cu peste 6 ani de AWS, GCP și Kubernetes în producție. Reduc facturile cloud fără să ating fiabilitatea — consultanță cu obiective fixe.',
 
     // ---- breadcrumb + header ----
     breadcrumbHome: 'Acasă',
     breadcrumbAbout: 'Despre mine',
-    h1: 'Despre mine',
-    headerSubtitle: 'Inginer DevOps specializat în infrastructură cloud',
-    contactLabel: 'E-mail:',
+    h1: 'Salut, sunt Alexandru',
+    headerSubtitle:
+      'Sunt un inginer DevOps care reduce facturile de cloud și Kubernetes fără să atingă fiabilitatea — peste șase ani de AWS, GCP și Kubernetes în producție. Disponibil pentru consultanță cu obiective fixe — și un profil de luat în calcul dacă angajați.',
+    ctaBookCall: 'Programează un apel gratuit',
+    ctaBookNote: '30 de minute · fără obligații',
     socialGithub: 'GitHub',
     socialLinkedin: 'LinkedIn',
-    socialChatter: 'Chatter',
 
-    // ---- professional summary ----
-    summaryHeading: 'Profil profesional',
-    summaryText:
-      'Inginer DevOps cu peste 6 ani de experiență practică în construirea și administrarea de infrastructuri cloud scalabile folosind AWS, Kubernetes și Terraform. Rezultate dovedite în automatizarea pipeline-urilor CI/CD, orchestrarea containerelor și aprovizionarea infrastructurii în multiple medii. Priceput în îmbunătățirea fiabilității implementărilor, a monitorizării și a productivității dezvoltatorilor prin instrumente moderne de DevOps.',
+    // ---- what I do ----
+    doHeading: 'Ce fac de fapt',
+    doCard1Title: 'Reduc factura cloud',
+    doCard1Body:
+      'Right-sizing, autoscaling, bin-packing, eliminarea cheltuielilor inutile. Risipa este aproape întotdeauna acolo — o găsesc și o elimin fără să fac nimic mai fragil.',
+    doCard2Title: 'Fac implementările plictisitoare',
+    doCard2Body:
+      'Terraform pentru tot, CI/CD în care dai push și se face deploy, Kubernetes doar când se justifică. Nimeni nu e trezit la 3 dimineața pentru ceva plictisitor.',
+    doCard3Title: 'Migrez fără dramă',
+    doCard3Body:
+      'Spre AWS sau GCP, bucată cu bucată, cu producția funcționând tot timpul. Mutăm ce merită mutat și sărim peste ce nu merită.',
+    doServicesLink: 'Vezi serviciile și tarifele →',
 
-    // ---- technical skills ----
-    skillsHeading: 'Competențe tehnice',
-    skillCloud: 'Cloud și infrastructură',
-    skillCicd: 'CI/CD și automatizare',
-    skillContainers: 'Containere și orchestrare',
-    skillMonitoring: 'Monitorizare și observabilitate',
-    skillLanguages: 'Limbaje și baze de date',
-    skillSecurity: 'Securitate și conformitate',
+    // ---- proof ----
+    proofHeading: 'Dovezi, nu promisiuni',
+    proofChatterTitle: 'Construiesc de la zero un mesager criptat',
+    proofChatterBody:
+      'Chatter este un mesager axat pe confidențialitate pe care îl dezvolt singur — client în Rust, backend în Go, criptare end-to-end completă cu protocolul Signal, funcțional pe Linux, Windows și Android. Majoritatea consultanților doar găzduiesc astfel de sisteme; eu le construiesc.',
+    proofChatterLink: 'Vezi proiectul →',
+    proofNumbersTitle: 'Cifre reale din joburi reale',
+    proofNumbersBody:
+      'În rolul meu actual am redus cu 40% timpul de aprovizionare a mediilor cu Terraform și Helm. Înainte, la Quorum, am aplicat principiul privilegiilor minime în IAM și am îmbunătățit eficiența costurilor EC2 în toate mediile.',
+    proofBlogTitle: 'Scriu despre ce operez',
+    proofBlogBody:
+      'Articole despre lucruri pe care chiar le-am construit și operat — fără comunicate de presă rescrise.',
+    proofBlogLink: 'Citește blogul →',
 
-    // ---- professional experience ----
-    experienceHeading: 'Experiență profesională',
-    experienceTechLabel: 'Stivă tehnologică:',
+    // ---- career timeline ----
+    timelineHeading: 'Unde am lucrat',
+    timelineIntro: 'Patru roluri de inginer DevOps, șase ani — versiunea scurtă. Detalii la cerere sau pe LinkedIn.',
+    experienceTechLabel: 'Stack:',
     jobs: [
       {
-        title: 'Inginer DevOps',
         company: 'Yopeso',
         period: 'sept. 2023 – Prezent',
-        achievements: [
-          'Am proiectat și implementat infrastructură AWS folosind Terraform și Helm, îmbunătățind cu 40% timpul de aprovizionare a mediilor',
-          'Am implementat și întreținut clustere Kubernetes pentru a susține microservicii la scară largă, îmbunătățind reziliența și fiabilitatea sistemului',
-          'Am automatizat aprovizionarea și configurarea infrastructurii cu Ansible, reducând timpul de implementare și erorile umane',
-        ],
-        tech: 'Terraform · AWS · Kubernetes · Helm · Jenkins · Ansible · Docker · Python · GitHub',
+        summary:
+          'Infrastructură AWS cu Terraform și Helm — am redus cu 40% timpul de aprovizionare a mediilor — plus clusterele Kubernetes care rulează microserviciile la scară largă.',
+        tech: 'Terraform · AWS · Kubernetes · Helm · Ansible',
       },
       {
-        title: 'Inginer DevOps',
         company: 'Quorum',
         period: 'feb. 2022 – mai 2023',
-        achievements: [
-          'Am administrat și aprovizionat infrastructură AWS folosind Terraform, asigurând implementări consecvente, scalabile și auditabile în toate mediile',
-          'Am configurat și întreținut servicii AWS esențiale — inclusiv RDS (PostgreSQL/MySQL), Elasticache (Redis) și OpenSearch —, oferind platforme de date fiabile și performante',
-          'Am implementat roluri și politici IAM securizate pentru a impune accesul cu privilegii minime și a consolida securitatea în cloud',
-          'Am supravegheat ciclul de viață al instanțelor EC2, îmbunătățind utilizarea resurselor și eficiența costurilor',
-          'Am construit și întreținut pipeline-uri CI/CD cu Jenkins, GitHub Actions și CircleCI, accelerând livrarea software-ului și reducând erorile manuale',
-          'Am integrat Datadog pentru monitorizarea infrastructurii în timp real, îmbunătățind disponibilitatea și observabilitatea în sistemele distribuite',
-        ],
-        tech: 'AWS · Terraform · Jenkins · CircleCI · GitHub · Datadog · Ansible · Kubernetes · Docker',
+        summary:
+          'Responsabil de infrastructura AWS cu Terraform — RDS, ElastiCache, OpenSearch — am aplicat privilegii minime în IAM și am îmbunătățit eficiența costurilor EC2.',
+        tech: 'AWS · Terraform · Jenkins · CircleCI · Datadog',
       },
       {
-        title: 'Inginer DevOps',
         company: 'Grid Dynamics',
         period: 'mar. 2021 – ian. 2022',
-        achievements: [
-          'Găzduirea aplicațiilor clienților pe Google Cloud Platform (GCP), asigurând accesibilitate fiabilă și performanță optimă',
-          'Întreținerea infrastructurii Kubernetes folosind Google Kubernetes Engine (GKE), rezultând într-o orchestrare fluidă a aplicațiilor containerizate',
-          'Stabilirea și întreținerea proceselor CI/CD cu instrumente precum Jenkins, Chef și Spinnaker, optimizând fluxurile de dezvoltare și implementare',
-          'Testarea sarcinilor de lucru containerizate cu Sonar și Black Duck, confirmând calitatea, securitatea și conformitatea software-ului',
-          'Introducerea de noi microservicii în stiva existentă, creând pipeline-urile și rețetele necesare folosind Chef pentru mașini virtuale și Helm pentru Kubernetes',
-          'Răspunsul activ la feedbackul dezvoltatorilor și efectuarea modificărilor adecvate în modelul de infrastructură pentru a elimina blocajele',
-        ],
-        tech: 'Google Cloud Platform (GCP) · Helm · Spinnaker · Ansible · Kubernetes',
+        summary:
+          'Am operat sarcini de lucru ale clienților pe GCP și GKE, am construit CI/CD cu Jenkins, Chef și Spinnaker și am integrat noi microservicii de la un capăt la altul.',
+        tech: 'GCP · GKE · Helm · Spinnaker · Chef',
       },
       {
-        title: 'Stagiu în Machine Learning',
-        company: 'Smart AItomation',
-        period: 'nov. 2020 – feb. 2021',
-        achievements: [
-          'Am dezvoltat pipeline-uri de machine learning de la un capăt la altul, accelerând implementarea modelelor și reducând timpul de livrare pentru soluțiile ML de producție',
-          'Am colectat și pregătit seturi de date personalizate prin Selenium și BeautifulSoup, permițând date de intrare de înaltă calitate pentru antrenare și evaluare',
-          'Am efectuat analiza și vizualizarea datelor cu Pandas și Matplotlib, descoperind informații pentru a ghida rafinarea modelelor',
-          'Am implementat și antrenat modele folosind scikit-learn (regresie logistică) și spaCy (recunoașterea entităților denumite), îmbunătățind acuratețea și viteza de procesare',
-          'Am integrat GitHub Actions pentru a automatiza fluxurile CI/CD, asigurând experimente ML eficiente și reproductibile',
-          'Am implementat aplicații ML containerizate pe Heroku, permițând acces public fără fricțiuni la demonstrațiile și prototipurile proiectului',
-        ],
-        tech: 'Python · scikit-learn · spaCy · Selenium · BeautifulSoup · Pandas · Matplotlib · GitHub Actions · Docker · Heroku',
-      },
-      {
-        title: 'Inginer DevOps',
         company: 'EBS-Integrator',
         period: 'aug. 2020 – oct. 2020',
-        achievements: [
-          'Am implementat și întreținut pipeline-uri CI în GitLab, optimizând fluxurile de build, testare și implementare în multiple medii',
-          'Am dezvoltat și gestionat playbook-uri Ansible pentru gestionarea configurației și aprovizionarea automatizată, reducând timpul de configurare manuală',
-          'Am construit și implementat containere Docker, integrând Nginx pentru echilibrarea încărcării pentru a îmbunătăți performanța și a asigura o disponibilitate ridicată',
-          'Am orchestrat implementări de microservicii folosind Docker Swarm, permițând o arhitectură a aplicațiilor modulară, scalabilă și tolerantă la erori',
-          'Am colaborat cu clienții pentru a proiecta soluții de infrastructură personalizate, aliniind practicile DevOps la obiective specifice de performanță și fiabilitate',
-        ],
-        tech: 'GitLab · Docker Swarm · Ansible · Nginx · Redis · Elasticsearch · RabbitMQ · GitHub',
-      },
-      {
-        title: 'Stagiu în DevOps',
-        company: 'Endava',
-        period: 'mar. 2020 – iul. 2020',
-        achievements: [
-          'Implementarea GIT pentru controlul fluid al codului sursă, optimizând procesul de control al versiunilor pentru o gestionare eficientă a codului',
-          'Crearea și întreținerea de pipeline-uri Jenkins cu mai multe ramuri folosind Docker, îmbunătățind astfel procesul de automatizare și implementare în cadrul echipei',
-          'Utilizarea build-urilor Docker în mai multe etape pentru a izola munca, asigurând o dezvoltare a codului curată, eficientă și fără erori',
-          'Utilizarea abilităților de scriptare în Python pentru a trimite metrici de build din pipeline-ul Jenkins către Grafana pentru vizualizare și analiză aprofundată',
-          'Crearea unui pipeline de implementare pentru a trimite cele mai noi imagini de aplicații Docker către AWS, îmbunătățind eficiența actualizărilor și asigurând o livrare la timp',
-        ],
-      },
-      {
-        title: 'Suport IT',
-        company: 'Gilat',
-        period: 'apr. 2017 – apr. 2020',
-        achievements: [
-          'Furnizarea de suport de tip call center 24/6, acționând ca prim punct de contact pentru depanarea și rezolvarea problemelor IT',
-          'Specializarea în administrarea și depanarea unei game variate de produse Microsoft pentru a maximiza productivitatea și eficiența',
-          'Implementarea accesului securizat în cadrul rețelei noastre de domeniu pentru a menține standarde ridicate de securitate și a proteja împotriva amenințărilor potențiale',
-          'Întreținerea și administrarea practică a sistemelor SAP, asigurând performanța lor optimă pentru operațiuni de afaceri fluide',
-          'Operarea și efectuarea de sarcini minore de dezvoltare pe Salesforce pentru a-i îmbunătăți funcționalitatea și experiența utilizatorului',
-        ],
-      },
-      {
-        title: 'Suport IT',
-        company: 'Contraproducoes',
-        period: 'mai 2015 – dec. 2015',
-        achievements: [
-          'Întreținerea calculatoarelor',
-          'Actualizări de software',
-          'Modernizarea infrastructurii hardware',
-          'Asistență clienți față în față',
-        ],
+        summary:
+          'Pipeline-uri CI în GitLab, automatizare cu Ansible și orchestrare cu Docker Swarm pentru stivele de microservicii ale clienților.',
+        tech: 'GitLab · Docker Swarm · Ansible · Nginx',
       },
     ],
+    timelineEarlier:
+      'Mai devreme: un stagiu DevOps la Endava, un stagiu de machine learning la Smart AItomation și trei ani de suport IT la Gilat — unde am învățat să explic probleme tehnice unor oameni cărora nu le pasă de YAML.',
+    timelineLinkedin: 'Istoricul complet pe LinkedIn →',
 
-    // ---- additional info ----
-    educationHeading: 'Educație',
-    educationDegree: 'Diplomă de bacalaureat',
-    languagesHeading: 'Limbi',
-    languages: [
-      { name: 'Română', level: '(Nativ)' },
-      { name: 'Engleză', level: '(C2)' },
-      { name: 'Portugheză', level: '(C1)' },
-      { name: 'Rusă', level: '(B2)' },
-    ],
+    // ---- how I work ----
+    workHeading: 'Cum lucrez',
+    value1Title: 'Obiective fixe, fără surprize',
+    value1Body:
+      'Aprobați planul și prețul înainte să înceapă orice lucrare. Propunere cu obiective fixe sau tarif pe zi — alegerea vă aparține.',
+    value2Title: 'Limbaj clar',
+    value2Body:
+      'Explic compromisurile fără cuvinte la modă și documentez totul pe parcurs.',
+    value3Title: 'Mă fac inutil',
+    value3Body:
+      'Totul este predat astfel încât echipa dumneavoastră să poată opera fără mine. Scopul este zero dependență — nici măcar de mine.',
+    languagesLine:
+      'Limbi de lucru: engleză (C2) · română (nativ) · portugheză (C1) · rusă (B2)',
 
     // ---- CTA ----
-    ctaHeading: 'Să luăm legătura',
-    ctaText: 'Vă interesează o colaborare sau o discuție despre practicile DevOps?',
-    ctaContact: 'Contactați-mă',
-    ctaBlog: 'Citiți blogul meu',
+    ctaHeading: 'Gata de discuție?',
+    ctaText:
+      'Dacă factura cloud crește mai repede decât veniturile, programați un apel. Dacă angajați, inboxul meu este deschis.',
+    ctaBook: 'Programează un apel gratuit',
+    ctaEmail: 'Trimite-mi un e-mail',
+    ctaLinkedinBtn: 'LinkedIn',
   },
 } as const;
 
