@@ -1,5 +1,6 @@
 ---
 title: "So You Want to Learn DevOps: A Practical Roadmap from Zero to Hired"
+seoTitle: "Learn DevOps: Roadmap from Zero to Hired"
 date: "2025-10-30"
 description: "A no-nonsense guide to learning DevOps fundamentals: Linux, AWS, Docker, Python, and everything you need to land your first permanent DevOps role"
 tags: ["DevOps", "Career", "Learning", "Linux", "AWS", "Docker", "Python"]
@@ -595,6 +596,8 @@ kubectl get services
 4. Configure alerting rules
 5. Send alerts to Slack
 ```
+
+<img src="/images/blog/so-you-want-to-learn-devops-body.webp" alt="Illustration of an ascending staircase of glowing platforms, a learning roadmap metaphor" width="1200" height="686" loading="lazy" decoding="async" />
 
 ## Phase 9: Security & Best Practices (Ongoing)
 

@@ -172,7 +172,7 @@ const keywords = [
       *{margin:0;padding:0;box-sizing:border-box}
       html{background-color:var(--color-bg);color:var(--color-text);font-family:monospace;line-height:1.6}
       body{min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}
-      header{background:var(--color-surface);border-bottom:1px solid var(--color-primary);position:relative;z-index:100}
+      body>header{background:var(--color-surface);border-bottom:1px solid var(--color-primary);position:relative;z-index:100}
       nav{max-width:1200px;margin:0 auto;padding:0.375rem 2rem;display:flex;justify-content:space-between;align-items:center}
       main{flex:1;max-width:1200px;width:100%;margin:0 auto;padding:3rem 2rem}
       footer{background:var(--color-surface);border-top:1px solid var(--color-primary);padding:0.5rem 2rem 1rem 2rem;text-align:center;color:var(--color-text-dim)}
@@ -489,8 +489,8 @@ const keywords = [
     display: none;
   }
 
-  /* Header */
-  header {
+  /* Header (site chrome only — pages use their own <header> elements) */
+  body > header {
     background: var(--color-surface);
     border-bottom: 1px solid var(--color-primary);
     box-shadow: 0 0 20px rgba(0, 255, 204, 0.3);

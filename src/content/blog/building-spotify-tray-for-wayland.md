@@ -1,5 +1,6 @@
 ---
 title: "Building a Spotify System Tray for Wayland and Hyprland"
+seoTitle: "Spotify Tray for Wayland & Hyprland"
 date: "2026-01-31"
 description: "How to add a Spotify tray icon on Wayland with minimize to tray, media controls, and why Linux desktop integration requires understanding five different subsystems."
 tags: ["Linux", "Wayland", "Spotify", "Hyprland", "System Tray", "Go", "D-Bus", "MPRIS"]
@@ -64,6 +65,8 @@ Wayland changed everything. Each application is isolated:
 - You can't capture the screen without explicit permission
 
 This breaks every X11-era Spotify tray tool, but the security trade-off is worth it. The problem is that replacement standards took years to mature, and adoption remains inconsistent.
+
+<img src="/images/blog/building-spotify-tray-for-wayland-body.webp" alt="Minimal illustration of a Linux taskbar with a glowing music note icon" width="1200" height="686" loading="lazy" decoding="async" />
 
 ## How spotify-tray-wayland Works
 

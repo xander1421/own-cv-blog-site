@@ -1,7 +1,8 @@
 ---
 title: "Anatomy of a Developer Recruitment Scam: A Technical Forensic Analysis"
+seoTitle: "Anatomy of a Developer Recruitment Scam"
 date: "2025-10-23"
-description: "How I forensically analyzed a malicious 'demo app' recruitment scam targeting developers, uncovered crypto wallet harvesting code before it could compromise my system—plus a defensive playbook for safely analyzing suspicious code"
+description: "Forensic analysis of a malicious 'demo app' recruitment scam hiding crypto-wallet harvesting code — plus a playbook for safely analyzing suspicious code."
 tags: ["Security", "Forensics", "Social Engineering", "DevOps"]
 image: "./anatomy-of-a-developer-recruitment-scam.webp"
 ---
@@ -652,6 +653,8 @@ Bob Wilson bob@company.com 2023-05-13 - refactor: extract payment service
 smartpaydev bot@bots.bitbucket.org 2025-10-22 - initial project
 smartpaydev bot@bots.bitbucket.org 2025-10-17 - initial project
 ```
+
+<img src="/images/blog/anatomy-of-a-developer-recruitment-scam-body.webp" alt="Illustration of a phishing hook dangling a holographic job offer over a laptop" width="1200" height="686" loading="lazy" decoding="async" />
 
 ## Red Flags Checklist: Is This a Recruitment Scam?
 

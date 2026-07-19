@@ -1,7 +1,8 @@
 ---
 title: "The Cat-and-Mouse Game: How Developer Recruitment Scams Mutated in 2026"
+seoTitle: "Developer Recruitment Scams in 2026"
 date: "2026-04-09"
-description: "The 'just read the code' advice is dead. From weaponized VS Code tasks to clipboard-hijacking CAPTCHAs, here is how state-sponsored actors like Lazarus have evolved their tactics to compromise even the most cautious developers."
+description: "'Just read the code' is dead. From weaponized VS Code tasks to clipboard-hijacking CAPTCHAs — how actors like Lazarus now compromise even cautious developers."
 tags: ["Security", "Cybersecurity", "Social Engineering", "DevOps", "Lazarus Group"]
 image: "./developer-recruitment-scams-v2-2026.webp"
 ---

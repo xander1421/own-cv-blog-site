@@ -1,5 +1,6 @@
 ---
 title: "Building Chatter: A Domain-Driven Monolithic Architecture"
+seoTitle: "Chatter: Domain-Driven Monolith Design"
 date: "2025-08-15"
 description: "Exploring how Domain-Driven Design principles and modular architecture create maintainable monoliths"
 tags: ["Architecture", "DDD", "Monolith", "Go"]
@@ -354,6 +355,8 @@ Benefits:
 - Hierarchical roles (admin inherits moderator)
 - Audit trails (who granted what, when)
 - External service (SpiceDB), decoupled from business logic
+
+<img src="/images/blog/why-i-chose-monolithic-architecture-for-chatter-body.webp" alt="Illustration of a monolith with clean glowing internal layers, fragments orbiting nearby" width="1200" height="686" loading="lazy" decoding="async" />
 
 ## Why Not Microservices?
 

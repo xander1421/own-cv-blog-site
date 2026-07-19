@@ -1,7 +1,8 @@
 ---
 title: "Mastering Rolling Updates: The Art of Zero-Downtime Deployments"
+seoTitle: "Rolling Updates: Zero-Downtime Deploys"
 date: "2025-10-10"
-description: "A comprehensive guide to rolling updates—understanding the mechanics, implementation strategies, and best practices for achieving zero-downtime deployments in production environments"
+description: "Rolling updates explained — mechanics, implementation strategies, and best practices for zero-downtime deployments in production."
 tags: ["DevOps", "Kubernetes", "Deployment Strategies", "High Availability", "SRE"]
 image: "./mastering-rolling-updates-zero-downtime-deployments.webp"
 ---
@@ -279,6 +280,8 @@ Use metrics to track rollout health:
 - **Health check failures**: Should be zero or minimal
 
 Set up alerts that automatically pause or rollback deployments if these metrics degrade.
+
+<img src="/images/blog/mastering-rolling-updates-zero-downtime-deployments-body.webp" alt="Illustration of pods on a conveyor being replaced one by one without downtime" width="1200" height="686" loading="lazy" decoding="async" />
 
 ## Common Pitfalls and How to Avoid Them
 

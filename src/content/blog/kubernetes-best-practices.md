@@ -1,5 +1,6 @@
 ---
 title: "Kubernetes Best Practices for Production in 2025"
+seoTitle: "Kubernetes Production Best Practices 2025"
 date: "2025-09-08"
 description: "Battle-tested practices for running secure, cost-efficient, and scalable Kubernetes clusters in production"
 tags: ["Kubernetes", "DevOps", "Best Practices", "Cloud Native"]
@@ -468,6 +469,8 @@ spec:
 - **Drift detection**: ArgoCD alerts if cluster state != git state
 
 GitOps dramatically reduces deployment issues by providing full auditability, automatic rollback capabilities, and eliminating manual kubectl commands.
+
+<img src="/images/blog/kubernetes-best-practices-body.webp" alt="Illustration of a ship helm wheel orchestrating a grid of glowing containers" width="1200" height="686" loading="lazy" decoding="async" />
 
 ## 7. Observability: You Can't Fix What You Can't See
 

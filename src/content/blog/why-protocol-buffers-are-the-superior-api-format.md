@@ -1,5 +1,6 @@
 ---
 title: "Why Protocol Buffers Are the Superior API Format: Speed, Type Safety, and Developer Experience"
+seoTitle: "Why Protocol Buffers Beat JSON APIs"
 date: "2025-08-28"
 description: "How Protocol Buffers deliver 10x faster serialization, 5x smaller payloads, and compile-time type safety compared to JSON REST APIs"
 tags: ["Protocol Buffers", "API Design", "Performance", "gRPC"]
@@ -345,6 +346,8 @@ curl -H "Content-Type: application/json" \
 ```
 
 Both hit the **same handler**. No duplicate REST controllers.
+
+<img src="/images/blog/why-protocol-buffers-are-the-superior-api-format-body.webp" alt="Illustration of bulky data blocks compressing into a single fast beam of light" width="1200" height="686" loading="lazy" decoding="async" />
 
 ## The Best Part: You Lose Nothing
 

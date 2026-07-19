@@ -1,7 +1,8 @@
 ---
 title: "Two Cryptos, One Binary: How Rust Links With C (and How I Got Heap Corruption)"
+seoTitle: "How Rust Links With C: Heap Corruption Story"
 date: "2026-06-30"
-description: "A Windows build of my chat app crashed with no Rust panic—just an access violation deep in C. Tracking it down meant learning how compilation, symbols, and linking actually work underneath cargo."
+description: "A Windows build crashed with no Rust panic — an access violation deep in C. Tracking it down meant learning how compilation, symbols, and linking really work."
 tags: ["Rust", "C", "Linking", "FFI", "OpenSSL", "BoringSSL", "Chatter", "SQLCipher", "WebRTC"]
 image: "./two-cryptos-one-binary-how-rust-links-with-c.webp"
 ---
@@ -86,6 +87,8 @@ By convention, Rust wraps a C library in a **`-sys` crate**: a thin crate whose 
 - **`livekit`** (voice/video calls) pulls in **`webrtc-sys`**, which downloads a *prebuilt* static `libwebrtc` with **BoringSSL statically welded inside it**. No compile step, no feature flag for the crypto backend—it's baked in.
 
 Two `-sys` crates, two C crypto libraries, headed for the same binary.
+
+<img src="/images/blog/two-cryptos-one-binary-how-rust-links-with-c-body.webp" alt="Illustration of two crystal lattice structures colliding inside a translucent cube" width="1200" height="686" loading="lazy" decoding="async" />
 
 ## The Collision
 

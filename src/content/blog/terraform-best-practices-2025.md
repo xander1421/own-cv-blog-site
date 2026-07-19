@@ -1,5 +1,6 @@
 ---
 title: "Terraform Best Practices for Production in 2025"
+seoTitle: "Terraform Production Best Practices 2025"
 date: "2025-09-22"
 description: "Battle-tested patterns for Infrastructure as Code: state management, CI/CD pipelines, and environment separation from real-world production experience"
 tags: ["Terraform", "IaC", "DevOps", "CI/CD", "AWS"]
@@ -716,6 +717,8 @@ Never give Terraform admin. If Terraform is compromised (leaked credentials, sup
 ```
 
 Only allow IAM role creation if the role name matches `terraform-managed-*`. This prevents Terraform from creating admin roles.
+
+<img src="/images/blog/terraform-best-practices-2025-body.webp" alt="Illustration of a wireframe blueprint materializing into solid infrastructure" width="1200" height="686" loading="lazy" decoding="async" />
 
 ## Security Best Practices
 

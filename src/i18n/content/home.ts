@@ -74,8 +74,8 @@ export const home = {
       'I implement alongside your team, document everything, and leave you able to run it without me.',
 
     // Flagship / side project
-    flagshipKicker: 'Proof I build hard systems',
-    flagshipHeading: 'I built a Signal-grade encrypted messenger from scratch',
+    flagshipKicker: 'Side project, real stakes',
+    flagshipHeading: "I'm building an end-to-end encrypted messenger, solo",
     flagshipLead:
       "Chatter is a privacy-first encrypted messenger I build solo — one Rust client (Slint) running on Linux, Windows, and Android today, with iOS and macOS planned, on a Go backend with full Signal Protocol end-to-end encryption. When I say I understand your infrastructure deeply, this is the receipt: cryptography to deployment, one person, real correctness stakes. Most DevOps consultants can only host systems like this. I build them.",
     flagshipStat1Value: '1',
@@ -95,7 +95,7 @@ export const home = {
     aboutKicker: "Who you'd work with",
     aboutHeading: "Hi, I'm Alexandru",
     aboutBody:
-      "I'm a DevOps engineer with 6+ years shipping cloud infrastructure on AWS, Kubernetes, and Terraform — and my specialty is cutting cloud and Kubernetes bills without sacrificing reliability. On my team I own security reviews and performance tuning — the same eye for risk, waste, and slow paths I bring to your stack. What sets me apart: I don't just operate systems, I build them from scratch — like Chatter, an encrypted messenger with Signal-grade cryptography I develop solo. That depth is why I find waste and risk other people miss. I care about boring, reliable systems and explain the trade-offs in plain language, not buzzwords.",
+      "I'm a DevOps engineer with 6+ years shipping cloud infrastructure on AWS, Kubernetes, and Terraform — and my specialty is cutting cloud and Kubernetes bills without sacrificing reliability. On my team I own security reviews and performance tuning — the same eye for risk, waste, and slow paths I bring to your stack. What sets me apart: I don't just operate systems, I build them from scratch — like Chatter, an encrypted messenger implementing the Signal Protocol that I develop solo. That depth is why I find waste and risk other people miss. I care about boring, reliable systems and explain the trade-offs in plain language, not buzzwords.",
 
     // FAQ
     faqKicker: 'Questions',
@@ -129,7 +129,7 @@ export const home = {
     meta: {
       title: 'Kubernetes- & Cloud-Kosten-Engineer',
       description:
-        'Ich senke AWS- und Kubernetes-Kosten um 30–50 % — ohne Einbußen bei der Zuverlässigkeit. Festpreis-Audits, kein Bodyshopping. Ein DevOps-Engineer, der Systeme baut, nicht nur betreibt.',
+        'Ich senke AWS- und Kubernetes-Kosten um 30–50 % — ohne Einbußen bei der Zuverlässigkeit. Festpreis-Audits, kein Bodyshopping. Ein DevOps-Engineer, der Systeme baut.',
     },
 
     heroKicker: 'Kubernetes- &amp; Cloud-Kosten-Engineering',
@@ -184,8 +184,8 @@ export const home = {
     step3Body:
       'Ich setze gemeinsam mit Ihrem Team um, dokumentiere alles und versetze Sie in die Lage, es ohne mich zu betreiben.',
 
-    flagshipKicker: 'Beleg, dass ich schwierige Systeme baue',
-    flagshipHeading: 'Ich habe einen Messenger mit Signal-Niveau-Verschlüsselung von Grund auf gebaut',
+    flagshipKicker: 'Nebenprojekt, echte Anforderungen',
+    flagshipHeading: 'Ich baue solo einen Ende-zu-Ende-verschlüsselten Messenger',
     flagshipLead:
       'Chatter ist ein Privacy-First-Messenger mit Ende-zu-Ende-Verschlüsselung, den ich allein entwickle — ein Rust-Client (Slint), der heute auf Linux, Windows und Android läuft, mit iOS und macOS in Planung, auf einem Go-Backend mit vollständiger Signal-Protocol-Ende-zu-Ende-Verschlüsselung. Wenn ich sage, dass ich Ihre Infrastruktur tiefgehend verstehe, ist das der Beleg: von der Kryptografie bis zum Deployment, eine Person, mit echten Korrektheitsanforderungen. Die meisten DevOps-Berater können solche Systeme nur betreiben. Ich baue sie.',
     flagshipStat1Value: '1',
@@ -204,7 +204,7 @@ export const home = {
     aboutKicker: 'Mit wem Sie arbeiten',
     aboutHeading: 'Hallo, ich bin Alexandru',
     aboutBody:
-      'Ich bin DevOps-Engineer mit über 6 Jahren Erfahrung im Ausliefern von Cloud-Infrastruktur auf AWS, Kubernetes und Terraform — und meine Spezialität ist das Senken von Cloud- und Kubernetes-Kosten, ohne die Zuverlässigkeit zu opfern. In meinem Team verantworte ich Security-Reviews und Performance-Tuning — mit demselben Blick für Risiko, Verschwendung und langsame Pfade, den ich in Ihren Stack einbringe. Was mich auszeichnet: Ich betreibe Systeme nicht nur, ich baue sie von Grund auf — wie Chatter, einen Messenger mit Signal-Niveau-Kryptografie, den ich allein entwickle. Diese Tiefe ist der Grund, warum ich Verschwendung und Risiken finde, die andere übersehen. Mir sind langweilige, zuverlässige Systeme wichtig, und ich erkläre die Kompromisse in klarer Sprache, nicht in Buzzwords.',
+      'Ich bin DevOps-Engineer mit über 6 Jahren Erfahrung im Ausliefern von Cloud-Infrastruktur auf AWS, Kubernetes und Terraform — und meine Spezialität ist das Senken von Cloud- und Kubernetes-Kosten, ohne die Zuverlässigkeit zu opfern. In meinem Team verantworte ich Security-Reviews und Performance-Tuning — mit demselben Blick für Risiko, Verschwendung und langsame Pfade, den ich in Ihren Stack einbringe. Was mich auszeichnet: Ich betreibe Systeme nicht nur, ich baue sie von Grund auf — wie Chatter, einen verschlüsselten Messenger auf Basis des Signal-Protokolls, den ich allein entwickle. Diese Tiefe ist der Grund, warum ich Verschwendung und Risiken finde, die andere übersehen. Mir sind langweilige, zuverlässige Systeme wichtig, und ich erkläre die Kompromisse in klarer Sprache, nicht in Buzzwords.',
 
     faqKicker: 'Fragen',
     faqHeading: 'Bevor Sie ein Gespräch buchen',
@@ -235,7 +235,7 @@ export const home = {
     meta: {
       title: 'Ingeniero de costes Kubernetes y Cloud',
       description:
-        'Reduzco las facturas de AWS y Kubernetes un 30–50 % sin sacrificar la fiabilidad — auditorías de alcance cerrado, sin bodyshopping. Un ingeniero DevOps que construye sistemas, no solo los hospeda.',
+        'Reduzco facturas de AWS y Kubernetes un 30–50 % sin sacrificar fiabilidad — auditorías de alcance cerrado, sin bodyshopping. Un ingeniero DevOps que construye sistemas.',
     },
 
     heroKicker: 'Ingeniería de costes Kubernetes &amp; Cloud',
@@ -290,8 +290,8 @@ export const home = {
     step3Body:
       'Implemento junto a tu equipo, documento todo y te dejo capaz de operarlo sin mí.',
 
-    flagshipKicker: 'Prueba de que construyo sistemas difíciles',
-    flagshipHeading: 'Construí desde cero un mensajero con cifrado de nivel Signal',
+    flagshipKicker: 'Proyecto paralelo, retos reales',
+    flagshipHeading: 'Estoy construyendo en solitario un mensajero cifrado de extremo a extremo',
     flagshipLead:
       'Chatter es un mensajero cifrado y centrado en la privacidad que construyo yo solo — un único cliente en Rust (Slint) que hoy funciona en Linux, Windows y Android, con iOS y macOS previstos, sobre un backend en Go con cifrado de extremo a extremo completo mediante Signal Protocol. Cuando digo que entiendo tu infraestructura a fondo, esta es la prueba: de la criptografía al despliegue, una sola persona, con exigencias reales de corrección. La mayoría de los consultores DevOps solo saben hospedar sistemas así. Yo los construyo.',
     flagshipStat1Value: '1',
@@ -310,7 +310,7 @@ export const home = {
     aboutKicker: 'Con quién trabajarías',
     aboutHeading: 'Hola, soy Alexandru',
     aboutBody:
-      'Soy ingeniero DevOps con más de 6 años desplegando infraestructura cloud en AWS, Kubernetes y Terraform — y mi especialidad es recortar los costes de nube y Kubernetes sin sacrificar la fiabilidad. En mi equipo me encargo de las revisiones de seguridad y del ajuste de rendimiento — con el mismo ojo para el riesgo, el desperdicio y los cuellos de botella que aporto a tu stack. Lo que me distingue: no solo opero sistemas, los construyo desde cero — como Chatter, un mensajero con criptografía de nivel Signal que desarrollo yo solo. Esa profundidad es la razón por la que encuentro el desperdicio y los riesgos que otros pasan por alto. Me importan los sistemas aburridos y fiables, y explico los compromisos en lenguaje claro, no en palabras de moda.',
+      'Soy ingeniero DevOps con más de 6 años desplegando infraestructura cloud en AWS, Kubernetes y Terraform — y mi especialidad es recortar los costes de nube y Kubernetes sin sacrificar la fiabilidad. En mi equipo me encargo de las revisiones de seguridad y del ajuste de rendimiento — con el mismo ojo para el riesgo, el desperdicio y los cuellos de botella que aporto a tu stack. Lo que me distingue: no solo opero sistemas, los construyo desde cero — como Chatter, un mensajero cifrado que implementa el Protocolo Signal y que desarrollo yo solo. Esa profundidad es la razón por la que encuentro el desperdicio y los riesgos que otros pasan por alto. Me importan los sistemas aburridos y fiables, y explico los compromisos en lenguaje claro, no en palabras de moda.',
 
     faqKicker: 'Preguntas',
     faqHeading: 'Antes de reservar una llamada',
@@ -341,7 +341,7 @@ export const home = {
     meta: {
       title: 'Engenheiro de custos Kubernetes e Cloud',
       description:
-        'Reduzo as contas de AWS e Kubernetes em 30–50 % sem comprometer a confiabilidade — auditorias de escopo fechado, sem bodyshopping. Um engenheiro DevOps que constrói sistemas, não apenas os hospeda.',
+        'Reduzo contas de AWS e Kubernetes em 30–50 % sem comprometer a confiabilidade — auditorias de escopo fechado, sem bodyshopping. Um engenheiro DevOps que constrói.',
     },
 
     heroKicker: 'Engenharia de custos Kubernetes &amp; Cloud',
@@ -396,8 +396,8 @@ export const home = {
     step3Body:
       'Implemento junto com o seu time, documento tudo e deixo você capaz de tocar sem mim.',
 
-    flagshipKicker: 'Prova de que construo sistemas difíceis',
-    flagshipHeading: 'Construí do zero um mensageiro com criptografia de nível Signal',
+    flagshipKicker: 'Projeto paralelo, desafios reais',
+    flagshipHeading: 'Estou construindo sozinho um mensageiro com criptografia de ponta a ponta',
     flagshipLead:
       'O Chatter é um mensageiro criptografado e focado em privacidade que construo sozinho — um único cliente em Rust (Slint) que hoje roda no Linux, Windows e Android, com iOS e macOS planejados, sobre um backend em Go com criptografia de ponta a ponta completa via Signal Protocol. Quando digo que entendo sua infraestrutura a fundo, esta é a prova: da criptografia ao deploy, uma só pessoa, com exigências reais de correção. A maioria dos consultores DevOps só sabe hospedar sistemas assim. Eu os construo.',
     flagshipStat1Value: '1',
@@ -416,7 +416,7 @@ export const home = {
     aboutKicker: 'Com quem você vai trabalhar',
     aboutHeading: 'Oi, eu sou o Alexandru',
     aboutBody:
-      'Sou engenheiro DevOps com mais de 6 anos entregando infraestrutura cloud na AWS, Kubernetes e Terraform — e minha especialidade é cortar custos de nuvem e Kubernetes sem sacrificar a confiabilidade. No meu time sou responsável pelas revisões de segurança e pelo tuning de performance — com o mesmo olho para risco, desperdício e gargalos que trago para o seu stack. O que me diferencia: não apenas opero sistemas, eu os construo do zero — como o Chatter, um mensageiro com criptografia de nível Signal que desenvolvo sozinho. Essa profundidade é a razão pela qual encontro o desperdício e os riscos que os outros deixam passar. Me importo com sistemas sem graça e confiáveis, e explico os trade-offs em linguagem clara, não em jargões da moda.',
+      'Sou engenheiro DevOps com mais de 6 anos entregando infraestrutura cloud na AWS, Kubernetes e Terraform — e minha especialidade é cortar custos de nuvem e Kubernetes sem sacrificar a confiabilidade. No meu time sou responsável pelas revisões de segurança e pelo tuning de performance — com o mesmo olho para risco, desperdício e gargalos que trago para o seu stack. O que me diferencia: não apenas opero sistemas, eu os construo do zero — como o Chatter, um mensageiro criptografado que implementa o Protocolo Signal e que desenvolvo sozinho. Essa profundidade é a razão pela qual encontro o desperdício e os riscos que os outros deixam passar. Me importo com sistemas sem graça e confiáveis, e explico os trade-offs em linguagem clara, não em jargões da moda.',
 
     faqKicker: 'Perguntas',
     faqHeading: 'Antes de agendar uma conversa',
@@ -447,7 +447,7 @@ export const home = {
     meta: {
       title: 'Ingénieur coûts Kubernetes et Cloud',
       description:
-        "Je réduis vos factures AWS et Kubernetes de 30 à 50 % sans toucher à la fiabilité — audits à périmètre fixe, sans bodyshopping. Un ingénieur DevOps qui construit des systèmes, pas seulement les héberge.",
+        "Je réduis vos factures AWS et Kubernetes de 30 à 50 % sans toucher à la fiabilité. Audits à périmètre fixe, sans bodyshopping, par un ingénieur DevOps.",
     },
 
     heroKicker: 'Ingénierie des coûts Kubernetes &amp; Cloud',
@@ -502,8 +502,8 @@ export const home = {
     step3Body:
       'Je mets en œuvre aux côtés de votre équipe, je documente tout et je vous laisse capable de le faire tourner sans moi.',
 
-    flagshipKicker: 'La preuve que je construis des systèmes exigeants',
-    flagshipHeading: "J'ai construit de zéro une messagerie chiffrée de niveau Signal",
+    flagshipKicker: 'Projet perso, vrais enjeux',
+    flagshipHeading: 'Je construis en solo une messagerie chiffrée de bout en bout',
     flagshipLead:
       "Chatter est une messagerie chiffrée et respectueuse de la vie privée que je développe seul — un seul client Rust (Slint) qui tourne aujourd'hui sur Linux, Windows et Android, avec iOS et macOS prévus, sur un backend Go avec un chiffrement de bout en bout complet via Signal Protocol. Quand je dis que je comprends votre infrastructure en profondeur, en voici la preuve : de la cryptographie au déploiement, une seule personne, avec de vraies exigences de correction. La plupart des consultants DevOps savent seulement héberger de tels systèmes. Moi, je les construis.",
     flagshipStat1Value: '1',
@@ -522,7 +522,7 @@ export const home = {
     aboutKicker: 'Avec qui vous travailleriez',
     aboutHeading: 'Bonjour, je suis Alexandru',
     aboutBody:
-      "Je suis ingénieur DevOps avec plus de 6 ans à livrer de l'infrastructure cloud sur AWS, Kubernetes et Terraform — et ma spécialité est de réduire les coûts cloud et Kubernetes sans sacrifier la fiabilité. Dans mon équipe, je prends en charge les revues de sécurité et l'optimisation des performances — avec le même œil pour le risque, le gaspillage et les points lents que j'apporte à votre stack. Ce qui me distingue : je n'exploite pas seulement les systèmes, je les construis de zéro — comme Chatter, une messagerie à la cryptographie de niveau Signal que je développe seul. C'est cette profondeur qui me fait repérer le gaspillage et les risques que les autres laissent passer. Je tiens aux systèmes ennuyeux et fiables, et j'explique les compromis en langage clair, pas en mots à la mode.",
+      "Je suis ingénieur DevOps avec plus de 6 ans à livrer de l'infrastructure cloud sur AWS, Kubernetes et Terraform — et ma spécialité est de réduire les coûts cloud et Kubernetes sans sacrifier la fiabilité. Dans mon équipe, je prends en charge les revues de sécurité et l'optimisation des performances — avec le même œil pour le risque, le gaspillage et les points lents que j'apporte à votre stack. Ce qui me distingue : je n'exploite pas seulement les systèmes, je les construis de zéro — comme Chatter, une messagerie chiffrée implémentant le protocole Signal que je développe seul. C'est cette profondeur qui me fait repérer le gaspillage et les risques que les autres laissent passer. Je tiens aux systèmes ennuyeux et fiables, et j'explique les compromis en langage clair, pas en mots à la mode.",
 
     faqKicker: 'Questions',
     faqHeading: 'Avant de réserver un appel',
@@ -553,7 +553,7 @@ export const home = {
     meta: {
       title: 'Inginer costuri Kubernetes și cloud',
       description:
-        'Reduc facturile AWS și Kubernetes cu 30–50 % fără a afecta fiabilitatea — audituri cu scop fix, fără bodyshopping. Un inginer DevOps care construiește sisteme, nu doar le găzduiește.',
+        'Reduc facturile AWS și Kubernetes cu 30–50 % fără a afecta fiabilitatea — audituri cu scop fix, fără bodyshopping. Un inginer DevOps care construiește sisteme.',
     },
 
     heroKicker: 'Inginerie de costuri Kubernetes &amp; cloud',
@@ -608,8 +608,8 @@ export const home = {
     step3Body:
       'Implementez alături de echipa dumneavoastră, documentez totul și vă las capabili să o operați fără mine.',
 
-    flagshipKicker: 'Dovada că construiesc sisteme dificile',
-    flagshipHeading: 'Am construit de la zero un mesager cu criptare de nivel Signal',
+    flagshipKicker: 'Proiect personal, mize reale',
+    flagshipHeading: 'Construiesc de unul singur un mesager cu criptare end-to-end',
     flagshipLead:
       'Chatter este un mesager criptat, axat pe confidențialitate, pe care îl construiesc de unul singur — un singur client Rust (Slint) care rulează astăzi pe Linux, Windows și Android, cu iOS și macOS planificate, pe un backend Go cu criptare end-to-end completă prin Signal Protocol. Când spun că vă înțeleg infrastructura în profunzime, aceasta este dovada: de la criptografie la deployment, o singură persoană, cu cerințe reale de corectitudine. Majoritatea consultanților DevOps știu doar să găzduiască astfel de sisteme. Eu le construiesc.',
     flagshipStat1Value: '1',
@@ -628,7 +628,7 @@ export const home = {
     aboutKicker: 'Cu cine ați lucra',
     aboutHeading: 'Bună, sunt Alexandru',
     aboutBody:
-      'Sunt inginer DevOps cu peste 6 ani de experiență în livrarea de infrastructură cloud pe AWS, Kubernetes și Terraform — iar specialitatea mea este reducerea costurilor cloud și Kubernetes fără a sacrifica fiabilitatea. În echipa mea mă ocup de reviziile de securitate și de optimizarea performanței — cu același ochi pentru risc, risipă și punctele lente pe care îl aduc în stack-ul dumneavoastră. Ce mă diferențiază: nu doar operez sisteme, ci le construiesc de la zero — precum Chatter, un mesager cu criptografie de nivel Signal pe care îl dezvolt de unul singur. Această profunzime este motivul pentru care găsesc risipa și riscurile pe care alții le trec cu vederea. Îmi pasă de sistemele stabile și fiabile și explic compromisurile într-un limbaj clar, nu în cuvinte la modă.',
+      'Sunt inginer DevOps cu peste 6 ani de experiență în livrarea de infrastructură cloud pe AWS, Kubernetes și Terraform — iar specialitatea mea este reducerea costurilor cloud și Kubernetes fără a sacrifica fiabilitatea. În echipa mea mă ocup de reviziile de securitate și de optimizarea performanței — cu același ochi pentru risc, risipă și punctele lente pe care îl aduc în stack-ul dumneavoastră. Ce mă diferențiază: nu doar operez sisteme, ci le construiesc de la zero — precum Chatter, un mesager criptat care implementează Protocolul Signal, pe care îl dezvolt de unul singur. Această profunzime este motivul pentru care găsesc risipa și riscurile pe care alții le trec cu vederea. Îmi pasă de sistemele stabile și fiabile și explic compromisurile într-un limbaj clar, nu în cuvinte la modă.',
 
     faqKicker: 'Întrebări',
     faqHeading: 'Înainte să programați o discuție',

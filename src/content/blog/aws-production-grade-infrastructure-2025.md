@@ -1,5 +1,6 @@
 ---
 title: "Building Production-Grade AWS Infrastructure in 2025"
+seoTitle: "Production-Grade AWS Infrastructure, 2025"
 date: "2025-10-05"
 description: "How to architect secure, scalable, and cost-efficient AWS infrastructure for businesses using multi-account strategy, Landing Zones, and the Well-Architected Framework"
 tags: ["AWS", "Cloud Architecture", "DevOps", "Security", "Infrastructure"]
@@ -863,6 +864,8 @@ resource "aws_secretsmanager_secret" "db_password" {
   recovery_window_in_days = 30
 }
 ```
+
+<img src="/images/blog/aws-production-grade-infrastructure-2025-body.webp" alt="Isometric illustration of a cloud data center with a hub-and-spoke network of glowing nodes" width="1200" height="686" loading="lazy" decoding="async" />
 
 ## High Availability and Disaster Recovery
 

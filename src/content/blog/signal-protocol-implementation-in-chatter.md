@@ -1,5 +1,6 @@
 ---
 title: "The Cryptographic Elegance of the Signal Protocol: How Chatter Implements End-to-End Security"
+seoTitle: "Signal Protocol in Chatter: E2E Security"
 date: "2025-10-22"
 description: "A deep dive into the Signal Protocol's cryptographic foundations and how we implement X3DH, Double Ratchet, and Sealed Sender in Chatter"
 tags: ["Cryptography", "Security", "Signal Protocol", "Go"]
@@ -559,6 +560,8 @@ Final_Secret = KDF(Classical_Secret || PQ_Secret)
 This hybrid approach provides:
 - Security **today** with Curve25519
 - Security **tomorrow** against quantum computers with Kyber
+
+<img src="/images/blog/signal-protocol-implementation-in-chatter-body.webp" alt="Illustration of interlocking ratchet gears with glowing keys, a Double Ratchet metaphor" width="1200" height="686" loading="lazy" decoding="async" />
 
 ## Key Rotation and Hygiene
 

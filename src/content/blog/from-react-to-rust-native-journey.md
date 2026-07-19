@@ -1,5 +1,6 @@
 ---
 title: "From React to Rust: Why I Switched to Native Mid-Project"
+seoTitle: "From React to Rust: Switching Mid-Project"
 date: "2026-02-01"
 description: "Building a chat app taught me that every abstraction layer has a cost—and some costs only become clear when you're deep in development."
 tags: ["Rust", "React", "Electron", "Flutter", "Wayland", "Native", "Signal Protocol", "Slint"]
@@ -221,6 +222,8 @@ cargo build --release --target aarch64-apple-ios   # iOS
 ```
 
 Currently I'm developing on Linux. Mobile builds are planned but not yet tested.
+
+<img src="/images/blog/from-react-to-rust-native-journey-body.webp" alt="Illustration of a browser window transforming into a metallic gear with a molten core" width="1200" height="686" loading="lazy" decoding="async" />
 
 ## The Real-World Experience
 

@@ -1,5 +1,6 @@
 ---
 title: "Breaking the Metadata Chain: Implementing Anonymous Inboxes in Chatter"
+seoTitle: "Anonymous Inboxes in Chatter"
 date: "2026-01-15"
 description: "How we implemented anonymous mailboxes with blind signatures to defeat Statistical Disclosure Attacks, based on the NDSS 2021 paper 'Improving Signal's Sealed Sender'"
 tags: ["Cryptography", "Security", "Privacy", "Go", "TypeScript"]
@@ -269,6 +270,8 @@ s.log.Info("tokens issued",
     "count", len(signatures),
 )
 ```
+
+<img src="/images/blog/anonymous-inbox-implementation-in-chatter-body.webp" alt="Illustration of anonymous mailboxes with encrypted envelopes dissolving into particles" width="1200" height="686" loading="lazy" decoding="async" />
 
 ## Frontend Implementation
 
