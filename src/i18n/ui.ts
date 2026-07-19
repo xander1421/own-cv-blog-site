@@ -67,7 +67,7 @@ export const ui = {
     'post.readMore': 'Mehr lesen →',
     // Services pages chrome (shared across /services and /services/<slug>)
     'svc.metaTitle': 'DevOps- & Cloud-Beratung',
-    'svc.metaDescription': 'DevOps- und Cloud-Beratung: Cloud-Migration, Kubernetes-Beratung, Kostenoptimierung, CI/CD sowie Architektur-Reviews, KI-App-Audits und Umsetzung von der Idee bis in die Produktion.',
+    'svc.metaDescription': 'DevOps- und Cloud-Beratung: Cloud-Migration, Kubernetes-Beratung, Kostenoptimierung, CI/CD sowie Architektur-Reviews, KI-App-Audits und Umsetzung bis zur Produktion.',
     'svc.kicker': 'Leistungen',
     'svc.h1': 'Von reibungslosem Produktivbetrieb bis zur Umsetzung Ihres ganzen Produkts',
     'svc.lead': 'DevOps und Cloud sind das Tagesgeschäft — Migrationen, Kubernetes, Kosten, CI/CD. Ich prüfe aber auch Architekturen, auditiere KI-gebaute Apps und bringe Ideen bis zum Livegang. Wählen Sie, wo es am meisten drückt.',
@@ -102,7 +102,7 @@ export const ui = {
     'post.readMore': 'Leer más →',
     // Services pages chrome (shared across /services and /services/<slug>)
     'svc.metaTitle': 'Consultoría DevOps y cloud',
-    'svc.metaDescription': 'Consultoría DevOps y cloud: migración a la nube, consultor Kubernetes, optimización de costes cloud, CI/CD, además de revisión de arquitectura, auditorías de apps con IA y desarrollo de la idea a producción.',
+    'svc.metaDescription': 'Consultoría DevOps y cloud: migración a la nube, Kubernetes, optimización de costes, CI/CD, revisión de arquitectura, auditorías de apps con IA e idea a producción.',
     'svc.kicker': 'Servicios',
     'svc.h1': 'De mantener la producción sin sobresaltos a lanzar todo tu producto',
     'svc.lead': 'DevOps y cloud son el día a día: migraciones, Kubernetes, costes, CI/CD. Pero también reviso arquitecturas, audito apps creadas con IA y llevo las ideas hasta el lanzamiento. Elige donde más te duele.',
@@ -137,7 +137,7 @@ export const ui = {
     'post.readMore': 'Ler mais →',
     // Services pages chrome (shared across /services and /services/<slug>)
     'svc.metaTitle': 'Consultoria DevOps e em nuvem',
-    'svc.metaDescription': 'Consultoria DevOps e em nuvem: migração para nuvem, Kubernetes, otimização de custos, CI/CD, além de revisão de arquitetura, auditoria de apps feitas com IA e desenvolvimento da ideia até produção.',
+    'svc.metaDescription': 'Consultoria DevOps e em nuvem: migração para nuvem, Kubernetes, otimização de custos, CI/CD, revisão de arquitetura, auditoria de apps com IA e da ideia até produção.',
     'svc.kicker': 'Serviços',
     'svc.h1': 'De manter a produção tranquila a colocar todo o seu produto no ar',
     'svc.lead': 'DevOps e nuvem são o trabalho do dia a dia: migrações, Kubernetes, custos, CI/CD. Mas também reviso arquiteturas, audito apps criadas com IA e levo ideias até a entrega. Escolha onde dói mais.',
@@ -172,7 +172,7 @@ export const ui = {
     'post.readMore': 'Lire plus →',
     // Services pages chrome (shared across /services and /services/<slug>)
     'svc.metaTitle': 'Conseil DevOps & cloud',
-    'svc.metaDescription': "Conseil DevOps et cloud : migration cloud, consultant Kubernetes, optimisation des coûts cloud, CI/CD, ainsi que revue d'architecture, audits d'applications créées par IA et réalisation de l'idée à la production.",
+    'svc.metaDescription': "Conseil DevOps et cloud : migration cloud, consultant Kubernetes, optimisation des coûts, CI/CD, revue d'architecture, audits d'apps IA et de l'idée à la production.",
     'svc.kicker': 'Services',
     'svc.h1': 'De la production sans accroc au lancement de tout votre produit',
     'svc.lead': "DevOps et cloud, c'est le quotidien : migrations, Kubernetes, coûts, CI/CD. Mais je revois aussi les architectures, j'audite les applications créées par IA et je mène les idées jusqu'à la mise en production. Choisissez là où ça fait le plus mal.",
@@ -207,7 +207,7 @@ export const ui = {
     'post.readMore': 'Citește mai mult →',
     // Services pages chrome (shared across /services and /services/<slug>)
     'svc.metaTitle': 'Servicii de consultanță DevOps și cloud',
-    'svc.metaDescription': 'Consultanță DevOps și cloud: migrare în cloud, Kubernetes, optimizarea costurilor cloud, CI/CD, plus analiză de arhitectură, audit de aplicații create cu IA și dezvoltare de la idee la producție.',
+    'svc.metaDescription': 'Consultanță DevOps și cloud: migrare în cloud, Kubernetes, optimizarea costurilor, CI/CD, analiză de arhitectură, audit de aplicații cu IA și de la idee la producție.',
     'svc.kicker': 'Servicii',
     'svc.h1': 'De la o producție stabilă la lansarea întregului dumneavoastră produs',
     'svc.lead': 'DevOps și cloud sunt activitatea de zi cu zi — migrări, Kubernetes, costuri, CI/CD. Dar analizez și arhitecturi, auditez aplicații create cu IA și duc ideile până la lansare. Alegeți unde vă doare cel mai tare.',

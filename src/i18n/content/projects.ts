@@ -36,9 +36,9 @@ export const projects = {
     indexProject3Live2Label: 'Firefox Add-ons',
 
     // ---- projects/chatter.astro ----
-    chatterMetaTitle: 'Chatter — Building an Encrypted Messenger Across Four Platforms',
+    chatterMetaTitle: 'Chatter — Encrypted Messenger, One Codebase',
     chatterMetaDescription:
-      "Chatter is a privacy-first encrypted messenger I'm building on the side — one Rust client for every platform (Linux, Windows, Android today; iOS and macOS planned) on a Go backend, with Signal Protocol E2E. A personal project, in development.",
+      "Chatter is a privacy-first encrypted messenger I'm building on the side — one Rust client for Linux, Windows, and Android on a Go backend, with Signal Protocol E2E.",
     chatterBreadcrumbHome: 'Home',
     chatterBreadcrumbProjects: 'Projects',
     chatterBreadcrumbChatter: 'Chatter',
@@ -114,9 +114,9 @@ export const projects = {
     indexProject3Live2Label: 'Firefox-Add-ons',
 
     // ---- projects/chatter.astro ----
-    chatterMetaTitle: 'Chatter — Ein verschlüsselter Messenger für vier Plattformen',
+    chatterMetaTitle: 'Chatter — Ein verschlüsselter Messenger',
     chatterMetaDescription:
-      'Chatter ist ein datenschutzorientierter, verschlüsselter Messenger, den ich nebenbei entwickle — ein Rust-Client für jede Plattform (heute Linux, Windows, Android; iOS und macOS geplant) auf einem Go-Backend, mit Signal-Protocol-E2E-Verschlüsselung. Ein persönliches Projekt in Entwicklung.',
+      'Chatter ist ein verschlüsselter Messenger, den ich nebenbei entwickle — ein Rust-Client für Linux, Windows und Android auf einem Go-Backend, mit Signal-Protocol-E2E.',
     chatterBreadcrumbHome: 'Start',
     chatterBreadcrumbProjects: 'Projekte',
     chatterBreadcrumbChatter: 'Chatter',
@@ -171,9 +171,9 @@ export const projects = {
   },
   es: {
     // ---- projects/index.astro ----
-    indexMetaTitle: 'Proyectos — Herramientas DevOps y código abierto',
+    indexMetaTitle: 'Proyectos — DevOps y código abierto',
     indexMetaDescription:
-      'Proyectos de código abierto de Alexandru Pruteanu — Chatter (un mensajero cifrado), una bandeja de Spotify para Wayland y herramientas DevOps surgidas de trabajo real en producción.',
+      'Proyectos de código abierto de Alexandru Pruteanu — Chatter (un mensajero cifrado), una bandeja de Spotify para Wayland y herramientas DevOps de producción real.',
     indexBreadcrumbHome: 'Inicio',
     indexBreadcrumbProjects: 'Proyectos',
     indexHeading: 'Proyectos',
@@ -191,9 +191,9 @@ export const projects = {
     indexProject3Live2Label: 'Firefox Add-ons',
 
     // ---- projects/chatter.astro ----
-    chatterMetaTitle: 'Chatter — Un mensajero cifrado en cuatro plataformas',
+    chatterMetaTitle: 'Chatter — Un mensajero cifrado en Rust',
     chatterMetaDescription:
-      'Chatter es un mensajero cifrado y centrado en la privacidad que desarrollo en mi tiempo libre — un único cliente en Rust para cada plataforma (hoy Linux, Windows y Android; iOS y macOS previstos) sobre un backend en Go, con cifrado E2E de Signal Protocol. Un proyecto personal, en desarrollo.',
+      'Chatter es un mensajero cifrado y centrado en la privacidad — un cliente en Rust para Linux, Windows y Android sobre un backend en Go, con cifrado E2E de Signal.',
     chatterBreadcrumbHome: 'Inicio',
     chatterBreadcrumbProjects: 'Proyectos',
     chatterBreadcrumbChatter: 'Chatter',
@@ -248,9 +248,9 @@ export const projects = {
   },
   pt: {
     // ---- projects/index.astro ----
-    indexMetaTitle: 'Projetos — Ferramentas DevOps e código aberto',
+    indexMetaTitle: 'Projetos — DevOps e código aberto',
     indexMetaDescription:
-      'Projetos de código aberto de Alexandru Pruteanu — Chatter (um mensageiro criptografado), uma bandeja do Spotify para Wayland e ferramentas de DevOps nascidas de trabalho real em produção.',
+      'Projetos de código aberto de Alexandru Pruteanu — Chatter (um mensageiro criptografado), uma bandeja do Spotify para Wayland e ferramentas DevOps de produção real.',
     indexBreadcrumbHome: 'Início',
     indexBreadcrumbProjects: 'Projetos',
     indexHeading: 'Projetos',
@@ -268,9 +268,9 @@ export const projects = {
     indexProject3Live2Label: 'Firefox Add-ons',
 
     // ---- projects/chatter.astro ----
-    chatterMetaTitle: 'Chatter — Um mensageiro criptografado em quatro plataformas',
+    chatterMetaTitle: 'Chatter — Um mensageiro criptografado',
     chatterMetaDescription:
-      'O Chatter é um mensageiro criptografado e focado em privacidade que desenvolvo nas horas vagas — um único cliente em Rust para cada plataforma (hoje Linux, Windows e Android; iOS e macOS planejados) sobre um backend em Go, com criptografia E2E do Signal Protocol. Um projeto pessoal, em desenvolvimento.',
+      'Chatter é um mensageiro criptografado focado em privacidade — um cliente em Rust para Linux, Windows e Android sobre um backend em Go, com criptografia E2E do Signal.',
     chatterBreadcrumbHome: 'Início',
     chatterBreadcrumbProjects: 'Projetos',
     chatterBreadcrumbChatter: 'Chatter',
@@ -327,7 +327,7 @@ export const projects = {
     // ---- projects/index.astro ----
     indexMetaTitle: 'Projets — Outils DevOps et open source',
     indexMetaDescription:
-      'Projets open source d’Alexandru Pruteanu — Chatter (une messagerie chiffrée), une applet Spotify pour Wayland et des outils DevOps issus de vrais déploiements en production.',
+      'Projets open source d’Alexandru Pruteanu — Chatter (une messagerie chiffrée), une applet Spotify pour Wayland et des outils DevOps issus de la production.',
     indexBreadcrumbHome: 'Accueil',
     indexBreadcrumbProjects: 'Projets',
     indexHeading: 'Projets',
@@ -345,9 +345,9 @@ export const projects = {
     indexProject3Live2Label: 'Firefox Add-ons',
 
     // ---- projects/chatter.astro ----
-    chatterMetaTitle: 'Chatter — Une messagerie chiffrée sur quatre plateformes',
+    chatterMetaTitle: 'Chatter — Une messagerie chiffrée en Rust',
     chatterMetaDescription:
-      'Chatter est une messagerie chiffrée et respectueuse de la vie privée que je développe en parallèle — un seul client Rust pour chaque plateforme (aujourd’hui Linux, Windows et Android ; iOS et macOS prévus) sur un backend Go, avec chiffrement E2E Signal Protocol. Un projet personnel, en développement.',
+      'Chatter est une messagerie chiffrée et respectueuse de la vie privée — un client Rust pour Linux, Windows et Android sur un backend Go, avec chiffrement E2E Signal.',
     chatterBreadcrumbHome: 'Accueil',
     chatterBreadcrumbProjects: 'Projets',
     chatterBreadcrumbChatter: 'Chatter',
@@ -404,7 +404,7 @@ export const projects = {
     // ---- projects/index.astro ----
     indexMetaTitle: 'Proiecte — Instrumente DevOps și open source',
     indexMetaDescription:
-      'Proiecte open source create de Alexandru Pruteanu — Chatter (un mesager criptat), o pictogramă Spotify în tava de sistem pentru Wayland și instrumente DevOps născute din muncă reală în producție.',
+      'Proiecte open source de Alexandru Pruteanu — Chatter (un mesager criptat), o pictogramă Spotify pentru Wayland și instrumente DevOps din muncă reală în producție.',
     indexBreadcrumbHome: 'Acasă',
     indexBreadcrumbProjects: 'Proiecte',
     indexHeading: 'Proiecte',
@@ -422,9 +422,9 @@ export const projects = {
     indexProject3Live2Label: 'Firefox Add-ons',
 
     // ---- projects/chatter.astro ----
-    chatterMetaTitle: 'Chatter — Un mesager criptat pe patru platforme',
+    chatterMetaTitle: 'Chatter — Un mesager criptat în Rust',
     chatterMetaDescription:
-      'Chatter este un mesager criptat, axat pe confidențialitate, pe care îl dezvolt în timpul liber — un singur client Rust pentru fiecare platformă (astăzi Linux, Windows și Android; iOS și macOS planificate) pe un backend Go, cu criptare E2E Signal Protocol. Un proiect personal, în dezvoltare.',
+      'Chatter este un mesager criptat, axat pe confidențialitate — un singur client Rust pentru Linux, Windows și Android pe un backend Go, cu criptare E2E Signal.',
     chatterBreadcrumbHome: 'Acasă',
     chatterBreadcrumbProjects: 'Proiecte',
     chatterBreadcrumbChatter: 'Chatter',

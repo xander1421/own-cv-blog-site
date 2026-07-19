@@ -15,7 +15,7 @@ import type { Lang } from '../ui';
 export const chatterWaitlist = {
   en: {
     // <head> meta
-    metaTitle: 'Chatter - Private Encrypted Messaging with Metadata Protection',
+    metaTitle: 'Chatter - Private Messaging, Zero Metadata',
     metaDescription:
       'End-to-end encrypted messaging that protects your metadata, not just content. No phone number required. Sealed Sender, anonymous inboxes, and local AI. Open source.',
 
@@ -65,9 +65,9 @@ export const chatterWaitlist = {
   },
   de: {
     // <head> meta
-    metaTitle: 'Chatter - Privater verschlüsselter Messenger mit Metadatenschutz',
+    metaTitle: 'Chatter - Privater Messenger ohne Metadaten',
     metaDescription:
-      'Ende-zu-Ende-verschlüsselter Messenger, der nicht nur Inhalte, sondern auch Ihre Metadaten schützt. Keine Telefonnummer erforderlich. Sealed Sender, anonyme Postfächer und lokale KI. Open Source.',
+      'Ende-zu-Ende-verschlüsselter Messenger, der auch Ihre Metadaten schützt. Keine Telefonnummer nötig. Sealed Sender, anonyme Postfächer, lokale KI. Open Source.',
 
     // Hero
     eyebrow: 'Demnächst',
@@ -115,9 +115,9 @@ export const chatterWaitlist = {
   },
   es: {
     // <head> meta
-    metaTitle: 'Chatter - Mensajería cifrada y privada con protección de metadatos',
+    metaTitle: 'Chatter - Mensajería privada sin metadatos',
     metaDescription:
-      'Mensajería con cifrado de extremo a extremo que protege tus metadatos, no solo el contenido. Sin número de teléfono. Sealed Sender, buzones anónimos e IA local. Código abierto.',
+      'Mensajería cifrada de extremo a extremo que protege también tus metadatos. Sin número de teléfono. Sealed Sender, buzones anónimos e IA local. Código abierto.',
 
     // Hero
     eyebrow: 'Próximamente',
@@ -165,9 +165,9 @@ export const chatterWaitlist = {
   },
   pt: {
     // <head> meta
-    metaTitle: 'Chatter - Mensagens criptografadas e privadas com proteção de metadados',
+    metaTitle: 'Chatter - Mensagens privadas sem metadados',
     metaDescription:
-      'Mensagens com criptografia de ponta a ponta que protegem seus metadados, não apenas o conteúdo. Sem número de telefone. Sealed Sender, caixas de entrada anônimas e IA local. Código aberto.',
+      'Mensagens criptografadas de ponta a ponta que protegem também seus metadados. Sem número de telefone. Sealed Sender, caixas anônimas e IA local. Código aberto.',
 
     // Hero
     eyebrow: 'Em breve',
@@ -215,9 +215,9 @@ export const chatterWaitlist = {
   },
   fr: {
     // <head> meta
-    metaTitle: 'Chatter - Messagerie chiffrée et privée avec protection des métadonnées',
+    metaTitle: 'Chatter - Messagerie privée sans métadonnées',
     metaDescription:
-      'Messagerie chiffrée de bout en bout qui protège vos métadonnées, pas seulement le contenu. Sans numéro de téléphone. Sealed Sender, boîtes de réception anonymes et IA locale. Open source.',
+      'Messagerie chiffrée de bout en bout qui protège aussi vos métadonnées. Sans numéro de téléphone. Sealed Sender, boîtes anonymes et IA locale. Open source.',
 
     // Hero
     eyebrow: 'Bientôt disponible',
@@ -265,9 +265,9 @@ export const chatterWaitlist = {
   },
   ro: {
     // <head> meta
-    metaTitle: 'Chatter - Mesagerie criptată și privată cu protecția metadatelor',
+    metaTitle: 'Chatter - Mesagerie privată, fără metadate',
     metaDescription:
-      'Mesagerie cu criptare end-to-end care vă protejează metadatele, nu doar conținutul. Fără număr de telefon. Sealed Sender, căsuțe poștale anonime și IA locală. Sursă deschisă.',
+      'Mesagerie criptată end-to-end care vă protejează metadatele, nu doar conținutul. Fără număr de telefon. Sealed Sender, căsuțe anonime și IA locală. Sursă deschisă.',
 
     // Hero
     eyebrow: 'În curând',

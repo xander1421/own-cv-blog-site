@@ -125,7 +125,7 @@ const en: Record<string, ServiceContent> = {
     nav: 'Kubernetes',
     title: 'Kubernetes Consulting',
     description:
-      'Production Kubernetes consulting: EKS/GKE clusters that scale on demand and shrink with your bill via Karpenter — without the YAML sprawl. Plus an honest answer on whether you need it.',
+      'Production Kubernetes consulting: EKS/GKE clusters that scale on demand and shrink your bill via Karpenter — plus an honest answer on whether you need it at all.',
     h1: 'Kubernetes, only where it earns its keep',
     lead: "Production-grade clusters that scale when traffic spikes and shrink (with the bill) when it doesn't — minus the thousands of lines of YAML nobody understands.",
     problems: [
@@ -198,7 +198,7 @@ const en: Record<string, ServiceContent> = {
     nav: 'CI/CD & IaC',
     title: 'CI/CD & Infrastructure as Code',
     description:
-      'CI/CD and Infrastructure as Code consulting. Boring, repeatable deployments and Terraform-managed infrastructure that is reviewed, versioned, and rebuildable from scratch.',
+      'CI/CD and Infrastructure as Code consulting. Boring, repeatable deployments and Terraform-managed infrastructure — reviewed, versioned, and rebuildable from scratch.',
     h1: 'Make shipping a non-event',
     lead: 'You push, it deploys, everyone moves on. Your whole setup lives in Terraform — reviewed, versioned, and rebuildable from scratch.',
     problems: [
@@ -269,7 +269,7 @@ const en: Record<string, ServiceContent> = {
     nav: 'Architecture review',
     title: 'Software Architecture Review',
     description:
-      'An honest second opinion on your software architecture — what scales, what breaks, and what to fix before it gets expensive. Backed by building an end-to-end encrypted app from a single cross-platform codebase myself.',
+      'An honest second opinion on your software architecture — what scales, what breaks, what to fix before it gets expensive. Backed by building an encrypted app myself.',
     h1: 'Is your architecture built to last?',
     lead: "A clear-eyed second opinion on how your system is built — what holds up, what breaks at scale, and what's quietly going to cost you. No dogma, just trade-offs.",
     problems: [
@@ -300,7 +300,7 @@ const en: Record<string, ServiceContent> = {
     nav: 'Idea → production',
     title: 'Idea to Production',
     description:
-      'Take an idea to a real, shipped, production-grade app — architecture, build, security, and the infrastructure to run it. Backed by building an encrypted messenger from a single cross-platform codebase, solo.',
+      'Take an idea to a real, shipped, production-grade app — architecture, build, security, and infrastructure to run it. Backed by building an encrypted messenger solo.',
     h1: 'From idea to a real, shipped product',
     lead: 'You have an idea — or a rough prototype — and need someone who can take it all the way: architected properly, built to last, secured, and actually deployed. Not a deck. A product.',
     problems: [
@@ -331,7 +331,7 @@ const en: Record<string, ServiceContent> = {
     nav: 'Building blocks',
     title: 'Production Building Blocks',
     description:
-      'Drop-in services for your app — authentication, user management, and encrypted file handling — adapted from a real encrypted-messenger codebase I built. Skip rebuilding the hard, risky parts from scratch.',
+      'Drop-in services for your app — authentication, user management, and encrypted file handling — adapted from a real encrypted messenger I built. Skip the risky rebuild.',
     h1: 'The hard parts, already built right',
     lead: "Auth, user management, encrypted file handling — the pieces everyone gets subtly wrong (especially AI tools). Start from primitives adapted from a real encrypted-messenger codebase instead of rebuilding them from scratch and hoping.",
     problems: [
@@ -369,7 +369,7 @@ const de: LocalizedContent = {
     nav: "Cloud Migration",
     title: "Cloud Migration Beratung",
     description:
-      "Cloud Migration Beratung, die Sie Schritt für Schritt zu AWS oder GCP bringt – der Betrieb läuft weiter, ohne riskante Hauruck-Umstellung. In der Regel günstiger als das, was ersetzt wird.",
+      "Cloud Migration Beratung, die Sie Schritt für Schritt zu AWS oder GCP bringt – der Betrieb läuft weiter, ohne riskante Hauruck-Umstellung. Meist günstiger als zuvor.",
     h1: "Cloud Migration ohne Ausfallzeiten",
     lead: "Der Umstieg auf AWS oder GCP – ohne das Geschäft an einem Big-Bang-Wochenende aufs Spiel zu setzen. Ich migriere, was sich zu migrieren lohnt, lasse den Rest weg und halte den Betrieb die gesamte Zeit über am Laufen.",
     problems: [
@@ -407,7 +407,7 @@ const de: LocalizedContent = {
     nav: "Kubernetes",
     title: "Kubernetes Beratung",
     description:
-      "Kubernetes Beratung für den Produktivbetrieb: EKS/GKE-Cluster, die bei Bedarf skalieren und mit Ihrer Rechnung schrumpfen – dank Karpenter, ohne YAML-Wildwuchs. Dazu eine ehrliche Antwort, ob Sie es überhaupt brauchen.",
+      "Kubernetes Beratung für den Produktivbetrieb: EKS/GKE-Cluster, die skalieren und Ihre Rechnung senken – dank Karpenter. Dazu eine ehrliche Antwort, ob Sie es brauchen.",
     h1: "Kubernetes – nur dort, wo es sich rechnet",
     lead: "Produktionsreife Cluster, die bei Lastspitzen hochskalieren und (samt Rechnung) schrumpfen, wenn die Last nachlässt – ohne die Tausenden Zeilen YAML, die niemand versteht.",
     problems: [
@@ -444,7 +444,7 @@ const de: LocalizedContent = {
     nav: "Kosten & Zuverlässigkeit",
     title: "Cloud Kostenoptimierung",
     description:
-      "Beratung zur Cloud Kostenoptimierung. Senken Sie Ihre AWS- oder GCP-Rechnung mit ARM/Graviton, Right-Sizing und Autoscaling – ohne die Zuverlässigkeit zu gefährden. Typische Einsparungen 20–40 %.",
+      "Beratung zur Cloud Kostenoptimierung: AWS- oder GCP-Rechnung senken mit ARM/Graviton, Right-Sizing und Autoscaling – ohne Zuverlässigkeitsrisiko. Typisch 20–40 %.",
     h1: "Senken Sie Ihre Cloud-Rechnung, ohne Zuverlässigkeit zu verlieren",
     lead: "Die Posten aufspüren, die still und leise Ihr Budget aufzehren, sie kappen und dabei sicherstellen, dass nichts kaputtgeht. Unaufgeregt, zuverlässig und günstiger.",
     problems: [
@@ -480,7 +480,7 @@ const de: LocalizedContent = {
     nav: "CI/CD & IaC",
     title: "CI/CD & Infrastructure as Code",
     description:
-      "Beratung zu CI/CD und Infrastructure as Code. Unaufgeregte, wiederholbare Deployments und mit Terraform verwaltete Infrastruktur, die überprüft, versioniert und von Grund auf wiederherstellbar ist.",
+      "Beratung zu CI/CD und Infrastructure as Code. Wiederholbare Deployments und Terraform-Infrastruktur – überprüft, versioniert und von Grund auf wiederherstellbar.",
     h1: "Machen Sie das Ausliefern zur Nebensache",
     lead: "Sie pushen, es deployt, alle machen weiter. Ihr gesamtes Setup liegt in Terraform – überprüft, versioniert und von Grund auf wiederherstellbar.",
     problems: [
@@ -516,7 +516,7 @@ const de: LocalizedContent = {
     nav: "KI-App-Audit",
     title: "Audit & Rettung KI-gebauter Apps",
     description:
-      "Audit und Härtung von Apps, die mit Cursor, Claude oder Copilot gebaut wurden. Finden Sie die Sicherheitslücken und architektonischen Minen, die KI hinterlässt – bevor sie Sie teuer zu stehen kommen.",
+      "Audit und Härtung von Apps, die mit Cursor, Claude oder Copilot gebaut wurden. Finden Sie Sicherheitslücken und Architektur-Minen der KI – bevor sie teuer werden.",
     h1: "Ihre KI-gebaute App – auditiert und entschärft",
     lead: "Etwas ausgeliefert, das größtenteils von Cursor, Claude oder Copilot gebaut wurde, und die leise Sorge, dass es zusammenbricht? Ich finde die Sicherheitslücken und architektonischen Minen, die KI-Werkzeuge hinterlassen – und sage Ihnen genau, was zu beheben ist, in klarer Sprache.",
     problems: [
@@ -551,7 +551,7 @@ const de: LocalizedContent = {
     nav: "Architektur-Review",
     title: "Software-Architektur-Review",
     description:
-      "Eine ehrliche Zweitmeinung zu Ihrer Software-Architektur – was skaliert, was bricht und was zu beheben ist, bevor es teuer wird. Untermauert davon, selbst eine Ende-zu-Ende-verschlüsselte App aus einer einzigen plattformübergreifenden Codebasis gebaut zu haben.",
+      "Ehrliche Zweitmeinung zu Ihrer Software-Architektur – was skaliert, was bricht, was zu beheben ist, bevor es teuer wird. Untermauert durch eine selbst gebaute App.",
     h1: "Ist Ihre Architektur für die Dauer gebaut?",
     lead: "Eine klarsichtige Zweitmeinung dazu, wie Ihr System gebaut ist – was trägt, was bei Skalierung bricht und was Sie still und leise Geld kosten wird. Kein Dogma, nur Abwägungen.",
     problems: [
@@ -582,7 +582,7 @@ const de: LocalizedContent = {
     nav: "Idee → Produktion",
     title: "Von der Idee in die Produktion",
     description:
-      "Von der Idee zu einer echten, ausgelieferten, produktionsreifen App – Architektur, Umsetzung, Sicherheit und die Infrastruktur, um sie zu betreiben. Untermauert davon, allein einen verschlüsselten Messenger aus einer einzigen plattformübergreifenden Codebasis gebaut zu haben.",
+      "Von der Idee zur echten, produktionsreifen App – Architektur, Umsetzung, Sicherheit und Infrastruktur. Gestützt auf einen selbst gebauten verschlüsselten Messenger.",
     h1: "Von der Idee zu einem echten, ausgelieferten Produkt",
     lead: "Sie haben eine Idee – oder einen groben Prototyp – und brauchen jemanden, der sie den ganzen Weg bringt: sauber architektiert, auf Dauer gebaut, abgesichert und tatsächlich deployt. Keine Präsentation. Ein Produkt.",
     problems: [
@@ -613,7 +613,7 @@ const de: LocalizedContent = {
     nav: "Bausteine",
     title: "Bausteine für die Produktion",
     description:
-      "Einsatzfertige Services für Ihre App – Authentifizierung, Nutzerverwaltung und verschlüsselte Dateiverarbeitung – adaptiert aus einer echten Messenger-Codebasis, die ich gebaut habe. Ersparen Sie sich den Neuaufbau der schweren, riskanten Teile von Grund auf.",
+      "Einsatzfertige Services für Ihre App – Authentifizierung, Nutzerverwaltung und Dateiverschlüsselung – aus einer echten Messenger-Codebasis. Ohne riskanten Neuaufbau.",
     h1: "Die schweren Teile, schon richtig gebaut",
     lead: "Auth, Nutzerverwaltung, verschlüsselte Dateiverarbeitung – die Bausteine, die alle auf subtile Weise falsch machen (besonders KI-Werkzeuge). Starten Sie von Primitiven, adaptiert aus einer echten verschlüsselten Messenger-Codebasis, statt sie von Grund auf neu zu bauen und zu hoffen.",
     problems: [
@@ -651,7 +651,7 @@ const es: LocalizedContent = {
     nav: 'Migración a la nube',
     title: 'Consultoría de migración a la nube',
     description:
-      'Consultoría de migración a la nube que te lleva a AWS o GCP por partes: la producción sigue funcionando, sin reescrituras arriesgadas de golpe. Normalmente más barato que lo que reemplaza.',
+      'Consultoría de migración a la nube que te lleva a AWS o GCP por partes: la producción sigue funcionando, sin reescrituras de golpe. Suele salir más barato que antes.',
     h1: 'Migración a la nube sin caídas del servicio',
     lead: 'Llega a AWS o GCP sin jugarte el negocio en un despliegue masivo de fin de semana. Migro lo que vale la pena mover, dejo lo que no y mantengo la producción funcionando durante todo el proceso.',
     problems: [
@@ -689,7 +689,7 @@ const es: LocalizedContent = {
     nav: 'Kubernetes',
     title: 'Consultoría de Kubernetes',
     description:
-      'Consultoría de Kubernetes en producción: clústeres EKS/GKE que escalan bajo demanda y se reducen junto con tu factura gracias a Karpenter, sin el caos de YAML. Y una respuesta honesta sobre si de verdad lo necesitas.',
+      'Consultoría de Kubernetes en producción: clústeres EKS/GKE que escalan bajo demanda y reducen tu factura con Karpenter. Y una respuesta honesta sobre si lo necesitas.',
     h1: 'Kubernetes, solo donde se gana su sueldo',
     lead: 'Clústeres de nivel producción que escalan cuando el tráfico se dispara y se reducen (junto con la factura) cuando no, sin las miles de líneas de YAML que nadie entiende.',
     problems: [
@@ -726,7 +726,7 @@ const es: LocalizedContent = {
     nav: 'Costes y fiabilidad',
     title: 'Optimización de costes en la nube',
     description:
-      'Consultoría de optimización de costes en la nube. Reduce tu factura de AWS o GCP con ARM/Graviton, dimensionamiento correcto y autoescalado, sin sacrificar la fiabilidad. Ahorro típico del 20-40%.',
+      'Consultoría de optimización de costes cloud. Reduce tu factura AWS o GCP con ARM/Graviton, right-sizing y autoescalado, sin sacrificar fiabilidad. Ahorro del 20-40%.',
     h1: 'Reduce tu factura de la nube sin perder fiabilidad',
     lead: 'Encuentra las partidas que drenan tu presupuesto en silencio, córtalas y asegúrate de que nada se rompa en el proceso. Aburrido, fiable y más barato.',
     problems: [
@@ -762,7 +762,7 @@ const es: LocalizedContent = {
     nav: 'CI/CD e IaC',
     title: 'CI/CD e infraestructura como código',
     description:
-      'Consultoría de CI/CD e infraestructura como código. Despliegues aburridos y repetibles, e infraestructura gestionada con Terraform que se revisa, versiona y reconstruye desde cero.',
+      'Consultoría de CI/CD e infraestructura como código. Despliegues aburridos y repetibles, e infraestructura Terraform: revisada, versionada y reconstruible desde cero.',
     h1: 'Convierte los despliegues en un no-evento',
     lead: 'Haces push, se despliega y todos siguen con lo suyo. Toda tu configuración vive en Terraform: revisada, versionada y reconstruible desde cero.',
     problems: [
@@ -798,7 +798,7 @@ const es: LocalizedContent = {
     nav: 'Auditoría de app con IA',
     title: 'Auditoría y rescate de apps creadas con IA',
     description:
-      'Audita y refuerza aplicaciones creadas con Cursor, Claude o Copilot. Encuentra los agujeros de seguridad y las minas arquitectónicas que la IA deja atrás, antes de que te cuesten caro.',
+      'Audita y refuerza apps creadas con Cursor, Claude o Copilot. Encuentra los agujeros de seguridad y las minas arquitectónicas que deja la IA, antes de que cuesten caro.',
     h1: 'Tu app creada con IA, auditada y sin riesgos ocultos',
     lead: '¿Has lanzado algo construido en gran parte con Cursor, Claude o Copilot y te preocupa en silencio que se venga abajo? Encuentro los agujeros de seguridad y las minas arquitectónicas que dejan atrás las herramientas de IA, y te digo exactamente qué corregir, en lenguaje claro.',
     problems: [
@@ -833,7 +833,7 @@ const es: LocalizedContent = {
     nav: 'Revisión de arquitectura',
     title: 'Revisión de arquitectura de software',
     description:
-      'Una segunda opinión honesta sobre la arquitectura de tu software: qué escala, qué se rompe y qué corregir antes de que salga caro. Respaldado por haber construido yo mismo una app cifrada de extremo a extremo desde un único código multiplataforma.',
+      'Segunda opinión honesta sobre tu arquitectura de software: qué escala, qué se rompe y qué corregir antes de que salga caro. Respaldada por una app cifrada que construí.',
     h1: '¿Tu arquitectura está hecha para durar?',
     lead: 'Una segunda opinión sin rodeos sobre cómo está construido tu sistema: qué aguanta, qué se rompe a escala y qué te va a costar dinero en silencio. Sin dogmas, solo compensaciones.',
     problems: [
@@ -864,7 +864,7 @@ const es: LocalizedContent = {
     nav: 'De la idea a producción',
     title: 'De la idea a producción',
     description:
-      'Lleva una idea hasta una app real, lanzada y de nivel producción: arquitectura, desarrollo, seguridad y la infraestructura para operarla. Respaldado por haber construido un mensajero cifrado desde un único código multiplataforma, en solitario.',
+      'De la idea a una app real, lanzada y de nivel producción: arquitectura, desarrollo, seguridad e infraestructura. Avalado por un mensajero cifrado que construí solo.',
     h1: 'De la idea a un producto real y lanzado',
     lead: 'Tienes una idea, o un prototipo tosco, y necesitas a alguien que pueda llevarla hasta el final: bien arquitecturada, construida para durar, asegurada y realmente desplegada. No una presentación. Un producto.',
     problems: [
@@ -895,7 +895,7 @@ const es: LocalizedContent = {
     nav: 'Componentes base',
     title: 'Componentes base de producción',
     description:
-      'Servicios listos para integrar en tu app (autenticación, gestión de usuarios y manejo de archivos cifrados) adaptados de un código real de mensajero cifrado que construí. Ahórrate reconstruir desde cero las partes difíciles y arriesgadas.',
+      'Servicios listos para tu app (autenticación, usuarios y archivos cifrados), adaptados de un mensajero cifrado real que construí. Ahórrate las partes arriesgadas.',
     h1: 'Las partes difíciles, ya construidas como es debido',
     lead: 'Autenticación, gestión de usuarios, manejo de archivos cifrados: las piezas que todo el mundo equivoca de forma sutil (especialmente las herramientas de IA). Empieza desde primitivas adaptadas de un código real de mensajero cifrado en lugar de reconstruirlas desde cero y cruzar los dedos.',
     problems: [
@@ -933,7 +933,7 @@ const pt: LocalizedContent = {
     nav: 'Migração para nuvem',
     title: 'Consultoria em Migração para Nuvem',
     description:
-      'Consultoria em migração para nuvem que leva você para a AWS ou GCP aos poucos — a produção continua no ar, sem reescrita arriscada de uma vez só. Normalmente mais barato do que aquilo que substitui.',
+      'Consultoria em migração para nuvem que leva você à AWS ou GCP aos poucos — a produção continua no ar, sem reescrita arriscada de uma vez. Costuma sair mais barato.',
     h1: 'Migração para nuvem sem downtime',
     lead: 'Chegue à AWS ou GCP sem apostar o negócio em um fim de semana de virada total. Eu movo o que vale a pena mover, deixo de lado o que não vale e mantenho a produção rodando o tempo todo.',
     problems: [
@@ -971,7 +971,7 @@ const pt: LocalizedContent = {
     nav: 'Kubernetes',
     title: 'Consultoria em Kubernetes',
     description:
-      'Consultoria em Kubernetes para produção: clusters EKS/GKE que escalam sob demanda e encolhem junto com a sua fatura via Karpenter — sem o excesso de YAML. Além de uma resposta honesta sobre se você realmente precisa disso.',
+      'Consultoria em Kubernetes para produção: clusters EKS/GKE que escalam sob demanda e reduzem sua fatura via Karpenter. E uma resposta honesta sobre se você precisa.',
     h1: 'Kubernetes, só onde ele se paga',
     lead: 'Clusters de nível produção que escalam quando o tráfego dispara e encolhem (junto com a conta) quando não — sem os milhares de linhas de YAML que ninguém entende.',
     problems: [
@@ -1008,7 +1008,7 @@ const pt: LocalizedContent = {
     nav: 'Custo e confiabilidade',
     title: 'Otimização de Custos na Nuvem',
     description:
-      'Consultoria em otimização de custos na nuvem. Reduza sua fatura da AWS ou GCP com ARM/Graviton, right-sizing e autoscaling — sem prejudicar a confiabilidade. Economia típica de 20 a 40%.',
+      'Consultoria em otimização de custos cloud. Reduza a fatura AWS ou GCP com ARM/Graviton, right-sizing e autoscaling, sem perder confiabilidade. Economia de 20 a 40%.',
     h1: 'Reduza a fatura da nuvem, mantenha a confiabilidade',
     lead: 'Encontre os itens que drenam seu orçamento silenciosamente, corte-os e garanta que nada quebre no processo. Chato, confiável e mais barato.',
     problems: [
@@ -1044,7 +1044,7 @@ const pt: LocalizedContent = {
     nav: 'CI/CD e IaC',
     title: 'CI/CD e Infraestrutura como Código',
     description:
-      'Consultoria em CI/CD e Infraestrutura como Código. Deployments chatos e repetíveis e infraestrutura gerenciada com Terraform, revisada, versionada e reconstruível do zero.',
+      'Consultoria em CI/CD e Infraestrutura como Código. Deployments chatos e repetíveis e infraestrutura com Terraform — revisada, versionada e reconstruível do zero.',
     h1: 'Faça do deploy um não-evento',
     lead: 'Você dá o push, ele faz o deploy, todo mundo segue em frente. Todo o seu ambiente vive no Terraform — revisado, versionado e reconstruível do zero.',
     problems: [
@@ -1080,7 +1080,7 @@ const pt: LocalizedContent = {
     nav: 'Auditoria de app com IA',
     title: 'Auditoria e Resgate de Apps Feitos com IA',
     description:
-      'Audite e reforce apps construídos com Cursor, Claude ou Copilot. Encontre as falhas de segurança e as armadilhas arquiteturais que a IA deixa para trás — antes que custem caro.',
+      'Audite e reforce apps construídos com Cursor, Claude ou Copilot. Encontre as falhas de segurança e as armadilhas que a IA deixa para trás — antes que custem caro.',
     h1: 'Seu app feito com IA, auditado e sem riscos',
     lead: 'Lançou algo construído em boa parte por Cursor, Claude ou Copilot e, no fundo, teme que ele desmorone? Eu encontro as falhas de segurança e as armadilhas arquiteturais que as ferramentas de IA deixam para trás — e te digo exatamente o que corrigir, em português claro.',
     problems: [
@@ -1115,7 +1115,7 @@ const pt: LocalizedContent = {
     nav: 'Revisão de arquitetura',
     title: 'Revisão de Arquitetura de Software',
     description:
-      'Uma segunda opinião honesta sobre a arquitetura do seu software — o que escala, o que quebra e o que corrigir antes que fique caro. Respaldada por eu mesmo ter construído um app com criptografia ponta a ponta a partir de um único código-base multiplataforma.',
+      'Segunda opinião honesta sobre arquitetura de software — o que escala, o que quebra, o que corrigir antes que fique caro. Baseada em um app criptografado que construí.',
     h1: 'Sua arquitetura foi feita para durar?',
     lead: 'Uma segunda opinião sem ilusões sobre como seu sistema é construído — o que se sustenta, o que quebra em escala e o que vai silenciosamente te custar caro. Sem dogma, só trade-offs.',
     problems: [
@@ -1146,7 +1146,7 @@ const pt: LocalizedContent = {
     nav: 'Ideia → produção',
     title: 'Da Ideia à Produção',
     description:
-      'Leve uma ideia a um app real, lançado e de nível produção — arquitetura, construção, segurança e a infraestrutura para rodá-lo. Respaldado por ter construído um mensageiro criptografado a partir de um único código-base multiplataforma, sozinho.',
+      'Da ideia a um app real, lançado e de nível produção — arquitetura, construção, segurança e infraestrutura. Baseado em um mensageiro criptografado que construí sozinho.',
     h1: 'Da ideia a um produto real e lançado',
     lead: 'Você tem uma ideia — ou um protótipo tosco — e precisa de alguém que consiga levá-la até o fim: arquitetada direito, construída para durar, protegida e de fato implantada. Não um slide. Um produto.',
     problems: [
@@ -1177,7 +1177,7 @@ const pt: LocalizedContent = {
     nav: 'Blocos de construção',
     title: 'Blocos de Construção para Produção',
     description:
-      'Serviços prontos para acoplar ao seu app — autenticação, gestão de usuários e manipulação de arquivos criptografados — adaptados de um código-base real de mensageiro criptografado que eu construí. Pule a etapa de reconstruir as partes difíceis e arriscadas do zero.',
+      'Serviços prontos para o seu app — autenticação, usuários e arquivos criptografados — adaptados de um mensageiro criptografado que construí. Pule as partes arriscadas.',
     h1: 'As partes difíceis, já construídas do jeito certo',
     lead: 'Auth, gestão de usuários, manipulação de arquivos criptografados — as peças que todo mundo erra de forma sutil (especialmente as ferramentas de IA). Comece a partir de primitivas adaptadas de um código-base real de mensageiro criptografado, em vez de reconstruí-las do zero na esperança de acertar.',
     problems: [
@@ -1215,7 +1215,7 @@ const fr: LocalizedContent = {
     nav: 'Migration cloud',
     title: "Conseil en migration cloud",
     description:
-      "Conseil en migration cloud qui vous fait passer vers AWS ou GCP par étapes — la production reste en ligne, sans réécriture risquée en big-bang. Généralement moins cher que ce qu'elle remplace.",
+      "Conseil en migration cloud qui vous fait passer vers AWS ou GCP par étapes — la production reste en ligne, sans réécriture risquée. Souvent moins cher qu'avant.",
     h1: "La migration cloud sans interruption de service",
     lead: "Passez à AWS ou GCP sans miser toute votre activité sur un week-end en big-bang. Je migre ce qui mérite de l'être, laisse de côté ce qui ne l'est pas, et maintiens la production en fonctionnement du début à la fin.",
     problems: [
@@ -1253,7 +1253,7 @@ const fr: LocalizedContent = {
     nav: 'Kubernetes',
     title: "Conseil Kubernetes",
     description:
-      "Conseil Kubernetes en production : des clusters EKS/GKE qui montent en charge à la demande et se réduisent avec votre facture grâce à Karpenter — sans la prolifération de YAML. Et une réponse honnête sur le fait d'en avoir besoin ou non.",
+      "Conseil Kubernetes en production : clusters EKS/GKE qui scalent à la demande et réduisent votre facture via Karpenter. Et une réponse honnête sur votre besoin réel.",
     h1: "Kubernetes, uniquement là où il est rentable",
     lead: "Des clusters de qualité production qui montent en charge quand le trafic explose et se réduisent (avec la facture) quand ce n'est pas le cas — moins les milliers de lignes de YAML que personne ne comprend.",
     problems: [
@@ -1290,7 +1290,7 @@ const fr: LocalizedContent = {
     nav: 'Coûts & fiabilité',
     title: "Optimisation des coûts cloud",
     description:
-      "Conseil en optimisation des coûts cloud. Réduisez votre facture AWS ou GCP avec ARM/Graviton, le right-sizing et l'autoscaling — sans nuire à la fiabilité. Économies typiques de 20 à 40 %.",
+      "Optimisation des coûts cloud. Réduisez votre facture AWS ou GCP avec ARM/Graviton, right-sizing et autoscaling — sans nuire à la fiabilité. Économies de 20 à 40 %.",
     h1: "Réduisez votre facture cloud, gardez la fiabilité",
     lead: "Repérez les postes qui vident discrètement votre budget, éliminez-les, et assurez-vous que rien ne casse au passage. Ennuyeux, fiable et moins cher.",
     problems: [
@@ -1326,7 +1326,7 @@ const fr: LocalizedContent = {
     nav: 'CI/CD & IaC',
     title: "CI/CD & Infrastructure as Code",
     description:
-      "Conseil en CI/CD et Infrastructure as Code. Des déploiements ennuyeux et reproductibles et une infrastructure gérée par Terraform, révisée, versionnée et reconstructible de zéro.",
+      "Conseil en CI/CD et Infrastructure as Code. Des déploiements ennuyeux et reproductibles, une infrastructure Terraform — révisée, versionnée et reconstructible de zéro.",
     h1: "Faites de la mise en production un non-événement",
     lead: "Vous poussez, ça se déploie, tout le monde passe à autre chose. Toute votre installation vit dans Terraform — révisée, versionnée et reconstructible de zéro.",
     problems: [
@@ -1362,7 +1362,7 @@ const fr: LocalizedContent = {
     nav: "Audit d'app IA",
     title: "Audit & sauvetage d'app construite par IA",
     description:
-      "Auditez et durcissez les applications construites avec Cursor, Claude ou Copilot. Trouvez les failles de sécurité et les pièges architecturaux que l'IA laisse derrière elle — avant qu'ils ne vous coûtent cher.",
+      "Auditez et durcissez les apps construites avec Cursor, Claude ou Copilot. Trouvez les failles de sécurité et les pièges que l'IA laisse — avant qu'ils ne coûtent cher.",
     h1: "Votre app construite par IA, auditée et dé-risquée",
     lead: "Vous avez livré quelque chose construit essentiellement par Cursor, Claude ou Copilot et vous craignez discrètement que ça s'effondre ? Je trouve les failles de sécurité et les pièges architecturaux que les outils d'IA laissent derrière eux — et je vous dis exactement quoi corriger, en clair.",
     problems: [
@@ -1397,7 +1397,7 @@ const fr: LocalizedContent = {
     nav: "Revue d'architecture",
     title: "Revue d'architecture logicielle",
     description:
-      "Un second avis honnête sur votre architecture logicielle — ce qui passe à l'échelle, ce qui casse, et ce qu'il faut corriger avant que ça ne coûte cher. Appuyé sur la construction d'une application chiffrée de bout en bout à partir d'une seule base de code multiplateforme.",
+      "Second avis honnête sur votre architecture logicielle — ce qui scale, ce qui casse, quoi corriger avant que ça coûte cher. Appuyé sur une app chiffrée que j'ai bâtie.",
     h1: "Votre architecture est-elle bâtie pour durer ?",
     lead: "Un second avis lucide sur la façon dont votre système est construit — ce qui tient, ce qui casse à l'échelle, et ce qui va discrètement vous coûter cher. Pas de dogme, juste des compromis.",
     problems: [
@@ -1428,7 +1428,7 @@ const fr: LocalizedContent = {
     nav: "Idée → production",
     title: "De l'idée à la production",
     description:
-      "Menez une idée jusqu'à une application réelle, livrée et de qualité production — architecture, développement, sécurité, et l'infrastructure pour la faire tourner. Appuyé sur la construction en solo d'une messagerie chiffrée à partir d'une seule base de code multiplateforme.",
+      "De l'idée à une application livrée, de niveau production — architecture, développement, sécurité, infrastructure. Appuyé sur une messagerie chiffrée bâtie en solo.",
     h1: "De l'idée à un produit réel et livré",
     lead: "Vous avez une idée — ou un prototype grossier — et il vous faut quelqu'un capable de la mener jusqu'au bout : architecturée correctement, construite pour durer, sécurisée, et réellement déployée. Pas une présentation. Un produit.",
     problems: [
@@ -1459,7 +1459,7 @@ const fr: LocalizedContent = {
     nav: "Briques de base",
     title: "Briques de production prêtes à l'emploi",
     description:
-      "Des services prêts à intégrer dans votre application — authentification, gestion des utilisateurs et gestion de fichiers chiffrés — adaptés d'une vraie base de code de messagerie chiffrée que j'ai construite. Évitez de reconstruire de zéro les parties difficiles et risquées.",
+      "Services prêts à intégrer à votre app — authentification, utilisateurs, fichiers chiffrés — adaptés d'une messagerie chiffrée que j'ai bâtie. Sans réécriture risquée.",
     h1: "Les parties difficiles, déjà construites correctement",
     lead: "Auth, gestion des utilisateurs, gestion de fichiers chiffrés — les pièces que tout le monde rate de façon subtile (surtout les outils d'IA). Partez de primitives adaptées d'une vraie base de code de messagerie chiffrée au lieu de les reconstruire de zéro en croisant les doigts.",
     problems: [
@@ -1497,7 +1497,7 @@ const ro: LocalizedContent = {
     nav: 'Migrare în cloud',
     title: 'Consultanță pentru migrarea în cloud',
     description:
-      'Consultanță pentru migrarea în cloud care vă mută pe AWS sau GCP bucată cu bucată — producția rămâne funcțională, fără rescrieri riscante de tip big-bang. De obicei mai ieftin decât ceea ce înlocuiește.',
+      'Consultanță pentru migrarea în cloud care vă mută pe AWS sau GCP bucată cu bucată — producția rămâne funcțională, fără rescrieri riscante. De obicei mai ieftin.',
     h1: 'Migrare în cloud fără downtime',
     lead: 'Ajungeți pe AWS sau GCP fără să pariați afacerea pe un weekend de tip big-bang. Mut ce merită mutat, las deoparte ce nu, și mențin producția funcțională pe tot parcursul.',
     problems: [
@@ -1535,7 +1535,7 @@ const ro: LocalizedContent = {
     nav: 'Kubernetes',
     title: 'Consultanță Kubernetes',
     description:
-      'Consultanță Kubernetes pentru producție: clustere EKS/GKE care scalează la cerere și se micșorează împreună cu factura prin Karpenter — fără proliferarea de YAML. Plus un răspuns onest dacă aveți nevoie de el.',
+      'Consultanță Kubernetes pentru producție: clustere EKS/GKE care scalează la cerere și vă reduc factura prin Karpenter. Plus un răspuns onest dacă aveți nevoie de el.',
     h1: 'Kubernetes, doar acolo unde își merită locul',
     lead: 'Clustere de nivel producție care scalează la vârfuri de trafic și se micșorează (împreună cu factura) când nu — fără miile de linii de YAML pe care nu le înțelege nimeni.',
     problems: [
@@ -1572,7 +1572,7 @@ const ro: LocalizedContent = {
     nav: 'Costuri & fiabilitate',
     title: 'Optimizarea costurilor cloud',
     description:
-      'Consultanță pentru optimizarea costurilor cloud. Reduceți factura AWS sau GCP cu ARM/Graviton, dimensionare corectă și autoscaling — fără a afecta fiabilitatea. Economii tipice de 20–40%.',
+      'Consultanță pentru optimizarea costurilor cloud. Reduceți factura AWS sau GCP cu ARM/Graviton, right-sizing și autoscaling, fără a afecta fiabilitatea. Tipic 20–40%.',
     h1: 'Reduceți factura cloud, păstrați fiabilitatea',
     lead: 'Găsim liniile de cost care vă golesc discret bugetul, le eliminăm și ne asigurăm că nimic nu se strică în proces. Fără surprize, fiabil și mai ieftin.',
     problems: [
@@ -1608,7 +1608,7 @@ const ro: LocalizedContent = {
     nav: 'CI/CD & IaC',
     title: 'CI/CD & Infrastructure as Code',
     description:
-      'Consultanță CI/CD și Infrastructure as Code. Deployment-uri fără surprize, repetabile, și infrastructură gestionată cu Terraform, care este revizuită, versionată și reconstruibilă de la zero.',
+      'Consultanță CI/CD și Infrastructure as Code. Deployment-uri repetabile și infrastructură cu Terraform — revizuită, versionată și reconstruibilă de la zero.',
     h1: 'Transformați lansarea într-un non-eveniment',
     lead: 'Dați push, se face deploy, toată lumea își vede de treabă. Întreaga configurație trăiește în Terraform — revizuită, versionată și reconstruibilă de la zero.',
     problems: [
@@ -1644,7 +1644,7 @@ const ro: LocalizedContent = {
     nav: 'Audit aplicații IA',
     title: 'Audit & salvare a aplicațiilor create cu IA',
     description:
-      'Auditați și consolidați aplicațiile create cu Cursor, Claude sau Copilot. Găsiți breșele de securitate și minele arhitecturale pe care IA le lasă în urmă — înainte să vă coste.',
+      'Auditați și consolidați aplicațiile create cu Cursor, Claude sau Copilot. Găsiți breșele de securitate și minele arhitecturale lăsate de IA — înainte să vă coste.',
     h1: 'Aplicația dumneavoastră creată cu IA, auditată și cu riscuri reduse',
     lead: 'Ați lansat ceva construit în mare parte de Cursor, Claude sau Copilot și vă temeți în tăcere că se va prăbuși? Găsesc breșele de securitate și minele arhitecturale pe care instrumentele IA le lasă în urmă — și vă spun exact ce să reparați, pe înțelesul tuturor.',
     problems: [
@@ -1679,7 +1679,7 @@ const ro: LocalizedContent = {
     nav: 'Analiză de arhitectură',
     title: 'Analiză de arhitectură software',
     description:
-      'O a doua opinie onestă asupra arhitecturii dumneavoastră software — ce scalează, ce se strică și ce trebuie reparat înainte să devină costisitor. Susținută de faptul că am construit chiar eu o aplicație criptată end-to-end dintr-o singură bază de cod multiplatformă.',
+      'A doua opinie onestă asupra arhitecturii software — ce scalează, ce se strică, ce e de reparat înainte să coste. Susținută de o aplicație criptată construită de mine.',
     h1: 'Este arhitectura dumneavoastră construită să dureze?',
     lead: 'O a doua opinie lucidă asupra modului în care este construit sistemul dumneavoastră — ce rezistă, ce se strică la scară și ce vă va costa pe tăcute. Fără dogme, doar compromisuri.',
     problems: [
@@ -1710,7 +1710,7 @@ const ro: LocalizedContent = {
     nav: 'Idee → producție',
     title: 'De la idee la producție',
     description:
-      'Duceți o idee până la o aplicație reală, lansată, de nivel producție — arhitectură, dezvoltare, securitate și infrastructura pentru a o rula. Susținut de construirea unui mesager criptat dintr-o singură bază de cod multiplatformă, de unul singur.',
+      'De la idee la o aplicație reală, lansată, de nivel producție — arhitectură, dezvoltare, securitate și infrastructură. Susținut de un mesager criptat construit singur.',
     h1: 'De la idee la un produs real, lansat',
     lead: 'Aveți o idee — sau un prototip brut — și aveți nevoie de cineva care să o ducă până la capăt: arhitecturată corect, construită să dureze, securizată și chiar pusă în producție. Nu o prezentare. Un produs.',
     problems: [
@@ -1741,7 +1741,7 @@ const ro: LocalizedContent = {
     nav: 'Componente de bază',
     title: 'Componente de bază pentru producție',
     description:
-      'Servicii gata de integrat pentru aplicația dumneavoastră — autentificare, gestionarea utilizatorilor și manipularea criptată a fișierelor — adaptate dintr-o bază de cod reală de mesager criptat pe care am construit-o. Evitați reconstruirea de la zero a părților grele și riscante.',
+      'Servicii gata de integrat în aplicația dvs. — autentificare, utilizatori și fișiere criptate — dintr-un mesager criptat construit de mine. Fără refaceri riscante.',
     h1: 'Părțile grele, deja construite corect',
     lead: 'Autentificare, gestionarea utilizatorilor, manipularea criptată a fișierelor — piesele pe care toată lumea le greșește subtil (mai ales instrumentele IA). Porniți de la primitive adaptate dintr-o bază de cod reală de mesager criptat, în loc să le reconstruiți de la zero și să sperați.',
     problems: [

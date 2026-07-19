@@ -2,10 +2,10 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="PROD ACCESS GRANTED" description="You've found the secret devops terminal">
+<BaseLayout title="PROD ACCESS GRANTED" description="You've found the secret DevOps terminal — an easter egg with a spinning ASCII donut, fake production incidents, and jokes only on-call engineers will get.">
   <div class="terminal-container">
     <div class="terminal-header">
-      <span class="terminal-title">PROD_TERMINAL_v1.0.0-YOLO</span>
+      <h1 class="terminal-title">PROD_TERMINAL_v1.0.0-YOLO</h1>
       <div class="terminal-controls">
         <span class="dot red"></span>
         <span class="dot yellow"></span>
@@ -124,6 +124,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   }
 
   .terminal-title {
+    margin: 0;
     color: var(--color-primary);
     font-family: var(--font-heading);
     font-weight: 700;

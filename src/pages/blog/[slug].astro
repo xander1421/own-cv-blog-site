@@ -42,7 +42,7 @@ interface Props {
 
 const { post, relatedPosts } = Astro.props;
 const { Content } = await render(post);
-const { title, description, date, image, tags } = post.data;
+const { title, seoTitle, description, date, image, tags } = post.data;
 
 // Calculate reading time
 function calculateReadingTime(content: string): number {
@@ -99,7 +99,7 @@ const blogPostSchema = {
 ---
 
 <BaseLayout
-  title={title || 'Blog Post'}
+  title={seoTitle || title || 'Blog Post'}
   description={description || ''}
   image={ogImage}
   type="article"
@@ -486,6 +486,15 @@ const blogPostSchema = {
 
   .post-content :global(p) {
     margin-bottom: 1.8rem;
+  }
+
+  .post-content :global(img) {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 2rem auto;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 255, 204, 0.15);
   }
 
   .post-content :global(ul),
