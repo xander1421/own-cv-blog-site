@@ -198,7 +198,7 @@ const faqSchema = {
       </div>
 
       <div class="hero-art" aria-hidden="true">
-        <img src="/images/site/home-hero.webp" alt="" width="1200" height="686" loading="lazy" decoding="async" />
+        <img src="/images/site/home-hero-tall.webp" alt="" width="640" height="1120" loading="lazy" decoding="async" />
       </div>
     </div>
   </section>
@@ -459,6 +459,7 @@ const faqSchema = {
     .hero-art {
       display: block;
       position: relative;
+      align-self: stretch;
     }
 
     .hero-art::before {
@@ -472,9 +473,14 @@ const faqSchema = {
     .hero-art img {
       position: relative;
       width: 100%;
-      height: auto;
+      height: 100%;
+      object-fit: cover;
       border-radius: 12px;
       border: 1px solid rgba(0, 255, 204, 0.18);
+    }
+
+    .hero-content .headline :global(.nowrap) {
+      white-space: nowrap;
     }
 
     .hero-content .subhead {

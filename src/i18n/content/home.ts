@@ -20,7 +20,7 @@ export const home = {
 
     // Hero
     heroKicker: 'Kubernetes &amp; Cloud Cost Engineering',
-    heroTitleA: 'Cut your cloud bill 30–50%.',
+    heroTitleA: 'Cut your cloud bill <span class="nowrap">30–50%</span>.',
     heroTitleB: 'Without touching&nbsp;reliability.',
     heroSubhead:
       "For scaling teams whose AWS or Kubernetes bill is growing faster than revenue. I find the waste, cut it, and keep deploys boring — and I build the systems most engineers only host. Fixed scope, no&nbsp;bodyshopping.",
@@ -133,7 +133,7 @@ export const home = {
     },
 
     heroKicker: 'Kubernetes- &amp; Cloud-Kosten-Engineering',
-    heroTitleA: 'Senken Sie Ihre Cloud-Kosten um 30–50 %.',
+    heroTitleA: 'Senken Sie Ihre Cloud-Kosten um <span class="nowrap">30–50&nbsp;%</span>.',
     heroTitleB: 'Ohne Einbußen bei der&nbsp;Zuverlässigkeit.',
     heroSubhead:
       'Für wachsende Teams, deren AWS- oder Kubernetes-Rechnung schneller steigt als der Umsatz. Ich finde die Verschwendung, streiche sie und halte Deployments langweilig — und ich baue die Systeme, die andere nur betreiben. Fester Umfang, kein&nbsp;Bodyshopping.',
@@ -239,7 +239,7 @@ export const home = {
     },
 
     heroKicker: 'Ingeniería de costes Kubernetes &amp; Cloud',
-    heroTitleA: 'Reduce tu factura de la nube un 30–50 %.',
+    heroTitleA: 'Reduce tu factura de la nube un <span class="nowrap">30–50&nbsp;%</span>.',
     heroTitleB: 'Sin tocar la&nbsp;fiabilidad.',
     heroSubhead:
       'Para equipos en crecimiento cuya factura de AWS o Kubernetes sube más rápido que sus ingresos. Encuentro el desperdicio, lo elimino y mantengo los despliegues aburridos — y construyo los sistemas que otros solo hospedan. Alcance cerrado, sin&nbsp;bodyshopping.',
@@ -345,7 +345,7 @@ export const home = {
     },
 
     heroKicker: 'Engenharia de custos Kubernetes &amp; Cloud',
-    heroTitleA: 'Reduza sua conta de nuvem em 30–50 %.',
+    heroTitleA: 'Reduza sua conta de nuvem em <span class="nowrap">30–50&nbsp;%</span>.',
     heroTitleB: 'Sem mexer na&nbsp;confiabilidade.',
     heroSubhead:
       'Para times em crescimento cuja conta de AWS ou Kubernetes sobe mais rápido que a receita. Encontro o desperdício, corto e mantenho os deploys sem graça — e construo os sistemas que os outros apenas hospedam. Escopo fechado, sem&nbsp;bodyshopping.',
@@ -451,7 +451,7 @@ export const home = {
     },
 
     heroKicker: 'Ingénierie des coûts Kubernetes &amp; Cloud',
-    heroTitleA: 'Réduisez votre facture cloud de 30 à 50 %.',
+    heroTitleA: 'Réduisez votre facture cloud de <span class="nowrap">30 à 50&nbsp;%</span>.',
     heroTitleB: 'Sans toucher à la&nbsp;fiabilité.',
     heroSubhead:
       "Pour les équipes en croissance dont la facture AWS ou Kubernetes grimpe plus vite que le chiffre d'affaires. Je repère le gaspillage, je le supprime et je garde les déploiements ennuyeux — et je construis les systèmes que les autres se contentent d'héberger. Périmètre fixe, sans&nbsp;bodyshopping.",
@@ -557,7 +557,7 @@ export const home = {
     },
 
     heroKicker: 'Inginerie de costuri Kubernetes &amp; cloud',
-    heroTitleA: 'Reduceți factura cloud cu 30–50 %.',
+    heroTitleA: 'Reduceți factura cloud cu <span class="nowrap">30–50&nbsp;%</span>.',
     heroTitleB: 'Fără a afecta&nbsp;fiabilitatea.',
     heroSubhead:
       'Pentru echipe în creștere a căror factură AWS sau Kubernetes crește mai repede decât veniturile. Găsesc risipa, o tai și păstrez deploy-urile plictisitoare — și construiesc sistemele pe care alții doar le găzduiesc. Scop fix, fără&nbsp;bodyshopping.',
