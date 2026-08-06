@@ -13,7 +13,7 @@ const { lang, slug } = Astro.props;
 const t = useTranslations(lang);
 const service = getService(slug, lang);
 const all = getServices(lang);
-const siteUrl = 'https://alexpruteanu.cloud';
+const siteUrl = 'https://www.alexpruteanu.cloud';
 const related = all.filter((s) => s.slug !== service.slug);
 
 const serviceSchema = {

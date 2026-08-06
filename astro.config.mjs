@@ -5,7 +5,7 @@ import mermaid from 'astro-mermaid';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://alexpruteanu.cloud',
+  site: 'https://www.alexpruteanu.cloud',
   i18n: {
     defaultLocale: 'en',
     locales: ['en', 'de', 'es', 'pt', 'fr', 'ro'],

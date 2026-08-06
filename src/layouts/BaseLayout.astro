@@ -24,7 +24,7 @@ export interface Props {
 const {
   title,
   description = "DevOps & cloud consultant with 6+ years building scalable cloud infrastructure. Cloud migration, Kubernetes, cost optimization, AWS, Terraform, CI/CD.",
-  image = "/width=3840.webp",
+  image = "/og-image.png",
   type = "website",
   publishedTime,
   modifiedTime,
@@ -63,8 +63,10 @@ const searchData = [
 ];
 
 // SEO metadata
-const siteUrl = 'https://alexpruteanu.cloud';
+const siteUrl = 'https://www.alexpruteanu.cloud';
 const canonicalURL = new URL(Astro.url.pathname, siteUrl);
+// Build-time year keeps the footer copyright current without a yearly edit
+const currentYear = new Date().getFullYear();
 const fullTitle = `${title} | Alexandru Pruteanu`;
 const imageURL = new URL(image, siteUrl);
 
@@ -295,7 +297,7 @@ const keywords = [
           </svg>
         </a>
       </div>
-      <p>&copy; 2025 Alexandru Pruteanu | {t('footer.role')}</p>
+      <p>&copy; {currentYear} Alexandru Pruteanu | {t('footer.role')}</p>
     </footer>
 
     <!-- Back to Top (site-wide) -->
