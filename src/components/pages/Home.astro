@@ -40,8 +40,8 @@ const personSchema = {
   "@type": "Person",
   "name": "Alexandru Pruteanu",
   "alternateName": "Alex Pruteanu",
-  "url": "https://alexpruteanu.cloud",
-  "image": "https://alexpruteanu.cloud/width=3840.webp",
+  "url": "https://www.alexpruteanu.cloud",
+  "image": "https://www.alexpruteanu.cloud/og-image.png",
   "jobTitle": "DevOps Engineer",
   "description": "DevOps Engineer with 6+ years of experience building scalable cloud infrastructures using AWS, Kubernetes, and Terraform",
   "worksFor": {
@@ -51,7 +51,7 @@ const personSchema = {
   "sameAs": [
     "https://github.com/xander1421",
     "https://linkedin.com/in/alexandru-prt",
-    "https://alexpruteanu.cloud"
+    "https://www.alexpruteanu.cloud"
   ],
   "email": "alexpruteanu@hotmail.com",
   "knowsAbout": [
@@ -83,7 +83,7 @@ const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   "name": "Alexandru Pruteanu - DevOps Engineer",
-  "url": "https://alexpruteanu.cloud",
+  "url": "https://www.alexpruteanu.cloud",
   "description": "Technical blog and portfolio of Alexandru Pruteanu, DevOps Engineer specializing in cloud infrastructure, Kubernetes, and scalable systems",
   "author": {
     "@type": "Person",
@@ -93,7 +93,7 @@ const websiteSchema = {
     "@type": "SearchAction",
     "target": {
       "@type": "EntryPoint",
-      "urlTemplate": "https://alexpruteanu.cloud/blog?search={search_term_string}"
+      "urlTemplate": "https://www.alexpruteanu.cloud/blog?search={search_term_string}"
     },
     "query-input": "required name=search_term_string"
   }
@@ -104,8 +104,8 @@ const serviceSchema = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   "name": "Alexandru Pruteanu — DevOps & Cloud Consulting",
-  "url": "https://alexpruteanu.cloud",
-  "image": "https://alexpruteanu.cloud/width=3840.webp",
+  "url": "https://www.alexpruteanu.cloud",
+  "image": "https://www.alexpruteanu.cloud/og-image.png",
   "description": "DevOps and cloud consulting for growing teams: cloud migration to AWS and Kubernetes, infrastructure cost optimization, CI/CD, and reliability engineering.",
   "areaServed": "Worldwide",
   "availableLanguage": ["English", "Romanian", "Portuguese", "Russian"],
@@ -113,14 +113,14 @@ const serviceSchema = {
   "provider": {
     "@type": "Person",
     "name": "Alexandru Pruteanu",
-    "url": "https://alexpruteanu.cloud"
+    "url": "https://www.alexpruteanu.cloud"
   },
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
     "name": "DevOps, Cloud & Product Consulting Services",
     "itemListElement": SERVICES.map((s) => ({
       "@type": "Offer",
-      "itemOffered": { "@type": "Service", "name": s.title, "description": s.description, "url": `https://alexpruteanu.cloud/services/${s.slug}` },
+      "itemOffered": { "@type": "Service", "name": s.title, "description": s.description, "url": `https://www.alexpruteanu.cloud/services/${s.slug}` },
     })),
   }
 };
@@ -208,12 +208,11 @@ const faqSchema = {
         <article class="service-card stop">
           <span class="stop-node" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M17.5 19a4.5 4.5 0 0 0 0-9 6 6 0 0 0-11.6-1.5A4 4 0 0 0 6 19z"/>
-              <path d="M12 16v-5"/><path d="m9.5 13 2.5-2.5 2.5 2.5"/>
+              <path d="M4.5 3.5v8"/><rect x="3" y="5.5" width="3" height="4" rx="0.4"/><path d="M9.5 6v9.5"/><rect x="8" y="8" width="3" height="5" rx="0.4" fill="currentColor"/><path d="M14.5 9v9.5"/><rect x="13" y="11" width="3" height="5" rx="0.4"/><path d="M19.5 12v8.5"/><rect x="18" y="14" width="3" height="5" rx="0.4" fill="currentColor"/>
             </svg>
           </span>
           <div class="stop-body">
-            <h3><a href="/services/cloud-migration" set:html={c.serviceCard1Title}></a></h3>
+            <h3><a href="/services/cost-optimization" set:html={c.serviceCard1Title}></a></h3>
             <p set:html={c.serviceCard1Body}></p>
           </div>
         </article>
@@ -234,11 +233,12 @@ const faqSchema = {
         <article class="service-card stop">
           <span class="stop-node" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4.5 3.5v8"/><rect x="3" y="5.5" width="3" height="4" rx="0.4"/><path d="M9.5 6v9.5"/><rect x="8" y="8" width="3" height="5" rx="0.4" fill="currentColor"/><path d="M14.5 9v9.5"/><rect x="13" y="11" width="3" height="5" rx="0.4"/><path d="M19.5 12v8.5"/><rect x="18" y="14" width="3" height="5" rx="0.4" fill="currentColor"/>
+              <path d="M17.5 19a4.5 4.5 0 0 0 0-9 6 6 0 0 0-11.6-1.5A4 4 0 0 0 6 19z"/>
+              <path d="M12 16v-5"/><path d="m9.5 13 2.5-2.5 2.5 2.5"/>
             </svg>
           </span>
           <div class="stop-body">
-            <h3><a href="/services/cost-optimization" set:html={c.serviceCard3Title}></a></h3>
+            <h3><a href="/services/cloud-migration" set:html={c.serviceCard3Title}></a></h3>
             <p set:html={c.serviceCard3Body}></p>
           </div>
         </article>
