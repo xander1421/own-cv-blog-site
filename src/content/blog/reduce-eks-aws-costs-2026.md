@@ -109,11 +109,11 @@ Storage waste is quiet and constant:
 
 Two line items are unique to EKS and catch almost everyone:
 
-**The control-plane tax.** Every EKS cluster costs **$0.10/hour (~$73/month)** for the control plane before a single pod runs ([EKS pricing breakdown](https://www.cloudzero.com/blog/eks-pricing/)). Run a cluster per team per environment and that overhead compounds fast. Consolidate low-traffic environments with **namespaces and RBAC** instead of spinning up a new cluster for every boundary.
+**The control-plane tax.** Every EKS cluster costs **$0.10/hour (~$73/month)** for the control plane before a single pod runs ([Amazon EKS pricing](https://aws.amazon.com/eks/pricing/)). Run a cluster per team per environment and that overhead compounds fast. Consolidate low-traffic environments with **namespaces and RBAC** instead of spinning up a new cluster for every boundary.
 
 **The extended-support 6x jump.** When your Kubernetes version ages out of standard support, EKS *automatically* moves the cluster to extended support and the fee leaps from **$0.10 to $0.60/hour — about $73 to $438/month per cluster** ([AWS extended support pricing](https://aws.amazon.com/blogs/containers/amazon-eks-extended-support-for-kubernetes-versions-pricing/)). It's the single most expensive way to procrastinate. **Keep a routine upgrade cadence** and this line item stays at zero.
 
-One more: **EKS Auto Mode** is genuinely convenient, but it adds roughly a **12% management surcharge** on top of your EC2 cost — and Savings Plans discount only the underlying EC2, not the surcharge. Worth it for small teams who want AWS to run the data plane; worth pricing out before you assume it's free.
+One more: **EKS Auto Mode** is genuinely convenient, but it adds roughly a **12% management surcharge** on top of your EC2 cost — and Savings Plans discount only the underlying EC2, not the surcharge ([Amazon EKS pricing](https://aws.amazon.com/eks/pricing/)). Worth it for small teams who want AWS to run the data plane; worth pricing out before you assume it's free. (If you run GPU/ML nodes, note that AWS [cut Auto Mode GPU management fees by up to 60% in July 2026](https://aws.amazon.com/about-aws/whats-new/2026/07/amazon-eks-auto-mode-gpu-price/), so the surcharge on accelerated instances is now lower.)
 
 ## Lever 8 — Networking, the invisible line item
 
@@ -122,7 +122,7 @@ Data transfer and NAT don't show up in your mental model, but they show up on th
 - A **NAT Gateway** costs **$0.045/hour (~$32.40/month)** *plus* **$0.045/GB processed**. Pull large images or ship logs to the internet through it and the per-GB charge dwarfs the hourly one. Use **VPC endpoints** for S3, ECR, and other AWS services to route around the NAT entirely.
 - **Cross-AZ traffic** costs **$0.01/GB in each direction**. A chatty service mesh spread across three AZs pays a tax on every hop. Use **topology-aware routing** to keep traffic in-zone where you safely can.
 
-*(AWS added a Regional NAT Gateway mode in late 2025 that auto-spans AZs — handy operationally, but you still pay per-AZ-hour, so it's not a discount. Measure before you migrate.)*
+*(AWS added a [Regional NAT Gateway mode in November 2025](https://aws.amazon.com/about-aws/whats-new/2025/11/aws-nat-gateway-regional-availability) that auto-spans AZs — handy operationally, but you still pay per-AZ-hour and the same per-GB processing fee, so it's not a discount. Measure before you migrate.)*
 
 ## How the levers stack to 30–50%
 
