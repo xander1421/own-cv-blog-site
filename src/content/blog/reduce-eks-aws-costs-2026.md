@@ -63,7 +63,7 @@ This is the highest-leverage change you can make, and it's *reliability-neutral 
 
 Once requests are honest, you need something to actually *pack* pods onto fewer, cheaper nodes and remove the empties. That's [Karpenter](https://karpenter.sh/), AWS's open-source node autoscaler, and it's a step change from the old Cluster Autoscaler.
 
-Instead of scaling fixed node groups, Karpenter looks at pending pods and provisions the *right* instance for the shape of the work — then continuously **consolidates**, moving pods onto cheaper or fuller nodes and terminating the rest. In production, consolidation routinely **reduces node counts by 30–50%**.
+Instead of scaling fixed node groups, Karpenter looks at pending pods and provisions the *right* instance for the shape of the work — then continuously **consolidates**, moving pods onto cheaper or fuller nodes and terminating the rest. In production, consolidation routinely **reduces node counts by 30–50%**. (Still on Cluster Autoscaler and weighing the switch? I wrote a [full cost comparison of Karpenter vs Cluster Autoscaler](/blog/karpenter-vs-cluster-autoscaler-cost) with the migration path.)
 
 The case studies are consistent:
 
