@@ -53,3 +53,14 @@ up on LinkedIn manually.
 must never be committed to this (public) repository. Treat exported
 lead data as personal data where it names individuals: keep it local,
 delete what you don't use (GDPR data-minimization).
+
+## Semi-automated mode (scheduled Routine + Gmail drafts)
+
+A weekday-morning Routine runs the collector in a fresh cloud session and,
+for each new qualified lead, creates a **Gmail draft** (empty To: field,
+subject + body prefilled, research notes appended below the signature).
+Sending remains manual by design: open Drafts, do the research checklist,
+fill the [BRACKETS], delete the notes block, set the recipient, send.
+
+The dedupe cache (`outreach/seen.json`, hashes only) is committed back by
+the Routine so runs never re-draft the same posting.

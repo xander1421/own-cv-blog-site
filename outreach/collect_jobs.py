@@ -134,7 +134,9 @@ def main():
     args = ap.parse_args()
     os.makedirs(OUT, exist_ok=True)
 
-    seen_path = os.path.join(OUT, "seen.json")
+    # seen-cache lives in the repo (hashes only, no lead data) so scheduled
+    # runs from fresh clones still dedupe against prior runs
+    seen_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "seen.json")
     seen = set(json.load(open(seen_path))) if os.path.exists(seen_path) else set()
 
     rows, new_count = {}, 0
