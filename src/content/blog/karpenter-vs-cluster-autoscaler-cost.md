@@ -3,6 +3,7 @@ title: "Karpenter vs Cluster Autoscaler: The Real Cost Difference on EKS (2026)"
 date: "2026-08-11"
 description: "Karpenter vs Cluster Autoscaler on EKS: mechanics, Spot, and consolidation — where the documented 20–50% cost savings come from, and when the gap shrinks."
 tags: ["AWS", "Kubernetes", "EKS", "Karpenter", "Cluster Autoscaler", "Cost Optimization", "FinOps", "DevOps"]
+image: "./karpenter-vs-cluster-autoscaler-cost.webp"
 faqs:
   - q: "Is Karpenter better than Cluster Autoscaler?"
     a: "For most EKS clusters, yes — Karpenter provisions right-sized instances directly from the EC2 API and continuously consolidates underused nodes, which Cluster Autoscaler doesn't do. But Cluster Autoscaler is still actively maintained, works on every cloud, and is perfectly adequate for small or homogeneous clusters. 'Better' here means a lower bill and faster scaling, not that the old tool is broken."
