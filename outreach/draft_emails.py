@@ -19,13 +19,16 @@ from datetime import date
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "out")
 SITE = "https://www.alexpruteanu.cloud"
+# UTM tag on site links so email clicks are attributable in Vercel Analytics
+# (email clients strip referrers, so without this they show as "direct").
+UTM = "?utm_source=outreach&utm_medium=email&utm_campaign=finops-leads"
 
 # Hook picked by the strongest signal present in the posting text.
 HOOKS = [
-    (r"karpenter", "I noticed the role mentions Karpenter — I've done these migrations in production and wrote up the real cost math here: {site}/blog/karpenter-vs-cluster-autoscaler-cost"),
-    (r"\beks\b|kubernetes", "Since the role touches Kubernetes on AWS: I published a data-backed playbook on cutting EKS bills 30–50% that maps almost 1:1 to what this position will own: {site}/blog/reduce-eks-aws-costs-2026"),
-    (r"finops|cloud cost|cost optimi", "FinOps hires typically take 3+ months to land and another 3 to ramp — I do fixed-scope cost audits that bank the first 30–50% of savings in weeks, and hand the runbook to whoever you hire: {site}/blog/reduce-eks-aws-costs-2026"),
-    (r".", "I help teams cut AWS/Kubernetes spend 30–50% on a fixed-scope basis — details and method here: {site}/services/cost-optimization"),
+    (r"karpenter", "I noticed the role mentions Karpenter — I've done these migrations in production and wrote up the real cost math here: {site}/blog/karpenter-vs-cluster-autoscaler-cost{utm}"),
+    (r"\beks\b|kubernetes", "Since the role touches Kubernetes on AWS: I published a data-backed playbook on cutting EKS bills 30–50% that maps almost 1:1 to what this position will own: {site}/blog/reduce-eks-aws-costs-2026{utm}"),
+    (r"finops|cloud cost|cost optimi", "FinOps hires typically take 3+ months to land and another 3 to ramp — I do fixed-scope cost audits that bank the first 30–50% of savings in weeks, and hand the runbook to whoever you hire: {site}/blog/reduce-eks-aws-costs-2026{utm}"),
+    (r".", "I help teams cut AWS/Kubernetes spend 30–50% on a fixed-scope basis — details and method here: {site}/services/cost-optimization{utm}"),
 ]
 
 TEMPLATE = """# {company} — outreach draft ({today})
@@ -89,7 +92,7 @@ def main():
     os.makedirs(day_dir, exist_ok=True)
     for i, l in enumerate(picked, 1):
         text = (l["title"] + " " + l["snippet"]).lower()
-        hook = next(h for pat, h in HOOKS if re.search(pat, text)).format(site=SITE)
+        hook = next(h for pat, h in HOOKS if re.search(pat, text)).format(site=SITE, utm=UTM)
         slug = re.sub(r"[^a-z0-9]+", "-", l["company"].lower()).strip("-")[:40] or "lead"
         body = TEMPLATE.format(
             company=l["company"], title=l["title"], title_lc=l["title"][0].lower() + l["title"][1:],
