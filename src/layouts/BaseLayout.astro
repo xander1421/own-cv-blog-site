@@ -26,7 +26,7 @@ export interface Props {
 const {
   title,
   description = "DevOps & cloud consultant with 6+ years building scalable cloud infrastructure. Cloud migration, Kubernetes, cost optimization, AWS, Terraform, CI/CD.",
-  image = "/width=3840.webp",
+  image = "/og-image.png",
   type = "website",
   publishedTime,
   modifiedTime,
@@ -66,8 +66,10 @@ const searchData = [
 ];
 
 // SEO metadata
-const siteUrl = 'https://alexpruteanu.cloud';
+const siteUrl = 'https://www.alexpruteanu.cloud';
 const canonicalURL = new URL(Astro.url.pathname, siteUrl);
+// Build-time year keeps the footer copyright current without a yearly edit
+const currentYear = new Date().getFullYear();
 const fullTitle = `${title} | Alexandru Pruteanu`;
 const imageURL = new URL(image, siteUrl);
 
@@ -175,12 +177,12 @@ const keywords = [
       *{margin:0;padding:0;box-sizing:border-box}
       html{background-color:var(--color-bg);color:var(--color-text);font-family:monospace;line-height:1.6}
       body{min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}
-      body>header{background:var(--color-surface);border-bottom:1px solid var(--color-primary);position:relative;z-index:100}
-      nav{max-width:1200px;margin:0 auto;padding:0.375rem 2rem;display:flex;justify-content:space-between;align-items:center}
+      .site-header{background:var(--color-surface);border-bottom:1px solid var(--color-primary);position:relative;z-index:100}
+      .site-header nav{max-width:1200px;margin:0 auto;padding:0.375rem 2rem;display:flex;justify-content:space-between;align-items:center}
       main{flex:1;max-width:1200px;width:100%;margin:0 auto;padding:3rem 2rem}
-      footer{background:var(--color-surface);border-top:1px solid var(--color-primary);padding:0.5rem 2rem 1rem 2rem;text-align:center;color:var(--color-text-dim)}
-      @media(max-width:768px){footer{padding:0.5rem 2rem 6rem 2rem}}
-      @media(max-width:480px){footer{padding:0.5rem 1.5rem 7rem 1.5rem}}
+      .site-footer{background:var(--color-surface);border-top:1px solid var(--color-primary);padding:0.5rem 2rem 1rem 2rem;text-align:center;color:var(--color-text-dim)}
+      @media(max-width:768px){.site-footer{padding:0.5rem 2rem 6rem 2rem}}
+      @media(max-width:480px){.site-footer{padding:0.5rem 1.5rem 7rem 1.5rem}}
     </style>
   </head>
   <body class:list={{ 'quiet-page': quiet }}>
@@ -196,11 +198,24 @@ const keywords = [
     <div class="noise"></div>
     <div class="hologram-grid"></div>
     <div class="glitch-overlay"></div>
-    <header>
+    <header class="site-header">
       <nav>
         <a href={getLocalizedPath('/', lang)} class="logo" data-localizable="/">
           <span class="terminal-prompt">alexpruteanu@cloud</span>
         </a>
+        {/* Mobile-only language switcher: lives in the bar so changing language
+            doesn't require opening the hamburger menu. Hidden on desktop, where
+            the switcher inside .nav-actions is shown instead. */}
+        <details class="lang-switch lang-switch--bar">
+          <summary aria-label="Language">{lang.toUpperCase()}</summary>
+          <ul>
+            {(Object.keys(languages) as (keyof typeof languages)[]).map(l => (
+              <li>
+                <a href={getLocalizedPath(switchBase, l)} hreflang={l} lang={l} data-lang={l} aria-current={l === lang ? 'true' : undefined}>{languages[l]}</a>
+              </li>
+            ))}
+          </ul>
+        </details>
         <button id="nav-toggle" class="nav-toggle" aria-label={t('nav.toggleMenu')} aria-expanded="false" aria-controls="primary-nav">
           <span></span><span></span><span></span>
         </button>
@@ -284,7 +299,7 @@ const keywords = [
     <main>
       <slot />
     </main>
-    <footer>
+    <footer class="site-footer">
       <p class="secret-hint">Some codes never expire // Est. 1986</p>
       <div class="footer-links">
         <a href="https://github.com/xander1421" target="_blank" rel="noopener" aria-label="GitHub">
@@ -298,7 +313,7 @@ const keywords = [
           </svg>
         </a>
       </div>
-      <p>&copy; 2025 Alexandru Pruteanu | {t('footer.role')}</p>
+      <p>&copy; {currentYear} Alexandru Pruteanu | {t('footer.role')}</p>
     </footer>
 
     <!-- Back to Top (site-wide) -->
@@ -492,8 +507,8 @@ const keywords = [
     display: none;
   }
 
-  /* Header (site chrome only — pages use their own <header> elements) */
-  body > header {
+  /* Header */
+  .site-header {
     background: var(--color-surface);
     border-bottom: 1px solid var(--color-primary);
     box-shadow: 0 0 20px rgba(0, 255, 204, 0.3);
@@ -501,7 +516,7 @@ const keywords = [
     z-index: 100;
   }
 
-  nav {
+  .site-header nav {
     max-width: 1200px;
     margin: 0 auto;
     padding: 1.5rem 1.25rem;
@@ -603,7 +618,7 @@ const keywords = [
       display: none;
     }
 
-    nav {
+    .site-header nav {
       padding: 1rem 1.5rem;
     }
 
@@ -746,6 +761,10 @@ const keywords = [
   .lang-switch ul a:hover { background: rgba(0, 255, 204, 0.1); color: var(--color-primary); }
   .lang-switch ul a[aria-current="true"] { color: var(--color-primary); font-weight: 700; }
 
+  /* Bar variant: mobile-only, so switching language never requires the hamburger.
+     Desktop shows the .nav-actions instance instead. */
+  .lang-switch--bar { display: none; }
+
   /* On desktop the menu's children flow as direct nav items (logo · chatter · links) */
   .nav-menu {
     display: contents;
@@ -775,15 +794,15 @@ const keywords = [
     transition: transform 0.25s ease, opacity 0.2s ease;
   }
 
-  nav.open .nav-toggle span:nth-child(1) {
+  .site-header nav.open .nav-toggle span:nth-child(1) {
     transform: translateY(7px) rotate(45deg);
   }
 
-  nav.open .nav-toggle span:nth-child(2) {
+  .site-header nav.open .nav-toggle span:nth-child(2) {
     opacity: 0;
   }
 
-  nav.open .nav-toggle span:nth-child(3) {
+  .site-header nav.open .nav-toggle span:nth-child(3) {
     transform: translateY(-7px) rotate(-45deg);
   }
 
@@ -944,7 +963,7 @@ const keywords = [
   }
 
   /* Footer */
-  footer {
+  .site-footer {
     background: var(--color-surface);
     border-top: 1px solid var(--color-primary);
     padding: 0.5rem 2rem 1rem 2rem;
@@ -1034,11 +1053,11 @@ const keywords = [
     }
   }
 
-  footer > p:first-child {
+  .site-footer > p:first-child {
     margin-bottom: 1.5rem;
   }
 
-  footer > p:last-child {
+  .site-footer > p:last-child {
     margin-top: 1.5rem;
   }
 
@@ -1165,7 +1184,7 @@ const keywords = [
   /* Responsive */
   /* Hamburger / collapsible menu: small tablets and phones */
   @media (max-width: 1024px) {
-    nav {
+    .site-header nav {
       position: relative;
       flex-wrap: nowrap;
       justify-content: space-between;
@@ -1192,7 +1211,7 @@ const keywords = [
       z-index: 200;
     }
 
-    nav.open .nav-menu {
+    .site-header nav.open .nav-menu {
       display: flex;
     }
 
@@ -1207,6 +1226,16 @@ const keywords = [
     .search-shortcut {
       display: none;
     }
+
+    /* Language switcher lives in the bar on mobile (one tap, no hamburger);
+       hide the in-menu instance so it isn't duplicated. */
+    .lang-switch--bar {
+      display: block;
+      margin-left: auto;
+    }
+    .nav-menu .lang-switch {
+      display: none;
+    }
   }
 
   @media (max-width: 768px) {
@@ -1217,7 +1246,7 @@ const keywords = [
       font-size: 1.5rem;
     }
 
-    nav {
+    .site-header nav {
       padding: 1rem 1.5rem;
     }
 
@@ -1229,13 +1258,13 @@ const keywords = [
       padding: 2rem 1rem;
     }
 
-    footer {
+    .site-footer {
       padding: 0.5rem 2rem 6rem 2rem;
     }
   }
 
   @media (max-width: 480px) {
-    nav {
+    .site-header nav {
       padding: 0.75rem 1rem;
     }
 
@@ -1243,7 +1272,7 @@ const keywords = [
       font-size: 0.7rem;
     }
 
-    footer {
+    .site-footer {
       padding: 0.5rem 1.5rem 7rem 1.5rem;
     }
   }
@@ -1667,7 +1696,7 @@ const keywords = [
   setTimeout(initMiniBlackhole, 500);
 
   // Mobile hamburger menu
-  const navEl = document.querySelector('nav');
+  const navEl = document.querySelector('.site-header nav');
   const navToggle = document.getElementById('nav-toggle');
   const navMenu = document.getElementById('primary-nav');
   if (navEl && navToggle && navMenu) {

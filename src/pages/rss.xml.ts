@@ -11,7 +11,7 @@ export async function GET(context: APIContext) {
   return rss({
     title: 'Alexandru Pruteanu - DevOps Engineer Blog',
     description: 'Technical articles on DevOps, Cloud Infrastructure, Kubernetes, AWS, and Software Architecture',
-    site: context.site || 'https://alexpruteanu.cloud',
+    site: context.site || 'https://www.alexpruteanu.cloud',
     items: sortedPosts.map((post) => ({
       title: post.data.title,
       pubDate: post.data.date,

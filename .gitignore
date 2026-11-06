@@ -22,3 +22,6 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# outreach data — scraped leads/drafts must never be committed
+outreach/out/
