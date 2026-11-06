@@ -13,6 +13,12 @@ I'm building Chatter as a personal project: a privacy-focused messenger with a s
 
 The screenshots and recordings below come from my own Android devices. The conversations and channels were created for this demo. They are fictional activity, not customer messages or a claim about adoption.
 
+## Try the Android build
+
+**Android testers can install [Chatter v32 from GitHub Releases](https://github.com/xander1421/chatter-linux-client/releases/tag/v32).** Open the release, expand **Assets**, and download **app-release.apk** (approximately 107 MB). Open it on your Android device and, if prompted, allow your browser or file manager to install this app.
+
+The signed APK was built in GitHub Actions: [release build 42174232033](https://github.com/xander1421/chatter-linux-client/actions/runs/42174232033) completed successfully. This is an early testing build; the screenshots below show the builds used for the demos, so small interface differences are possible.
+
 ## A messenger you can actually use
 
 The current interface includes direct conversations, public channels, invite-only private channels, anonymous groups and Saved Messages. Reactions, quoted replies, typing indicators and read receipts make the conversation easier to follow. The home screen brings those different spaces together, with different visual markers for channels, private spaces and anonymous groups.
@@ -159,6 +165,6 @@ The next stage is about making the existing behavior dependable: reconnecting cl
 
 Chatter is in closed alpha, with platform support and the privacy implementation still developing. I am not claiming an independent security audit or suitability for high-risk communication at this stage.
 
-If you would like to follow the project or ask about alpha testing, visit the [Chatter page](/chatter-waitlist) or [contact me by email](mailto:alexpruteanu@hotmail.com?subject=Chatter%20alpha). The earlier engineering posts, including [the shared-client journey](/blog/from-react-to-rust-native-journey), explain more of the implementation.
+To try the Android build, download [v32 from GitHub Releases](https://github.com/xander1421/chatter-linux-client/releases/tag/v32). To follow the project or share testing feedback, visit the [Chatter page](/chatter-waitlist) or [contact me by email](mailto:alexpruteanu@hotmail.com?subject=Chatter%20alpha). The earlier engineering posts, including [the shared-client journey](/blog/from-react-to-rust-native-journey), explain more of the implementation.
 
 I'd especially like feedback on the everyday parts: what makes a conversation comfortable to use, how calls should fit into it, and what you would need before trying a new messenger with your own small group.
