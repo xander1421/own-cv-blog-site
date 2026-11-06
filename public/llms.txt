@@ -16,7 +16,7 @@
 
 ## Side project
 
-- [Chatter (side project)](https://alexpruteanu.cloud/projects/chatter): A privacy-first encrypted messenger Alexandru is building on the side — one Rust client (Slint) for every platform, running on Linux, Windows, and Android today with iOS and macOS planned, on a Go backend with Signal Protocol end-to-end encryption. In active development; it's how he stays hands-on across the whole stack, from cryptography to deployment.
+- [Chatter](https://alexpruteanu.cloud/chatter-waitlist): A messenger in closed alpha with a shared Rust/Slint client and Go backend. End-to-end encrypted private conversations, voice calls, and optional Shield metadata protection through Tor onion routing and blind-signed anonymous mailboxes. Android and Linux are the development focus; other platform builds vary in readiness. Public channels can carry service-readable content.
 
 ## Writing
 

@@ -77,7 +77,7 @@ export const home = {
     flagshipKicker: 'Side project, real stakes',
     flagshipHeading: "I'm building an end-to-end encrypted messenger, solo",
     flagshipLead:
-      "Chatter is a privacy-first encrypted messenger I build solo — one Rust client (Slint) running on Linux, Windows, and Android today, with iOS and macOS planned, on a Go backend with full Signal Protocol end-to-end encryption. When I say I understand your infrastructure deeply, this is the receipt: cryptography to deployment, one person, real correctness stakes. Most DevOps consultants can only host systems like this. I build them.",
+      "A messenger for everyday conversations, with encrypted private chats, voice calls and optional Shield metadata protection through Tor onion routing and anonymous mailboxes. Rust and Slint share the application core and interface across platform builds. Go, Protobuf/Connect RPC, HTTP/3/QUIC, PostgreSQL, Redis and Temporal power the service. Platform support varies; Android and Linux are the current development focus.",
     flagshipStat1Value: '1',
     flagshipStat1Label: ' codebase',
     flagshipStat2Value: 'Go',
@@ -86,8 +86,8 @@ export const home = {
     flagshipStat3Label: ' client',
     flagshipStat4Value: 'Signal',
     flagshipStat4Label: ' E2E',
-    flagshipStat5Value: 'In',
-    flagshipStat5Label: ' development',
+    flagshipStat5Value: "Closed alpha",
+    flagshipStat5Label: "",
     flagshipMoreCta: 'More on Chatter →',
     flagshipAllProjects: 'All projects →',
 
@@ -187,7 +187,7 @@ export const home = {
     flagshipKicker: 'Nebenprojekt, echte Anforderungen',
     flagshipHeading: 'Ich baue solo einen Ende-zu-Ende-verschlüsselten Messenger',
     flagshipLead:
-      'Chatter ist ein Privacy-First-Messenger mit Ende-zu-Ende-Verschlüsselung, den ich allein entwickle — ein Rust-Client (Slint), der heute auf Linux, Windows und Android läuft, mit iOS und macOS in Planung, auf einem Go-Backend mit vollständiger Signal-Protocol-Ende-zu-Ende-Verschlüsselung. Wenn ich sage, dass ich Ihre Infrastruktur tiefgehend verstehe, ist das der Beleg: von der Kryptografie bis zum Deployment, eine Person, mit echten Korrektheitsanforderungen. Die meisten DevOps-Berater können solche Systeme nur betreiben. Ich baue sie.',
+      "Ein Messenger für den Alltag: verschlüsselte private Chats, Sprachanrufe und optionaler Metadatenschutz durch Shield, Tor-Onion-Routing und anonyme Postfächer. Rust und Slint teilen Kern und Oberfläche zwischen Plattform-Builds. Go, Protobuf/Connect RPC, HTTP/3/QUIC, PostgreSQL, Redis und Temporal betreiben den Dienst. Android und Linux stehen derzeit im Fokus.",
     flagshipStat1Value: '1',
     flagshipStat1Label: ' Codebase',
     flagshipStat2Value: 'Go',
@@ -196,8 +196,8 @@ export const home = {
     flagshipStat3Label: ' Client',
     flagshipStat4Value: 'Signal',
     flagshipStat4Label: ' E2E',
-    flagshipStat5Value: 'In',
-    flagshipStat5Label: ' Entwicklung',
+    flagshipStat5Value: "Geschlossene Alpha",
+    flagshipStat5Label: "",
     flagshipMoreCta: 'Mehr über Chatter →',
     flagshipAllProjects: 'Alle Projekte →',
 
@@ -293,7 +293,7 @@ export const home = {
     flagshipKicker: 'Proyecto paralelo, retos reales',
     flagshipHeading: 'Estoy construyendo en solitario un mensajero cifrado de extremo a extremo',
     flagshipLead:
-      'Chatter es un mensajero cifrado y centrado en la privacidad que construyo yo solo — un único cliente en Rust (Slint) que hoy funciona en Linux, Windows y Android, con iOS y macOS previstos, sobre un backend en Go con cifrado de extremo a extremo completo mediante Signal Protocol. Cuando digo que entiendo tu infraestructura a fondo, esta es la prueba: de la criptografía al despliegue, una sola persona, con exigencias reales de corrección. La mayoría de los consultores DevOps solo saben hospedar sistemas así. Yo los construyo.',
+      "Un mensajero para el día a día: chats privados cifrados, llamadas de voz y protección opcional de metadatos con Shield, rutas onion de Tor y buzones anónimos. Rust y Slint comparten el núcleo y la interfaz entre compilaciones. Go, Protobuf/Connect RPC, HTTP/3/QUIC, PostgreSQL, Redis y Temporal impulsan el servicio. Android y Linux son el foco actual.",
     flagshipStat1Value: '1',
     flagshipStat1Label: ' base de código',
     flagshipStat2Value: 'Go',
@@ -302,8 +302,8 @@ export const home = {
     flagshipStat3Label: ' cliente',
     flagshipStat4Value: 'Signal',
     flagshipStat4Label: ' E2E',
-    flagshipStat5Value: 'En',
-    flagshipStat5Label: ' desarrollo',
+    flagshipStat5Value: "Alfa cerrada",
+    flagshipStat5Label: "",
     flagshipMoreCta: 'Más sobre Chatter →',
     flagshipAllProjects: 'Todos los proyectos →',
 
@@ -399,7 +399,7 @@ export const home = {
     flagshipKicker: 'Projeto paralelo, desafios reais',
     flagshipHeading: 'Estou construindo sozinho um mensageiro com criptografia de ponta a ponta',
     flagshipLead:
-      'O Chatter é um mensageiro criptografado e focado em privacidade que construo sozinho — um único cliente em Rust (Slint) que hoje roda no Linux, Windows e Android, com iOS e macOS planejados, sobre um backend em Go com criptografia de ponta a ponta completa via Signal Protocol. Quando digo que entendo sua infraestrutura a fundo, esta é a prova: da criptografia ao deploy, uma só pessoa, com exigências reais de correção. A maioria dos consultores DevOps só sabe hospedar sistemas assim. Eu os construo.',
+      "Um mensageiro para o dia a dia: chats privados criptografados, chamadas de voz e proteção opcional de metadados com Shield, roteamento onion do Tor e caixas anônimas. Rust e Slint compartilham o núcleo e a interface entre compilações. Go, Protobuf/Connect RPC, HTTP/3/QUIC, PostgreSQL, Redis e Temporal sustentam o serviço. Android e Linux são o foco atual.",
     flagshipStat1Value: '1',
     flagshipStat1Label: ' base de código',
     flagshipStat2Value: 'Go',
@@ -408,8 +408,8 @@ export const home = {
     flagshipStat3Label: ' cliente',
     flagshipStat4Value: 'Signal',
     flagshipStat4Label: ' E2E',
-    flagshipStat5Value: 'Em',
-    flagshipStat5Label: ' desenvolvimento',
+    flagshipStat5Value: "Alfa fechada",
+    flagshipStat5Label: "",
     flagshipMoreCta: 'Mais sobre o Chatter →',
     flagshipAllProjects: 'Todos os projetos →',
 
@@ -505,7 +505,7 @@ export const home = {
     flagshipKicker: 'Projet perso, vrais enjeux',
     flagshipHeading: 'Je construis en solo une messagerie chiffrée de bout en bout',
     flagshipLead:
-      "Chatter est une messagerie chiffrée et respectueuse de la vie privée que je développe seul — un seul client Rust (Slint) qui tourne aujourd'hui sur Linux, Windows et Android, avec iOS et macOS prévus, sur un backend Go avec un chiffrement de bout en bout complet via Signal Protocol. Quand je dis que je comprends votre infrastructure en profondeur, en voici la preuve : de la cryptographie au déploiement, une seule personne, avec de vraies exigences de correction. La plupart des consultants DevOps savent seulement héberger de tels systèmes. Moi, je les construis.",
+      "Une messagerie du quotidien : échanges privés chiffrés, appels vocaux et protection optionnelle des métadonnées par Shield, routage onion Tor et boîtes anonymes. Rust et Slint partagent le cœur et l’interface entre les builds. Go, Protobuf/Connect RPC, HTTP/3/QUIC, PostgreSQL, Redis et Temporal assurent le service. Android et Linux sont les priorités actuelles.",
     flagshipStat1Value: '1',
     flagshipStat1Label: ' base de code',
     flagshipStat2Value: 'Go',
@@ -514,8 +514,8 @@ export const home = {
     flagshipStat3Label: ' client',
     flagshipStat4Value: 'Signal',
     flagshipStat4Label: ' E2E',
-    flagshipStat5Value: 'En',
-    flagshipStat5Label: ' développement',
+    flagshipStat5Value: "Alpha fermée",
+    flagshipStat5Label: "",
     flagshipMoreCta: 'En savoir plus sur Chatter →',
     flagshipAllProjects: 'Tous les projets →',
 
@@ -611,7 +611,7 @@ export const home = {
     flagshipKicker: 'Proiect personal, mize reale',
     flagshipHeading: 'Construiesc de unul singur un mesager cu criptare end-to-end',
     flagshipLead:
-      'Chatter este un mesager criptat, axat pe confidențialitate, pe care îl construiesc de unul singur — un singur client Rust (Slint) care rulează astăzi pe Linux, Windows și Android, cu iOS și macOS planificate, pe un backend Go cu criptare end-to-end completă prin Signal Protocol. Când spun că vă înțeleg infrastructura în profunzime, aceasta este dovada: de la criptografie la deployment, o singură persoană, cu cerințe reale de corectitudine. Majoritatea consultanților DevOps știu doar să găzduiască astfel de sisteme. Eu le construiesc.',
+      "Un mesager pentru fiecare zi: conversații private criptate, apeluri vocale și protecție opțională a metadatelor prin Shield, rutare onion Tor și căsuțe anonime. Rust și Slint partajează nucleul și interfața între build-uri. Go, Protobuf/Connect RPC, HTTP/3/QUIC, PostgreSQL, Redis și Temporal susțin serviciul. Android și Linux sunt prioritățile actuale.",
     flagshipStat1Value: '1',
     flagshipStat1Label: ' bază de cod',
     flagshipStat2Value: 'Go',
@@ -620,8 +620,8 @@ export const home = {
     flagshipStat3Label: ' client',
     flagshipStat4Value: 'Signal',
     flagshipStat4Label: ' E2E',
-    flagshipStat5Value: 'În',
-    flagshipStat5Label: ' dezvoltare',
+    flagshipStat5Value: "Alfa închisă",
+    flagshipStat5Label: "",
     flagshipMoreCta: 'Mai multe despre Chatter →',
     flagshipAllProjects: 'Toate proiectele →',
 

@@ -3,7 +3,7 @@ import { z } from 'zod';
 import { glob } from 'astro/loaders';
 
 const blogCollection = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/blog' }),
+  loader: glob({ pattern: '**/*.md', base: './src/content/blog', retainBody: true }),
   schema: z.object({
     title: z.string(),
     // Short title for <title>/og:title only (search results truncate ~60 chars);

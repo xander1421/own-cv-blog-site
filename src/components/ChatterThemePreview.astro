@@ -1,0 +1,13 @@
+---
+import '../styles/chatter-theme-preview.css';
+interface Props { registerOnly?: boolean; variant?: 'phone' | 'tablet'; }
+const { registerOnly = false, variant = 'phone' } = Astro.props;
+const tablet = variant === 'tablet';
+const prefix = tablet ? 'tablet' : 'home';
+---
+{!registerOnly && <chatter-theme-preview data-light-src={`/images/chatter/${prefix}-light.webp`}>
+  <img src={`/images/chatter/${prefix}-dark.webp`} alt={tablet ? 'Chatter tablet development build in dark mode, showing a fictional private mesh conversation' : 'Chatter home screen in dark mode, with fictional chats and channels'} width={tablet ? 2960 : 1440} height={tablet ? 1848 : 3120} loading="lazy" decoding="async" />
+</chatter-theme-preview>}
+<script>
+  import '../scripts/chatter-theme-preview';
+</script>

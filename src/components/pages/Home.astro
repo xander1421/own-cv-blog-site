@@ -197,9 +197,6 @@ const faqSchema = {
         </ul>
       </div>
 
-      <div class="hero-art" aria-hidden="true">
-        <img src="/images/site/home-hero-tall.webp" alt="" width="640" height="1120" loading="lazy" decoding="async" />
-      </div>
     </div>
   </section>
 
@@ -439,81 +436,6 @@ const faqSchema = {
     max-width: 820px;
     margin: 0 auto;
     text-align: center;
-  }
-
-  .hero-art {
-    display: none;
-  }
-
-  /* Split hero on wide screens: pitch left, artifact right */
-  @media (min-width: 1024px) {
-    .hero-content {
-      max-width: 1100px;
-      display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      align-items: center;
-      gap: 3rem;
-      text-align: left;
-    }
-
-    .hero-art {
-      display: block;
-      position: relative;
-      align-self: stretch;
-    }
-
-    .hero-art::before {
-      content: '';
-      position: absolute;
-      inset: 8%;
-      background: radial-gradient(circle, rgba(0, 255, 204, 0.14), transparent 70%);
-      filter: blur(28px);
-    }
-
-    .hero-art img {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 12px;
-      border: 1px solid rgba(0, 255, 204, 0.18);
-    }
-
-    .hero-content .headline :global(.nowrap) {
-      white-space: nowrap;
-    }
-
-    .hero-content .subhead {
-      margin: 0 0 2.5rem;
-    }
-
-    .hero-content .cta-row {
-      align-items: flex-start;
-    }
-
-    .hero-content .headline {
-      font-size: clamp(2.1rem, 2.6vw, 2.6rem);
-    }
-
-    .hero-content .proof-stats {
-      justify-content: flex-start;
-      gap: 1.25rem;
-    }
-
-    .hero-content .proof-stats li {
-      align-items: flex-start;
-      text-align: left;
-      flex: 1 1 0;
-      max-width: none;
-    }
-
-    .hero-content .proof-stats strong {
-      font-size: 2rem;
-    }
-
-    .hero-content .service-pills {
-      justify-content: flex-start;
-    }
   }
 
   .kicker {

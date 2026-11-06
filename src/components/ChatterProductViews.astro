@@ -1,0 +1,29 @@
+---
+import ChatterThemePreview from './ChatterThemePreview.astro';
+interface Props { compact?: boolean; }
+const { compact = false } = Astro.props;
+---
+<div class:list={['product-views', { compact }]} aria-label="Real Chatter app screens; scroll horizontally on small screens to see both" role="region" tabindex="0">
+  <figure>
+    <ChatterThemePreview />
+    <figcaption>Conversations, in one place</figcaption>
+  </figure>
+  <figure>
+    <a href="/images/chatter/call-with-chat.webp" aria-label="Open the full connected call screenshot">
+      <img src="/images/chatter/call-with-chat.webp" alt="A real connected voice call above the demo conversation in Chatter" width="1440" height="3120" loading="eager" />
+    </a>
+    <figcaption>A call, with the chat still open</figcaption>
+  </figure>
+</div>
+<style>
+  .product-views { display: flex; align-items: flex-start; justify-content: center; gap: 48px; padding: 40px 32px 24px; background: #171c1c; border: 1px solid #ffffff0f; border-radius: 20px; }
+  figure { margin: 0; width: min(40%, 264px); min-width: 0; }
+  a { display: block; border: 1px solid #ffffff1f; border-radius: 20px; overflow: hidden; background: #000; }
+  img { display: block; width: 100%; height: auto; }
+  figure:nth-child(2) { padding-top: 48px; }
+  figcaption { margin: 16px 0 0; color: #a2aaa7; font: 13px/1.5 var(--font-mono); }
+  .compact { padding: 24px; gap: 24px; }
+  .compact figure { width: 47%; }
+  a:focus-visible { outline: 2px solid #8ed5bd; outline-offset: 4px; }
+  @media (max-width: 640px) { .product-views, .product-views.compact { gap: 24px; padding: 24px; border-radius: 16px; justify-content: flex-start; overflow-x: auto; scroll-snap-type: x mandatory; } figure, .compact figure { flex: 0 0 min(100%, 280px); width: min(100%, 280px); scroll-snap-align: center; } a { border-radius: 16px; } figcaption { font-size: 13px; } }
+</style>

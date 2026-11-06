@@ -1,0 +1,153 @@
+---
+import ChatterThemePreview from './ChatterThemePreview.astro';
+import type { Lang } from '../i18n/ui';
+interface Props { lang: Lang; showTechnical?: boolean; }
+const { lang, showTechnical = true } = Astro.props;
+const article = '/blog/chatter-closed-alpha-rust-slint-messenger';
+const translations = {
+  en: '',
+  de: 'Die ausführliche Projektvorstellung ist derzeit auf Englisch verfügbar.',
+  es: 'La presentación detallada del proyecto está disponible actualmente en inglés.',
+  pt: 'A apresentação detalhada do projeto está disponível atualmente em inglês.',
+  fr: 'La présentation détaillée du projet est actuellement disponible en anglais.',
+  ro: 'Prezentarea detaliată a proiectului este disponibilă momentan în engleză.',
+};
+const shots = [
+  { file: 'home-dark', title: 'Your conversations, together', text: 'Direct chats, public channels, private spaces and anonymous groups in one home screen.', alt: 'Chatter home screen with fictional direct chats, public channels, private channels and anonymous groups' },
+  { file: 'conversation', title: 'Replies that keep their context', text: 'Reactions, quoted replies, typing indicators and read receipts.', alt: 'Fictional weekend-planning conversation showing reactions and a quoted reply' },
+  { file: 'call-with-chat', title: 'Stay in the conversation', text: 'A connected voice call can stay above the conversation or expand to fill the screen.', alt: 'Connected voice call with verification emojis and controls above a fictional conversation' },
+  { file: 'media-album', title: 'Photos, GIFs and albums', text: 'Text with media, animated attachments and multiple photos under one caption. AI-generated demo pictures inside the real app.', alt: 'Chatter Saved Messages with a captioned photo, a GIF and a two-photo album' },
+  { file: 'privacy', title: 'Choose what you share', text: 'Profile visibility, username discovery, read receipts, typing indicators and optional Shield mode.', alt: 'Privacy controls in the current Chatter Android build' },
+];
+const stack = [
+  ['Client', 'Rust + Slint: shared application logic and interface, with platform-specific adapters.'],
+  ['Private messaging', 'Signal Protocol through libsignal; SQLCipher for local message history.'],
+  ['Transport', 'HTTP/3 over QUIC for eligible direct connections, with HTTP/2 over TCP fallback. Shield uses Tor onion routing instead of direct QUIC.'],
+  ['Mesh', 'Nearby Bluetooth LE messaging; Noise-encrypted private mesh messages, public radio channels and optional Nostr relays.'],
+  ['Calls', 'LiveKit + WebRTC, with native audio and media integration.'],
+  ['Backend', 'Go + Protobuf/Connect RPC, PostgreSQL, Redis and Temporal.'],
+  ['Metadata protection', 'Optional Shield mode, Tor onion routing and blind-signed anonymous mailboxes.'],
+  ['Deployment', 'OVHcloud in France, containers, systemd and infrastructure as code.'],
+];
+---
+<section id="inside-chatter" class="chatter-details" aria-label="Chatter app details" lang="en">
+  {lang !== 'en' && <p class="translation-note" lang={lang}>{translations[lang]}</p>}
+  <header>
+    <p class="section-label">From the current build</p>
+    <h2>A closer look at Chatter</h2>
+    <p class="intro">These captures come from my own Android phones. The conversations and channels are fictional demo content. Chatter is in closed alpha.</p>
+  </header>
+  <div class="gallery">
+    {shots.map((shot) => (
+      <figure>
+        {shot.file === 'home-dark' ? <div class="home-preview"><ChatterThemePreview /></div> : <a class="screen-link" href={`/images/chatter/${shot.file}.webp`} aria-label={`Open full screenshot: ${shot.title}`}>
+          <img src={`/images/chatter/${shot.file}.webp`} alt={shot.alt} width="1440" height="3120" loading="lazy" decoding="async" />
+        </a>}
+        <figcaption><h3>{shot.title}</h3><p>{shot.text}</p></figcaption>
+      </figure>
+    ))}
+  </div>
+  <section class="tablet-showcase" aria-label="Chatter on a tablet">
+    <h3>More room on a tablet</h3>
+    <p>The landscape layout keeps the conversation list beside your messages. Captured on a Samsung Tab S9 Ultra development build, with a fictional private mesh conversation.</p>
+    <ChatterThemePreview variant="tablet" />
+  </section>
+  <section class="tablet-showcase" aria-label="Mesh messaging">
+    <h3>Mesh chat, without the Chatter server</h3>
+    <p>Nearby devices can exchange messages over Bluetooth Low Energy. I disabled Wi-Fi and mobile data on my phone and tablet, then sent the message shown in this recording. This is a real nearby-device exchange, not a multi-hop range test.</p>
+    <video controls playsinline preload="none" poster="/images/chatter/mesh-private.webp" width="720" height="1480" style="display:block;width:min(100%,360px);height:auto;margin:1.5rem auto" aria-label="A private Bluetooth mesh message arriving with internet disabled">
+      <source src="/videos/chatter/mesh.mp4" type="video/mp4" />
+    </video>
+    <p>Public #mesh channels are readable by nearby participants. Private mesh messages use Noise encryption; nicknames are self-asserted until you verify the peer. Optional Nostr relays require internet. Mesh and Tor-based Shield are separate features.</p>
+  </section>
+  <div class="demos">
+    <figure>
+      <video controls playsinline preload="none" poster="/images/chatter/media-album.webp" width="720" height="1480" aria-label="Photos, animated GIF and album in the real app">
+        <source src="/videos/chatter/media.mp4" type="video/mp4" />
+      </video>
+      <figcaption><h3>More than text</h3><p>A captioned photo, GIF and two-photo album. Real app recording with AI-generated demo attachments.</p></figcaption>
+    </figure>
+    <figure>
+      <video controls playsinline preload="none" poster="/images/chatter/conversation.webp" width="720" height="1486" aria-label="Real-device message delivery demo">
+        <source src="/videos/chatter/messaging.mp4" type="video/mp4" />
+        <a href="/videos/chatter/messaging.mp4">Download the messaging demo</a>
+      </video>
+      <figcaption><h3>A message arrives</h3><p>Typing indicator, incoming message and conversation movement. Silent screen recording.</p></figcaption>
+    </figure>
+    <figure>
+      <video controls playsinline preload="none" poster="/images/chatter/voice-call.webp" width="720" height="1486" aria-label="Real connected voice call switching between full-screen and compact views">
+        <source src="/videos/chatter/calling.mp4" type="video/mp4" />
+        <a href="/videos/chatter/calling.mp4">Download the call demo</a>
+      </video>
+      <figcaption><h3>A call without losing your place</h3><p>Switching between full-screen and compact views during a connected voice call. Silent screen recording.</p></figcaption>
+    </figure>
+  </div>
+  {showTechnical && <>
+    <section class="technical">
+      <h2>One shared client, a build for each platform</h2>
+      <p>Rust owns the messaging, encryption and local storage. Slint provides a shared interface that adapts to phone, tablet and desktop layouts. Platform adapters handle notifications, permissions, application lifecycle, cameras and audio.</p>
+      <p>This is a shared codebase compiled for each target, with native platform integration. It is not one executable that runs everywhere, and feature coverage varies by build.</p>
+      <dl>{stack.map(([label, text]) => <div><dt>{label}</dt><dd>{text}</dd></div>)}</dl>
+      <div class="table-scroll" role="region" aria-label="Platform readiness" tabindex="0">
+        <table>
+          <caption>Platform readiness · closed alpha</caption>
+          <thead><tr><th scope="col">Platform</th><th scope="col">Current position</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Android</th><td>Current closed-alpha device testing. The captures here are from real phones.</td></tr>
+            <tr><th scope="row">Linux</th><td>Active desktop development alongside Android.</td></tr>
+            <tr><th scope="row">Windows</th><td>Build support exists. Feature coverage varies; the cross-build configuration excludes LiveKit calls.</td></tr>
+            <tr><th scope="row">macOS</th><td>Desktop packaging exists; broader device validation is still needed.</td></tr>
+            <tr><th scope="row">iOS</th><td>App shell and Rust integration exist; the shared UI port is in progress.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <section class="technical">
+      <h2>Encryption and metadata protection</h2>
+      <p>Private conversations require end-to-end encryption: clients encrypt and decrypt the content, while the backend handles delivery. Public channels can send service-readable content; TLS still protects the network connection.</p>
+      <p><strong>Shield adds metadata protection.</strong> When enabled and connected, it routes the client’s RPC traffic through Tor to the configured onion service and carries attachment transfers over Tor. Anonymous mailboxes use blind-signed tokens to reduce linkage between account authentication and mailbox activity.</p>
+      <p>Shield suspends direct account push and restricts third-party media fetches to avoid bypassing that routing. It is optional and resets on app restart. Authenticated operations can still identify an account, and traffic timing, volume and the size of the anonymity set remain relevant. This is metadata protection, not a claim of zero metadata or immunity to traffic analysis.</p>
+      <p>The app is still in closed alpha. An independent security audit is not being claimed.</p>
+    </section>
+  </>}
+  <footer class="details-footer">
+    <a href={article}>Read the full development update →</a>
+    <a href="mailto:alexpruteanu@hotmail.com?subject=Chatter%20alpha">Ask about alpha testing →</a>
+  </footer>
+</section>
+<style>
+  .chatter-details { position: relative; z-index: 2; max-width: 1120px; margin: 0 auto; padding: 64px 0; color: #edf0ee; }
+  header { max-width: 760px; margin-bottom: 40px; }
+  .section-label { color: #8ed5bd; font-family: var(--font-mono); font-size: .85rem; }
+  h2 { font-size: clamp(1.7rem, 3.5vw, 2.5rem); line-height: 1.2; margin: .75rem 0 1.25rem; letter-spacing: -.025em; font-weight: 500; }
+  p { line-height: 1.75; color: #b4bcb8; }
+  .intro { font-size: 1.1rem; }
+  .translation-note { padding: .8rem 1rem; border-left: 2px solid #70d6c1; margin-bottom: 2rem; font-size: .9rem; }
+  .gallery { display: grid; max-width: 880px; margin: 0 auto; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px; }
+  figure { margin: 0; min-width: 0; }
+  .gallery figure { padding: 32px; border-radius: 16px; background: #171c1c; border: 1px solid #ffffff0f; }
+  .home-preview { max-width: 300px; margin: 0 auto; }
+  .screen-link { display: block; max-width: 300px; margin: 0 auto; border: 1px solid #38464a; border-radius: 18px; overflow: hidden; background: #080d0f; }
+  .screen-link img { display: block; width: 100%; height: auto; }
+  h3 { font-size: 18px; font-weight: 500; line-height: 1.4; margin: 1rem 0 .5rem; color: #edf0ee; }
+  figcaption p { font-size: 15px; margin: 0; }
+  .tablet-showcase { max-width: 1000px; margin: 64px auto; }
+  .tablet-showcase > p { max-width: 760px; margin-bottom: 24px; }
+  .demos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 3rem; margin: 4rem auto; max-width: 740px; }
+  video { display: block; width: 100%; height: auto; border: 1px solid #38464a; border-radius: 18px; background: #000; }
+  .technical { max-width: 820px; margin: 4rem auto 0; }
+  dl { margin: 2rem 0; }
+  dl div { display: grid; grid-template-columns: 155px 1fr; gap: 1.2rem; padding: 1rem 0; border-bottom: 1px solid #ffffff14; }
+  dt { font-weight: 600; color: #edf0ee; }
+  dd { margin: 0; color: #b4bcb8; line-height: 1.6; }
+  .table-scroll { overflow-x: auto; margin-top: 2.5rem; }
+  table { width: 100%; border-collapse: collapse; text-align: left; font-size: .95rem; }
+  caption { text-align: left; font-weight: 600; margin-bottom: 1rem; }
+  th, td { border-bottom: 1px solid #ffffff14; padding: .9rem; vertical-align: top; }
+  td { color: #b4bcb8; line-height: 1.6; }
+  .details-footer { display: flex; flex-wrap: wrap; gap: 1.5rem; margin-top: 3rem; }
+  a { color: #8ed5bd; text-underline-offset: .2em; }
+  a:focus-visible, video:focus-visible, .table-scroll:focus-visible { outline: 2px solid #8ed5bd; outline-offset: 5px; }
+  @media (max-width: 850px) { .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 520px) { .chatter-details { padding: 48px 0; } .gallery { grid-template-columns: 1fr; gap: 32px; } .gallery figure { padding: 24px; } .demos { grid-template-columns: 1fr; max-width: 300px; gap: 2.5rem; } dl div { grid-template-columns: 1fr; gap: .4rem; } }
+</style>

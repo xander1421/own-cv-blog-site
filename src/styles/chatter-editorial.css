@@ -1,0 +1,29 @@
+/* Chatter presentation direction informed by unslop, Damir Sokolovsky
+   (@heydamir), CC BY 4.0: https://heydamir.design/unslop */
+/* Keep the site's Share Tech Mono typography and Matrix background.
+   The opt-in class controls only the Chatter content layout. */
+body.quiet-page > header { background: #111415; border-bottom: 1px solid #ffffff14; box-shadow: none; }
+body.quiet-page nav { max-width: 1200px; padding: 16px 32px; }
+body.quiet-page .logo, body.quiet-page .logo *, body.quiet-page nav a { color: #b4bcb8; text-shadow: none; animation: none; }
+body.quiet-page .logo { font-size: 14px; }
+body.quiet-page .logo::before { background: #8ed5bd; box-shadow: none; }
+body.quiet-page .nav-links a { font-family: var(--font-mono); font-size: 14px; letter-spacing: 0; }
+body.quiet-page .nav-links a:hover { color: #edf0ee; text-shadow: none; }
+body.quiet-page .nav-links a::after { display: none; }
+body.quiet-page .reading-progress-bar { background: #8ed5bd; box-shadow: none; height: 2px; }
+body.quiet-page .chatter-nav-link { color: #b4bcb8; background: transparent; border-color: #ffffff24; box-shadow: none; }
+body.quiet-page main { padding: 48px 32px 80px; }
+body.quiet-page > footer { background: #111415; border-top: 1px solid #ffffff14; color: #a2aaa7; padding: 24px; }
+body.quiet-page .back-to-top { box-shadow: none; background: #1b2020; border-color: #ffffff24; color: #b4bcb8; }
+body.quiet-page a:focus-visible { outline: 2px solid #8ed5bd; outline-offset: 4px; }
+@media (max-width: 640px) {
+  body.quiet-page nav { padding: 16px 24px; }
+  body.quiet-page main { padding: 32px 24px 64px; }
+}
+body.quiet-page .case-head h1 { background: none; color: #edf0ee; -webkit-text-fill-color: currentColor; font-weight: 500; text-shadow: none; }
+body.quiet-page .case .kicker { color: #a2aaa7; text-transform: none; letter-spacing: 0; }
+body.quiet-page .case-stats li { background: #171c1c; border-color: #ffffff14; }
+body.quiet-page .case-stats strong { color: #edf0ee; font-weight: 500; }
+body.quiet-page .case-block h2, body.quiet-page .case-cta h2 { color: #edf0ee; font-weight: 500; }
+body.quiet-page .case .lead, body.quiet-page .case-list li { color: #b4bcb8; }
+

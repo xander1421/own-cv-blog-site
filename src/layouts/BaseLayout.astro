@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import { SERVICES } from '../data/services';
 import Analytics from '@vercel/analytics/astro';
+import '../styles/chatter-editorial.css';
 import { getLangFromUrl, useTranslations, getAlternates, getLocalizedPath, ogLocale, languages, stripLangPrefix } from '../i18n/ui';
 
 const lang = getLangFromUrl(Astro.url);
@@ -19,6 +20,7 @@ export interface Props {
   // Set true only on pages that have real localized versions (home, services).
   // Gates hreflang tags + the language switcher target so we never point at 404s.
   localized?: boolean;
+  quiet?: boolean;
 }
 
 const {
@@ -30,7 +32,8 @@ const {
   modifiedTime,
   tags = [],
   author = "Alexandru Pruteanu",
-  localized = false
+  localized = false,
+  quiet = false
 } = Astro.props;
 
 // hreflang alternates for localized pages; the switcher targets the current page
@@ -180,7 +183,7 @@ const keywords = [
       @media(max-width:480px){footer{padding:0.5rem 1.5rem 7rem 1.5rem}}
     </style>
   </head>
-  <body>
+  <body class:list={{ 'quiet-page': quiet }}>
     <!-- Reading / scroll progress bar (site-wide) -->
     <div id="reading-progress" class="reading-progress-bar"></div>
 
