@@ -96,3 +96,26 @@ The static output will be in `./dist/` and ready to deploy.
 ---
 
 Built with ❤️ and ☕
+
+## Chatter product and team-pilot pages
+
+- `/chatter-waitlist/` keeps the general product overview and real-device demos.
+- `/chatter-teams/` explains the supported team pilot and its hosting/support terms.
+- `/chatter-teams/deployment/` is the deployment and handover brief for a technical lead.
+- `outreach/chatter-pitch.md` contains audience-specific wording and verified claim boundaries.
+
+The inquiry form builds an email draft locally or copies the request for webmail.
+It does not submit to a backend, store entries or report that a request was sent.
+The recipient and subject are fixed in `src/data/chatterPilot.ts`. Build/SEO and
+form checks before release:
+
+```bash
+npm run build
+npm run astro -- check
+npm run seo
+npm run check:pilot
+```
+
+The existing GitHub `main` branch is connected to Vercel production. Verify the
+public page and inquiry links after a site release, then update any outreach
+system's destination URL. Never point an active campaign at an unpublished page.

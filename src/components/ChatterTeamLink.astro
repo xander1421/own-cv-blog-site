@@ -1,0 +1,26 @@
+---
+import type { Lang } from '../i18n/ui';
+interface Props { lang?: Lang; compact?: boolean; }
+const { lang = 'en', compact = false } = Astro.props;
+const text = {
+  en: ['For your team', 'A 60-day self-hosted evaluation for two small teams. Setup and maintenance are included; you cover VM hosting.', 'Explore the team pilot'],
+  de: ['Für Ihr Team', 'Chatter auf Ihrer eigenen Infrastruktur, mit Einrichtung und Wartung direkt durch den Entwickler.', 'Team-Pilot ansehen (Englisch)'],
+  es: ['Para tu equipo', 'Chatter en infraestructura que controlas, con despliegue y mantenimiento a cargo de su desarrollador.', 'Ver el piloto para equipos (inglés)'],
+  pt: ['Para sua equipe', 'Chatter na infraestrutura que você controla, com implantação e manutenção pelo próprio desenvolvedor.', 'Conhecer o piloto (inglês)'],
+  fr: ['Pour votre équipe', 'Chatter sur une infrastructure que vous contrôlez, avec déploiement et maintenance assurés par son développeur.', 'Découvrir le pilote (en anglais)'],
+  ro: ['Pentru echipa ta', 'Chatter pe infrastructura pe care o controlezi, cu instalare și mentenanță asigurate direct de dezvoltator.', 'Vezi programul pilot (în engleză)'],
+}[lang];
+---
+<aside class:list={['team-link', { compact }]} aria-label={text[0]}>
+  <div><h2>{text[0]}</h2>{!compact && <p>{text[1]}</p>}</div>
+  <a href="/chatter-teams/">{text[2]} <span aria-hidden="true">→</span></a>
+</aside>
+<style>
+  .team-link { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 28px 0; border-block: 1px solid #ffffff20; margin-block: 36px; }
+  h2 { font-size: 20px; font-weight: 500; color: #edf0ee; margin: 0 0 8px; }
+  p { max-width: 640px; color: #b4bcb8; line-height: 1.7; margin: 0; }
+  a { flex-shrink: 0; color: #8ed5bd; text-underline-offset: 4px; }
+  .compact { margin-block: 20px 0; padding-block: 16px; align-items: baseline; }
+  .compact h2 { font-size: 15px; margin: 0; }
+  @media (max-width: 700px) { .team-link { align-items: flex-start; flex-direction: column; gap: 12px; } }
+</style>

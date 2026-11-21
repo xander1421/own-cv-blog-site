@@ -1,0 +1,105 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ChatterPilotRequest from '../components/ChatterPilotRequest.astro';
+import { chatterPilot } from '../data/chatterPilot';
+const contact = '#pilot-request';
+const architecture = [
+  ['Native client', 'Rust + Slint share the client core and interface. Linux and Android are the current development focus; other platforms have different levels of readiness.'],
+  ['Private messages', 'Signal Protocol through libsignal for private conversations, with SQLCipher for local message history. Public channels have different content-visibility rules.'],
+  ['Delivery privacy', 'Sealed Sender is used on direct-message and anonymous-group paths. Server-managed channel posts remain identified; this is not a zero-metadata system.'],
+  ['Service', 'Go + Protobuf/Connect RPC, with PostgreSQL, Redis, Temporal, object storage and supporting services. Calls use LiveKit and WebRTC.'],
+  ['Operations', 'Containers, systemd and infrastructure as code. We agree the VM, networking, backup and restore arrangements before deployment.'],
+];
+---
+<BaseLayout title="Chatter for Teams — Self-Hosted Pilot" description="Try Chatter on your own infrastructure: a native Rust and Slint client, encrypted private conversations, and deployment and maintenance handled by its developer." image="/images/blog/chatter-closed-alpha.webp" quiet>
+  <article class="teams">
+    <header class="hero">
+      <div class="hero-copy"><p class="eyebrow">Chatter for teams · supported pilot</p>
+      <h1>Private team chat.<br />Your infrastructure.</h1>
+      <p class="lead">Messaging, file sharing and calls on your own server, with a native Linux client. I handle deployment and maintenance while your team evaluates Chatter.</p>
+      <div class="actions"><a class="primary" href={contact}>Discuss a team pilot <span aria-hidden="true">→</span></a><a href="#architecture">See how it runs</a></div>
+      <p class="offer-note">Two 60-day pilots · ideally 5–15 people<br />Setup and maintenance included; you cover hosting.</p><p class="status">Early software. We agree the device scope and handover before deploying.</p></div>
+      <figure class="hero-preview"><a href="/images/chatter/conversation.webp"><img src="/images/chatter/conversation.webp" alt="Chatter's native Android conversation interface with fictional demo messages, replies and reactions" width="720" height="1486" loading="eager" /></a><figcaption>From the shared client: an Android development build with fictional messages. Linux and Android are the current focus.</figcaption></figure>
+    </header>
+
+    <section class="intro split" aria-labelledby="fit-title">
+      <div><p class="eyebrow">Who it is for</p><h2 id="fit-title">Small teams with a reason<br />to run their own chat.</h2></div>
+      <div><p>For engineering teams that prefer a native Linux client and control over where their communication runs. For IT providers exploring privately hosted communication for their clients.</p><p>The pilot is a chance to test the actual workflow, device support and operating requirements together. We agree what to evaluate before your team starts.</p></div>
+    </section>
+
+    <section class="pilot" aria-labelledby="pilot-title">
+      <div class="section-head"><p class="eyebrow">The offer</p><h2 id="pilot-title">Two small teams.<br />A 60-day pilot.</h2><p>Ideally 5–15 people using Chatter for a real project or internal team communication. Availability and the start date are confirmed together before deployment.</p></div>
+      <dl class="terms">
+        <div><dt>You provide</dt><dd>A suitable VM and its hosting cost, supported test devices, regular use and a short weekly feedback conversation.</dd></div>
+        <div><dt>I handle</dt><dd>Setup, updates, maintenance and bug fixes during the pilot, without a service fee. You work directly with me.</dd></div>
+        <div><dt>Before we start</dt><dd>We agree the device and feature scope, VM requirements, support expectations, backups and the handover process. Any optional paid maintenance after the pilot is discussed up front, with no obligation to continue.</dd></div>
+        <div><dt>When the pilot ends</dt><dd>You retain the infrastructure. You can take over operations with another administrator or agree ongoing support with me. Deployment documentation and backup/restore steps form part of the handover.</dd></div>
+      </dl>
+    </section>
+
+    <section id="architecture" class="architecture" aria-labelledby="architecture-title">
+      <div class="section-head"><p class="eyebrow">For the technical team</p><h2 id="architecture-title">A native client.<br />A documented service stack.</h2><p>The client uses Rust and Slint rather than an Electron/Chromium interface. Self-hosting covers the backend and its supporting services; we walk through those requirements before a pilot.</p></div>
+      <dl class="stack">{architecture.map(([title, text]) => <div><dt>{title}</dt><dd>{text}</dd></div>)}</dl>
+      <p><a href={chatterPilot.briefPath}>Read the deployment and handover brief →</a></p>
+      <p class="note">Private conversations use end-to-end encryption. Public channels can carry service-readable content. Optional Shield routes supported traffic through Tor and anonymous mailboxes to reduce some metadata exposure; it does not eliminate metadata or traffic analysis. The app is still developing, and an independent security audit is not being claimed.</p>
+    </section>
+
+    <section class="evaluation" aria-labelledby="evaluation-title"><div class="section-head"><p class="eyebrow">What a useful pilot looks like</p><h2 id="evaluation-title">Test the work your team actually does.</h2></div><ol><li><strong>Start small.</strong> Agree the devices, private chats, file sharing and call workflows you want to evaluate.</li><li><strong>Use it for a real project.</strong> Share a short weekly report on delivery, notifications, calls, usability and the operating work involved.</li><li><strong>Make a clear decision.</strong> Review the results, restore a backup in an isolated environment and agree a handover or optional continued support.</li></ol></section>
+
+    <section class="demo split" aria-labelledby="demo-title">
+      <div><p class="eyebrow">See the current build</p><h2 id="demo-title">Real app.<br />Real device captures.</h2><p>The demo conversations are fictional. These captures show Android development builds, rather than a finished interface for every platform.</p><a href="/chatter-waitlist/#inside-chatter">Watch the messaging and call demos →</a><a href="/blog/chatter-closed-alpha-rust-slint-messenger/">Read the development and architecture notes →</a></div>
+      <figure><video controls playsinline preload="none" poster="/images/chatter/voice-call.webp" width="720" height="1486" aria-label="Real-device Chatter voice-call interface demonstration"><source src="/videos/chatter/calling.mp4" type="video/mp4" /><a href="/videos/chatter/calling.mp4">Download the call demo</a></video><figcaption>A connected call in an Android development build, with fictional demo conversations. This demonstrates the interface; device and network compatibility are checked during the pilot.</figcaption></figure>
+    </section>
+
+    <section class="questions" aria-labelledby="questions-title">
+      <h2 id="questions-title">Before you commit a team</h2>
+      <details><summary>Can we start a pilot, or is this a waitlist?</summary><p>This page is a direct conversation about a pilot. Email your team size, device/OS mix and what you want to test. I confirm compatibility, availability and deployment scope with you. This is a pilot inquiry, not an automatic signup or a place in a consumer queue.</p></details>
+      <details><summary>What about employee access, retention and compliance?</summary><p>We review onboarding, offboarding, access and data-handling needs before agreeing a pilot. Do not assume enterprise SSO, centralized device management, legal hold, retention policies or compliance certification are included; those need a specific capability review.</p></details>
+      <details><summary>Can we run it without keeping you on retainer?</summary><p>Yes. The pilot includes an agreed operational handover: deployment configuration, an inventory of services and credentials under your control, and backup/restore instructions for your administrator. We agree the scope and verify the restore process before handover. Continuing to run the server does not require retaining me for maintenance.</p></details>
+      <details><summary>Is every platform ready for a team rollout?</summary><p>No. Linux and Android are the current development focus. Windows build support and macOS packaging exist, but support and features vary. We check the exact devices, calls and other workflows you need before accepting the pilot.</p></details>
+    </section>
+
+    <ChatterPilotRequest />
+  </article>
+</BaseLayout>
+<style>
+  .teams { max-width: 1060px; margin: 0 auto; color: #edf0ee; }
+  .hero { display: grid; grid-template-columns: 1.3fr .7fr; gap: 60px; align-items: center; padding: 28px 0 68px; }
+  .hero-preview { max-width: 250px; margin: 0 auto; }
+  .hero-preview img { border-radius: 14px; }
+  .hero-preview figcaption { max-width: 260px; }
+  .offer-note { font-size: 14px; line-height: 1.8; color: #d5ddd8; margin-top: 26px; }
+  .evaluation ol { padding-left: 20px; max-width: 850px; }
+  .evaluation li { padding-left: 8px; color: #b4bcb8; line-height: 1.8; margin: 0 0 16px; }
+  .evaluation strong { color: #edf0ee; font-weight: 500; }
+  .eyebrow { color: #8ed5bd; font: 14px/1.6 var(--font-mono); margin: 0 0 18px; }
+  h1 { font-size: clamp(38px, 4.6vw, 58px); line-height: 1.08; font-weight: 500; letter-spacing: -.045em; margin: 0 0 28px; color: #edf0ee; }
+  h2 { color: #edf0ee; font-size: clamp(26px, 3.7vw, 40px); line-height: 1.2; font-weight: 500; letter-spacing: -.03em; margin: 0 0 22px; }
+  p { color: #b4bcb8; font-size: 16px; line-height: 1.8; margin: 0 0 18px; }
+  .lead { max-width: 760px; font-size: 20px; }
+  a { color: #8ed5bd; text-underline-offset: 4px; }
+  .actions { display: flex; align-items: center; flex-wrap: wrap; gap: 24px; margin-top: 30px; }
+  .primary { display: inline-flex; align-items: center; gap: 24px; padding: 14px 20px; border-radius: 8px; background: #edf0ee; color: #111415; font-size: 15px; font-weight: 500; text-decoration: none; }
+  .primary:hover { background: #cdd9d2; }
+  .status, .note, figcaption, .signoff { color: #a2aaa7; font-size: 13px; line-height: 1.75; }
+  .status { margin-top: 20px; }
+  section { padding: 48px 0; border-top: 1px solid #ffffff20; scroll-margin-top: 100px; }
+  .split { display: grid; grid-template-columns: .85fr 1.15fr; gap: 56px; }
+  .section-head { max-width: 740px; margin-bottom: 30px; }
+  dl { margin: 0; }
+  .terms > div, .stack > div { display: grid; grid-template-columns: 180px 1fr; gap: 32px; padding: 22px 0; border-top: 1px solid #ffffff14; }
+  dt { font-size: 16px; font-weight: 500; color: #edf0ee; }
+  dd { color: #b4bcb8; font-size: 16px; line-height: 1.8; margin: 0; }
+  .note { margin: 30px 0 0; max-width: 840px; }
+  .demo a { display: block; margin-top: 16px; }
+  figure { margin: 0; align-self: center; }
+  figure img { display: block; width: 100%; height: auto; border: 1px solid #ffffff20; border-radius: 8px; }
+  figcaption { margin-top: 16px; }
+  .demo video { display: block; width: min(100%, 260px); height: auto; margin: 0 auto; border: 1px solid #ffffff20; border-radius: 12px; }
+  details { padding: 20px 0; border-top: 1px solid #ffffff14; }
+  summary { cursor: pointer; font-size: 17px; line-height: 1.6; color: #edf0ee; }
+  details p { margin: 16px 0 0; max-width: 820px; }
+  .closing { max-width: 760px; border-top: 1px solid #ffffff20; padding-top: 48px; margin-top: 16px; }
+  .closing .primary { margin: 8px 0 20px; }
+  @media (max-width: 700px) { .hero { grid-template-columns: 1fr; gap: 28px; padding-top: 16px; padding-bottom: 40px; } .hero-preview { width: 210px; } .lead { font-size: 18px; } .split { grid-template-columns: 1fr; gap: 20px; } section { padding: 36px 0; } .terms > div, .stack > div { grid-template-columns: 1fr; gap: 8px; } }
+</style>

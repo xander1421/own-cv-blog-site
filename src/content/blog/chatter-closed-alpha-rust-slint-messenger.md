@@ -1,23 +1,35 @@
 ---
-title: "Building Chatter: private conversations, from chat to call"
-seoTitle: "Chatter: Rust, Slint and Private Chat"
+title: "Building Chatter: native clients, private conversations and self-hosting"
+seoTitle: "Chatter: Native Clients, Self-Hosted Chat"
 date: "2026-11-06"
-description: "A look inside Chatter: real Android demos, a shared Rust and Slint client, a Go backend, voice calls, and the boundaries of its encryption and privacy model."
+description: "Inside Chatter: native Rust and Slint clients, Signal Protocol private messaging, a self-hosted Go service stack, real device demos and a supported team pilot."
 tags: ["Chatter", "Rust", "Slint", "Go", "Privacy", "WebRTC"]
 image: "./chatter-closed-alpha.webp"
 ---
 
-Chatter has reached the point where I can show a conversation between two real phones, place a call, and keep chatting while the call stays open. That is a more useful introduction than a list of protocols.
+Chatter combines a native **Rust + Slint client**, **Signal Protocol encryption through libsignal for private conversations**, and a **self-hosted Go service stack**. The interface is compiled for each target, with native platform integration rather than an Electron/Chromium wrapper. Linux and Android are the current development focus; feature coverage on other platforms varies.
+
+The goal is to make private communication practical on infrastructure you control. I can now show a conversation between two real phones, place a call, and keep chatting while the call stays open. Below are those real-device demos, the engineering decisions behind them, and the limits of the current build.
 
 I'm building Chatter as a personal project: a privacy-focused messenger with a shared Rust client and a Go backend. It is currently in **closed alpha**. This is a look at what works in the build I'm using, how the pieces fit together, and the boundaries I want to be explicit about before a wider beta.
 
 The screenshots and recordings below come from my own Android devices. The conversations and channels were created for this demo. They are fictional activity, not customer messages or a claim about adoption.
 
-## Try the Android build
+## Trying Chatter with a team
 
-**Android testers can install [Chatter v32 from GitHub Releases](https://github.com/xander1421/chatter-linux-client/releases/tag/v32).** Open the release, expand **Assets**, and download **app-release.apk** (approximately 107 MB). Open it on your Android device and, if prompted, allow your browser or file manager to install this app.
+**Pilot update — November 21, 2026.**
 
-The signed APK was built in GitHub Actions: [release build 42174232033](https://github.com/xander1421/chatter-linux-client/actions/runs/42174232033) completed successfully. This is an early testing build; the screenshots below show the builds used for the demos, so small interface differences are possible.
+Alongside individual app testing, I'm offering a **supported self-hosted pilot for two small teams**. The aim is to evaluate private team communication on infrastructure the team controls, with deployment, updates and maintenance handled directly by me. The pilot lasts 60 days; the team covers its VM hosting, and there is no service fee during that period.
+
+The [team pilot page](/chatter-teams/) explains the offer, device checks, operating requirements and handover. It is a direct pilot inquiry rather than a place in a general consumer waitlist. We agree the scope before deploying; an evaluation does not establish production readiness or compliance certification.
+
+The development notes and demos below still describe the build and its limitations. Private chats, public channels and nearby mesh messages have different privacy properties, and self-hosting includes supporting services beyond the Go application.
+
+## Try a current testing build
+
+**Find current Android and Linux testing builds on [GitHub Releases](https://github.com/xander1421/chatter-linux-client/releases/latest).** Check the release notes and select the asset for your platform. Android releases include `app-release.apk`; if prompted, allow your browser or file manager to install the APK. Linux packages have their own runtime and installation requirements in the release notes.
+
+At this article's original publication, the signed Android APK was [v32](https://github.com/xander1421/chatter-linux-client/releases/tag/v32), built by [GitHub Actions run 42174232033](https://github.com/xander1421/chatter-linux-client/actions/runs/42174232033). Those links document that build, rather than selecting the current recommended release. The demos below show development builds, so interface differences are possible.
 
 ## A messenger you can actually use
 

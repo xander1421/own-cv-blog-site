@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ChatterDetails from '../ChatterDetails.astro';
+import ChatterTeamLink from '../ChatterTeamLink.astro';
 import Breadcrumb from '../Breadcrumb.astro';
 import PostCard from '../PostCard.astro';
 import { getCollection } from 'astro:content';
@@ -59,6 +60,8 @@ const description = c.chatterMetaDescription;
         <li><strong>{s.n}</strong><span>{s.label}</span></li>
       ))}
     </ul>
+
+    <ChatterTeamLink lang={lang} />
 
     <ChatterDetails lang={lang} showTechnical={false} />
 

@@ -45,6 +45,8 @@ const switchBase = localized ? basePath : '/';
 // Build the search index: blog posts + service pages
 const allPosts = await getCollection('blog');
 const searchData = [
+  { title: 'Chatter for teams — self-hosted pilot', description: 'A supported team chat pilot on your own infrastructure, with native clients, deployment and handover.', url: '/chatter-teams/', tags: ['Chatter', 'Teams', 'Self-hosting', 'Pilot'] },
+  { title: 'Chatter deployment brief', description: 'Services, hosting requirements, encryption boundaries and operational handover for a team pilot.', url: '/chatter-teams/deployment/', tags: ['Chatter', 'Deployment', 'Infrastructure'] },
   {
     title: 'Services — DevOps & Cloud Consulting',
     description: 'Cloud migration, Kubernetes, cloud cost optimization, and CI/CD consulting.',

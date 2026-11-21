@@ -3,10 +3,12 @@
 // Exits non-zero if any page fails a check, so it can gate CI.
 // ponytail: regex over HTML, not a DOM parser — fine for Astro's own output.
 
+import { existsSync, globSync, readFileSync } from 'node:fs';
+
 const DIST = new URL('../dist/', import.meta.url).pathname;
 const LOCALES = ['de', 'es', 'pt', 'fr', 'ro'];
 
-const pages = [...new Bun.Glob('**/index.html').scanSync(DIST)].sort();
+const pages = globSync('**/index.html', { cwd: DIST }).sort();
 if (pages.length === 0) {
   console.error('dist/ is empty — run `bun run build` first');
   process.exit(1);
@@ -24,7 +26,7 @@ const first = (html: string, re: RegExp) => {
 };
 
 for (const page of pages) {
-  const html = await Bun.file(DIST + page).text();
+  const html = readFileSync(DIST + page, 'utf8');
 
   const title = first(html, /<title[^>]*>([^<]*)<\/title>/i);
   if (!title) warn(page, 'missing <title>');
@@ -63,7 +65,7 @@ for (const page of pages) {
 }
 
 for (const f of ['robots.txt', 'sitemap-index.xml']) {
-  if (!(await Bun.file(DIST + f).exists())) issues.push({ page: '(site)', problem: `missing ${f}` });
+  if (!existsSync(DIST + f)) issues.push({ page: '(site)', problem: `missing ${f}` });
 }
 
 if (issues.length) {

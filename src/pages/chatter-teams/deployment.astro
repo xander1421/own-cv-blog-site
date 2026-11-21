@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { chatterPilot } from '../../data/chatterPilot';
+const services = [
+  ['Application', 'Go server and background worker, with Protobuf/Connect RPC APIs.'],
+  ['Data', 'PostgreSQL for durable records, Redis for coordination, and S3-compatible object storage for uploaded media.'],
+  ['Supporting services', 'Temporal workflows, SpiceDB authorization, and the deployment’s key-management and notification components.'],
+  ['Calls', 'LiveKit and WebRTC, with network and client-device checks for the call workflows included in the pilot.'],
+  ['Client', 'Native Rust + Slint builds. Private messaging uses libsignal; local message history uses SQLCipher.'],
+];
+---
+<BaseLayout title="Chatter — Team Deployment Brief" description="What a self-hosted Chatter pilot involves: services, VM and network planning, devices, backup and restore, access checks, and an operational handover." quiet>
+  <article class="brief">
+    <a class="back" href={chatterPilot.path}>← Chatter for teams</a>
+    <header><p class="eyebrow">Deployment brief · November 2026</p><h1>What running Chatter involves.</h1><p class="lead">A practical starting point for the person who will own the server. The pilot begins with a review of your devices, infrastructure and evaluation goals.</p></header>
+    <section><h2>The service stack</h2><p>The backend is a Go application with supporting services. Deployment and maintenance cover that whole stack.</p><dl>{services.map(([label, detail]) => <div><dt>{label}</dt><dd>{detail}</dd></div>)}</dl><p>Existing deployment work uses containers, systemd and infrastructure as code. The documented OVH VPS path uses Debian 12 on amd64; the exact host and configuration are agreed before setup.</p></section>
+    <section><h2>What we agree before setup</h2><ul><li><strong>Devices and scope:</strong> team size, operating systems, messaging, file-sharing and call workflows. Linux and Android are the development focus; other builds need a compatibility review.</li><li><strong>Hosting:</strong> VM CPU/RAM, disk capacity, domain, storage growth, region and backup destination. Send an existing VM’s specification if you have one; I will review it before you pay for additional hosting.</li><li><strong>Networking:</strong> DNS, TLS, administrative access and the ports/routing required for messaging, media and calls. We review your firewall and network restrictions together.</li><li><strong>Operations:</strong> who holds credentials, how updates are scheduled, how problems are reported and who can restore service. Support hours and response expectations are agreed for the pilot.</li></ul></section>
+    <section><h2>Acceptance checks with your team</h2><ol><li>Install the agreed builds on the actual operating systems and networks your team uses.</li><li>Exercise account/device setup, private messaging, files, notifications and reconnect behaviour. Add voice/video only where the agreed builds and network support it.</li><li>Review member invitations/removal and device-access changes against your onboarding and offboarding requirements. Account access and previously delivered local content need separate consideration.</li><li>Confirm the update procedure, monitoring, backup destination and restore procedure before the team relies on the pilot.</li></ol><p>Enterprise SSO, device fleet management, retention/legal-hold policies and compliance requirements are separate capability questions. We identify any blockers before treating the pilot as a fit.</p></section>
+    <section><h2>Privacy boundaries to understand</h2><p>Private conversations use Signal Protocol encryption through libsignal. Public channels can carry service-readable content. Sealed Sender applies to specific direct-message and anonymous-group delivery paths; server-managed channel posts remain identified.</p><p>Shield/Tor and anonymous mailboxes address particular network and metadata exposures. They do not remove all metadata, authenticated operations or traffic-analysis risks. Device support and the exact workflows being evaluated matter. An independent security audit or compliance certification is not being claimed.</p></section>
+    <section><h2>What a handover includes</h2><ul><li>A service inventory with versions, configuration locations, domain/TLS setup and a credential-custody checklist.</li><li>Deployment, update, restart and rollback instructions for the agreed host.</li><li>An encrypted-backup plan covering durable data and the identity/trust material required for recovery, with recovery credentials kept separately.</li><li>A restore exercise into an isolated target, so your administrator can verify recovery before taking over.</li><li>A decision on ongoing support, independent operation or agreed shutdown. Any export or migration requirement is reviewed explicitly before the pilot; a universal history converter is not promised.</li></ul><p>You retain the infrastructure. The pilot is designed to leave an administrator able to operate it without keeping me on retainer, provided they take responsibility for updates and ongoing maintenance.</p></section>
+    <footer><h2>Send the outline to your technical lead.</h2><p>If the approach fits, tell me your team size, devices and evaluation goal. I will confirm the deployment scope and pilot availability.</p><a class="primary" href={`${chatterPilot.path}#pilot-request`}>Ask about a pilot →</a><a class="releases" href={chatterPilot.releases}>Inspect the client releases →</a></footer>
+  </article>
+</BaseLayout>
+<style>
+  .brief { max-width: 880px; margin: 0 auto; color: #edf0ee; }
+  .back, .releases { color: #8ed5bd; text-underline-offset: 4px; }
+  header { padding: 40px 0 32px; }
+  .eyebrow { color: #8ed5bd; font-size: 14px; }
+  h1 { font-size: clamp(36px, 5vw, 56px); line-height: 1.12; font-weight: 500; letter-spacing: -.04em; color: #edf0ee; }
+  h2 { font-size: 27px; line-height: 1.3; font-weight: 500; color: #edf0ee; margin: 0 0 22px; }
+  p, li, dd { color: #b4bcb8; font-size: 16px; line-height: 1.85; }
+  .lead { font-size: 19px; }
+  section, footer { padding: 36px 0; border-top: 1px solid #ffffff20; }
+  dl { margin: 24px 0; }
+  dl > div { display: grid; grid-template-columns: 165px 1fr; gap: 24px; padding: 18px 0; border-top: 1px solid #ffffff14; }
+  dt, strong { color: #edf0ee; font-weight: 500; }
+  dd { margin: 0; }
+  li { margin-bottom: 12px; padding-left: 6px; }
+  ul, ol { padding-left: 20px; }
+  .primary { display: inline-block; padding: 14px 20px; margin: 8px 24px 20px 0; border-radius: 8px; background: #edf0ee; color: #111415; text-decoration: none; }
+  .releases { display: inline-block; }
+  @media(max-width: 640px) { dl > div { grid-template-columns: 1fr; gap: 6px; } }
+</style>

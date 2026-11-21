@@ -8,7 +8,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "seo": "bun scripts/seo-check.ts",
-    "seo:lighthouse": "bunx lighthouse http://localhost:4321/about/ --only-categories=seo,performance,accessibility --view"
+    "seo:lighthouse": "bunx lighthouse http://localhost:4321/about/ --only-categories=seo,performance,accessibility --view",
+    "check:pilot": "bun scripts/check-chatter-pilot.ts"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.9",

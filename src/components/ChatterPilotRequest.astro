@@ -1,0 +1,75 @@
+---
+import { chatterPilot } from '../data/chatterPilot';
+---
+<section id="pilot-request" class="request" aria-labelledby="request-title">
+  <div class="intro"><p class="eyebrow">Talk to the developer</p><h2 id="request-title">What would your team like to try?</h2><p>Tell me the devices you use and the workflow you want to evaluate. I’ll reply with a deployment outline, compatibility checks and pilot availability.</p><p class="delivery">Open a draft in your email app, or copy the request into webmail. Nothing is sent until you send the email.</p><p>Prefer to write directly? <a href={`mailto:${chatterPilot.email}?subject=Chatter%20team%20pilot`}>{chatterPilot.email}</a></p></div>
+  <form id="chatter-pilot-form">
+    <fieldset id="pilot-fields" aria-label="Team pilot details" disabled>
+    <label for="pilot-company">Team or company <span>(optional)</span></label>
+    <input id="pilot-company" name="company" autocomplete="organization" maxlength="100" />
+    <label for="pilot-size">Team size</label>
+    <select id="pilot-size" name="teamSize" required><option value="">Choose a team size</option><option>2–4 people</option><option>5–15 people</option><option>16–30 people</option><option>More than 30 people</option><option>IT provider evaluating for clients</option></select>
+    <label for="pilot-devices">Devices and operating systems</label>
+    <input id="pilot-devices" name="devices" required maxlength="180" placeholder="For example: Debian desktops and Android phones" />
+    <label for="pilot-goal">What would you like to evaluate?</label>
+    <textarea id="pilot-goal" name="goal" required rows="4" maxlength="600" placeholder="Your current workflow, what you want to improve, and any hosting preference."></textarea>
+    <div class="form-actions"><button class="primary" type="submit">Open email draft →</button><button class="copy" type="button" id="pilot-copy">Copy request</button></div>
+    <p id="pilot-request-status" role="status" aria-live="polite"></p>
+    </fieldset>
+    <noscript><p>The draft builder needs JavaScript. You can still <a href={`mailto:${chatterPilot.email}?subject=Chatter%20team%20pilot`}>email Alex directly</a> with your team size, devices and evaluation goal.</p></noscript>
+  </form>
+</section>
+<script>
+  import { buildPilotInquiry, chatterPilot } from '../data/chatterPilot';
+  const form = document.querySelector<HTMLFormElement>('#chatter-pilot-form');
+  const status = document.querySelector<HTMLParagraphElement>('#pilot-request-status');
+  function inquiry() {
+    if (!form || !form.reportValidity()) return null;
+    const data = new FormData(form);
+    return buildPilotInquiry({ company: String(data.get('company') || ''), teamSize: String(data.get('teamSize') || ''), devices: String(data.get('devices') || ''), goal: String(data.get('goal') || '') });
+  }
+  form?.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const draft = inquiry();
+    if (!draft) return;
+    window.location.href = draft.mailto;
+    if (status) status.textContent = `Email draft requested. If your email app did not open, use Copy request and send it to ${chatterPilot.email}.`;
+  });
+  document.querySelector('#pilot-copy')?.addEventListener('click', async () => {
+    const draft = inquiry();
+    if (!draft) return;
+    try {
+      await navigator.clipboard.writeText(`To: ${chatterPilot.email}\nSubject: ${chatterPilot.subject}\n\n${draft.body}`);
+      if (status) status.textContent = `Request copied. Paste it into an email to ${chatterPilot.email}; it has not been sent.`;
+    } catch {
+      if (status) status.textContent = 'Clipboard access is unavailable. Email Alex directly using the address above; your entries remain in the form.';
+    }
+  });
+  // Keep the form inert if its script fails: no fallback GET containing user entries.
+  const fields = document.querySelector<HTMLFieldSetElement>('#pilot-fields');
+  if (fields) fields.disabled = false;
+
+</script>
+<style>
+  .request { border-top: 1px solid #ffffff20; padding-top: 48px; display: grid; grid-template-columns: .85fr 1.15fr; gap: 56px; scroll-margin-top: 100px; }
+  .eyebrow { color: #8ed5bd; font-size: 14px; margin-bottom: 18px; }
+  h2 { font-size: clamp(26px, 3.7vw, 40px); line-height: 1.2; font-weight: 500; letter-spacing: -.03em; color: #edf0ee; margin: 0 0 22px; }
+  p { color: #b4bcb8; font-size: 16px; line-height: 1.8; }
+  a { color: #8ed5bd; text-underline-offset: 4px; overflow-wrap: anywhere; }
+  .delivery, #pilot-request-status { font-size: 13px; line-height: 1.7; color: #a2aaa7; }
+  form { min-width: 0; }
+  fieldset { min-width: 0; border: 0; padding: 0; margin: 0; }
+  fieldset:disabled { opacity: .65; }
+  label { display: block; color: #edf0ee; margin-bottom: 9px; font-size: 14px; }
+  label span { color: #a2aaa7; }
+  input, select, textarea { box-sizing: border-box; display: block; width: 100%; color: #edf0ee; background: #171c1c; border: 1px solid #53635c; border-radius: 6px; padding: 12px; font: inherit; font-size: 15px; margin: 0 0 24px; }
+  input::placeholder, textarea::placeholder { color: #9daaa2; }
+  textarea { resize: vertical; }
+  input:focus-visible, select:focus-visible, textarea:focus-visible, button:focus-visible { outline: 2px solid #8ed5bd; outline-offset: 3px; }
+  .form-actions { display: flex; flex-wrap: wrap; gap: 18px; align-items: center; }
+  button { cursor: pointer; font: inherit; font-size: 15px; }
+  .primary { padding: 14px 20px; border: 0; border-radius: 8px; background: #edf0ee; color: #111415; }
+  .copy { background: none; color: #8ed5bd; padding: 12px 0; border: 0; text-decoration: underline; text-underline-offset: 4px; }
+  #pilot-request-status { min-height: 2em; margin-top: 16px; }
+  @media (max-width: 700px) { .request { grid-template-columns: 1fr; gap: 24px; } }
+</style>
