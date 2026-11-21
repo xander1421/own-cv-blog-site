@@ -284,7 +284,7 @@ const keywords = [
     </script>
 
     <!-- Search Modal -->
-    <div id="search-modal" class="search-modal" style="display: none;" data-posts={JSON.stringify(searchData)} data-no-results={t('search.noResults')}>
+    <div id="search-modal" class="search-modal" role="dialog" aria-modal="true" aria-label={t('search.placeholder')} style="display: none;" data-posts={JSON.stringify(searchData)} data-no-results={t('search.noResults')}>
       <div class="search-modal-content">
         <div class="search-header">
           <input
@@ -905,6 +905,9 @@ const keywords = [
   }
 
   .search-result-item {
+    display: block;
+    color: inherit;
+    text-decoration: none;
     padding: 1rem;
     border: 1px solid rgba(0, 255, 204, 0.2);
     margin-bottom: 0.75rem;
@@ -919,6 +922,8 @@ const keywords = [
     background: rgba(0, 255, 204, 0.05);
     transform: translateX(4px);
   }
+
+  .search-result-item:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 3px; }
 
   .search-result-title {
     color: var(--color-primary);
@@ -1370,6 +1375,7 @@ const keywords = [
       searchModal.style.display = 'none';
       if (searchInput) searchInput.value = '';
       if (searchResults) searchResults.innerHTML = '';
+      searchButton?.focus();
     }
   }
 
@@ -1399,27 +1405,29 @@ const keywords = [
 
     if (searchResults) {
       searchResults.innerHTML = results.map((post: any) => `
-        <div class="search-result-item" data-url="${post.url}">
+        <a class="search-result-item" href="${post.url}">
           <div class="search-result-title">${post.title}</div>
           <div class="search-result-description">${post.description}</div>
           <div class="search-result-tags">
             ${post.tags.map((tag: string) => `<span class="search-result-tag">${tag}</span>`).join('')}
           </div>
-        </div>
+        </a>
       `).join('');
-
-      // Add click handlers to results
-      document.querySelectorAll('.search-result-item').forEach((item) => {
-        item.addEventListener('click', () => {
-          const url = item.getAttribute('data-url');
-          if (url) window.location.href = url;
-        });
-      });
     }
   }
 
   // Keyboard shortcut - Register with capture phase to prevent browser default
   window.addEventListener('keydown', (e: KeyboardEvent) => {
+    if (e.key === 'Tab' && searchModal && searchModal.style.display !== 'none') {
+      const controls = Array.from(searchModal.querySelectorAll<HTMLElement>('input, button, a[href]'));
+      const first = controls[0];
+      const last = controls[controls.length - 1];
+      if (e.shiftKey && document.activeElement === first && last) {
+        e.preventDefault(); last.focus();
+      } else if (!e.shiftKey && document.activeElement === last && first) {
+        e.preventDefault(); first.focus();
+      }
+    }
     // Open search with "/" (unless typing in an input)
     if (e.key === '/' && !(e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement)) {
       e.preventDefault();
