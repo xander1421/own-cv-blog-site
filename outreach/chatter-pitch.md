@@ -1,8 +1,12 @@
 # Chatter team-pilot positioning
 
-Use `/chatter-teams/` as the outreach destination **after the new page is published**.
-Until then, the existing `/chatter-waitlist` overview remains the working public URL.
-Do not silently point live campaigns at an unpublished route.
+Live pilot page: **https://www.alexpruteanu.cloud/chatter-teams/**
+Technical handover brief: **https://www.alexpruteanu.cloud/chatter-teams/deployment/**
+
+Use the pilot page for team and IT-partner outreach. The general product overview
+and demonstrations remain at `/chatter-waitlist/`. Only send to recipients whose
+source and country-specific requirements have been reviewed; a footer alone does
+not establish legal compliance.
 
 The offer is a supported self-hosted evaluation for two small teams, ideally
 5–15 people, lasting 60 days. The team covers VM hosting; setup, maintenance,
@@ -79,3 +83,24 @@ Alexandru Pruteanu
   requirements need a capability review. Do not claim enterprise coverage or compliance.
 - Source: Chatter README.md; linux-client/crates/chatter-ui-slint/Cargo.toml;
   docker-compose.yml and deploy/RUNBOOK.md, checked against the local source on 2026-11-21.
+
+## Ready-to-use follow-up for Freexian
+
+This company has already received an introduction. Use only as a reply in that
+existing thread, after the normal due date and reply/suppression checks.
+
+Hello Freexian team,
+
+A more concrete follow-up to my earlier note: Chatter has a native Rust + Slint
+Linux client and uses Signal Protocol through libsignal for private conversations.
+The self-hosted Go service stack is documented, and I can handle deployment and
+maintenance during a supported team pilot.
+
+Given your Debian support and packaging work, would a short deployment and
+client-architecture breakdown be useful?
+
+https://www.alexpruteanu.cloud/chatter-teams/
+
+Alexandru Pruteanu
+
+Reply “unsubscribe” to stop further messages.
