@@ -214,7 +214,7 @@ yay -S spotify-tray-wayland-bin
 yay -S spotify-tray-wayland-git
 ```
 
-Hyprland keybinds are configured automatically during installation, and cleaned up on uninstall.
+Keyboard shortcuts are opt-in: run `spotify-tray-setup` after installing to set them up. Uninstalling removes them.
 
 ### From Source
 
@@ -224,19 +224,28 @@ cd spotify-tray-wayland
 ./setup.sh
 ```
 
-The setup script detects your existing close keybind, installs the binary and smart-close script, creates a launcher that starts the tray with Spotify, and configures Hyprland keybinds automatically.
+The setup script detects your existing close keybind, installs the binary and smart-close script, creates a launcher that starts the tray with Spotify, and offers the optional keyboard shortcuts when run in a terminal.
 
 ## Features
 
-- **Super+Q**: Smart close—minimizes Spotify to tray, kills other windows
-- **Left-click**: Show/hide Spotify window (minimize to tray)
+- **Super+Q** (opt-in): Smart close—minimizes Spotify to tray, closes other windows as usual
+- **Super+`** (opt-in): Show or hide Spotify's workspace
+- **Click**: Menu with track info, Show/Hide, playback controls, quit
 - **Middle-click**: Play/pause
-- **Scroll up**: Next track
-- **Scroll down**: Previous track
-- **Right-click menu**: Full playback controls, quit option
+- **Scroll down / up**: Next / previous track (on Waybar)
 - **Tooltip**: Shows current track and playback status
 - **Auto-restore**: If Spotify was hidden when the tray starts, it automatically shows it
 - **Clean quit**: Pauses playback, closes window gracefully, then terminates
+
+## Update: November 2026
+
+![spotify-tray-wayland demo: hover, scroll, middle-click, Super+Q, Super+`, tray menu](https://raw.githubusercontent.com/xander1421/spotify-tray-wayland/main/docs/demo.gif)
+
+Ten months in, the tray has more than 830 release downloads. Some things changed along the way:
+
+- **Shortcuts are opt-in.** The first versions rebound Super+Q and added Super+M and Super+grave during install. Changing someone's keybinds from a package install is rude, so now the package installs only the launcher. `spotify-tray-setup` asks before touching anything, and it checks with Hyprland that a shortcut is free before using it. Upgrades remove the old automatic bindings.
+- **Scroll direction depends on the bar.** The StatusNotifierItem spec doesn't define which sign a scroll delta has. KDE sends a positive delta for wheel up; Waybar sends a positive delta for wheel down. My fork follows KDE's naming, so on Waybar wheel down plays the next track. The menu labels now say so.
+- **Regression tests in CI.** Every reviewed bug in the setup and uninstall scripts now has a shell test that reproduces it, and CI runs them on every push.
 
 ## Conclusion
 

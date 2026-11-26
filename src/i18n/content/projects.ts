@@ -34,6 +34,11 @@ export const projects = {
       "A lightweight browser extension that adds Twitch-style tab-fullscreen mode to YouTube. Hide all distractions and focus on your content with a keyboard shortcut (Alt+T) or a single click. Works seamlessly with YouTube's single-page app navigation.",
     indexProject3LiveLabel: 'Chrome Store',
     indexProject3Live2Label: 'Firefox Add-ons',
+    indexStatReleaseDownloads: 'release downloads',
+    indexStatWeeklyChrome: 'weekly users · Chrome',
+    indexStatDailyFirefox: 'daily users · Firefox',
+    indexStatFirefoxRating: 'Firefox rating · 3 reviews',
+    indexStatsAsOf: 'Stats as of November 2026',
 
     // ---- projects/chatter.astro ----
     chatterMetaTitle: "Chatter — Rust Messenger in Closed Alpha",
@@ -139,6 +144,11 @@ export const projects = {
       'Eine schlanke Browser-Erweiterung, die YouTube einen Tab-Vollbildmodus im Twitch-Stil hinzufügt. Blenden Sie alle Ablenkungen aus und konzentrieren Sie sich per Tastenkürzel (Alt+T) oder einem einzigen Klick auf Ihre Inhalte. Funktioniert nahtlos mit der Single-Page-Navigation von YouTube.',
     indexProject3LiveLabel: 'Chrome Store',
     indexProject3Live2Label: 'Firefox-Add-ons',
+    indexStatReleaseDownloads: 'Release-Downloads',
+    indexStatWeeklyChrome: 'wöchentliche Nutzer · Chrome',
+    indexStatDailyFirefox: 'tägliche Nutzer · Firefox',
+    indexStatFirefoxRating: 'Firefox-Bewertung · 3 Rezensionen',
+    indexStatsAsOf: 'Stand: November 2026',
 
     // ---- projects/chatter.astro ----
     chatterMetaTitle: "Chatter — Rust Messenger in Closed Alpha",
@@ -243,6 +253,11 @@ export const projects = {
       'Una extensión de navegador ligera que añade a YouTube un modo de pantalla completa por pestaña al estilo de Twitch. Oculta todas las distracciones y céntrate en tu contenido con un atajo de teclado (Alt+T) o un solo clic. Funciona a la perfección con la navegación de página única de YouTube.',
     indexProject3LiveLabel: 'Chrome Store',
     indexProject3Live2Label: 'Firefox Add-ons',
+    indexStatReleaseDownloads: 'descargas de versiones',
+    indexStatWeeklyChrome: 'usuarios semanales · Chrome',
+    indexStatDailyFirefox: 'usuarios diarios · Firefox',
+    indexStatFirefoxRating: 'valoración en Firefox · 3 reseñas',
+    indexStatsAsOf: 'Datos de noviembre de 2026',
 
     // ---- projects/chatter.astro ----
     chatterMetaTitle: "Chatter — Rust Messenger in Closed Alpha",
@@ -347,6 +362,11 @@ export const projects = {
       'Uma extensão de navegador leve que adiciona ao YouTube um modo de tela cheia por aba no estilo da Twitch. Oculte todas as distrações e concentre-se no seu conteúdo com um atalho de teclado (Alt+T) ou um único clique. Funciona perfeitamente com a navegação em página única do YouTube.',
     indexProject3LiveLabel: 'Chrome Store',
     indexProject3Live2Label: 'Firefox Add-ons',
+    indexStatReleaseDownloads: 'downloads de versões',
+    indexStatWeeklyChrome: 'usuários semanais · Chrome',
+    indexStatDailyFirefox: 'usuários diários · Firefox',
+    indexStatFirefoxRating: 'avaliação no Firefox · 3 avaliações',
+    indexStatsAsOf: 'Dados de novembro de 2026',
 
     // ---- projects/chatter.astro ----
     chatterMetaTitle: "Chatter — Rust Messenger in Closed Alpha",
@@ -451,6 +471,11 @@ export const projects = {
       'Une extension de navigateur légère qui ajoute à YouTube un mode plein écran par onglet à la manière de Twitch. Masquez toutes les distractions et concentrez-vous sur votre contenu grâce à un raccourci clavier (Alt+T) ou un simple clic. Fonctionne parfaitement avec la navigation en application monopage de YouTube.',
     indexProject3LiveLabel: 'Chrome Store',
     indexProject3Live2Label: 'Firefox Add-ons',
+    indexStatReleaseDownloads: 'téléchargements de versions',
+    indexStatWeeklyChrome: 'utilisateurs hebdo · Chrome',
+    indexStatDailyFirefox: 'utilisateurs quotidiens · Firefox',
+    indexStatFirefoxRating: 'note Firefox · 3 avis',
+    indexStatsAsOf: 'Chiffres de novembre 2026',
 
     // ---- projects/chatter.astro ----
     chatterMetaTitle: "Chatter — Rust Messenger in Closed Alpha",
@@ -555,6 +580,11 @@ export const projects = {
       'O extensie de browser ușoară care adaugă în YouTube un mod ecran complet pe filă, în stilul Twitch. Ascundeți toate distragerile și concentrați-vă asupra conținutului printr-o scurtătură de tastatură (Alt+T) sau un singur clic. Funcționează perfect cu navigarea de tip aplicație cu o singură pagină a YouTube.',
     indexProject3LiveLabel: 'Chrome Store',
     indexProject3Live2Label: 'Firefox Add-ons',
+    indexStatReleaseDownloads: 'descărcări de versiuni',
+    indexStatWeeklyChrome: 'utilizatori săptămânali · Chrome',
+    indexStatDailyFirefox: 'utilizatori zilnici · Firefox',
+    indexStatFirefoxRating: 'rating Firefox · 3 recenzii',
+    indexStatsAsOf: 'Date din noiembrie 2026',
 
     // ---- projects/chatter.astro ----
     chatterMetaTitle: "Chatter — Rust Messenger in Closed Alpha",

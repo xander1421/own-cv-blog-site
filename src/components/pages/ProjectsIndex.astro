@@ -28,6 +28,7 @@ const projects = [
     github: "https://github.com/xander1421/spotify-tray-wayland",
     live: "https://aur.archlinux.org/packages/spotify-tray-wayland-bin",
     liveLabel: c.indexProject2LiveLabel,
+    stats: [{ n: "830+", label: c.indexStatReleaseDownloads }],
     icon: "spotify"
   },
   {
@@ -39,6 +40,11 @@ const projects = [
     liveLabel: c.indexProject3LiveLabel,
     live2: "https://addons.mozilla.org/en-US/firefox/addon/youtube-tab-fullscreen/",
     live2Label: c.indexProject3Live2Label,
+    stats: [
+      { n: "~125", label: c.indexStatWeeklyChrome },
+      { n: "~35", label: c.indexStatDailyFirefox },
+      { n: "5★", label: c.indexStatFirefoxRating },
+    ],
     icon: "youtube"
   }
 ];
@@ -144,6 +150,17 @@ const projects = [
           </div>
 
           <p class="project-description">{project.description}</p>
+
+          {project.stats && (
+            <div class="project-stats-wrap">
+              <ul class="project-stats">
+                {project.stats.map((s) => (
+                  <li><strong>{s.n}</strong><span>{s.label}</span></li>
+                ))}
+              </ul>
+              <p class="project-stats-asof">{c.indexStatsAsOf}</p>
+            </div>
+          )}
 
           <div class="project-tech">
             {project.tech.map((tech, i) => (
@@ -281,6 +298,41 @@ const projects = [
     line-height: 1.7;
     margin-bottom: 1.5rem;
     font-size: 1.05rem;
+  }
+
+  .project-stats-wrap {
+    margin-bottom: 1.5rem;
+  }
+
+  .project-stats-asof {
+    margin: 0.5rem 0 0;
+    font-size: 0.7rem;
+    color: var(--color-text-dim);
+  }
+
+  .project-stats {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.5rem;
+  }
+
+  .project-stats li {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .project-stats strong {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1.4rem;
+    color: var(--color-text);
+  }
+
+  .project-stats span {
+    font-size: 0.8rem;
+    color: var(--color-text-dim);
   }
 
   .project-tech {
